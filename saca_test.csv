@@ -1,0 +1,985 @@
+symptom_text,severity,disease,total_weight
+itching vomiting yellowish_skin nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Chronic cholestasis,26
+itching skin_rash fatigue lethargy high_fever headache loss_of_appetite mild_fever malaise red_spots_over_body,HIGH,Chicken pox,38
+chills vomiting high_fever sweating headache nausea diarrhoea muscle_pain,HIGH,Malaria,34
+muscle_wasting patches_in_throat high_fever extra_marital_contacts,MEDIUM,AIDS,21
+itching skin_rash nodal_skin_eruptions dischromic _patches,LOW,Fungal infection,8
+vomiting yellowish_skin abdominal_pain swelling_of_stomach distention_of_abdomen history_of_alcohol_consumption fluid_overload,HIGH,Alcoholic hepatitis,32
+constipation pain_during_bowel_movements pain_in_anal_region bloody_stool irritation_in_anus,HIGH,Dimorphic hemmorhoids(piles),26
+burning_micturition bladder_discomfort foul_smell_of urine,LOW,Urinary tract infection,10
+joint_pain vomiting fatigue high_fever yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain yellowing_of_eyes acute_liver_failure coma stomach_bleeding,CRITICAL,Hepatitis E,62
+fatigue cough high_fever breathlessness mucoid_sputum,MEDIUM,Bronchial Asthma,23
+fatigue cramps bruising obesity swollen_legs swollen_blood_vessels prominent_veins_on_calf,HIGH,Varicose veins,32
+fatigue cough high_fever breathlessness family_history mucoid_sputum,HIGH,Bronchial Asthma,28
+vomiting indigestion loss_of_appetite abdominal_pain internal_itching,MEDIUM,Peptic ulcer diseae,22
+fatigue weight_loss restlessness lethargy irregular_sugar_level blurred_and_distorted_vision obesity excessive_hunger increased_appetite polyuria,CRITICAL,Diabetes,41
+fatigue cramps bruising obesity swollen_blood_vessels prominent_veins_on_calf,HIGH,Varicose veins,27
+itching yellowish_skin nausea loss_of_appetite abdominal_pain yellowing_of_eyes,MEDIUM,Chronic cholestasis,21
+itching fatigue lethargy yellowish_skin dark_urine loss_of_appetite abdominal_pain yellow_urine yellowing_of_eyes malaise receiving_blood_transfusion receiving_unsterile_injections,CRITICAL,Hepatitis B,43
+acidity indigestion headache blurred_and_distorted_vision excessive_hunger stiff_neck depression irritability,HIGH,Migraine,29
+skin_rash high_fever red_sore_around_nose yellow_crust_ooze,MEDIUM,Impetigo,15
+fatigue cough high_fever breathlessness family_history mucoid_sputum,HIGH,Bronchial Asthma,28
+skin_rash skin_peeling silver_like_dusting small_dents_in_nails inflammatory_nails,LOW,Psoriasis,12
+continuous_sneezing shivering chills watering_from_eyes,MEDIUM,Allergy,16
+vomiting yellowish_skin abdominal_pain swelling_of_stomach distention_of_abdomen history_of_alcohol_consumption fluid_overload,HIGH,Alcoholic hepatitis,32
+chills fatigue cough high_fever breathlessness malaise phlegm chest_pain fast_heart_rate rusty_sputum,CRITICAL,Pneumonia,49
+chills joint_pain vomiting fatigue high_fever headache nausea loss_of_appetite pain_behind_the_eyes back_pain malaise muscle_pain red_spots_over_body,CRITICAL,Dengue,52
+itching skin_rash fatigue lethargy high_fever headache loss_of_appetite mild_fever swelled_lymph_nodes malaise red_spots_over_body,CRITICAL,Chicken pox,44
+shivering chills watering_from_eyes,LOW,Allergy,12
+itching fatigue lethargy yellowish_skin dark_urine loss_of_appetite abdominal_pain yellow_urine yellowing_of_eyes malaise receiving_blood_transfusion receiving_unsterile_injections,CRITICAL,Hepatitis B,43
+continuous_sneezing chills fatigue cough high_fever headache swelled_lymph_nodes malaise phlegm throat_irritation redness_of_eyes sinus_pressure runny_nose congestion chest_pain loss_of_smell muscle_pain,CRITICAL,Common Cold,77
+joint_pain vomiting yellowish_skin nausea loss_of_appetite abdominal_pain diarrhoea mild_fever yellowing_of_eyes muscle_pain,CRITICAL,hepatitis A,41
+vomiting yellowish_skin abdominal_pain swelling_of_stomach distention_of_abdomen history_of_alcohol_consumption,HIGH,Alcoholic hepatitis,28
+joint_pain neck_pain knee_pain hip_joint_pain swelling_joints painful_walking,MEDIUM,Osteoarthristis,20
+constipation pain_during_bowel_movements pain_in_anal_region irritation_in_anus,MEDIUM,Dimorphic hemmorhoids(piles),21
+fatigue weight_loss restlessness lethargy irregular_sugar_level blurred_and_distorted_vision obesity excessive_hunger increased_appetite polyuria,CRITICAL,Diabetes,41
+vomiting fatigue anxiety sweating headache nausea blurred_and_distorted_vision excessive_hunger drying_and_tingling_lips slurred_speech irritability palpitations,CRITICAL,Hypoglycemia,47
+chills vomiting fatigue weight_loss cough high_fever breathlessness sweating loss_of_appetite mild_fever yellowing_of_eyes swelled_lymph_nodes malaise phlegm chest_pain blood_in_sputum,CRITICAL,Tuberculosis,75
+vomiting indigestion loss_of_appetite passage_of_gases internal_itching,MEDIUM,Peptic ulcer diseae,23
+chills fatigue cough high_fever breathlessness sweating malaise phlegm chest_pain fast_heart_rate rusty_sputum,CRITICAL,Pneumonia,52
+fatigue weight_loss lethargy irregular_sugar_level blurred_and_distorted_vision obesity excessive_hunger increased_appetite polyuria,HIGH,Diabetes,36
+skin_rash chills joint_pain vomiting fatigue high_fever headache nausea loss_of_appetite pain_behind_the_eyes back_pain malaise muscle_pain red_spots_over_body,CRITICAL,Dengue,55
+constipation pain_during_bowel_movements pain_in_anal_region bloody_stool irritation_in_anus,HIGH,Dimorphic hemmorhoids(piles),26
+fatigue weight_gain cold_hands_and_feets mood_swings lethargy dizziness puffy_face_and_eyes enlarged_thyroid brittle_nails swollen_extremeties depression irritability abnormal_menstruation,CRITICAL,Hypothyroidism,53
+chills vomiting fatigue weight_loss cough high_fever breathlessness sweating loss_of_appetite mild_fever yellowing_of_eyes swelled_lymph_nodes malaise phlegm chest_pain blood_in_sputum,CRITICAL,Tuberculosis,75
+vomiting headache nausea spinning_movements loss_of_balance unsteadiness,HIGH,(vertigo) Paroymsal  Positional Vertigo,27
+fatigue weight_loss restlessness lethargy irregular_sugar_level blurred_and_distorted_vision obesity excessive_hunger increased_appetite polyuria,CRITICAL,Diabetes,41
+vomiting fatigue anxiety sweating headache nausea blurred_and_distorted_vision excessive_hunger drying_and_tingling_lips slurred_speech irritability palpitations,CRITICAL,Hypoglycemia,47
+fatigue cramps bruising obesity swollen_blood_vessels prominent_veins_on_calf,HIGH,Varicose veins,27
+acidity indigestion headache blurred_and_distorted_vision excessive_hunger stiff_neck depression irritability visual_disturbances,HIGH,Migraine,32
+fatigue weight_loss restlessness lethargy irregular_sugar_level blurred_and_distorted_vision obesity excessive_hunger increased_appetite polyuria,CRITICAL,Diabetes,41
+chills vomiting fatigue high_fever headache nausea constipation abdominal_pain diarrhoea toxic_look_(typhos) belly_pain,CRITICAL,Typhoid,50
+vomiting headache nausea spinning_movements loss_of_balance unsteadiness,HIGH,(vertigo) Paroymsal  Positional Vertigo,27
+itching fatigue lethargy yellowish_skin dark_urine loss_of_appetite abdominal_pain yellow_urine yellowing_of_eyes malaise receiving_blood_transfusion receiving_unsterile_injections,CRITICAL,Hepatitis B,43
+back_pain weakness_in_limbs neck_pain dizziness loss_of_balance,MEDIUM,Cervical spondylosis,23
+chills vomiting fatigue weight_loss cough high_fever breathlessness sweating loss_of_appetite mild_fever yellowing_of_eyes swelled_lymph_nodes malaise phlegm chest_pain blood_in_sputum,CRITICAL,Tuberculosis,75
+continuous_sneezing shivering chills watering_from_eyes,MEDIUM,Allergy,16
+muscle_wasting patches_in_throat high_fever extra_marital_contacts,MEDIUM,AIDS,21
+itching skin_rash nodal_skin_eruptions dischromic _patches,LOW,Fungal infection,8
+joint_pain vomiting yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain diarrhoea mild_fever yellowing_of_eyes muscle_pain,CRITICAL,hepatitis A,45
+pus_filled_pimples blackheads scurring,LOW,Acne,6
+bladder_discomfort foul_smell_of urine continuous_feel_of_urine,LOW,Urinary tract infection,10
+muscle_wasting patches_in_throat high_fever,MEDIUM,AIDS,16
+constipation pain_during_bowel_movements pain_in_anal_region bloody_stool irritation_in_anus,HIGH,Dimorphic hemmorhoids(piles),26
+headache chest_pain dizziness loss_of_balance lack_of_concentration,MEDIUM,Hypertension,21
+fatigue weight_loss restlessness lethargy irregular_sugar_level blurred_and_distorted_vision obesity excessive_hunger increased_appetite polyuria,CRITICAL,Diabetes,41
+skin_rash pus_filled_pimples blackheads scurring,LOW,Acne,9
+joint_pain vomiting fatigue high_fever yellowish_skin dark_urine loss_of_appetite abdominal_pain yellowing_of_eyes acute_liver_failure coma stomach_bleeding,CRITICAL,Hepatitis E,57
+itching skin_rash stomach_pain burning_micturition,MEDIUM,Drug Reaction,15
+muscle_wasting patches_in_throat high_fever extra_marital_contacts,MEDIUM,AIDS,21
+itching skin_rash stomach_pain burning_micturition spotting_ urination,MEDIUM,Drug Reaction,15
+vomiting fatigue sweating headache nausea blurred_and_distorted_vision excessive_hunger drying_and_tingling_lips slurred_speech irritability palpitations,CRITICAL,Hypoglycemia,43
+itching skin_rash stomach_pain burning_micturition,MEDIUM,Drug Reaction,15
+chills vomiting fatigue weight_loss cough breathlessness sweating loss_of_appetite mild_fever yellowing_of_eyes swelled_lymph_nodes malaise phlegm chest_pain blood_in_sputum,CRITICAL,Tuberculosis,68
+itching vomiting yellowish_skin nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Chronic cholestasis,26
+itching skin_rash stomach_pain burning_micturition spotting_ urination,MEDIUM,Drug Reaction,15
+joint_pain vomiting yellowish_skin dark_urine nausea loss_of_appetite diarrhoea mild_fever yellowing_of_eyes muscle_pain,CRITICAL,hepatitis A,41
+fatigue mood_swings weight_loss restlessness sweating diarrhoea fast_heart_rate excessive_hunger muscle_weakness irritability abnormal_menstruation,CRITICAL,Hyperthyroidism,43
+skin_rash chills joint_pain vomiting fatigue high_fever headache nausea loss_of_appetite pain_behind_the_eyes back_pain malaise muscle_pain red_spots_over_body,CRITICAL,Dengue,55
+stomach_pain acidity ulcers_on_tongue vomiting cough chest_pain,HIGH,GERD,28
+chills fatigue cough high_fever breathlessness sweating malaise phlegm chest_pain fast_heart_rate rusty_sputum,CRITICAL,Pneumonia,52
+vomiting headache nausea spinning_movements loss_of_balance unsteadiness,HIGH,(vertigo) Paroymsal  Positional Vertigo,27
+itching skin_rash stomach_pain spotting_ urination,LOW,Drug Reaction,9
+itching vomiting fatigue weight_loss high_fever yellowish_skin dark_urine abdominal_pain,HIGH,Jaundice,31
+back_pain weakness_in_limbs neck_pain dizziness loss_of_balance,MEDIUM,Cervical spondylosis,23
+muscle_wasting high_fever extra_marital_contacts,MEDIUM,AIDS,15
+itching vomiting fatigue weight_loss high_fever yellowish_skin dark_urine abdominal_pain,HIGH,Jaundice,31
+joint_pain neck_pain knee_pain hip_joint_pain swelling_joints painful_walking,MEDIUM,Osteoarthristis,20
+continuous_sneezing shivering chills,LOW,Allergy,12
+chills fatigue cough high_fever breathlessness sweating malaise chest_pain fast_heart_rate rusty_sputum,CRITICAL,Pneumonia,47
+fatigue weight_gain cold_hands_and_feets mood_swings lethargy dizziness puffy_face_and_eyes enlarged_thyroid brittle_nails swollen_extremeties depression irritability abnormal_menstruation,CRITICAL,Hypothyroidism,53
+muscle_wasting patches_in_throat high_fever extra_marital_contacts,MEDIUM,AIDS,21
+vomiting headache weakness_of_one_body_side altered_sensorium,MEDIUM,Paralysis (brain hemorrhage),14
+joint_pain neck_pain knee_pain hip_joint_pain swelling_joints painful_walking,MEDIUM,Osteoarthristis,20
+skin_rash high_fever blister red_sore_around_nose yellow_crust_ooze,MEDIUM,Impetigo,19
+fatigue weight_gain cold_hands_and_feets mood_swings lethargy dizziness enlarged_thyroid brittle_nails swollen_extremeties depression irritability abnormal_menstruation,CRITICAL,Hypothyroidism,48
+acidity indigestion headache blurred_and_distorted_vision excessive_hunger stiff_neck depression irritability visual_disturbances,HIGH,Migraine,32
+itching skin_rash stomach_pain burning_micturition spotting_ urination,MEDIUM,Drug Reaction,15
+continuous_sneezing chills watering_from_eyes,LOW,Allergy,11
+chills vomiting high_fever sweating headache nausea diarrhoea muscle_pain,HIGH,Malaria,34
+itching skin_rash dischromic _patches,LOW,Fungal infection,4
+joint_pain vomiting fatigue yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Hepatitis D,36
+fatigue cough high_fever breathlessness sweating malaise phlegm chest_pain fast_heart_rate rusty_sputum,CRITICAL,Pneumonia,49
+skin_rash joint_pain skin_peeling silver_like_dusting small_dents_in_nails inflammatory_nails,MEDIUM,Psoriasis,15
+vomiting headache nausea spinning_movements loss_of_balance unsteadiness,HIGH,(vertigo) Paroymsal  Positional Vertigo,27
+burning_micturition bladder_discomfort foul_smell_of urine continuous_feel_of_urine,MEDIUM,Urinary tract infection,16
+skin_rash chills joint_pain vomiting fatigue high_fever headache nausea loss_of_appetite pain_behind_the_eyes back_pain malaise muscle_pain red_spots_over_body,CRITICAL,Dengue,55
+fatigue high_fever breathlessness family_history mucoid_sputum,MEDIUM,Bronchial Asthma,24
+fatigue weight_loss restlessness lethargy irregular_sugar_level blurred_and_distorted_vision obesity excessive_hunger increased_appetite polyuria,CRITICAL,Diabetes,41
+skin_rash chills joint_pain vomiting fatigue high_fever headache nausea loss_of_appetite pain_behind_the_eyes back_pain malaise muscle_pain red_spots_over_body,CRITICAL,Dengue,55
+muscle_weakness stiff_neck swelling_joints movement_stiffness painful_walking,MEDIUM,Arthritis,18
+vomiting headache nausea spinning_movements loss_of_balance unsteadiness,HIGH,(vertigo) Paroymsal  Positional Vertigo,27
+vomiting headache weakness_of_one_body_side altered_sensorium,MEDIUM,Paralysis (brain hemorrhage),14
+headache nausea spinning_movements loss_of_balance unsteadiness,MEDIUM,(vertigo) Paroymsal  Positional Vertigo,22
+vomiting sunken_eyes dehydration diarrhoea,MEDIUM,Gastroenteritis,18
+muscle_weakness stiff_neck swelling_joints movement_stiffness painful_walking,MEDIUM,Arthritis,18
+vomiting fatigue anxiety sweating headache nausea blurred_and_distorted_vision excessive_hunger drying_and_tingling_lips slurred_speech irritability palpitations,CRITICAL,Hypoglycemia,47
+muscle_weakness stiff_neck swelling_joints movement_stiffness painful_walking,MEDIUM,Arthritis,18
+constipation pain_during_bowel_movements pain_in_anal_region bloody_stool irritation_in_anus,HIGH,Dimorphic hemmorhoids(piles),26
+vomiting yellowish_skin abdominal_pain swelling_of_stomach distention_of_abdomen history_of_alcohol_consumption fluid_overload,HIGH,Alcoholic hepatitis,32
+skin_rash joint_pain skin_peeling silver_like_dusting small_dents_in_nails,MEDIUM,Psoriasis,13
+fatigue weight_loss restlessness lethargy blurred_and_distorted_vision obesity excessive_hunger increased_appetite polyuria,HIGH,Diabetes,36
+vomiting headache weakness_of_one_body_side altered_sensorium,MEDIUM,Paralysis (brain hemorrhage),14
+joint_pain neck_pain knee_pain hip_joint_pain swelling_joints painful_walking,MEDIUM,Osteoarthristis,20
+muscle_weakness swelling_joints movement_stiffness painful_walking,MEDIUM,Arthritis,14
+continuous_sneezing chills fatigue cough high_fever headache swelled_lymph_nodes malaise phlegm throat_irritation redness_of_eyes sinus_pressure runny_nose congestion chest_pain loss_of_smell muscle_pain,CRITICAL,Common Cold,77
+muscle_weakness stiff_neck swelling_joints movement_stiffness painful_walking,MEDIUM,Arthritis,18
+burning_micturition bladder_discomfort continuous_feel_of_urine,MEDIUM,Urinary tract infection,16
+itching skin_rash dischromic _patches,LOW,Fungal infection,4
+joint_pain vomiting fatigue high_fever yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain yellowing_of_eyes acute_liver_failure coma stomach_bleeding,CRITICAL,Hepatitis E,62
+fatigue cough high_fever breathlessness family_history,MEDIUM,Bronchial Asthma,24
+chills vomiting fatigue high_fever nausea constipation abdominal_pain diarrhoea toxic_look_(typhos) belly_pain,CRITICAL,Typhoid,47
+itching skin_rash fatigue lethargy high_fever headache loss_of_appetite mild_fever swelled_lymph_nodes malaise red_spots_over_body,CRITICAL,Chicken pox,44
+joint_pain vomiting fatigue yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Hepatitis D,36
+fatigue weight_gain cold_hands_and_feets mood_swings lethargy dizziness puffy_face_and_eyes enlarged_thyroid brittle_nails swollen_extremeties depression irritability abnormal_menstruation,CRITICAL,Hypothyroidism,53
+chills vomiting fatigue high_fever headache constipation abdominal_pain diarrhoea toxic_look_(typhos) belly_pain,CRITICAL,Typhoid,45
+acidity indigestion headache blurred_and_distorted_vision excessive_hunger stiff_neck depression irritability visual_disturbances,HIGH,Migraine,32
+continuous_sneezing chills fatigue cough high_fever headache swelled_lymph_nodes malaise phlegm throat_irritation redness_of_eyes sinus_pressure runny_nose congestion chest_pain loss_of_smell muscle_pain,CRITICAL,Common Cold,77
+headache chest_pain dizziness loss_of_balance lack_of_concentration,MEDIUM,Hypertension,21
+joint_pain vomiting yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain diarrhoea mild_fever yellowing_of_eyes muscle_pain,CRITICAL,hepatitis A,45
+fatigue weight_gain cold_hands_and_feets mood_swings lethargy dizziness puffy_face_and_eyes enlarged_thyroid brittle_nails swollen_extremeties depression irritability abnormal_menstruation,CRITICAL,Hypothyroidism,53
+itching skin_rash stomach_pain burning_micturition,MEDIUM,Drug Reaction,15
+chills vomiting fatigue high_fever headache nausea constipation abdominal_pain diarrhoea toxic_look_(typhos) belly_pain,CRITICAL,Typhoid,50
+vomiting yellowish_skin nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Chronic cholestasis,25
+vomiting yellowish_skin abdominal_pain swelling_of_stomach distention_of_abdomen history_of_alcohol_consumption fluid_overload,HIGH,Alcoholic hepatitis,32
+chills vomiting fatigue weight_loss cough breathlessness sweating loss_of_appetite mild_fever yellowing_of_eyes swelled_lymph_nodes malaise phlegm chest_pain blood_in_sputum,CRITICAL,Tuberculosis,68
+skin_rash joint_pain skin_peeling silver_like_dusting small_dents_in_nails inflammatory_nails,MEDIUM,Psoriasis,15
+vomiting breathlessness sweating chest_pain,MEDIUM,Heart attack,19
+muscle_weakness stiff_neck movement_stiffness painful_walking,MEDIUM,Arthritis,13
+yellowish_skin nausea loss_of_appetite yellowing_of_eyes family_history,MEDIUM,Hepatitis C,21
+skin_rash joint_pain skin_peeling silver_like_dusting small_dents_in_nails inflammatory_nails,MEDIUM,Psoriasis,15
+skin_rash joint_pain skin_peeling silver_like_dusting small_dents_in_nails inflammatory_nails,MEDIUM,Psoriasis,15
+vomiting fatigue high_fever yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain yellowing_of_eyes acute_liver_failure coma stomach_bleeding,CRITICAL,Hepatitis E,59
+muscle_weakness stiff_neck swelling_joints movement_stiffness painful_walking,MEDIUM,Arthritis,18
+continuous_sneezing chills fatigue cough high_fever headache swelled_lymph_nodes malaise phlegm throat_irritation redness_of_eyes sinus_pressure runny_nose congestion chest_pain loss_of_smell muscle_pain,CRITICAL,Common Cold,77
+fatigue cough high_fever breathlessness family_history mucoid_sputum,HIGH,Bronchial Asthma,28
+chills vomiting fatigue high_fever headache nausea constipation diarrhoea toxic_look_(typhos) belly_pain,CRITICAL,Typhoid,46
+itching fatigue lethargy yellowish_skin dark_urine loss_of_appetite abdominal_pain yellow_urine yellowing_of_eyes malaise receiving_blood_transfusion receiving_unsterile_injections,CRITICAL,Hepatitis B,43
+acidity indigestion headache blurred_and_distorted_vision excessive_hunger stiff_neck depression irritability visual_disturbances,HIGH,Migraine,32
+vomiting headache weakness_of_one_body_side altered_sensorium,MEDIUM,Paralysis (brain hemorrhage),14
+skin_rash high_fever blister red_sore_around_nose yellow_crust_ooze,MEDIUM,Impetigo,19
+itching lethargy yellowish_skin dark_urine loss_of_appetite abdominal_pain yellow_urine yellowing_of_eyes malaise receiving_blood_transfusion receiving_unsterile_injections,HIGH,Hepatitis B,39
+fatigue weight_loss restlessness lethargy irregular_sugar_level blurred_and_distorted_vision obesity excessive_hunger increased_appetite polyuria,CRITICAL,Diabetes,41
+chills vomiting high_fever sweating headache nausea diarrhoea muscle_pain,HIGH,Malaria,34
+fatigue mood_swings weight_loss restlessness sweating diarrhoea fast_heart_rate excessive_hunger muscle_weakness irritability abnormal_menstruation,CRITICAL,Hyperthyroidism,43
+vomiting sunken_eyes dehydration diarrhoea,MEDIUM,Gastroenteritis,18
+vomiting sweating chest_pain,MEDIUM,Heart attack,15
+joint_pain vomiting fatigue high_fever yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain yellowing_of_eyes acute_liver_failure coma stomach_bleeding,CRITICAL,Hepatitis E,62
+fatigue mood_swings weight_loss restlessness sweating diarrhoea fast_heart_rate excessive_hunger muscle_weakness irritability abnormal_menstruation,CRITICAL,Hyperthyroidism,43
+skin_rash chills joint_pain vomiting fatigue high_fever headache nausea loss_of_appetite pain_behind_the_eyes back_pain malaise muscle_pain red_spots_over_body,CRITICAL,Dengue,55
+skin_rash joint_pain skin_peeling silver_like_dusting small_dents_in_nails inflammatory_nails,MEDIUM,Psoriasis,15
+chills vomiting fatigue high_fever headache nausea abdominal_pain diarrhoea toxic_look_(typhos) belly_pain,CRITICAL,Typhoid,46
+burning_micturition bladder_discomfort continuous_feel_of_urine,MEDIUM,Urinary tract infection,16
+fatigue cramps bruising obesity swollen_legs swollen_blood_vessels prominent_veins_on_calf,HIGH,Varicose veins,32
+vomiting indigestion loss_of_appetite abdominal_pain passage_of_gases,MEDIUM,Peptic ulcer diseae,23
+vomiting headache nausea spinning_movements loss_of_balance unsteadiness,HIGH,(vertigo) Paroymsal  Positional Vertigo,27
+fatigue cough high_fever breathlessness family_history mucoid_sputum,HIGH,Bronchial Asthma,28
+fatigue mood_swings weight_loss sweating diarrhoea fast_heart_rate excessive_hunger muscle_weakness irritability abnormal_menstruation,HIGH,Hyperthyroidism,38
+fatigue yellowish_skin nausea loss_of_appetite yellowing_of_eyes,MEDIUM,Hepatitis C,20
+back_pain weakness_in_limbs neck_pain dizziness loss_of_balance,MEDIUM,Cervical spondylosis,23
+pus_filled_pimples blackheads scurring,LOW,Acne,6
+joint_pain neck_pain knee_pain hip_joint_pain swelling_joints,MEDIUM,Osteoarthristis,18
+skin_rash joint_pain skin_peeling small_dents_in_nails inflammatory_nails,MEDIUM,Psoriasis,13
+skin_rash chills joint_pain vomiting fatigue high_fever headache nausea loss_of_appetite pain_behind_the_eyes back_pain malaise muscle_pain red_spots_over_body,CRITICAL,Dengue,55
+joint_pain vomiting fatigue yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Hepatitis D,36
+vomiting yellowish_skin abdominal_pain swelling_of_stomach distention_of_abdomen history_of_alcohol_consumption fluid_overload,HIGH,Alcoholic hepatitis,32
+fatigue weight_gain cold_hands_and_feets mood_swings lethargy dizziness puffy_face_and_eyes enlarged_thyroid brittle_nails swollen_extremeties depression irritability abnormal_menstruation,CRITICAL,Hypothyroidism,53
+burning_micturition foul_smell_of urine continuous_feel_of_urine,LOW,Urinary tract infection,12
+itching skin_rash fatigue lethargy high_fever headache loss_of_appetite mild_fever swelled_lymph_nodes malaise red_spots_over_body,CRITICAL,Chicken pox,44
+muscle_wasting high_fever extra_marital_contacts,MEDIUM,AIDS,15
+vomiting weakness_of_one_body_side altered_sensorium,LOW,Paralysis (brain hemorrhage),11
+skin_rash blister red_sore_around_nose yellow_crust_ooze,LOW,Impetigo,12
+chills vomiting fatigue high_fever headache nausea constipation abdominal_pain diarrhoea toxic_look_(typhos) belly_pain,CRITICAL,Typhoid,50
+burning_micturition bladder_discomfort foul_smell_of urine continuous_feel_of_urine,MEDIUM,Urinary tract infection,16
+burning_micturition bladder_discomfort foul_smell_of urine continuous_feel_of_urine,MEDIUM,Urinary tract infection,16
+continuous_sneezing shivering chills watering_from_eyes,MEDIUM,Allergy,16
+chills vomiting fatigue high_fever headache nausea constipation abdominal_pain diarrhoea toxic_look_(typhos) belly_pain,CRITICAL,Typhoid,50
+joint_pain vomiting fatigue yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Hepatitis D,36
+joint_pain vomiting fatigue high_fever yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain yellowing_of_eyes acute_liver_failure coma stomach_bleeding,CRITICAL,Hepatitis E,62
+skin_rash high_fever blister red_sore_around_nose,MEDIUM,Impetigo,16
+itching skin_rash burning_micturition spotting_ urination,LOW,Drug Reaction,10
+joint_pain vomiting yellowish_skin dark_urine nausea abdominal_pain diarrhoea mild_fever yellowing_of_eyes muscle_pain,CRITICAL,hepatitis A,41
+chills vomiting high_fever sweating headache nausea diarrhoea muscle_pain,HIGH,Malaria,34
+vomiting sweating chest_pain,MEDIUM,Heart attack,15
+itching skin_rash stomach_pain burning_micturition spotting_ urination,MEDIUM,Drug Reaction,15
+muscle_weakness stiff_neck swelling_joints movement_stiffness painful_walking,MEDIUM,Arthritis,18
+headache weakness_of_one_body_side altered_sensorium,LOW,Paralysis (brain hemorrhage),9
+burning_micturition bladder_discomfort foul_smell_of urine,LOW,Urinary tract infection,10
+vomiting loss_of_appetite abdominal_pain passage_of_gases internal_itching,MEDIUM,Peptic ulcer diseae,22
+vomiting loss_of_appetite abdominal_pain passage_of_gases internal_itching,MEDIUM,Peptic ulcer diseae,22
+vomiting sunken_eyes dehydration diarrhoea,MEDIUM,Gastroenteritis,18
+chills fatigue high_fever breathlessness sweating malaise phlegm chest_pain fast_heart_rate rusty_sputum,CRITICAL,Pneumonia,48
+skin_rash high_fever blister red_sore_around_nose yellow_crust_ooze,MEDIUM,Impetigo,19
+vomiting headache weakness_of_one_body_side altered_sensorium,MEDIUM,Paralysis (brain hemorrhage),14
+vomiting yellowish_skin abdominal_pain swelling_of_stomach distention_of_abdomen history_of_alcohol_consumption fluid_overload,HIGH,Alcoholic hepatitis,32
+cramps bruising obesity swollen_legs swollen_blood_vessels prominent_veins_on_calf,HIGH,Varicose veins,28
+vomiting breathlessness sweating chest_pain,MEDIUM,Heart attack,19
+chills vomiting high_fever sweating headache nausea muscle_pain,HIGH,Malaria,28
+itching skin_rash nodal_skin_eruptions,LOW,Fungal infection,8
+chills vomiting high_fever sweating headache nausea diarrhoea muscle_pain,HIGH,Malaria,34
+vomiting headache weakness_of_one_body_side altered_sensorium,MEDIUM,Paralysis (brain hemorrhage),14
+skin_rash joint_pain skin_peeling silver_like_dusting small_dents_in_nails inflammatory_nails,MEDIUM,Psoriasis,15
+itching vomiting fatigue weight_loss high_fever yellowish_skin dark_urine abdominal_pain,HIGH,Jaundice,31
+joint_pain vomiting yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain diarrhoea mild_fever yellowing_of_eyes muscle_pain,CRITICAL,hepatitis A,45
+skin_rash joint_pain skin_peeling silver_like_dusting small_dents_in_nails inflammatory_nails,MEDIUM,Psoriasis,15
+itching vomiting yellowish_skin nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Chronic cholestasis,26
+chills vomiting fatigue weight_loss cough breathlessness sweating loss_of_appetite mild_fever yellowing_of_eyes swelled_lymph_nodes malaise phlegm chest_pain blood_in_sputum,CRITICAL,Tuberculosis,68
+chills joint_pain vomiting fatigue high_fever headache nausea loss_of_appetite pain_behind_the_eyes back_pain malaise muscle_pain red_spots_over_body,CRITICAL,Dengue,52
+itching fatigue lethargy yellowish_skin dark_urine loss_of_appetite abdominal_pain yellow_urine yellowing_of_eyes malaise receiving_blood_transfusion receiving_unsterile_injections,CRITICAL,Hepatitis B,43
+vomiting headache nausea spinning_movements unsteadiness,MEDIUM,(vertigo) Paroymsal  Positional Vertigo,23
+chills vomiting fatigue weight_loss cough high_fever breathlessness sweating loss_of_appetite mild_fever yellowing_of_eyes swelled_lymph_nodes malaise phlegm chest_pain blood_in_sputum,CRITICAL,Tuberculosis,75
+itching fatigue lethargy dark_urine loss_of_appetite abdominal_pain yellow_urine yellowing_of_eyes malaise receiving_blood_transfusion receiving_unsterile_injections,CRITICAL,Hepatitis B,40
+skin_rash joint_pain vomiting fatigue high_fever headache nausea loss_of_appetite pain_behind_the_eyes back_pain malaise muscle_pain red_spots_over_body,CRITICAL,Dengue,52
+burning_micturition bladder_discomfort foul_smell_of urine continuous_feel_of_urine,MEDIUM,Urinary tract infection,16
+breathlessness sweating chest_pain,MEDIUM,Heart attack,14
+fatigue weight_gain cold_hands_and_feets mood_swings lethargy dizziness enlarged_thyroid brittle_nails swollen_extremeties depression irritability abnormal_menstruation,CRITICAL,Hypothyroidism,48
+joint_pain vomiting fatigue yellowish_skin nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Hepatitis D,32
+itching vomiting yellowish_skin nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Chronic cholestasis,26
+continuous_sneezing chills watering_from_eyes,LOW,Allergy,11
+skin_rash high_fever blister red_sore_around_nose yellow_crust_ooze,MEDIUM,Impetigo,19
+headache chest_pain dizziness loss_of_balance lack_of_concentration,MEDIUM,Hypertension,21
+acidity indigestion headache blurred_and_distorted_vision excessive_hunger stiff_neck depression irritability visual_disturbances,HIGH,Migraine,32
+constipation pain_during_bowel_movements pain_in_anal_region bloody_stool irritation_in_anus,HIGH,Dimorphic hemmorhoids(piles),26
+itching nodal_skin_eruptions dischromic _patches,LOW,Fungal infection,5
+vomiting sunken_eyes dehydration diarrhoea,MEDIUM,Gastroenteritis,18
+fatigue weight_gain mood_swings lethargy dizziness puffy_face_and_eyes enlarged_thyroid brittle_nails swollen_extremeties depression irritability abnormal_menstruation,CRITICAL,Hypothyroidism,48
+fatigue restlessness lethargy irregular_sugar_level blurred_and_distorted_vision obesity excessive_hunger increased_appetite polyuria,HIGH,Diabetes,38
+vomiting fatigue anxiety sweating headache blurred_and_distorted_vision excessive_hunger drying_and_tingling_lips slurred_speech irritability palpitations,CRITICAL,Hypoglycemia,42
+chills fatigue cough high_fever breathlessness sweating malaise phlegm chest_pain fast_heart_rate rusty_sputum,CRITICAL,Pneumonia,52
+joint_pain vomiting fatigue dark_urine nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Hepatitis D,33
+itching vomiting yellowish_skin nausea abdominal_pain yellowing_of_eyes,MEDIUM,Chronic cholestasis,22
+muscle_wasting patches_in_throat high_fever extra_marital_contacts,MEDIUM,AIDS,21
+itching skin_rash stomach_pain burning_micturition spotting_ urination,MEDIUM,Drug Reaction,15
+itching vomiting yellowish_skin nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Chronic cholestasis,26
+chills vomiting fatigue weight_loss cough breathlessness sweating loss_of_appetite mild_fever yellowing_of_eyes swelled_lymph_nodes malaise phlegm chest_pain blood_in_sputum,CRITICAL,Tuberculosis,68
+vomiting fatigue anxiety sweating headache nausea blurred_and_distorted_vision excessive_hunger drying_and_tingling_lips slurred_speech irritability palpitations,CRITICAL,Hypoglycemia,47
+joint_pain vomiting fatigue yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain,HIGH,Hepatitis D,32
+itching skin_rash stomach_pain burning_micturition spotting_ urination,MEDIUM,Drug Reaction,15
+muscle_wasting high_fever extra_marital_contacts,MEDIUM,AIDS,15
+itching skin_rash stomach_pain burning_micturition spotting_ urination,MEDIUM,Drug Reaction,15
+fatigue cough high_fever breathlessness family_history mucoid_sputum,HIGH,Bronchial Asthma,28
+chills vomiting fatigue weight_loss cough high_fever breathlessness sweating loss_of_appetite mild_fever yellowing_of_eyes swelled_lymph_nodes malaise phlegm chest_pain blood_in_sputum,CRITICAL,Tuberculosis,75
+skin_rash joint_pain skin_peeling silver_like_dusting small_dents_in_nails inflammatory_nails,MEDIUM,Psoriasis,15
+vomiting headache nausea spinning_movements loss_of_balance unsteadiness,HIGH,(vertigo) Paroymsal  Positional Vertigo,27
+vomiting headache altered_sensorium,LOW,Paralysis (brain hemorrhage),10
+continuous_sneezing shivering chills,LOW,Allergy,12
+stomach_pain acidity ulcers_on_tongue vomiting cough chest_pain,HIGH,GERD,28
+joint_pain vomiting yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain diarrhoea mild_fever yellowing_of_eyes muscle_pain,CRITICAL,hepatitis A,45
+acidity indigestion headache blurred_and_distorted_vision excessive_hunger stiff_neck depression irritability visual_disturbances,HIGH,Migraine,32
+vomiting headache nausea spinning_movements unsteadiness,MEDIUM,(vertigo) Paroymsal  Positional Vertigo,23
+vomiting headache weakness_of_one_body_side altered_sensorium,MEDIUM,Paralysis (brain hemorrhage),14
+vomiting indigestion loss_of_appetite abdominal_pain passage_of_gases internal_itching,HIGH,Peptic ulcer diseae,27
+joint_pain vomiting fatigue yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Hepatitis D,36
+headache chest_pain dizziness loss_of_balance lack_of_concentration,MEDIUM,Hypertension,21
+joint_pain vomiting fatigue high_fever yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain yellowing_of_eyes acute_liver_failure coma stomach_bleeding,CRITICAL,Hepatitis E,62
+itching skin_rash dischromic _patches,LOW,Fungal infection,4
+skin_rash joint_pain skin_peeling silver_like_dusting small_dents_in_nails inflammatory_nails,MEDIUM,Psoriasis,15
+joint_pain vomiting fatigue yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Hepatitis D,36
+itching skin_rash nodal_skin_eruptions dischromic _patches,LOW,Fungal infection,8
+fatigue weight_loss lethargy irregular_sugar_level blurred_and_distorted_vision obesity excessive_hunger increased_appetite polyuria,HIGH,Diabetes,36
+fatigue cough high_fever breathlessness family_history mucoid_sputum,HIGH,Bronchial Asthma,28
+muscle_wasting patches_in_throat high_fever extra_marital_contacts,MEDIUM,AIDS,21
+muscle_wasting patches_in_throat high_fever extra_marital_contacts,MEDIUM,AIDS,21
+joint_pain neck_pain knee_pain hip_joint_pain swelling_joints painful_walking,MEDIUM,Osteoarthristis,20
+chills vomiting fatigue high_fever headache nausea constipation abdominal_pain diarrhoea toxic_look_(typhos) belly_pain,CRITICAL,Typhoid,50
+bladder_discomfort foul_smell_of urine continuous_feel_of_urine,LOW,Urinary tract infection,10
+vomiting yellowish_skin abdominal_pain swelling_of_stomach distention_of_abdomen history_of_alcohol_consumption fluid_overload,HIGH,Alcoholic hepatitis,32
+vomiting yellowish_skin abdominal_pain swelling_of_stomach history_of_alcohol_consumption fluid_overload,HIGH,Alcoholic hepatitis,28
+vomiting yellowish_skin abdominal_pain swelling_of_stomach distention_of_abdomen history_of_alcohol_consumption fluid_overload,HIGH,Alcoholic hepatitis,32
+sunken_eyes dehydration diarrhoea,MEDIUM,Gastroenteritis,13
+joint_pain vomiting fatigue high_fever yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain yellowing_of_eyes acute_liver_failure coma stomach_bleeding,CRITICAL,Hepatitis E,62
+vomiting headache weakness_of_one_body_side altered_sensorium,MEDIUM,Paralysis (brain hemorrhage),14
+acidity indigestion headache blurred_and_distorted_vision excessive_hunger stiff_neck depression irritability visual_disturbances,HIGH,Migraine,32
+skin_rash chills joint_pain vomiting fatigue high_fever headache nausea loss_of_appetite pain_behind_the_eyes back_pain malaise muscle_pain red_spots_over_body,CRITICAL,Dengue,55
+vomiting fatigue anxiety sweating headache nausea blurred_and_distorted_vision excessive_hunger drying_and_tingling_lips slurred_speech irritability palpitations,CRITICAL,Hypoglycemia,47
+chills fatigue cough high_fever breathlessness sweating malaise phlegm chest_pain fast_heart_rate rusty_sputum,CRITICAL,Pneumonia,52
+burning_micturition bladder_discomfort continuous_feel_of_urine,MEDIUM,Urinary tract infection,16
+cramps bruising obesity swollen_legs swollen_blood_vessels prominent_veins_on_calf,HIGH,Varicose veins,28
+joint_pain vomiting fatigue yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Hepatitis D,36
+continuous_sneezing shivering chills watering_from_eyes,MEDIUM,Allergy,16
+fatigue mood_swings weight_loss restlessness sweating diarrhoea fast_heart_rate excessive_hunger muscle_weakness irritability abnormal_menstruation,CRITICAL,Hyperthyroidism,43
+fatigue cough high_fever breathlessness family_history mucoid_sputum,HIGH,Bronchial Asthma,28
+fatigue cough high_fever breathlessness family_history mucoid_sputum,HIGH,Bronchial Asthma,28
+itching vomiting fatigue weight_loss high_fever yellowish_skin dark_urine,HIGH,Jaundice,27
+fatigue weight_loss restlessness lethargy irregular_sugar_level blurred_and_distorted_vision obesity excessive_hunger increased_appetite polyuria,CRITICAL,Diabetes,41
+vomiting breathlessness sweating chest_pain,MEDIUM,Heart attack,19
+vomiting sunken_eyes dehydration diarrhoea,MEDIUM,Gastroenteritis,18
+vomiting yellowish_skin abdominal_pain swelling_of_stomach distention_of_abdomen history_of_alcohol_consumption fluid_overload,HIGH,Alcoholic hepatitis,32
+muscle_wasting patches_in_throat high_fever extra_marital_contacts,MEDIUM,AIDS,21
+skin_rash high_fever blister red_sore_around_nose yellow_crust_ooze,MEDIUM,Impetigo,19
+itching fatigue lethargy yellowish_skin dark_urine loss_of_appetite abdominal_pain yellow_urine yellowing_of_eyes malaise receiving_blood_transfusion receiving_unsterile_injections,CRITICAL,Hepatitis B,43
+skin_rash joint_pain skin_peeling silver_like_dusting small_dents_in_nails inflammatory_nails,MEDIUM,Psoriasis,15
+chills vomiting sweating headache nausea diarrhoea muscle_pain,HIGH,Malaria,27
+continuous_sneezing chills watering_from_eyes,LOW,Allergy,11
+continuous_sneezing chills fatigue cough high_fever headache swelled_lymph_nodes malaise phlegm throat_irritation redness_of_eyes sinus_pressure runny_nose congestion chest_pain loss_of_smell muscle_pain,CRITICAL,Common Cold,77
+fatigue cramps bruising obesity swollen_legs swollen_blood_vessels prominent_veins_on_calf,HIGH,Varicose veins,32
+vomiting fatigue anxiety sweating headache nausea blurred_and_distorted_vision excessive_hunger drying_and_tingling_lips slurred_speech irritability palpitations,CRITICAL,Hypoglycemia,47
+chills vomiting fatigue high_fever headache nausea constipation diarrhoea toxic_look_(typhos) belly_pain,CRITICAL,Typhoid,46
+joint_pain neck_pain knee_pain hip_joint_pain swelling_joints painful_walking,MEDIUM,Osteoarthristis,20
+fatigue weight_loss restlessness lethargy irregular_sugar_level blurred_and_distorted_vision obesity excessive_hunger increased_appetite polyuria,CRITICAL,Diabetes,41
+skin_rash chills joint_pain vomiting fatigue high_fever headache nausea loss_of_appetite pain_behind_the_eyes back_pain malaise muscle_pain red_spots_over_body,CRITICAL,Dengue,55
+vomiting headache weakness_of_one_body_side altered_sensorium,MEDIUM,Paralysis (brain hemorrhage),14
+acidity indigestion headache blurred_and_distorted_vision excessive_hunger stiff_neck depression irritability visual_disturbances,HIGH,Migraine,32
+fatigue lethargy yellowish_skin dark_urine loss_of_appetite abdominal_pain yellow_urine yellowing_of_eyes malaise receiving_blood_transfusion receiving_unsterile_injections,CRITICAL,Hepatitis B,42
+vomiting sunken_eyes dehydration diarrhoea,MEDIUM,Gastroenteritis,18
+back_pain weakness_in_limbs neck_pain dizziness loss_of_balance,MEDIUM,Cervical spondylosis,23
+fatigue cold_hands_and_feets mood_swings lethargy dizziness puffy_face_and_eyes enlarged_thyroid brittle_nails swollen_extremeties depression irritability abnormal_menstruation,CRITICAL,Hypothyroidism,50
+itching skin_rash fatigue lethargy headache loss_of_appetite mild_fever swelled_lymph_nodes malaise red_spots_over_body,HIGH,Chicken pox,37
+fatigue mood_swings weight_loss restlessness sweating diarrhoea fast_heart_rate excessive_hunger muscle_weakness irritability abnormal_menstruation,CRITICAL,Hyperthyroidism,43
+acidity indigestion headache blurred_and_distorted_vision excessive_hunger stiff_neck depression irritability,HIGH,Migraine,29
+skin_rash joint_pain skin_peeling silver_like_dusting small_dents_in_nails inflammatory_nails,MEDIUM,Psoriasis,15
+chills vomiting fatigue high_fever headache nausea constipation abdominal_pain toxic_look_(typhos) belly_pain,CRITICAL,Typhoid,44
+muscle_wasting patches_in_throat high_fever extra_marital_contacts,MEDIUM,AIDS,21
+vomiting breathlessness chest_pain,MEDIUM,Heart attack,16
+vomiting headache weakness_of_one_body_side altered_sensorium,MEDIUM,Paralysis (brain hemorrhage),14
+shivering chills watering_from_eyes,LOW,Allergy,12
+chills vomiting high_fever sweating headache nausea diarrhoea muscle_pain,HIGH,Malaria,34
+joint_pain vomiting fatigue high_fever yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain yellowing_of_eyes acute_liver_failure coma stomach_bleeding,CRITICAL,Hepatitis E,62
+joint_pain vomiting yellowish_skin dark_urine nausea loss_of_appetite diarrhoea mild_fever yellowing_of_eyes muscle_pain,CRITICAL,hepatitis A,41
+chills vomiting high_fever sweating headache nausea diarrhoea muscle_pain,HIGH,Malaria,34
+chills fatigue weight_loss cough high_fever breathlessness sweating loss_of_appetite mild_fever yellowing_of_eyes swelled_lymph_nodes malaise phlegm chest_pain blood_in_sputum,CRITICAL,Tuberculosis,70
+vomiting headache nausea spinning_movements loss_of_balance unsteadiness,HIGH,(vertigo) Paroymsal  Positional Vertigo,27
+vomiting fatigue yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Hepatitis D,33
+continuous_sneezing shivering chills watering_from_eyes,MEDIUM,Allergy,16
+itching vomiting fatigue weight_loss high_fever dark_urine abdominal_pain,HIGH,Jaundice,28
+chills vomiting fatigue high_fever headache nausea constipation abdominal_pain diarrhoea toxic_look_(typhos) belly_pain,CRITICAL,Typhoid,50
+vomiting indigestion loss_of_appetite abdominal_pain passage_of_gases internal_itching,HIGH,Peptic ulcer diseae,27
+vomiting indigestion loss_of_appetite abdominal_pain passage_of_gases internal_itching,HIGH,Peptic ulcer diseae,27
+headache dizziness loss_of_balance lack_of_concentration,MEDIUM,Hypertension,14
+continuous_sneezing shivering chills watering_from_eyes,MEDIUM,Allergy,16
+itching fatigue lethargy yellowish_skin dark_urine loss_of_appetite abdominal_pain yellow_urine yellowing_of_eyes malaise receiving_blood_transfusion receiving_unsterile_injections,CRITICAL,Hepatitis B,43
+chills vomiting fatigue high_fever headache nausea constipation abdominal_pain diarrhoea toxic_look_(typhos) belly_pain,CRITICAL,Typhoid,50
+vomiting headache weakness_of_one_body_side altered_sensorium,MEDIUM,Paralysis (brain hemorrhage),14
+vomiting headache nausea loss_of_balance unsteadiness,MEDIUM,(vertigo) Paroymsal  Positional Vertigo,21
+fatigue cough high_fever breathlessness family_history mucoid_sputum,HIGH,Bronchial Asthma,28
+continuous_sneezing chills fatigue cough high_fever headache swelled_lymph_nodes malaise phlegm throat_irritation redness_of_eyes sinus_pressure runny_nose congestion chest_pain loss_of_smell muscle_pain,CRITICAL,Common Cold,77
+itching vomiting yellowish_skin nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Chronic cholestasis,26
+vomiting sunken_eyes dehydration diarrhoea,MEDIUM,Gastroenteritis,18
+skin_rash high_fever blister red_sore_around_nose yellow_crust_ooze,MEDIUM,Impetigo,19
+joint_pain vomiting fatigue dark_urine nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Hepatitis D,33
+back_pain weakness_in_limbs neck_pain dizziness loss_of_balance,MEDIUM,Cervical spondylosis,23
+muscle_weakness stiff_neck swelling_joints movement_stiffness painful_walking,MEDIUM,Arthritis,18
+itching skin_rash nodal_skin_eruptions dischromic _patches,LOW,Fungal infection,8
+vomiting breathlessness sweating chest_pain,MEDIUM,Heart attack,19
+chills fatigue cough high_fever breathlessness sweating malaise phlegm chest_pain fast_heart_rate rusty_sputum,CRITICAL,Pneumonia,52
+burning_micturition bladder_discomfort foul_smell_of urine continuous_feel_of_urine,MEDIUM,Urinary tract infection,16
+chills fatigue cough breathlessness sweating malaise phlegm chest_pain fast_heart_rate rusty_sputum,CRITICAL,Pneumonia,45
+skin_rash high_fever blister red_sore_around_nose yellow_crust_ooze,MEDIUM,Impetigo,19
+chills fatigue cough breathlessness sweating malaise phlegm chest_pain fast_heart_rate rusty_sputum,CRITICAL,Pneumonia,45
+headache weakness_of_one_body_side altered_sensorium,LOW,Paralysis (brain hemorrhage),9
+skin_rash high_fever blister red_sore_around_nose,MEDIUM,Impetigo,16
+chills fatigue high_fever breathlessness sweating malaise phlegm chest_pain fast_heart_rate rusty_sputum,CRITICAL,Pneumonia,48
+burning_micturition bladder_discomfort foul_smell_of urine continuous_feel_of_urine,MEDIUM,Urinary tract infection,16
+vomiting headache nausea spinning_movements loss_of_balance unsteadiness,HIGH,(vertigo) Paroymsal  Positional Vertigo,27
+fatigue cold_hands_and_feets mood_swings lethargy dizziness puffy_face_and_eyes enlarged_thyroid brittle_nails swollen_extremeties depression irritability abnormal_menstruation,CRITICAL,Hypothyroidism,50
+vomiting indigestion loss_of_appetite abdominal_pain passage_of_gases internal_itching,HIGH,Peptic ulcer diseae,27
+joint_pain vomiting fatigue high_fever yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain yellowing_of_eyes acute_liver_failure coma stomach_bleeding,CRITICAL,Hepatitis E,62
+constipation pain_during_bowel_movements pain_in_anal_region bloody_stool irritation_in_anus,HIGH,Dimorphic hemmorhoids(piles),26
+chills fatigue cough high_fever breathlessness sweating malaise phlegm chest_pain fast_heart_rate rusty_sputum,CRITICAL,Pneumonia,52
+vomiting sunken_eyes dehydration diarrhoea,MEDIUM,Gastroenteritis,18
+fatigue bruising obesity swollen_legs swollen_blood_vessels prominent_veins_on_calf,HIGH,Varicose veins,28
+continuous_sneezing shivering chills watering_from_eyes,MEDIUM,Allergy,16
+burning_micturition bladder_discomfort foul_smell_of urine continuous_feel_of_urine,MEDIUM,Urinary tract infection,16
+itching fatigue lethargy high_fever headache loss_of_appetite mild_fever swelled_lymph_nodes malaise red_spots_over_body,CRITICAL,Chicken pox,41
+chills vomiting fatigue weight_loss cough high_fever breathlessness sweating loss_of_appetite mild_fever yellowing_of_eyes swelled_lymph_nodes malaise phlegm chest_pain blood_in_sputum,CRITICAL,Tuberculosis,75
+itching nodal_skin_eruptions dischromic _patches,LOW,Fungal infection,5
+fatigue mood_swings weight_loss restlessness diarrhoea fast_heart_rate excessive_hunger muscle_weakness irritability abnormal_menstruation,CRITICAL,Hyperthyroidism,40
+constipation pain_during_bowel_movements pain_in_anal_region bloody_stool irritation_in_anus,HIGH,Dimorphic hemmorhoids(piles),26
+fatigue weight_gain cold_hands_and_feets mood_swings lethargy dizziness puffy_face_and_eyes enlarged_thyroid brittle_nails swollen_extremeties depression irritability abnormal_menstruation,CRITICAL,Hypothyroidism,53
+joint_pain neck_pain knee_pain hip_joint_pain swelling_joints painful_walking,MEDIUM,Osteoarthristis,20
+vomiting breathlessness sweating chest_pain,MEDIUM,Heart attack,19
+itching skin_rash nodal_skin_eruptions,LOW,Fungal infection,8
+itching skin_rash fatigue high_fever headache loss_of_appetite mild_fever swelled_lymph_nodes malaise red_spots_over_body,CRITICAL,Chicken pox,42
+muscle_wasting patches_in_throat high_fever extra_marital_contacts,MEDIUM,AIDS,21
+itching fatigue lethargy yellowish_skin dark_urine abdominal_pain yellow_urine yellowing_of_eyes malaise receiving_blood_transfusion receiving_unsterile_injections,HIGH,Hepatitis B,39
+chills vomiting high_fever sweating headache nausea diarrhoea muscle_pain,HIGH,Malaria,34
+headache chest_pain dizziness loss_of_balance lack_of_concentration,MEDIUM,Hypertension,21
+continuous_sneezing chills fatigue cough high_fever headache swelled_lymph_nodes malaise phlegm throat_irritation redness_of_eyes sinus_pressure runny_nose congestion chest_pain loss_of_smell muscle_pain,CRITICAL,Common Cold,77
+itching vomiting yellowish_skin nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Chronic cholestasis,26
+chills vomiting fatigue high_fever headache nausea constipation abdominal_pain diarrhoea belly_pain,CRITICAL,Typhoid,45
+fatigue yellowish_skin nausea loss_of_appetite yellowing_of_eyes family_history,HIGH,Hepatitis C,25
+itching vomiting yellowish_skin nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Chronic cholestasis,26
+stomach_pain acidity ulcers_on_tongue vomiting cough chest_pain,HIGH,GERD,28
+chills vomiting high_fever sweating headache nausea muscle_pain,HIGH,Malaria,28
+skin_rash joint_pain skin_peeling silver_like_dusting small_dents_in_nails,MEDIUM,Psoriasis,13
+fatigue yellowish_skin nausea loss_of_appetite yellowing_of_eyes family_history,HIGH,Hepatitis C,25
+stomach_pain ulcers_on_tongue vomiting cough chest_pain,HIGH,GERD,25
+headache chest_pain dizziness loss_of_balance lack_of_concentration,MEDIUM,Hypertension,21
+itching skin_rash nodal_skin_eruptions,LOW,Fungal infection,8
+vomiting yellowish_skin abdominal_pain swelling_of_stomach history_of_alcohol_consumption fluid_overload,HIGH,Alcoholic hepatitis,28
+itching fatigue lethargy yellowish_skin loss_of_appetite abdominal_pain yellow_urine yellowing_of_eyes malaise receiving_blood_transfusion receiving_unsterile_injections,HIGH,Hepatitis B,39
+fatigue mood_swings weight_loss restlessness sweating diarrhoea fast_heart_rate muscle_weakness irritability abnormal_menstruation,HIGH,Hyperthyroidism,39
+itching vomiting fatigue weight_loss high_fever yellowish_skin abdominal_pain,HIGH,Jaundice,27
+itching stomach_pain burning_micturition spotting_ urination,LOW,Drug Reaction,12
+itching skin_rash fatigue high_fever headache loss_of_appetite mild_fever swelled_lymph_nodes malaise red_spots_over_body,CRITICAL,Chicken pox,42
+itching vomiting fatigue weight_loss high_fever yellowish_skin dark_urine abdominal_pain,HIGH,Jaundice,31
+fatigue weight_loss restlessness lethargy irregular_sugar_level blurred_and_distorted_vision obesity excessive_hunger increased_appetite polyuria,CRITICAL,Diabetes,41
+constipation pain_during_bowel_movements pain_in_anal_region bloody_stool irritation_in_anus,HIGH,Dimorphic hemmorhoids(piles),26
+joint_pain vomiting fatigue yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Hepatitis D,36
+skin_rash high_fever blister red_sore_around_nose yellow_crust_ooze,MEDIUM,Impetigo,19
+vomiting yellowish_skin abdominal_pain distention_of_abdomen history_of_alcohol_consumption fluid_overload,HIGH,Alcoholic hepatitis,25
+chest_pain dizziness loss_of_balance lack_of_concentration,MEDIUM,Hypertension,18
+joint_pain neck_pain knee_pain hip_joint_pain swelling_joints,MEDIUM,Osteoarthristis,18
+fatigue mood_swings weight_loss restlessness sweating diarrhoea fast_heart_rate excessive_hunger muscle_weakness irritability abnormal_menstruation,CRITICAL,Hyperthyroidism,43
+skin_rash high_fever blister red_sore_around_nose yellow_crust_ooze,MEDIUM,Impetigo,19
+vomiting breathlessness sweating chest_pain,MEDIUM,Heart attack,19
+joint_pain neck_pain knee_pain hip_joint_pain swelling_joints painful_walking,MEDIUM,Osteoarthristis,20
+vomiting headache weakness_of_one_body_side altered_sensorium,MEDIUM,Paralysis (brain hemorrhage),14
+back_pain weakness_in_limbs neck_pain dizziness loss_of_balance,MEDIUM,Cervical spondylosis,23
+muscle_wasting patches_in_throat high_fever extra_marital_contacts,MEDIUM,AIDS,21
+fatigue yellowish_skin nausea loss_of_appetite yellowing_of_eyes family_history,HIGH,Hepatitis C,25
+chills vomiting high_fever sweating headache nausea diarrhoea muscle_pain,HIGH,Malaria,34
+stomach_pain acidity ulcers_on_tongue vomiting cough chest_pain,HIGH,GERD,28
+fatigue weight_gain cold_hands_and_feets mood_swings lethargy dizziness puffy_face_and_eyes enlarged_thyroid brittle_nails swollen_extremeties depression irritability abnormal_menstruation,CRITICAL,Hypothyroidism,53
+continuous_sneezing chills fatigue high_fever headache swelled_lymph_nodes malaise phlegm throat_irritation redness_of_eyes sinus_pressure runny_nose congestion chest_pain loss_of_smell muscle_pain,CRITICAL,Common Cold,73
+continuous_sneezing chills cough high_fever headache swelled_lymph_nodes malaise phlegm throat_irritation redness_of_eyes sinus_pressure runny_nose congestion chest_pain loss_of_smell muscle_pain,CRITICAL,Common Cold,73
+vomiting yellowish_skin abdominal_pain swelling_of_stomach distention_of_abdomen fluid_overload,HIGH,Alcoholic hepatitis,27
+itching skin_rash fatigue lethargy high_fever headache loss_of_appetite mild_fever swelled_lymph_nodes malaise red_spots_over_body,CRITICAL,Chicken pox,44
+acidity indigestion headache blurred_and_distorted_vision excessive_hunger stiff_neck depression irritability visual_disturbances,HIGH,Migraine,32
+fatigue weight_loss restlessness lethargy irregular_sugar_level blurred_and_distorted_vision obesity excessive_hunger increased_appetite polyuria,CRITICAL,Diabetes,41
+chills joint_pain vomiting fatigue high_fever headache nausea loss_of_appetite pain_behind_the_eyes back_pain malaise muscle_pain red_spots_over_body,CRITICAL,Dengue,52
+vomiting headache nausea spinning_movements loss_of_balance unsteadiness,HIGH,(vertigo) Paroymsal  Positional Vertigo,27
+vomiting breathlessness sweating chest_pain,MEDIUM,Heart attack,19
+chills fatigue cough high_fever breathlessness sweating phlegm chest_pain fast_heart_rate rusty_sputum,CRITICAL,Pneumonia,46
+skin_rash nodal_skin_eruptions dischromic _patches,LOW,Fungal infection,7
+skin_rash high_fever blister red_sore_around_nose yellow_crust_ooze,MEDIUM,Impetigo,19
+skin_rash chills joint_pain vomiting fatigue high_fever headache nausea loss_of_appetite pain_behind_the_eyes back_pain malaise red_spots_over_body,CRITICAL,Dengue,53
+vomiting yellowish_skin abdominal_pain swelling_of_stomach distention_of_abdomen history_of_alcohol_consumption fluid_overload,HIGH,Alcoholic hepatitis,32
+itching vomiting yellowish_skin nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Chronic cholestasis,26
+headache chest_pain dizziness loss_of_balance lack_of_concentration,MEDIUM,Hypertension,21
+stomach_pain acidity ulcers_on_tongue vomiting cough chest_pain,HIGH,GERD,28
+itching vomiting yellowish_skin nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Chronic cholestasis,26
+fatigue weight_gain cold_hands_and_feets mood_swings lethargy dizziness puffy_face_and_eyes enlarged_thyroid brittle_nails swollen_extremeties depression irritability abnormal_menstruation,CRITICAL,Hypothyroidism,53
+joint_pain vomiting fatigue high_fever yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain yellowing_of_eyes acute_liver_failure coma stomach_bleeding,CRITICAL,Hepatitis E,62
+continuous_sneezing chills fatigue cough high_fever headache swelled_lymph_nodes malaise phlegm throat_irritation redness_of_eyes sinus_pressure runny_nose congestion chest_pain loss_of_smell muscle_pain,CRITICAL,Common Cold,77
+skin_rash high_fever blister red_sore_around_nose yellow_crust_ooze,MEDIUM,Impetigo,19
+stomach_pain acidity ulcers_on_tongue vomiting cough chest_pain,HIGH,GERD,28
+vomiting headache spinning_movements loss_of_balance unsteadiness,MEDIUM,(vertigo) Paroymsal  Positional Vertigo,22
+fatigue cough high_fever breathlessness family_history mucoid_sputum,HIGH,Bronchial Asthma,28
+joint_pain vomiting fatigue high_fever yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain yellowing_of_eyes acute_liver_failure coma stomach_bleeding,CRITICAL,Hepatitis E,62
+itching skin_rash stomach_pain burning_micturition spotting_ urination,MEDIUM,Drug Reaction,15
+vomiting sunken_eyes dehydration diarrhoea,MEDIUM,Gastroenteritis,18
+fatigue cough high_fever breathlessness family_history mucoid_sputum,HIGH,Bronchial Asthma,28
+burning_micturition bladder_discomfort foul_smell_of urine continuous_feel_of_urine,MEDIUM,Urinary tract infection,16
+chills vomiting fatigue high_fever headache nausea constipation abdominal_pain diarrhoea toxic_look_(typhos) belly_pain,CRITICAL,Typhoid,50
+vomiting fatigue high_fever yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain yellowing_of_eyes acute_liver_failure coma stomach_bleeding,CRITICAL,Hepatitis E,59
+muscle_wasting patches_in_throat high_fever extra_marital_contacts,MEDIUM,AIDS,21
+fatigue yellowish_skin nausea loss_of_appetite yellowing_of_eyes family_history,HIGH,Hepatitis C,25
+itching skin_rash stomach_pain burning_micturition spotting_ urination,MEDIUM,Drug Reaction,15
+chills high_fever sweating headache nausea diarrhoea muscle_pain,HIGH,Malaria,29
+skin_rash high_fever blister red_sore_around_nose yellow_crust_ooze,MEDIUM,Impetigo,19
+vomiting headache weakness_of_one_body_side altered_sensorium,MEDIUM,Paralysis (brain hemorrhage),14
+chills fatigue cough high_fever breathlessness sweating malaise phlegm chest_pain fast_heart_rate rusty_sputum,CRITICAL,Pneumonia,52
+skin_rash high_fever blister red_sore_around_nose yellow_crust_ooze,MEDIUM,Impetigo,19
+joint_pain vomiting fatigue yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Hepatitis D,36
+joint_pain vomiting yellowish_skin dark_urine loss_of_appetite abdominal_pain diarrhoea mild_fever yellowing_of_eyes muscle_pain,CRITICAL,hepatitis A,40
+vomiting yellowish_skin abdominal_pain swelling_of_stomach distention_of_abdomen history_of_alcohol_consumption fluid_overload,HIGH,Alcoholic hepatitis,32
+joint_pain vomiting fatigue yellowish_skin dark_urine nausea abdominal_pain yellowing_of_eyes,HIGH,Hepatitis D,32
+muscle_weakness stiff_neck swelling_joints movement_stiffness,MEDIUM,Arthritis,16
+vomiting sunken_eyes dehydration,LOW,Gastroenteritis,12
+continuous_sneezing shivering chills watering_from_eyes,MEDIUM,Allergy,16
+chills fatigue cough high_fever breathlessness sweating malaise phlegm chest_pain fast_heart_rate rusty_sputum,CRITICAL,Pneumonia,52
+vomiting fatigue anxiety sweating headache nausea blurred_and_distorted_vision excessive_hunger drying_and_tingling_lips slurred_speech irritability palpitations,CRITICAL,Hypoglycemia,47
+vomiting sunken_eyes dehydration diarrhoea,MEDIUM,Gastroenteritis,18
+itching skin_rash fatigue lethargy high_fever headache loss_of_appetite mild_fever swelled_lymph_nodes malaise red_spots_over_body,CRITICAL,Chicken pox,44
+continuous_sneezing chills fatigue cough high_fever headache swelled_lymph_nodes malaise phlegm throat_irritation redness_of_eyes sinus_pressure runny_nose congestion chest_pain loss_of_smell muscle_pain,CRITICAL,Common Cold,77
+burning_micturition bladder_discomfort foul_smell_of urine continuous_feel_of_urine,MEDIUM,Urinary tract infection,16
+fatigue weight_loss restlessness lethargy irregular_sugar_level blurred_and_distorted_vision obesity excessive_hunger increased_appetite polyuria,CRITICAL,Diabetes,41
+chest_pain dizziness loss_of_balance lack_of_concentration,MEDIUM,Hypertension,18
+fatigue cough high_fever breathlessness family_history mucoid_sputum,HIGH,Bronchial Asthma,28
+itching skin_rash stomach_pain burning_micturition spotting_ urination,MEDIUM,Drug Reaction,15
+vomiting indigestion loss_of_appetite abdominal_pain passage_of_gases internal_itching,HIGH,Peptic ulcer diseae,27
+itching skin_rash fatigue lethargy high_fever headache loss_of_appetite mild_fever swelled_lymph_nodes malaise red_spots_over_body,CRITICAL,Chicken pox,44
+vomiting sunken_eyes dehydration diarrhoea,MEDIUM,Gastroenteritis,18
+stomach_pain acidity ulcers_on_tongue vomiting cough chest_pain,HIGH,GERD,28
+chills cough high_fever breathlessness sweating malaise phlegm chest_pain fast_heart_rate rusty_sputum,CRITICAL,Pneumonia,48
+skin_rash chills joint_pain fatigue high_fever headache nausea loss_of_appetite pain_behind_the_eyes back_pain malaise muscle_pain red_spots_over_body,CRITICAL,Dengue,50
+itching fatigue lethargy yellowish_skin dark_urine loss_of_appetite abdominal_pain yellowing_of_eyes malaise receiving_blood_transfusion receiving_unsterile_injections,HIGH,Hepatitis B,39
+vomiting dehydration diarrhoea,MEDIUM,Gastroenteritis,15
+skin_rash blackheads scurring,LOW,Acne,7
+skin_rash pus_filled_pimples blackheads scurring,LOW,Acne,9
+vomiting fatigue anxiety sweating headache nausea excessive_hunger drying_and_tingling_lips slurred_speech irritability palpitations,CRITICAL,Hypoglycemia,42
+vomiting sunken_eyes dehydration diarrhoea,MEDIUM,Gastroenteritis,18
+chills vomiting high_fever sweating headache nausea diarrhoea muscle_pain,HIGH,Malaria,34
+skin_rash blister red_sore_around_nose yellow_crust_ooze,LOW,Impetigo,12
+fatigue cough high_fever breathlessness mucoid_sputum,MEDIUM,Bronchial Asthma,23
+joint_pain neck_pain knee_pain swelling_joints painful_walking,MEDIUM,Osteoarthristis,18
+breathlessness sweating chest_pain,MEDIUM,Heart attack,14
+vomiting high_fever sweating headache nausea diarrhoea muscle_pain,HIGH,Malaria,31
+fatigue weight_loss lethargy irregular_sugar_level blurred_and_distorted_vision obesity excessive_hunger increased_appetite polyuria,HIGH,Diabetes,36
+chills vomiting fatigue high_fever headache nausea abdominal_pain diarrhoea toxic_look_(typhos) belly_pain,CRITICAL,Typhoid,46
+chills vomiting fatigue weight_loss cough high_fever breathlessness sweating loss_of_appetite mild_fever yellowing_of_eyes swelled_lymph_nodes malaise phlegm chest_pain blood_in_sputum,CRITICAL,Tuberculosis,75
+fatigue weight_loss restlessness lethargy irregular_sugar_level blurred_and_distorted_vision obesity excessive_hunger increased_appetite polyuria,CRITICAL,Diabetes,41
+fatigue yellowish_skin nausea loss_of_appetite yellowing_of_eyes,MEDIUM,Hepatitis C,20
+vomiting sunken_eyes dehydration diarrhoea,MEDIUM,Gastroenteritis,18
+joint_pain skin_peeling silver_like_dusting small_dents_in_nails inflammatory_nails,LOW,Psoriasis,12
+continuous_sneezing chills watering_from_eyes,LOW,Allergy,11
+chills vomiting fatigue weight_loss cough high_fever breathlessness sweating loss_of_appetite mild_fever yellowing_of_eyes swelled_lymph_nodes malaise phlegm chest_pain blood_in_sputum,CRITICAL,Tuberculosis,75
+vomiting indigestion loss_of_appetite abdominal_pain passage_of_gases internal_itching,HIGH,Peptic ulcer diseae,27
+continuous_sneezing shivering chills watering_from_eyes,MEDIUM,Allergy,16
+vomiting headache altered_sensorium,LOW,Paralysis (brain hemorrhage),10
+fatigue cough high_fever breathlessness family_history mucoid_sputum,HIGH,Bronchial Asthma,28
+joint_pain vomiting fatigue high_fever yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain yellowing_of_eyes acute_liver_failure coma stomach_bleeding,CRITICAL,Hepatitis E,62
+vomiting fatigue anxiety sweating headache nausea blurred_and_distorted_vision excessive_hunger drying_and_tingling_lips slurred_speech irritability palpitations,CRITICAL,Hypoglycemia,47
+vomiting fatigue anxiety sweating headache nausea blurred_and_distorted_vision excessive_hunger drying_and_tingling_lips slurred_speech irritability palpitations,CRITICAL,Hypoglycemia,47
+vomiting fatigue anxiety sweating headache nausea blurred_and_distorted_vision excessive_hunger slurred_speech irritability palpitations,CRITICAL,Hypoglycemia,43
+yellowish_skin abdominal_pain swelling_of_stomach distention_of_abdomen history_of_alcohol_consumption fluid_overload,HIGH,Alcoholic hepatitis,27
+weakness_in_limbs neck_pain dizziness loss_of_balance,MEDIUM,Cervical spondylosis,20
+chills vomiting fatigue weight_loss cough high_fever breathlessness sweating loss_of_appetite mild_fever yellowing_of_eyes swelled_lymph_nodes malaise phlegm chest_pain blood_in_sputum,CRITICAL,Tuberculosis,75
+fatigue anxiety sweating headache nausea blurred_and_distorted_vision excessive_hunger drying_and_tingling_lips slurred_speech irritability palpitations,CRITICAL,Hypoglycemia,42
+back_pain weakness_in_limbs neck_pain dizziness loss_of_balance,MEDIUM,Cervical spondylosis,23
+fatigue weight_loss restlessness lethargy irregular_sugar_level blurred_and_distorted_vision obesity excessive_hunger increased_appetite polyuria,CRITICAL,Diabetes,41
+back_pain neck_pain dizziness loss_of_balance,MEDIUM,Cervical spondylosis,16
+skin_rash joint_pain skin_peeling silver_like_dusting inflammatory_nails,MEDIUM,Psoriasis,13
+joint_pain vomiting yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain diarrhoea mild_fever yellowing_of_eyes muscle_pain,CRITICAL,hepatitis A,45
+fatigue cough high_fever breathlessness family_history mucoid_sputum,HIGH,Bronchial Asthma,28
+skin_rash joint_pain skin_peeling silver_like_dusting small_dents_in_nails inflammatory_nails,MEDIUM,Psoriasis,15
+joint_pain fatigue yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Hepatitis D,31
+skin_rash blackheads scurring,LOW,Acne,7
+vomiting fatigue anxiety sweating nausea blurred_and_distorted_vision excessive_hunger drying_and_tingling_lips slurred_speech irritability palpitations,CRITICAL,Hypoglycemia,44
+skin_rash pus_filled_pimples blackheads scurring,LOW,Acne,9
+vomiting headache weakness_of_one_body_side altered_sensorium,MEDIUM,Paralysis (brain hemorrhage),14
+headache weakness_of_one_body_side altered_sensorium,LOW,Paralysis (brain hemorrhage),9
+vomiting yellowish_skin abdominal_pain swelling_of_stomach distention_of_abdomen history_of_alcohol_consumption,HIGH,Alcoholic hepatitis,28
+itching fatigue lethargy yellowish_skin dark_urine abdominal_pain yellow_urine yellowing_of_eyes malaise receiving_blood_transfusion receiving_unsterile_injections,HIGH,Hepatitis B,39
+chills fatigue cough high_fever breathlessness sweating malaise phlegm chest_pain fast_heart_rate rusty_sputum,CRITICAL,Pneumonia,52
+chills high_fever sweating headache nausea diarrhoea muscle_pain,HIGH,Malaria,29
+fatigue bruising obesity swollen_legs swollen_blood_vessels prominent_veins_on_calf,HIGH,Varicose veins,28
+fatigue cough high_fever breathlessness family_history mucoid_sputum,HIGH,Bronchial Asthma,28
+itching vomiting yellowish_skin nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Chronic cholestasis,26
+chills fatigue cough high_fever breathlessness sweating malaise phlegm chest_pain fast_heart_rate rusty_sputum,CRITICAL,Pneumonia,52
+itching skin_rash nodal_skin_eruptions dischromic _patches,LOW,Fungal infection,8
+itching skin_rash stomach_pain burning_micturition spotting_ urination,MEDIUM,Drug Reaction,15
+joint_pain vomiting yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain diarrhoea mild_fever yellowing_of_eyes muscle_pain,CRITICAL,hepatitis A,45
+joint_pain vomiting yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain diarrhoea mild_fever yellowing_of_eyes muscle_pain,CRITICAL,hepatitis A,45
+back_pain weakness_in_limbs neck_pain dizziness loss_of_balance,MEDIUM,Cervical spondylosis,23
+vomiting indigestion abdominal_pain passage_of_gases internal_itching,MEDIUM,Peptic ulcer diseae,23
+fatigue cramps obesity swollen_legs swollen_blood_vessels prominent_veins_on_calf,HIGH,Varicose veins,28
+sunken_eyes dehydration diarrhoea,MEDIUM,Gastroenteritis,13
+itching vomiting fatigue weight_loss high_fever yellowish_skin dark_urine abdominal_pain,HIGH,Jaundice,31
+headache chest_pain dizziness loss_of_balance lack_of_concentration,MEDIUM,Hypertension,21
+skin_rash pus_filled_pimples scurring,LOW,Acne,7
+mood_swings weight_loss restlessness sweating diarrhoea fast_heart_rate excessive_hunger muscle_weakness irritability abnormal_menstruation,HIGH,Hyperthyroidism,39
+skin_rash joint_pain skin_peeling silver_like_dusting small_dents_in_nails inflammatory_nails,MEDIUM,Psoriasis,15
+joint_pain neck_pain knee_pain hip_joint_pain swelling_joints painful_walking,MEDIUM,Osteoarthristis,20
+headache chest_pain dizziness loss_of_balance lack_of_concentration,MEDIUM,Hypertension,21
+chills vomiting high_fever sweating headache nausea diarrhoea muscle_pain,HIGH,Malaria,34
+muscle_wasting patches_in_throat high_fever extra_marital_contacts,MEDIUM,AIDS,21
+itching skin_rash fatigue lethargy high_fever headache loss_of_appetite mild_fever swelled_lymph_nodes malaise red_spots_over_body,CRITICAL,Chicken pox,44
+acidity indigestion headache blurred_and_distorted_vision excessive_hunger stiff_neck irritability visual_disturbances,HIGH,Migraine,29
+vomiting sunken_eyes dehydration diarrhoea,MEDIUM,Gastroenteritis,18
+itching skin_rash stomach_pain burning_micturition spotting_ urination,MEDIUM,Drug Reaction,15
+skin_rash high_fever blister red_sore_around_nose yellow_crust_ooze,MEDIUM,Impetigo,19
+fatigue weight_gain cold_hands_and_feets mood_swings lethargy dizziness puffy_face_and_eyes enlarged_thyroid brittle_nails swollen_extremeties depression irritability abnormal_menstruation,CRITICAL,Hypothyroidism,53
+itching fatigue lethargy yellowish_skin dark_urine loss_of_appetite abdominal_pain yellow_urine yellowing_of_eyes malaise receiving_blood_transfusion receiving_unsterile_injections,CRITICAL,Hepatitis B,43
+vomiting yellowish_skin abdominal_pain swelling_of_stomach distention_of_abdomen history_of_alcohol_consumption fluid_overload,HIGH,Alcoholic hepatitis,32
+cough high_fever breathlessness family_history mucoid_sputum,MEDIUM,Bronchial Asthma,24
+itching vomiting yellowish_skin loss_of_appetite abdominal_pain yellowing_of_eyes,MEDIUM,Chronic cholestasis,21
+fatigue weight_gain cold_hands_and_feets lethargy dizziness puffy_face_and_eyes enlarged_thyroid brittle_nails swollen_extremeties depression irritability abnormal_menstruation,CRITICAL,Hypothyroidism,50
+skin_rash joint_pain skin_peeling silver_like_dusting small_dents_in_nails,MEDIUM,Psoriasis,13
+vomiting high_fever sweating headache nausea diarrhoea muscle_pain,HIGH,Malaria,31
+stomach_pain acidity ulcers_on_tongue cough chest_pain,MEDIUM,GERD,23
+itching fatigue lethargy yellowish_skin dark_urine loss_of_appetite abdominal_pain yellow_urine yellowing_of_eyes malaise receiving_blood_transfusion receiving_unsterile_injections,CRITICAL,Hepatitis B,43
+vomiting breathlessness sweating chest_pain,MEDIUM,Heart attack,19
+chills vomiting high_fever sweating headache nausea diarrhoea muscle_pain,HIGH,Malaria,34
+vomiting sunken_eyes dehydration diarrhoea,MEDIUM,Gastroenteritis,18
+skin_rash joint_pain skin_peeling silver_like_dusting small_dents_in_nails inflammatory_nails,MEDIUM,Psoriasis,15
+itching fatigue lethargy dark_urine loss_of_appetite abdominal_pain yellow_urine yellowing_of_eyes malaise receiving_blood_transfusion receiving_unsterile_injections,CRITICAL,Hepatitis B,40
+fatigue cramps bruising obesity swollen_blood_vessels prominent_veins_on_calf,HIGH,Varicose veins,27
+burning_micturition bladder_discomfort foul_smell_of urine continuous_feel_of_urine,MEDIUM,Urinary tract infection,16
+itching skin_rash fatigue lethargy high_fever headache loss_of_appetite mild_fever swelled_lymph_nodes malaise red_spots_over_body,CRITICAL,Chicken pox,44
+continuous_sneezing chills fatigue high_fever headache swelled_lymph_nodes malaise phlegm throat_irritation redness_of_eyes sinus_pressure runny_nose congestion chest_pain loss_of_smell muscle_pain,CRITICAL,Common Cold,73
+headache chest_pain dizziness loss_of_balance lack_of_concentration,MEDIUM,Hypertension,21
+chills vomiting high_fever sweating headache diarrhoea muscle_pain,HIGH,Malaria,29
+chills vomiting fatigue weight_loss cough high_fever breathlessness sweating loss_of_appetite mild_fever yellowing_of_eyes swelled_lymph_nodes malaise phlegm chest_pain blood_in_sputum,CRITICAL,Tuberculosis,75
+stomach_pain acidity ulcers_on_tongue vomiting cough chest_pain,HIGH,GERD,28
+skin_rash pus_filled_pimples blackheads scurring,LOW,Acne,9
+fatigue weight_loss restlessness lethargy irregular_sugar_level blurred_and_distorted_vision obesity increased_appetite polyuria,HIGH,Diabetes,37
+muscle_wasting patches_in_throat high_fever extra_marital_contacts,MEDIUM,AIDS,21
+joint_pain neck_pain knee_pain hip_joint_pain swelling_joints painful_walking,MEDIUM,Osteoarthristis,20
+muscle_weakness stiff_neck swelling_joints movement_stiffness painful_walking,MEDIUM,Arthritis,18
+back_pain weakness_in_limbs neck_pain dizziness loss_of_balance,MEDIUM,Cervical spondylosis,23
+fatigue mood_swings weight_loss restlessness sweating diarrhoea fast_heart_rate excessive_hunger muscle_weakness irritability abnormal_menstruation,CRITICAL,Hyperthyroidism,43
+continuous_sneezing shivering chills watering_from_eyes,MEDIUM,Allergy,16
+continuous_sneezing chills fatigue cough high_fever headache swelled_lymph_nodes malaise phlegm throat_irritation redness_of_eyes sinus_pressure runny_nose congestion chest_pain loss_of_smell muscle_pain,CRITICAL,Common Cold,77
+back_pain weakness_in_limbs neck_pain dizziness,MEDIUM,Cervical spondylosis,19
+fatigue cough high_fever breathlessness family_history mucoid_sputum,HIGH,Bronchial Asthma,28
+shivering chills watering_from_eyes,LOW,Allergy,12
+vomiting headache nausea spinning_movements loss_of_balance unsteadiness,HIGH,(vertigo) Paroymsal  Positional Vertigo,27
+vomiting loss_of_appetite abdominal_pain passage_of_gases internal_itching,MEDIUM,Peptic ulcer diseae,22
+continuous_sneezing chills cough high_fever headache swelled_lymph_nodes malaise phlegm throat_irritation redness_of_eyes sinus_pressure runny_nose congestion chest_pain loss_of_smell muscle_pain,CRITICAL,Common Cold,73
+back_pain weakness_in_limbs neck_pain dizziness loss_of_balance,MEDIUM,Cervical spondylosis,23
+itching vomiting fatigue weight_loss high_fever yellowish_skin dark_urine abdominal_pain,HIGH,Jaundice,31
+continuous_sneezing chills fatigue cough high_fever headache swelled_lymph_nodes malaise phlegm throat_irritation redness_of_eyes sinus_pressure runny_nose congestion chest_pain loss_of_smell muscle_pain,CRITICAL,Common Cold,77
+skin_rash high_fever blister red_sore_around_nose yellow_crust_ooze,MEDIUM,Impetigo,19
+chills vomiting high_fever sweating headache nausea muscle_pain,HIGH,Malaria,28
+acidity indigestion headache blurred_and_distorted_vision excessive_hunger stiff_neck depression irritability visual_disturbances,HIGH,Migraine,32
+muscle_wasting patches_in_throat high_fever extra_marital_contacts,MEDIUM,AIDS,21
+stomach_pain ulcers_on_tongue vomiting cough chest_pain,HIGH,GERD,25
+continuous_sneezing chills fatigue cough high_fever swelled_lymph_nodes malaise phlegm throat_irritation redness_of_eyes sinus_pressure runny_nose congestion chest_pain loss_of_smell muscle_pain,CRITICAL,Common Cold,74
+itching skin_rash fatigue lethargy high_fever headache loss_of_appetite mild_fever swelled_lymph_nodes malaise red_spots_over_body,CRITICAL,Chicken pox,44
+fatigue weight_loss restlessness lethargy irregular_sugar_level obesity excessive_hunger increased_appetite polyuria,HIGH,Diabetes,36
+vomiting indigestion loss_of_appetite abdominal_pain passage_of_gases internal_itching,HIGH,Peptic ulcer diseae,27
+joint_pain vomiting fatigue yellowish_skin dark_urine nausea loss_of_appetite yellowing_of_eyes,HIGH,Hepatitis D,32
+joint_pain neck_pain knee_pain hip_joint_pain swelling_joints painful_walking,MEDIUM,Osteoarthristis,20
+fatigue weight_loss restlessness lethargy irregular_sugar_level blurred_and_distorted_vision obesity excessive_hunger increased_appetite polyuria,CRITICAL,Diabetes,41
+continuous_sneezing chills fatigue cough high_fever headache swelled_lymph_nodes malaise phlegm throat_irritation redness_of_eyes sinus_pressure runny_nose congestion chest_pain loss_of_smell muscle_pain,CRITICAL,Common Cold,77
+vomiting fatigue anxiety sweating headache nausea blurred_and_distorted_vision excessive_hunger drying_and_tingling_lips slurred_speech irritability palpitations,CRITICAL,Hypoglycemia,47
+chills vomiting fatigue high_fever headache nausea constipation abdominal_pain diarrhoea toxic_look_(typhos) belly_pain,CRITICAL,Typhoid,50
+itching skin_rash fatigue lethargy high_fever headache mild_fever swelled_lymph_nodes malaise red_spots_over_body,CRITICAL,Chicken pox,40
+vomiting sunken_eyes dehydration diarrhoea,MEDIUM,Gastroenteritis,18
+skin_rash chills joint_pain vomiting fatigue high_fever headache nausea loss_of_appetite pain_behind_the_eyes back_pain malaise muscle_pain red_spots_over_body,CRITICAL,Dengue,55
+itching skin_rash dischromic _patches,LOW,Fungal infection,4
+skin_rash chills joint_pain vomiting fatigue high_fever headache nausea loss_of_appetite pain_behind_the_eyes back_pain malaise muscle_pain red_spots_over_body,CRITICAL,Dengue,55
+fatigue yellowish_skin nausea loss_of_appetite yellowing_of_eyes family_history,HIGH,Hepatitis C,25
+joint_pain vomiting fatigue yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Hepatitis D,36
+fatigue cough high_fever breathlessness family_history mucoid_sputum,HIGH,Bronchial Asthma,28
+joint_pain vomiting yellowish_skin dark_urine nausea loss_of_appetite diarrhoea mild_fever yellowing_of_eyes muscle_pain,CRITICAL,hepatitis A,41
+vomiting headache weakness_of_one_body_side altered_sensorium,MEDIUM,Paralysis (brain hemorrhage),14
+chills vomiting fatigue weight_loss cough high_fever breathlessness sweating loss_of_appetite mild_fever yellowing_of_eyes swelled_lymph_nodes malaise phlegm chest_pain blood_in_sputum,CRITICAL,Tuberculosis,75
+chills vomiting fatigue high_fever headache nausea constipation abdominal_pain diarrhoea toxic_look_(typhos) belly_pain,CRITICAL,Typhoid,50
+neck_pain knee_pain hip_joint_pain swelling_joints painful_walking,MEDIUM,Osteoarthristis,17
+constipation pain_during_bowel_movements pain_in_anal_region bloody_stool irritation_in_anus,HIGH,Dimorphic hemmorhoids(piles),26
+chills cough high_fever breathlessness sweating malaise phlegm chest_pain fast_heart_rate rusty_sputum,CRITICAL,Pneumonia,48
+vomiting yellowish_skin abdominal_pain swelling_of_stomach distention_of_abdomen history_of_alcohol_consumption fluid_overload,HIGH,Alcoholic hepatitis,32
+chills vomiting high_fever sweating headache nausea diarrhoea muscle_pain,HIGH,Malaria,34
+headache chest_pain dizziness loss_of_balance,MEDIUM,Hypertension,18
+fatigue yellowish_skin nausea loss_of_appetite yellowing_of_eyes family_history,HIGH,Hepatitis C,25
+headache chest_pain dizziness lack_of_concentration,MEDIUM,Hypertension,17
+weakness_in_limbs neck_pain dizziness loss_of_balance,MEDIUM,Cervical spondylosis,20
+chills joint_pain vomiting fatigue high_fever headache nausea loss_of_appetite pain_behind_the_eyes back_pain malaise muscle_pain red_spots_over_body,CRITICAL,Dengue,52
+vomiting indigestion loss_of_appetite abdominal_pain passage_of_gases internal_itching,HIGH,Peptic ulcer diseae,27
+itching skin_rash fatigue lethargy high_fever headache loss_of_appetite mild_fever swelled_lymph_nodes malaise red_spots_over_body,CRITICAL,Chicken pox,44
+fatigue cough high_fever breathlessness family_history mucoid_sputum,HIGH,Bronchial Asthma,28
+stiff_neck swelling_joints movement_stiffness painful_walking,MEDIUM,Arthritis,16
+vomiting headache weakness_of_one_body_side altered_sensorium,MEDIUM,Paralysis (brain hemorrhage),14
+vomiting breathlessness sweating chest_pain,MEDIUM,Heart attack,19
+itching skin_rash fatigue lethargy high_fever headache loss_of_appetite mild_fever swelled_lymph_nodes malaise red_spots_over_body,CRITICAL,Chicken pox,44
+vomiting sunken_eyes dehydration diarrhoea,MEDIUM,Gastroenteritis,18
+fatigue cramps bruising obesity swollen_legs swollen_blood_vessels prominent_veins_on_calf,HIGH,Varicose veins,32
+fatigue yellowish_skin nausea loss_of_appetite yellowing_of_eyes family_history,HIGH,Hepatitis C,25
+skin_rash pus_filled_pimples blackheads scurring,LOW,Acne,9
+stomach_pain acidity ulcers_on_tongue vomiting cough chest_pain,HIGH,GERD,28
+fatigue bruising obesity swollen_legs swollen_blood_vessels prominent_veins_on_calf,HIGH,Varicose veins,28
+skin_rash high_fever blister red_sore_around_nose,MEDIUM,Impetigo,16
+fatigue weight_loss restlessness lethargy irregular_sugar_level blurred_and_distorted_vision obesity excessive_hunger increased_appetite polyuria,CRITICAL,Diabetes,41
+chills vomiting high_fever sweating headache nausea diarrhoea muscle_pain,HIGH,Malaria,34
+vomiting indigestion loss_of_appetite abdominal_pain passage_of_gases internal_itching,HIGH,Peptic ulcer diseae,27
+stomach_pain ulcers_on_tongue vomiting cough chest_pain,HIGH,GERD,25
+back_pain weakness_in_limbs neck_pain dizziness loss_of_balance,MEDIUM,Cervical spondylosis,23
+vomiting breathlessness sweating chest_pain,MEDIUM,Heart attack,19
+fatigue weight_loss restlessness lethargy irregular_sugar_level blurred_and_distorted_vision obesity excessive_hunger increased_appetite polyuria,CRITICAL,Diabetes,41
+chills cough high_fever breathlessness sweating malaise phlegm chest_pain fast_heart_rate rusty_sputum,CRITICAL,Pneumonia,48
+headache dizziness loss_of_balance lack_of_concentration,MEDIUM,Hypertension,14
+skin_rash joint_pain skin_peeling silver_like_dusting small_dents_in_nails inflammatory_nails,MEDIUM,Psoriasis,15
+skin_rash stomach_pain burning_micturition spotting_ urination,MEDIUM,Drug Reaction,14
+chills fatigue cough high_fever breathlessness sweating malaise phlegm chest_pain fast_heart_rate rusty_sputum,CRITICAL,Pneumonia,52
+muscle_weakness stiff_neck swelling_joints movement_stiffness painful_walking,MEDIUM,Arthritis,18
+patches_in_throat high_fever extra_marital_contacts,MEDIUM,AIDS,18
+stiff_neck swelling_joints movement_stiffness painful_walking,MEDIUM,Arthritis,16
+fatigue lethargy yellowish_skin dark_urine loss_of_appetite abdominal_pain yellow_urine yellowing_of_eyes malaise receiving_blood_transfusion receiving_unsterile_injections,CRITICAL,Hepatitis B,42
+skin_rash joint_pain skin_peeling silver_like_dusting small_dents_in_nails inflammatory_nails,MEDIUM,Psoriasis,15
+chills vomiting fatigue weight_loss cough high_fever breathlessness sweating loss_of_appetite mild_fever yellowing_of_eyes swelled_lymph_nodes malaise phlegm chest_pain blood_in_sputum,CRITICAL,Tuberculosis,75
+vomiting yellowish_skin abdominal_pain swelling_of_stomach distention_of_abdomen history_of_alcohol_consumption fluid_overload,HIGH,Alcoholic hepatitis,32
+fatigue yellowish_skin nausea loss_of_appetite yellowing_of_eyes family_history,HIGH,Hepatitis C,25
+muscle_weakness stiff_neck swelling_joints movement_stiffness painful_walking,MEDIUM,Arthritis,18
+skin_rash joint_pain skin_peeling silver_like_dusting small_dents_in_nails inflammatory_nails,MEDIUM,Psoriasis,15
+vomiting headache nausea spinning_movements loss_of_balance unsteadiness,HIGH,(vertigo) Paroymsal  Positional Vertigo,27
+vomiting loss_of_appetite abdominal_pain passage_of_gases internal_itching,MEDIUM,Peptic ulcer diseae,22
+itching skin_rash nodal_skin_eruptions dischromic _patches,LOW,Fungal infection,8
+joint_pain vomiting fatigue high_fever yellowish_skin dark_urine loss_of_appetite abdominal_pain yellowing_of_eyes acute_liver_failure coma stomach_bleeding,CRITICAL,Hepatitis E,57
+vomiting sunken_eyes dehydration diarrhoea,MEDIUM,Gastroenteritis,18
+chills vomiting fatigue high_fever headache nausea constipation abdominal_pain diarrhoea toxic_look_(typhos) belly_pain,CRITICAL,Typhoid,50
+fatigue yellowish_skin nausea loss_of_appetite family_history,MEDIUM,Hepatitis C,21
+joint_pain vomiting yellowish_skin dark_urine nausea loss_of_appetite diarrhoea mild_fever yellowing_of_eyes muscle_pain,CRITICAL,hepatitis A,41
+joint_pain vomiting yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain diarrhoea mild_fever yellowing_of_eyes muscle_pain,CRITICAL,hepatitis A,45
+skin_rash high_fever blister red_sore_around_nose yellow_crust_ooze,MEDIUM,Impetigo,19
+joint_pain vomiting fatigue yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Hepatitis D,36
+muscle_wasting patches_in_throat high_fever extra_marital_contacts,MEDIUM,AIDS,21
+vomiting sunken_eyes dehydration diarrhoea,MEDIUM,Gastroenteritis,18
+itching skin_rash nodal_skin_eruptions dischromic _patches,LOW,Fungal infection,8
+joint_pain vomiting fatigue yellowish_skin dark_urine loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Hepatitis D,31
+itching vomiting yellowish_skin nausea loss_of_appetite abdominal_pain,MEDIUM,Chronic cholestasis,22
+back_pain weakness_in_limbs neck_pain dizziness loss_of_balance,MEDIUM,Cervical spondylosis,23
+itching vomiting yellowish_skin nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Chronic cholestasis,26
+vomiting fatigue anxiety sweating headache nausea blurred_and_distorted_vision excessive_hunger drying_and_tingling_lips slurred_speech irritability palpitations,CRITICAL,Hypoglycemia,47
+continuous_sneezing shivering chills watering_from_eyes,MEDIUM,Allergy,16
+back_pain weakness_in_limbs neck_pain dizziness loss_of_balance,MEDIUM,Cervical spondylosis,23
+fatigue cramps bruising obesity swollen_legs swollen_blood_vessels,HIGH,Varicose veins,26
+joint_pain neck_pain knee_pain hip_joint_pain swelling_joints painful_walking,MEDIUM,Osteoarthristis,20
+itching vomiting fatigue weight_loss high_fever yellowish_skin dark_urine abdominal_pain,HIGH,Jaundice,31
+high_fever blister red_sore_around_nose yellow_crust_ooze,MEDIUM,Impetigo,16
+skin_rash high_fever blister red_sore_around_nose yellow_crust_ooze,MEDIUM,Impetigo,19
+vomiting loss_of_appetite abdominal_pain passage_of_gases internal_itching,MEDIUM,Peptic ulcer diseae,22
+itching vomiting yellowish_skin nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Chronic cholestasis,26
+vomiting yellowish_skin abdominal_pain swelling_of_stomach distention_of_abdomen history_of_alcohol_consumption fluid_overload,HIGH,Alcoholic hepatitis,32
+fatigue cough high_fever breathlessness family_history mucoid_sputum,HIGH,Bronchial Asthma,28
+vomiting yellowish_skin abdominal_pain swelling_of_stomach distention_of_abdomen fluid_overload,HIGH,Alcoholic hepatitis,27
+muscle_wasting patches_in_throat high_fever extra_marital_contacts,MEDIUM,AIDS,21
+vomiting headache nausea loss_of_balance unsteadiness,MEDIUM,(vertigo) Paroymsal  Positional Vertigo,21
+vomiting indigestion loss_of_appetite abdominal_pain passage_of_gases internal_itching,HIGH,Peptic ulcer diseae,27
+fatigue cough high_fever breathlessness family_history mucoid_sputum,HIGH,Bronchial Asthma,28
+itching fatigue lethargy yellowish_skin dark_urine loss_of_appetite yellow_urine yellowing_of_eyes malaise receiving_blood_transfusion receiving_unsterile_injections,HIGH,Hepatitis B,39
+fatigue cramps bruising obesity swollen_legs swollen_blood_vessels prominent_veins_on_calf,HIGH,Varicose veins,32
+continuous_sneezing chills fatigue cough high_fever headache swelled_lymph_nodes malaise phlegm throat_irritation redness_of_eyes sinus_pressure runny_nose congestion chest_pain loss_of_smell muscle_pain,CRITICAL,Common Cold,77
+itching skin_rash fatigue lethargy high_fever headache loss_of_appetite mild_fever swelled_lymph_nodes malaise red_spots_over_body,CRITICAL,Chicken pox,44
+skin_rash chills joint_pain vomiting fatigue high_fever headache nausea loss_of_appetite pain_behind_the_eyes back_pain muscle_pain red_spots_over_body,CRITICAL,Dengue,49
+itching vomiting fatigue weight_loss high_fever yellowish_skin dark_urine abdominal_pain,HIGH,Jaundice,31
+itching nodal_skin_eruptions dischromic _patches,LOW,Fungal infection,5
+vomiting fatigue anxiety sweating headache nausea blurred_and_distorted_vision excessive_hunger drying_and_tingling_lips slurred_speech irritability palpitations,CRITICAL,Hypoglycemia,47
+continuous_sneezing chills fatigue cough high_fever headache swelled_lymph_nodes malaise phlegm throat_irritation redness_of_eyes sinus_pressure runny_nose congestion chest_pain loss_of_smell muscle_pain,CRITICAL,Common Cold,77
+vomiting fatigue anxiety sweating headache nausea blurred_and_distorted_vision excessive_hunger slurred_speech irritability palpitations,CRITICAL,Hypoglycemia,43
+back_pain weakness_in_limbs neck_pain dizziness loss_of_balance,MEDIUM,Cervical spondylosis,23
+vomiting dehydration diarrhoea,MEDIUM,Gastroenteritis,15
+muscle_wasting patches_in_throat high_fever extra_marital_contacts,MEDIUM,AIDS,21
+vomiting fatigue anxiety sweating headache nausea blurred_and_distorted_vision excessive_hunger drying_and_tingling_lips slurred_speech irritability palpitations,CRITICAL,Hypoglycemia,47
+headache weakness_of_one_body_side altered_sensorium,LOW,Paralysis (brain hemorrhage),9
+skin_rash joint_pain skin_peeling silver_like_dusting small_dents_in_nails inflammatory_nails,MEDIUM,Psoriasis,15
+vomiting headache weakness_of_one_body_side altered_sensorium,MEDIUM,Paralysis (brain hemorrhage),14
+joint_pain vomiting fatigue yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Hepatitis D,36
+joint_pain neck_pain knee_pain hip_joint_pain swelling_joints painful_walking,MEDIUM,Osteoarthristis,20
+skin_rash joint_pain skin_peeling silver_like_dusting small_dents_in_nails inflammatory_nails,MEDIUM,Psoriasis,15
+continuous_sneezing shivering chills watering_from_eyes,MEDIUM,Allergy,16
+itching fatigue lethargy yellowish_skin loss_of_appetite abdominal_pain yellow_urine yellowing_of_eyes malaise receiving_blood_transfusion receiving_unsterile_injections,HIGH,Hepatitis B,39
+vomiting headache nausea spinning_movements loss_of_balance unsteadiness,HIGH,(vertigo) Paroymsal  Positional Vertigo,27
+bladder_discomfort foul_smell_of urine continuous_feel_of_urine,LOW,Urinary tract infection,10
+continuous_sneezing chills watering_from_eyes,LOW,Allergy,11
+fatigue yellowish_skin nausea loss_of_appetite yellowing_of_eyes family_history,HIGH,Hepatitis C,25
+skin_rash pus_filled_pimples blackheads scurring,LOW,Acne,9
+vomiting sunken_eyes dehydration diarrhoea,MEDIUM,Gastroenteritis,18
+acidity indigestion headache blurred_and_distorted_vision excessive_hunger stiff_neck depression irritability visual_disturbances,HIGH,Migraine,32
+stomach_pain acidity ulcers_on_tongue vomiting cough chest_pain,HIGH,GERD,28
+fatigue cough high_fever breathlessness family_history,MEDIUM,Bronchial Asthma,24
+chills vomiting fatigue weight_loss cough high_fever breathlessness sweating loss_of_appetite mild_fever yellowing_of_eyes swelled_lymph_nodes malaise phlegm chest_pain blood_in_sputum,CRITICAL,Tuberculosis,75
+shivering chills watering_from_eyes,LOW,Allergy,12
+burning_micturition bladder_discomfort foul_smell_of urine continuous_feel_of_urine,MEDIUM,Urinary tract infection,16
+continuous_sneezing chills watering_from_eyes,LOW,Allergy,11
+chills vomiting high_fever sweating headache nausea diarrhoea muscle_pain,HIGH,Malaria,34
+itching skin_rash nodal_skin_eruptions dischromic _patches,LOW,Fungal infection,8
+itching skin_rash nodal_skin_eruptions dischromic _patches,LOW,Fungal infection,8
+fatigue cramps bruising obesity swollen_legs swollen_blood_vessels prominent_veins_on_calf,HIGH,Varicose veins,32
+fatigue weight_gain cold_hands_and_feets mood_swings lethargy dizziness puffy_face_and_eyes enlarged_thyroid brittle_nails swollen_extremeties depression irritability abnormal_menstruation,CRITICAL,Hypothyroidism,53
+vomiting sweating chest_pain,MEDIUM,Heart attack,15
+joint_pain vomiting fatigue high_fever yellowish_skin dark_urine loss_of_appetite abdominal_pain yellowing_of_eyes acute_liver_failure coma stomach_bleeding,CRITICAL,Hepatitis E,57
+vomiting fatigue weight_loss cough high_fever breathlessness sweating loss_of_appetite mild_fever yellowing_of_eyes swelled_lymph_nodes malaise phlegm chest_pain blood_in_sputum,CRITICAL,Tuberculosis,72
+fatigue cramps bruising obesity swollen_legs swollen_blood_vessels prominent_veins_on_calf,HIGH,Varicose veins,32
+itching fatigue lethargy yellowish_skin dark_urine loss_of_appetite abdominal_pain yellow_urine yellowing_of_eyes malaise receiving_blood_transfusion receiving_unsterile_injections,CRITICAL,Hepatitis B,43
+fatigue cramps bruising obesity swollen_legs swollen_blood_vessels prominent_veins_on_calf,HIGH,Varicose veins,32
+acidity indigestion headache blurred_and_distorted_vision excessive_hunger stiff_neck depression irritability visual_disturbances,HIGH,Migraine,32
+acidity indigestion headache blurred_and_distorted_vision excessive_hunger stiff_neck depression irritability visual_disturbances,HIGH,Migraine,32
+itching vomiting fatigue weight_loss high_fever yellowish_skin dark_urine abdominal_pain,HIGH,Jaundice,31
+vomiting headache spinning_movements loss_of_balance unsteadiness,MEDIUM,(vertigo) Paroymsal  Positional Vertigo,22
+back_pain weakness_in_limbs neck_pain dizziness loss_of_balance,MEDIUM,Cervical spondylosis,23
+continuous_sneezing shivering chills watering_from_eyes,MEDIUM,Allergy,16
+vomiting headache nausea spinning_movements loss_of_balance unsteadiness,HIGH,(vertigo) Paroymsal  Positional Vertigo,27
+headache chest_pain dizziness loss_of_balance lack_of_concentration,MEDIUM,Hypertension,21
+continuous_sneezing shivering chills watering_from_eyes,MEDIUM,Allergy,16
+indigestion headache blurred_and_distorted_vision excessive_hunger stiff_neck depression irritability visual_disturbances,HIGH,Migraine,29
+vomiting yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain diarrhoea mild_fever yellowing_of_eyes muscle_pain,CRITICAL,hepatitis A,42
+vomiting yellowish_skin abdominal_pain swelling_of_stomach distention_of_abdomen history_of_alcohol_consumption fluid_overload,HIGH,Alcoholic hepatitis,32
+fatigue weight_loss restlessness lethargy irregular_sugar_level blurred_and_distorted_vision obesity excessive_hunger increased_appetite polyuria,CRITICAL,Diabetes,41
+continuous_sneezing shivering chills,LOW,Allergy,12
+joint_pain vomiting fatigue yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Hepatitis D,36
+joint_pain knee_pain hip_joint_pain swelling_joints painful_walking,MEDIUM,Osteoarthristis,15
+weight_loss restlessness lethargy irregular_sugar_level blurred_and_distorted_vision obesity excessive_hunger increased_appetite polyuria,HIGH,Diabetes,37
+chills fatigue cough high_fever breathlessness sweating malaise phlegm chest_pain fast_heart_rate rusty_sputum,CRITICAL,Pneumonia,52
+joint_pain neck_pain knee_pain hip_joint_pain swelling_joints painful_walking,MEDIUM,Osteoarthristis,20
+itching vomiting yellowish_skin nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Chronic cholestasis,26
+vomiting yellowish_skin abdominal_pain swelling_of_stomach distention_of_abdomen history_of_alcohol_consumption fluid_overload,HIGH,Alcoholic hepatitis,32
+joint_pain vomiting fatigue high_fever yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain yellowing_of_eyes acute_liver_failure coma stomach_bleeding,CRITICAL,Hepatitis E,62
+itching skin_rash lethargy high_fever headache loss_of_appetite mild_fever swelled_lymph_nodes malaise red_spots_over_body,CRITICAL,Chicken pox,40
+acidity indigestion headache blurred_and_distorted_vision excessive_hunger stiff_neck depression irritability visual_disturbances,HIGH,Migraine,32
+chills vomiting fatigue high_fever headache nausea constipation abdominal_pain diarrhoea toxic_look_(typhos) belly_pain,CRITICAL,Typhoid,50
+indigestion loss_of_appetite abdominal_pain passage_of_gases internal_itching,MEDIUM,Peptic ulcer diseae,22
+fatigue weight_gain cold_hands_and_feets mood_swings lethargy dizziness puffy_face_and_eyes enlarged_thyroid brittle_nails swollen_extremeties depression irritability abnormal_menstruation,CRITICAL,Hypothyroidism,53
+fatigue cramps bruising obesity swollen_legs swollen_blood_vessels prominent_veins_on_calf,HIGH,Varicose veins,32
+skin_rash joint_pain vomiting fatigue high_fever headache nausea loss_of_appetite pain_behind_the_eyes back_pain malaise muscle_pain red_spots_over_body,CRITICAL,Dengue,52
+skin_rash pus_filled_pimples blackheads scurring,LOW,Acne,9
+fatigue weight_gain cold_hands_and_feets mood_swings lethargy dizziness puffy_face_and_eyes enlarged_thyroid brittle_nails swollen_extremeties depression irritability abnormal_menstruation,CRITICAL,Hypothyroidism,53
+chills vomiting fatigue high_fever headache nausea constipation abdominal_pain diarrhoea toxic_look_(typhos),CRITICAL,Typhoid,46
+vomiting weakness_of_one_body_side altered_sensorium,LOW,Paralysis (brain hemorrhage),11
+vomiting headache nausea spinning_movements loss_of_balance unsteadiness,HIGH,(vertigo) Paroymsal  Positional Vertigo,27
+joint_pain vomiting fatigue yellowish_skin dark_urine nausea abdominal_pain yellowing_of_eyes,HIGH,Hepatitis D,32
+constipation pain_during_bowel_movements pain_in_anal_region bloody_stool irritation_in_anus,HIGH,Dimorphic hemmorhoids(piles),26
+vomiting sunken_eyes dehydration,LOW,Gastroenteritis,12
+burning_micturition bladder_discomfort foul_smell_of urine continuous_feel_of_urine,MEDIUM,Urinary tract infection,16
+muscle_weakness stiff_neck swelling_joints movement_stiffness painful_walking,MEDIUM,Arthritis,18
+skin_rash high_fever blister yellow_crust_ooze,MEDIUM,Impetigo,17
+itching skin_rash fatigue lethargy high_fever headache loss_of_appetite mild_fever swelled_lymph_nodes malaise red_spots_over_body,CRITICAL,Chicken pox,44
+joint_pain vomiting yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain diarrhoea mild_fever yellowing_of_eyes muscle_pain,CRITICAL,hepatitis A,45
+fatigue weight_gain cold_hands_and_feets mood_swings lethargy dizziness enlarged_thyroid brittle_nails swollen_extremeties depression irritability abnormal_menstruation,CRITICAL,Hypothyroidism,48
+muscle_weakness stiff_neck swelling_joints movement_stiffness painful_walking,MEDIUM,Arthritis,18
+vomiting breathlessness chest_pain,MEDIUM,Heart attack,16
+skin_rash high_fever blister red_sore_around_nose yellow_crust_ooze,MEDIUM,Impetigo,19
+muscle_wasting patches_in_throat high_fever extra_marital_contacts,MEDIUM,AIDS,21
+constipation pain_during_bowel_movements pain_in_anal_region bloody_stool irritation_in_anus,HIGH,Dimorphic hemmorhoids(piles),26
+skin_rash high_fever blister red_sore_around_nose yellow_crust_ooze,MEDIUM,Impetigo,19
+burning_micturition bladder_discomfort foul_smell_of urine continuous_feel_of_urine,MEDIUM,Urinary tract infection,16
+chills vomiting fatigue cough high_fever breathlessness sweating loss_of_appetite mild_fever yellowing_of_eyes swelled_lymph_nodes malaise phlegm chest_pain blood_in_sputum,CRITICAL,Tuberculosis,72
+fatigue weight_loss restlessness lethargy irregular_sugar_level blurred_and_distorted_vision obesity excessive_hunger increased_appetite polyuria,CRITICAL,Diabetes,41
+muscle_weakness stiff_neck swelling_joints movement_stiffness painful_walking,MEDIUM,Arthritis,18
+chills vomiting fatigue high_fever headache nausea constipation abdominal_pain diarrhoea toxic_look_(typhos) belly_pain,CRITICAL,Typhoid,50
+acidity indigestion headache blurred_and_distorted_vision excessive_hunger stiff_neck depression irritability visual_disturbances,HIGH,Migraine,32
+joint_pain vomiting yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain diarrhoea mild_fever yellowing_of_eyes muscle_pain,CRITICAL,hepatitis A,45
+itching vomiting fatigue weight_loss high_fever yellowish_skin dark_urine abdominal_pain,HIGH,Jaundice,31
+itching fatigue lethargy yellowish_skin dark_urine loss_of_appetite abdominal_pain yellowing_of_eyes malaise receiving_blood_transfusion receiving_unsterile_injections,HIGH,Hepatitis B,39
+skin_rash joint_pain skin_peeling silver_like_dusting small_dents_in_nails inflammatory_nails,MEDIUM,Psoriasis,15
+vomiting headache weakness_of_one_body_side,LOW,Paralysis (brain hemorrhage),12
+joint_pain vomiting fatigue yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Hepatitis D,36
+neck_pain knee_pain hip_joint_pain swelling_joints painful_walking,MEDIUM,Osteoarthristis,17
+vomiting fatigue yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Hepatitis D,33
+fatigue mood_swings weight_loss restlessness sweating diarrhoea fast_heart_rate excessive_hunger muscle_weakness irritability abnormal_menstruation,CRITICAL,Hyperthyroidism,43
+burning_micturition bladder_discomfort foul_smell_of urine continuous_feel_of_urine,MEDIUM,Urinary tract infection,16
+fatigue nausea loss_of_appetite yellowing_of_eyes family_history,MEDIUM,Hepatitis C,22
+vomiting indigestion loss_of_appetite abdominal_pain passage_of_gases,MEDIUM,Peptic ulcer diseae,23
+fatigue cramps bruising obesity swollen_legs swollen_blood_vessels prominent_veins_on_calf,HIGH,Varicose veins,32
+itching vomiting fatigue weight_loss high_fever dark_urine abdominal_pain,HIGH,Jaundice,28
+headache chest_pain dizziness loss_of_balance lack_of_concentration,MEDIUM,Hypertension,21
+itching yellowish_skin nausea loss_of_appetite abdominal_pain yellowing_of_eyes,MEDIUM,Chronic cholestasis,21
+itching vomiting fatigue weight_loss high_fever yellowish_skin dark_urine abdominal_pain,HIGH,Jaundice,31
+back_pain weakness_in_limbs neck_pain dizziness loss_of_balance,MEDIUM,Cervical spondylosis,23
+itching vomiting fatigue weight_loss yellowish_skin dark_urine abdominal_pain,MEDIUM,Jaundice,24
+chills vomiting fatigue weight_loss cough high_fever sweating loss_of_appetite mild_fever yellowing_of_eyes swelled_lymph_nodes malaise phlegm chest_pain blood_in_sputum,CRITICAL,Tuberculosis,71
+vomiting breathlessness sweating chest_pain,MEDIUM,Heart attack,19
+back_pain weakness_in_limbs neck_pain dizziness loss_of_balance,MEDIUM,Cervical spondylosis,23
+fatigue weight_gain cold_hands_and_feets mood_swings lethargy puffy_face_and_eyes enlarged_thyroid brittle_nails swollen_extremeties depression irritability abnormal_menstruation,CRITICAL,Hypothyroidism,49
+fatigue weight_loss restlessness lethargy irregular_sugar_level blurred_and_distorted_vision obesity excessive_hunger increased_appetite polyuria,CRITICAL,Diabetes,41
+fatigue cramps bruising obesity swollen_legs swollen_blood_vessels prominent_veins_on_calf,HIGH,Varicose veins,32
+continuous_sneezing shivering chills watering_from_eyes,MEDIUM,Allergy,16
+chills vomiting high_fever sweating headache diarrhoea muscle_pain,HIGH,Malaria,29
+chills vomiting fatigue high_fever headache nausea constipation abdominal_pain diarrhoea toxic_look_(typhos),CRITICAL,Typhoid,46
+fatigue mood_swings weight_loss restlessness sweating diarrhoea fast_heart_rate excessive_hunger muscle_weakness irritability abnormal_menstruation,CRITICAL,Hyperthyroidism,43
+joint_pain vomiting fatigue high_fever yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain yellowing_of_eyes coma stomach_bleeding,CRITICAL,Hepatitis E,56
+itching fatigue lethargy yellowish_skin loss_of_appetite abdominal_pain yellow_urine yellowing_of_eyes malaise receiving_blood_transfusion receiving_unsterile_injections,HIGH,Hepatitis B,39
+vomiting breathlessness sweating chest_pain,MEDIUM,Heart attack,19
+acidity ulcers_on_tongue vomiting cough chest_pain,MEDIUM,GERD,23
+vomiting nausea spinning_movements loss_of_balance unsteadiness,MEDIUM,(vertigo) Paroymsal  Positional Vertigo,24
+headache chest_pain dizziness loss_of_balance lack_of_concentration,MEDIUM,Hypertension,21
+itching skin_rash fatigue lethargy high_fever headache loss_of_appetite mild_fever swelled_lymph_nodes malaise red_spots_over_body,CRITICAL,Chicken pox,44
+chills vomiting fatigue weight_loss cough high_fever breathlessness sweating loss_of_appetite mild_fever yellowing_of_eyes swelled_lymph_nodes malaise phlegm chest_pain blood_in_sputum,CRITICAL,Tuberculosis,75
+chills vomiting fatigue weight_loss cough high_fever breathlessness sweating loss_of_appetite mild_fever yellowing_of_eyes swelled_lymph_nodes malaise phlegm chest_pain blood_in_sputum,CRITICAL,Tuberculosis,75
+vomiting headache nausea loss_of_balance unsteadiness,MEDIUM,(vertigo) Paroymsal  Positional Vertigo,21
+fatigue cough high_fever breathlessness family_history mucoid_sputum,HIGH,Bronchial Asthma,28
+chills fatigue cough high_fever breathlessness sweating malaise phlegm chest_pain fast_heart_rate rusty_sputum,CRITICAL,Pneumonia,52
+itching skin_rash nodal_skin_eruptions dischromic _patches,LOW,Fungal infection,8
+vomiting headache weakness_of_one_body_side altered_sensorium,MEDIUM,Paralysis (brain hemorrhage),14
+itching fatigue lethargy yellowish_skin dark_urine loss_of_appetite abdominal_pain yellow_urine yellowing_of_eyes malaise receiving_blood_transfusion receiving_unsterile_injections,CRITICAL,Hepatitis B,43
+itching skin_rash nodal_skin_eruptions dischromic _patches,LOW,Fungal infection,8
+cough high_fever breathlessness family_history mucoid_sputum,MEDIUM,Bronchial Asthma,24
+fatigue yellowish_skin nausea loss_of_appetite yellowing_of_eyes family_history,HIGH,Hepatitis C,25
+vomiting fatigue anxiety sweating headache nausea blurred_and_distorted_vision excessive_hunger drying_and_tingling_lips slurred_speech irritability palpitations,CRITICAL,Hypoglycemia,47
+headache dizziness loss_of_balance lack_of_concentration,MEDIUM,Hypertension,14
+skin_rash chills joint_pain vomiting fatigue high_fever headache nausea loss_of_appetite pain_behind_the_eyes back_pain muscle_pain red_spots_over_body,CRITICAL,Dengue,49
+chills vomiting fatigue high_fever headache constipation abdominal_pain diarrhoea toxic_look_(typhos) belly_pain,CRITICAL,Typhoid,45
+itching fatigue lethargy yellowish_skin dark_urine loss_of_appetite abdominal_pain yellow_urine yellowing_of_eyes malaise receiving_blood_transfusion receiving_unsterile_injections,CRITICAL,Hepatitis B,43
+chills fatigue cough high_fever breathlessness sweating malaise phlegm chest_pain fast_heart_rate rusty_sputum,CRITICAL,Pneumonia,52
+burning_micturition bladder_discomfort foul_smell_of urine continuous_feel_of_urine,MEDIUM,Urinary tract infection,16
+vomiting headache nausea loss_of_balance unsteadiness,MEDIUM,(vertigo) Paroymsal  Positional Vertigo,21
+chills vomiting fatigue high_fever headache nausea constipation abdominal_pain diarrhoea toxic_look_(typhos) belly_pain,CRITICAL,Typhoid,50
+skin_rash fatigue lethargy high_fever headache loss_of_appetite mild_fever swelled_lymph_nodes malaise red_spots_over_body,CRITICAL,Chicken pox,43
+joint_pain vomiting fatigue yellowish_skin dark_urine nausea loss_of_appetite yellowing_of_eyes,HIGH,Hepatitis D,32
+vomiting anxiety sweating headache nausea blurred_and_distorted_vision excessive_hunger drying_and_tingling_lips slurred_speech irritability palpitations,CRITICAL,Hypoglycemia,43
+muscle_wasting patches_in_throat high_fever extra_marital_contacts,MEDIUM,AIDS,21
+vomiting indigestion loss_of_appetite abdominal_pain passage_of_gases internal_itching,HIGH,Peptic ulcer diseae,27
+chills vomiting fatigue high_fever headache nausea constipation abdominal_pain diarrhoea toxic_look_(typhos) belly_pain,CRITICAL,Typhoid,50
+fatigue cramps bruising obesity swollen_legs swollen_blood_vessels prominent_veins_on_calf,HIGH,Varicose veins,32
+muscle_weakness stiff_neck swelling_joints movement_stiffness painful_walking,MEDIUM,Arthritis,18
+sunken_eyes dehydration diarrhoea,MEDIUM,Gastroenteritis,13
+vomiting yellowish_skin abdominal_pain swelling_of_stomach distention_of_abdomen history_of_alcohol_consumption fluid_overload,HIGH,Alcoholic hepatitis,32
+itching vomiting fatigue weight_loss high_fever yellowish_skin dark_urine abdominal_pain,HIGH,Jaundice,31
+skin_rash joint_pain vomiting fatigue high_fever headache nausea loss_of_appetite pain_behind_the_eyes back_pain malaise muscle_pain red_spots_over_body,CRITICAL,Dengue,52
+burning_micturition bladder_discomfort foul_smell_of urine continuous_feel_of_urine,MEDIUM,Urinary tract infection,16
+chills fatigue cough breathlessness sweating malaise phlegm chest_pain fast_heart_rate rusty_sputum,CRITICAL,Pneumonia,45
+itching vomiting fatigue weight_loss high_fever yellowish_skin dark_urine abdominal_pain,HIGH,Jaundice,31
+fatigue weight_loss restlessness lethargy irregular_sugar_level blurred_and_distorted_vision obesity excessive_hunger increased_appetite polyuria,CRITICAL,Diabetes,41
+muscle_weakness stiff_neck movement_stiffness painful_walking,MEDIUM,Arthritis,13
+itching vomiting yellowish_skin nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Chronic cholestasis,26
+itching skin_rash nodal_skin_eruptions,LOW,Fungal infection,8
+back_pain weakness_in_limbs neck_pain dizziness loss_of_balance,MEDIUM,Cervical spondylosis,23
+chills vomiting fatigue weight_loss cough high_fever breathlessness sweating loss_of_appetite mild_fever yellowing_of_eyes swelled_lymph_nodes malaise phlegm chest_pain blood_in_sputum,CRITICAL,Tuberculosis,75
+skin_rash skin_peeling silver_like_dusting small_dents_in_nails inflammatory_nails,LOW,Psoriasis,12
+itching skin_rash nodal_skin_eruptions dischromic _patches,LOW,Fungal infection,8
+weight_loss restlessness lethargy irregular_sugar_level blurred_and_distorted_vision obesity excessive_hunger increased_appetite polyuria,HIGH,Diabetes,37
+skin_rash high_fever blister red_sore_around_nose yellow_crust_ooze,MEDIUM,Impetigo,19
+skin_rash blister red_sore_around_nose yellow_crust_ooze,LOW,Impetigo,12
+muscle_weakness stiff_neck swelling_joints movement_stiffness painful_walking,MEDIUM,Arthritis,18
+fatigue yellowish_skin nausea loss_of_appetite yellowing_of_eyes family_history,HIGH,Hepatitis C,25
+itching fatigue lethargy yellowish_skin dark_urine loss_of_appetite yellow_urine yellowing_of_eyes malaise receiving_blood_transfusion receiving_unsterile_injections,HIGH,Hepatitis B,39
+vomiting fatigue anxiety sweating headache nausea blurred_and_distorted_vision excessive_hunger drying_and_tingling_lips slurred_speech irritability palpitations,CRITICAL,Hypoglycemia,47
+headache chest_pain dizziness loss_of_balance,MEDIUM,Hypertension,18
+itching vomiting yellowish_skin nausea loss_of_appetite yellowing_of_eyes,MEDIUM,Chronic cholestasis,22
+burning_micturition bladder_discomfort foul_smell_of urine continuous_feel_of_urine,MEDIUM,Urinary tract infection,16
+fatigue mood_swings weight_loss restlessness sweating diarrhoea fast_heart_rate excessive_hunger muscle_weakness irritability abnormal_menstruation,CRITICAL,Hyperthyroidism,43
+vomiting sunken_eyes dehydration diarrhoea,MEDIUM,Gastroenteritis,18
+stomach_pain acidity ulcers_on_tongue vomiting chest_pain,MEDIUM,GERD,24
+fatigue high_fever breathlessness family_history mucoid_sputum,MEDIUM,Bronchial Asthma,24
+fatigue mood_swings weight_loss restlessness sweating diarrhoea fast_heart_rate excessive_hunger muscle_weakness irritability abnormal_menstruation,CRITICAL,Hyperthyroidism,43
+fatigue weight_loss restlessness lethargy blurred_and_distorted_vision obesity excessive_hunger increased_appetite polyuria,HIGH,Diabetes,36
+vomiting fatigue anxiety sweating headache nausea blurred_and_distorted_vision excessive_hunger drying_and_tingling_lips slurred_speech irritability palpitations,CRITICAL,Hypoglycemia,47
+continuous_sneezing chills fatigue cough high_fever headache swelled_lymph_nodes phlegm throat_irritation redness_of_eyes sinus_pressure runny_nose congestion chest_pain loss_of_smell muscle_pain,CRITICAL,Common Cold,71
+skin_rash chills joint_pain vomiting fatigue high_fever headache nausea loss_of_appetite pain_behind_the_eyes back_pain malaise muscle_pain red_spots_over_body,CRITICAL,Dengue,55
+fatigue cough high_fever breathlessness sweating malaise phlegm chest_pain fast_heart_rate rusty_sputum,CRITICAL,Pneumonia,49
+continuous_sneezing chills fatigue cough high_fever headache swelled_lymph_nodes phlegm throat_irritation redness_of_eyes sinus_pressure runny_nose congestion chest_pain loss_of_smell muscle_pain,CRITICAL,Common Cold,71
+chills fatigue cough high_fever breathlessness sweating malaise phlegm chest_pain fast_heart_rate rusty_sputum,CRITICAL,Pneumonia,52
+vomiting abdominal_pain swelling_of_stomach distention_of_abdomen history_of_alcohol_consumption fluid_overload,HIGH,Alcoholic hepatitis,29
+vomiting fatigue anxiety sweating headache nausea blurred_and_distorted_vision excessive_hunger drying_and_tingling_lips slurred_speech irritability palpitations,CRITICAL,Hypoglycemia,47
+burning_micturition bladder_discomfort foul_smell_of urine,LOW,Urinary tract infection,10
+fatigue cramps bruising obesity swollen_legs swollen_blood_vessels prominent_veins_on_calf,HIGH,Varicose veins,32
+joint_pain vomiting yellowish_skin nausea loss_of_appetite abdominal_pain diarrhoea mild_fever yellowing_of_eyes muscle_pain,CRITICAL,hepatitis A,41
+fatigue cramps bruising obesity swollen_legs swollen_blood_vessels prominent_veins_on_calf,HIGH,Varicose veins,32
+fatigue mood_swings weight_loss restlessness sweating diarrhoea fast_heart_rate excessive_hunger muscle_weakness irritability abnormal_menstruation,CRITICAL,Hyperthyroidism,43
+chest_pain dizziness loss_of_balance lack_of_concentration,MEDIUM,Hypertension,18
+skin_rash nodal_skin_eruptions dischromic _patches,LOW,Fungal infection,7
+stomach_pain acidity ulcers_on_tongue vomiting cough chest_pain,HIGH,GERD,28
+muscle_wasting patches_in_throat high_fever extra_marital_contacts,MEDIUM,AIDS,21
+skin_rash pus_filled_pimples blackheads scurring,LOW,Acne,9
+fatigue mood_swings weight_loss restlessness sweating diarrhoea fast_heart_rate excessive_hunger muscle_weakness irritability abnormal_menstruation,CRITICAL,Hyperthyroidism,43
+skin_rash joint_pain skin_peeling silver_like_dusting small_dents_in_nails inflammatory_nails,MEDIUM,Psoriasis,15
+vomiting fatigue yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Hepatitis D,33
+vomiting yellowish_skin abdominal_pain swelling_of_stomach distention_of_abdomen history_of_alcohol_consumption fluid_overload,HIGH,Alcoholic hepatitis,32
+fatigue cough high_fever breathlessness family_history mucoid_sputum,HIGH,Bronchial Asthma,28
+muscle_weakness stiff_neck movement_stiffness painful_walking,MEDIUM,Arthritis,13
+joint_pain neck_pain knee_pain hip_joint_pain swelling_joints painful_walking,MEDIUM,Osteoarthristis,20
+skin_rash pus_filled_pimples blackheads scurring,LOW,Acne,9
+itching skin_rash burning_micturition spotting_ urination,LOW,Drug Reaction,10
+vomiting sunken_eyes dehydration,LOW,Gastroenteritis,12
+back_pain weakness_in_limbs neck_pain dizziness,MEDIUM,Cervical spondylosis,19
+chills vomiting fatigue weight_loss cough high_fever breathlessness sweating loss_of_appetite mild_fever yellowing_of_eyes swelled_lymph_nodes malaise phlegm chest_pain blood_in_sputum,CRITICAL,Tuberculosis,75
+itching vomiting yellowish_skin nausea loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Chronic cholestasis,26
+chills fatigue cough high_fever breathlessness sweating malaise phlegm chest_pain fast_heart_rate rusty_sputum,CRITICAL,Pneumonia,52
+yellowish_skin nausea loss_of_appetite yellowing_of_eyes family_history,MEDIUM,Hepatitis C,21
+constipation pain_during_bowel_movements pain_in_anal_region bloody_stool irritation_in_anus,HIGH,Dimorphic hemmorhoids(piles),26
+vomiting yellowish_skin abdominal_pain swelling_of_stomach distention_of_abdomen history_of_alcohol_consumption fluid_overload,HIGH,Alcoholic hepatitis,32
+vomiting yellowish_skin abdominal_pain swelling_of_stomach distention_of_abdomen history_of_alcohol_consumption fluid_overload,HIGH,Alcoholic hepatitis,32
+chills vomiting fatigue high_fever headache nausea constipation abdominal_pain toxic_look_(typhos) belly_pain,CRITICAL,Typhoid,44
+fatigue weight_loss restlessness sweating diarrhoea fast_heart_rate excessive_hunger muscle_weakness irritability abnormal_menstruation,CRITICAL,Hyperthyroidism,40
+vomiting headache nausea spinning_movements loss_of_balance unsteadiness,HIGH,(vertigo) Paroymsal  Positional Vertigo,27
+itching skin_rash fatigue lethargy high_fever headache loss_of_appetite mild_fever swelled_lymph_nodes malaise red_spots_over_body,CRITICAL,Chicken pox,44
+chills vomiting fatigue weight_loss cough high_fever breathlessness sweating loss_of_appetite mild_fever yellowing_of_eyes swelled_lymph_nodes malaise phlegm chest_pain blood_in_sputum,CRITICAL,Tuberculosis,75
+itching vomiting fatigue weight_loss high_fever yellowish_skin dark_urine abdominal_pain,HIGH,Jaundice,31
+chills fatigue high_fever breathlessness sweating malaise phlegm chest_pain fast_heart_rate rusty_sputum,CRITICAL,Pneumonia,48
+itching skin_rash nodal_skin_eruptions dischromic _patches,LOW,Fungal infection,8
+itching skin_rash nodal_skin_eruptions,LOW,Fungal infection,8
+continuous_sneezing shivering chills watering_from_eyes,MEDIUM,Allergy,16
+vomiting yellowish_skin abdominal_pain swelling_of_stomach distention_of_abdomen history_of_alcohol_consumption fluid_overload,HIGH,Alcoholic hepatitis,32
+vomiting headache nausea spinning_movements loss_of_balance unsteadiness,HIGH,(vertigo) Paroymsal  Positional Vertigo,27
+constipation pain_during_bowel_movements pain_in_anal_region bloody_stool irritation_in_anus,HIGH,Dimorphic hemmorhoids(piles),26
+acidity indigestion headache blurred_and_distorted_vision excessive_hunger depression irritability visual_disturbances,HIGH,Migraine,28
+chills vomiting fatigue weight_loss cough high_fever breathlessness sweating loss_of_appetite mild_fever yellowing_of_eyes swelled_lymph_nodes malaise phlegm chest_pain blood_in_sputum,CRITICAL,Tuberculosis,75
+muscle_weakness stiff_neck swelling_joints movement_stiffness painful_walking,MEDIUM,Arthritis,18
+back_pain neck_pain dizziness loss_of_balance,MEDIUM,Cervical spondylosis,16
+back_pain weakness_in_limbs neck_pain dizziness loss_of_balance,MEDIUM,Cervical spondylosis,23
+continuous_sneezing chills fatigue cough high_fever headache swelled_lymph_nodes malaise phlegm throat_irritation redness_of_eyes sinus_pressure runny_nose congestion chest_pain loss_of_smell muscle_pain,CRITICAL,Common Cold,77
+skin_rash high_fever blister red_sore_around_nose yellow_crust_ooze,MEDIUM,Impetigo,19
+joint_pain vomiting fatigue high_fever yellowish_skin dark_urine nausea loss_of_appetite abdominal_pain yellowing_of_eyes acute_liver_failure coma stomach_bleeding,CRITICAL,Hepatitis E,62
+vomiting sunken_eyes dehydration diarrhoea,MEDIUM,Gastroenteritis,18
+fatigue cough high_fever breathlessness family_history mucoid_sputum,HIGH,Bronchial Asthma,28
+stomach_pain ulcers_on_tongue vomiting cough chest_pain,HIGH,GERD,25
+itching skin_rash dischromic _patches,LOW,Fungal infection,4
+skin_rash chills joint_pain vomiting fatigue high_fever headache nausea loss_of_appetite pain_behind_the_eyes back_pain malaise muscle_pain red_spots_over_body,CRITICAL,Dengue,55
+itching skin_rash stomach_pain burning_micturition spotting_ urination,MEDIUM,Drug Reaction,15
+acidity headache blurred_and_distorted_vision excessive_hunger stiff_neck depression irritability visual_disturbances,HIGH,Migraine,27
+acidity indigestion headache blurred_and_distorted_vision excessive_hunger stiff_neck depression irritability visual_disturbances,HIGH,Migraine,32
+continuous_sneezing chills watering_from_eyes,LOW,Allergy,11
+fatigue anxiety sweating headache nausea blurred_and_distorted_vision excessive_hunger drying_and_tingling_lips slurred_speech irritability palpitations,CRITICAL,Hypoglycemia,42
+joint_pain vomiting fatigue yellowish_skin dark_urine loss_of_appetite abdominal_pain yellowing_of_eyes,HIGH,Hepatitis D,31

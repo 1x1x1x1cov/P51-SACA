@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SACA - Smart Adaptive Clinical Assistant</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; background: #f4f6f9; color: #1a2332; height: 100vh; display: flex; flex-direction: column; }
+header { background: #fff; border-bottom: 1px solid #dde3ec; padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+.logo { display: flex; align-items: center; gap: 10px; }
+.logo-icon { width: 32px; height: 32px; background: #1565c0; border-radius: 6px; color: #fff; font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; display: flex; align-items: center; justify-content: center; }
+.logo-name { font-size: 15px; font-weight: 600; }
+.logo-sub { font-size: 12px; color: #8a97aa; margin-left: 4px; }
+.status-pill { display: flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 500; background: #e8f5e9; border: 1px solid #a5d6a7; color: #1b5e20; }
+.status-pill.offline { background: #fdecea; border-color: #ef9a9a; color: #c62828; }
+.status-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.main { display: flex; flex: 1; overflow: hidden; }
+.sidebar { width: 300px; background: #fff; border-right: 1px solid #dde3ec; display: flex; flex-direction: column; flex-shrink: 0; }
+.sidebar-top { padding: 16px; border-bottom: 1px solid #dde3ec; }
+.section-label { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; color: #8a97aa; text-transform: uppercase; margin-bottom: 10px; }
+.search-wrap { position: relative; }
+.search-wrap svg { position: absolute; left: 9px; top: 50%; transform: translateY(-50%); color: #8a97aa; pointer-events: none; }
+#searchInput { width: 100%; background: #f0f4f8; border: 1px solid #dde3ec; border-radius: 6px; padding: 7px 10px 7px 30px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: #1a2332; outline: none; }
+#searchInput:focus { border-color: #4285f4; }
+#searchInput::placeholder { color: #8a97aa; }
+.dict-meta { font-size: 10px; color: #8a97aa; margin-top: 8px; }
+.dict-list { flex: 1; overflow-y: auto; padding: 8px; }
+.dict-item { display: flex; gap: 8px; align-items: baseline; padding: 7px 9px; border-radius: 6px; cursor: pointer; }
+.dict-item:hover { background: #e8f0fe; }
+.sw-word { font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; color: #1565c0; min-width: 110px; flex-shrink: 0; }
+.en-word { font-size: 11px; color: #8a97aa; line-height: 1.4; }
+.panel { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+.tab-nav { display: flex; border-bottom: 1px solid #dde3ec; background: #fff; padding: 0 24px; flex-shrink: 0; }
+.tab-btn { padding: 10px 20px; font-size: 13px; font-weight: 500; color: #8a97aa; cursor: pointer; border: none; border-bottom: 2px solid transparent; background: none; }
+.tab-btn.active { color: #1565c0; border-bottom-color: #1565c0; }
+.tab-pane { display: none; flex-direction: column; flex: 1; overflow: hidden; }
+.tab-pane.active { display: flex; }
+.workspace { flex: 1; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 20px; }
+.input-card { background: #fff; border: 1px solid #dde3ec; border-radius: 10px; overflow: hidden; }
+#symptomInput { width: 100%; border: none; padding: 16px 18px; font-family: 'DM Sans', sans-serif; font-size: 15px; color: #1a2332; resize: none; outline: none; line-height: 1.6; min-height: 96px; background: transparent; }
+#symptomInput::placeholder { color: #8a97aa; }
+.input-footer { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; border-top: 1px solid #dde3ec; background: #f0f4f8; }
+.input-hint { font-size: 11px; color: #8a97aa; }
+.btn-classify { background: #1565c0; color: #fff; border: none; border-radius: 6px; padding: 8px 20px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; }
+.btn-classify:hover { background: #1976d2; }
+.btn-classify:disabled { background: #8a97aa; cursor: not-allowed; }
+.examples-wrap { display: flex; flex-wrap: wrap; gap: 8px; }
+.example-chip { background: #fff; border: 1px solid #dde3ec; border-radius: 20px; padding: 5px 12px; cursor: pointer; }
+.example-chip:hover { border-color: #4285f4; background: #e8f0fe; }
+.chip-sw { font-family: 'DM Mono', monospace; font-size: 11px; color: #1565c0; font-weight: 500; }
+.chip-en { font-size: 10px; color: #8a97aa; }
+.result-card { background: #fff; border: 1px solid #dde3ec; border-radius: 10px; overflow: hidden; }
+.result-card.hidden { display: none; }
+.result-top { padding: 16px 20px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #dde3ec; }
+.sev-badge { padding: 4px 12px; border-radius: 4px; font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; border: 1px solid; }
+.sev-badge.CRITICAL { background: #fdecea; color: #c62828; border-color: #ef9a9a; }
+.sev-badge.HIGH { background: #fff3e0; color: #e65100; border-color: #ffcc80; }
+.sev-badge.MEDIUM { background: #fffde7; color: #f57f17; border-color: #ffe082; }
+.sev-badge.LOW { background: #e8f5e9; color: #1b5e20; border-color: #a5d6a7; }
+.sev-sw { font-size: 18px; font-weight: 600; }
+.sev-sw.CRITICAL { color: #c62828; }
+.sev-sw.HIGH { color: #e65100; }
+.sev-sw.MEDIUM { color: #f57f17; }
+.sev-sw.LOW { color: #1b5e20; }
+.result-body { padding: 16px 20px; display: flex; flex-direction: column; gap: 14px; }
+.result-row { display: grid; grid-template-columns: 120px 1fr; gap: 8px; }
+.row-label { font-size: 11px; font-weight: 600; letter-spacing: 0.05em; color: #8a97aa; text-transform: uppercase; padding-top: 2px; }
+.row-value { font-size: 14px; color: #1a2332; line-height: 1.5; }
+.sym-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.sym-tag { background: #f0f4f8; border: 1px solid #dde3ec; border-radius: 4px; padding: 2px 8px; font-family: 'DM Mono', monospace; font-size: 11px; color: #4a5568; }
+.disclaimer { background: #e8f0fe; border-left: 3px solid #4285f4; padding: 10px 14px; font-size: 12px; color: #1565c0; font-style: italic; }
+.error-card { background: #fdecea; border: 1px solid #ef9a9a; border-radius: 8px; padding: 12px 16px; font-size: 13px; color: #c62828; }
+.error-card.hidden { display: none; }
+.footer-bar { background: #fff; border-top: 1px solid #dde3ec; padding: 8px 24px; display: flex; gap: 20px; flex-shrink: 0; }
+.foot-item { font-size: 11px; color: #8a97aa; }
+.foot-item strong { color: #4a5568; font-weight: 500; }
+.msg { padding: 16px; font-size: 12px; color: #8a97aa; text-align: center; }
+.sessions-wrap { flex: 1; overflow-y: auto; padding: 20px 24px; }
+.refresh-bar { display: flex; align-items: center; justify-content: space-between; padding: 10px 24px; background: #fff; border-bottom: 1px solid #dde3ec; flex-shrink: 0; }
+.btn-refresh { background: #1565c0; color: #fff; border: none; border-radius: 6px; padding: 6px 16px; font-size: 12px; font-weight: 500; cursor: pointer; }
+.btn-refresh:hover { background: #1976d2; }
+.sessions-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.sessions-table th { background: #f0f4f8; color: #8a97aa; font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; padding: 8px 12px; text-align: left; font-weight: 500; border-bottom: 1px solid #dde3ec; }
+.sessions-table td { padding: 10px 12px; border-bottom: 0.5px solid #dde3ec; color: #1a2332; vertical-align: top; }
+.sessions-table tr:last-child td { border-bottom: none; }
+.sessions-table tr:hover td { background: #f8fafc; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">S</div>
+    <span class="logo-name">SACA</span>
+    <span class="logo-sub">Smart Adaptive Clinical Assistant</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <div class="status-pill" id="statusPill">
+      <div class="status-dot"></div>
+      <span id="statusText">Checking...</span>
+    </div>
+    <span style="font-size:12px;color:#8a97aa;">Mbinga District, Ruvuma Region, Tanzania</span>
+  </div>
+</header>
+
+<div class="main">
+
+  <div class="sidebar">
+    <div class="sidebar-top">
+      <div class="section-label">Kamusi ya Dalili // Symptom Dictionary</div>
+      <div class="search-wrap">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+        <input type="text" id="searchInput" placeholder="Search in English...">
+      </div>
+      <div class="dict-meta" id="dictMeta">Loading...</div>
+    </div>
+    <div class="dict-list" id="dictList">
+      <div class="msg">Loading dictionary from API...</div>
+    </div>
+  </div>
+
+  <div class="panel">
+
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="switchTab('classify')">Classify</button>
+      <button class="tab-btn" onclick="switchTab('sessions')">Sessions (SQLite)</button>
+    </div>
+
+    <div class="tab-pane active" id="tab-classify">
+      <div class="workspace">
+
+        <div>
+          <div class="section-label">Ingiza Dalili // Enter Symptoms in Swahili</div>
+          <div class="input-card">
+            <textarea id="symptomInput" rows="4" placeholder="Andika dalili kwa Kiswahili... (e.g. ana homa na degedege)"></textarea>
+            <div class="input-footer">
+              <span class="input-hint">Click a symptom in the dictionary to insert it. Ctrl+Enter to classify.</span>
+              <button type="button" class="btn-classify" id="classifyBtn" onclick="doClassify()">Classify</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="error-card hidden" id="errorCard"></div>
+
+        <div class="result-card hidden" id="resultCard">
+          <div class="result-top">
+            <div class="sev-badge" id="sevBadge"></div>
+            <div class="sev-sw" id="sevSw"></div>
+          </div>
+          <div class="result-body">
+            <div class="result-row">
+              <div class="row-label">Sababu // Reason</div>
+              <div class="row-value" id="resReason"></div>
+            </div>
+            <div class="result-row">
+              <div class="row-label">Dalili // Detected</div>
+              <div class="row-value"><div class="sym-tags" id="symTags"></div></div>
+            </div>
+            <div class="disclaimer" id="resDisclaimer"></div>
+          </div>
+        </div>
+
+        <div>
+          <div class="section-label">Mifano // Quick Examples - click to load</div>
+          <div class="examples-wrap" id="examplesWrap"></div>
+        </div>
+
+      </div>
+
+      <div class="footer-bar">
+        <span class="foot-item">Engine <strong>Rule-Based v1.0</strong></span>
+        <span class="foot-item">Language <strong>Kiswahili</strong></span>
+        <span class="foot-item">Framework <strong>WHO ETAT / IMCI / SATS</strong></span>
+        <span class="foot-item">Storage <strong>SQLite (offline-first)</strong></span>
+      </div>
+    </div>
+
+    <div class="tab-pane" id="tab-sessions">
+      <div class="refresh-bar">
+        <span style="font-size:12px;color:#8a97aa;">Live view of SQLite local database — last 10 sessions</span>
+        <button class="btn-refresh" onclick="loadSessions()">Refresh</button>
+      </div>
+      <div class="sessions-wrap">
+        <table class="sessions-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Timestamp</th>
+              <th>Symptom input</th>
+              <th>Severity</th>
+              <th>Reason</th>
+            </tr>
+          </thead>
+          <tbody id="sessionsBody">
+            <tr><td colspan="5" style="text-align:center;color:#8a97aa;padding:24px;">Click Refresh to load sessions</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const API = 'http://127.0.0.1:8000';
+let DICT = [];
+
+const EXAMPLES = [
+  {sw:'ana homa na degedege',en:'fever + convulsions'},
+  {sw:'ana kikohozi na kupumua haraka',en:'cough + fast breathing'},
+  {sw:'ana kuhara na macho yaliyozama',en:'diarrhoea + sunken eyes'},
+  {sw:'maumivu ya kichwa na shingo ngumu',en:'headache + stiff neck'},
+  {sw:'kuumwa na nyoka na uvimbe mkubwa',en:'snake bite + swelling'},
+  {sw:'mjamzito ana damu nyingi',en:'pregnant + heavy bleeding'},
+  {sw:'ana homa tu',en:'fever only'},
+  {sw:'kukohoa zaidi ya wiki mbili na jasho usiku na uzito kupotea',en:'TB triad'},
+];
+
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    if (b.textContent.toLowerCase().includes(tab)) b.classList.add('active');
+  });
+  if (tab === 'sessions') loadSessions();
+}
+
+async function loadSessions() {
+  const tbody = document.getElementById('sessionsBody');
+  tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:#8a97aa;padding:16px;">Loading...</td></tr>';
+  try {
+    const res = await fetch(API + '/sessions');
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const rows = await res.json();
+    if (!rows.length) {
+      tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:#8a97aa;padding:24px;">No sessions yet. Classify something first.</td></tr>';
+      return;
+    }
+    const sevColors = { CRITICAL:'#c62828', HIGH:'#e65100', MEDIUM:'#f57f17', LOW:'#1b5e20' };
+    tbody.innerHTML = rows.slice(0, 10).map(r => {
+      const color = sevColors[r.severity] || '#8a97aa';
+      const ts = r.timestamp ? r.timestamp.replace('T', ' ').substring(0, 19) : '';
+      return '<tr>' +
+        '<td style="color:#8a97aa;font-size:12px;">' + r.id + '</td>' +
+        '<td style="color:#8a97aa;font-size:11px;white-space:nowrap;">' + ts + '</td>' +
+        '<td style="font-family:monospace;font-size:12px;max-width:200px;word-break:break-word;">' + (r.symptom_text || '') + '</td>' +
+        '<td><span style="background:' + color + '22;color:' + color + ';border:1px solid ' + color + '66;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:500;white-space:nowrap;">' + r.severity + ' / ' + (r.severity_sw || '') + '</span></td>' +
+        '<td style="font-size:12px;color:#4a5568;max-width:180px;">' + (r.reason || '') + '</td>' +
+        '</tr>';
+    }).join('');
+  } catch(err) {
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:#c62828;padding:16px;">Error: ' + err.message + '</td></tr>';
+  }
+}
+
+async function loadDict() {
+  try {
+    const res = await fetch(API + '/keywords');
+    if (!res.ok) throw new Error();
+    DICT = await res.json();
+    document.getElementById('dictMeta').textContent = DICT.length + ' symptoms loaded';
+    renderDict();
+  } catch {
+    document.getElementById('dictList').innerHTML = '<div class="msg">Could not load dictionary. Is the API running?</div>';
+    document.getElementById('dictMeta').textContent = '';
+  }
+}
+
+function renderDict(filter) {
+  const items = filter
+    ? DICT.filter(d => d.en.toLowerCase().includes(filter.toLowerCase()) || d.sw.toLowerCase().includes(filter.toLowerCase()))
+    : DICT;
+  const list = document.getElementById('dictList');
+  if (!items.length) { list.innerHTML = '<div class="msg">No results.</div>'; return; }
+  list.innerHTML = items.map(d =>
+    '<div class="dict-item" onclick="insertSw(\`' + d.sw + '\`)">' +
+    '<span class="sw-word">' + d.sw + '</span>' +
+    '<span class="en-word">' + d.en + '</span>' +
+    '</div>'
+  ).join('');
+}
+
+function insertSw(sw) {
+  const ta = document.getElementById('symptomInput');
+  const v = ta.value.trim();
+  ta.value = v ? v + ' na ' + sw : sw;
+  ta.focus();
+}
+
+function renderExamples() {
+  document.getElementById('examplesWrap').innerHTML = EXAMPLES.map(e =>
+    '<div class="example-chip" onclick="document.getElementById(\'symptomInput\').value=\`' + e.sw + '\`">' +
+    '<div class="chip-sw">' + e.sw + '</div>' +
+    '<div class="chip-en">' + e.en + '</div>' +
+    '</div>'
+  ).join('');
+}
+
+async function checkApi() {
+  const pill = document.getElementById('statusPill');
+  const txt = document.getElementById('statusText');
+  try {
+    const r = await fetch(API + '/', {signal: AbortSignal.timeout(3000)});
+    if (r.ok) { pill.classList.remove('offline'); txt.textContent = 'API Online'; }
+    else throw new Error();
+  } catch {
+    pill.classList.add('offline');
+    txt.textContent = 'API Offline';
+  }
+}
+
+async function doClassify() {
+  const text = document.getElementById('symptomInput').value.trim();
+  if (!text) return;
+  const btn = document.getElementById('classifyBtn');
+  btn.disabled = true;
+  btn.textContent = 'Classifying...';
+  document.getElementById('resultCard').classList.add('hidden');
+  document.getElementById('errorCard').classList.add('hidden');
+  try {
+    const res = await fetch(API + '/classify', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({symptom_text: text})
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const d = await res.json();
+    document.getElementById('sevBadge').textContent = d.severity;
+    document.getElementById('sevBadge').className = 'sev-badge ' + d.severity;
+    document.getElementById('sevSw').textContent = d.severity_sw;
+    document.getElementById('sevSw').className = 'sev-sw ' + d.severity;
+    document.getElementById('resReason').textContent = d.reason;
+    document.getElementById('resDisclaimer').textContent = d.disclaimer;
+    document.getElementById('symTags').innerHTML = d.symptoms.length
+      ? d.symptoms.map(s => '<span class="sym-tag">' + s + '</span>').join('')
+      : '<span style="font-size:12px;color:#8a97aa">No specific symptoms detected</span>';
+    document.getElementById('resultCard').classList.remove('hidden');
+  } catch(err) {
+    document.getElementById('errorCard').textContent = 'Cannot connect to SACA API. Make sure the server is running. (' + err.message + ')';
+    document.getElementById('errorCard').classList.remove('hidden');
+  }
+  btn.disabled = false;
+  btn.textContent = 'Classify';
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  loadDict();
+  renderExamples();
+  checkApi();
+  setInterval(checkApi, 10000);
+  document.getElementById('searchInput').addEventListener('input', function(e) { renderDict(e.target.value); });
+  document.getElementById('symptomInput').addEventListener('keydown', function(e) { if (e.ctrlKey && e.key === 'Enter') doClassify(); });
+});
+</script>
+</body>
+</html>
