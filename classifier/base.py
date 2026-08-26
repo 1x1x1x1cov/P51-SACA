@@ -35,35 +35,45 @@ class BaseClassifier(ABC):
     same shape regardless of the underlying method.
     """
 
-    #: Short identifier used in comparison results and logging,
-    #: e.g. "rule_based", "random_forest", "svm", "logistic_regression", "hybrid".
     name: str = "base"
 
     @abstractmethod
     def classify(self, symptom_text: str) -> dict:
-        """
-        Classify raw symptom text and return a severity result.
-
-        Args:
-            symptom_text: Raw Swahili symptom input from the user.
-
-        Returns:
-            dict shaped by build_result(), containing severity,
-            severity_sw, symptoms, reason, and disclaimer.
-        """
         raise NotImplementedError
 
-    def build_result(self, severity: str, symptoms: list, reason: str) -> dict:
+    def build_result(
+        self, severity: str, symptoms: list, reason: str, confidence: float | None = None
+    ) -> dict:
         """
         Build a standardised result dict. All subclasses should use
         this instead of constructing the return dict by hand, so the
         output shape can't drift between approaches.
+
+        confidence is optional: rule-based classifiers have no real
+        probability to report (they're deterministic if/else logic),
+        so they should simply omit it, leaving it as None rather than
+        fabricating a number. ML approaches (SVM, Random Forest,
+        Logistic Regression) that support predict_proba() should pass
+        the probability of the predicted class here.
         """
         if severity not in VALID_SEVERITIES:
             raise ValueError(
                 f"Invalid severity '{severity}' from classifier '{self.name}'. "
                 f"Must be one of {sorted(VALID_SEVERITIES)}."
             )
+
+        if confidence is not None:
+            if not isinstance(confidence, (int, float)):
+                raise ValueError(
+                    f"confidence must be a number or None, got {type(confidence).__name__} "
+                    f"from classifier '{self.name}'."
+                )
+            if not (0.0 <= confidence <= 1.0):
+                raise ValueError(
+                    f"confidence must be between 0 and 1, got {confidence} "
+                    f"from classifier '{self.name}'."
+                )
+            confidence = round(float(confidence), 4)
 
         return {
             "severity": severity,
@@ -72,4 +82,5 @@ class BaseClassifier(ABC):
             "reason": reason,
             "disclaimer": DISCLAIMER,
             "classifier": self.name,
+            "confidence": confidence,
         }
