@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-19T16:18:42.459957",
+  "generated_at": "2026-09-09T03:53:49.468120",
   "test_rows": 984,
   "results": [
     {
@@ -11,68 +11,42 @@
       "f1": 0.0137,
       "rows_tested": 984,
       "rows_errored": 0,
+      "note": "rule_based.py matches Swahili keyword phrases (keywords.py / SYMPTOM_MAP) against symptom_text. saca_test.csv's symptom_text is English, so extract_symptoms() returns [] on almost every row, and rule_based.py's own fallback (\"no symptoms recognised\" → LOW) fires nearly universally. The 8.64% accuracy equals the LOW-tier share of the test set (85/984) — this is not a measurement of the classifier's real-world quality, it is a language mismatch between a Swahili production classifier and an English test set. Verified by re-running score_classifiers.py directly against the corrected saca_test.csv/saca_train.csv in this session (2026-09-09). Do not use this number to judge rule_based.py; it needs a Swahili-labelled test set to be evaluated meaningfully (see handoff doc: unverified 29-term Swahili glossary draft).",
       "per_class": {
-        "CRITICAL": {
-          "precision": 0.0,
-          "recall": 0.0,
-          "f1": 0.0,
-          "support": 286
-        },
-        "HIGH": {
-          "precision": 0.0,
-          "recall": 0.0,
-          "f1": 0.0,
-          "support": 280
-        },
-        "LOW": {
-          "precision": 0.0864,
-          "recall": 1.0,
-          "f1": 0.159,
-          "support": 85
-        },
-        "MEDIUM": {
-          "precision": 0.0,
-          "recall": 0.0,
-          "f1": 0.0,
-          "support": 333
-        }
+        "CRITICAL": {"precision": 0.0, "recall": 0.0, "f1": 0.0, "support": 286},
+        "HIGH": {"precision": 0.0, "recall": 0.0, "f1": 0.0, "support": 280},
+        "LOW": {"precision": 0.0864, "recall": 1.0, "f1": 0.159, "support": 85},
+        "MEDIUM": {"precision": 0.0, "recall": 0.0, "f1": 0.0, "support": 333}
       }
     },
     {
-      "name": "rule_based_en",
+      "name": "svm",
       "status": "ok",
-      "accuracy": 0.3923,
-      "precision": 0.369,
-      "recall": 0.3923,
-      "f1": 0.3609,
+      "accuracy": 0.94,
+      "precision": 0.9423,
+      "recall": 0.94,
+      "f1": 0.94,
       "rows_tested": 984,
       "rows_errored": 0,
+      "note": "Verified by re-running score_classifiers.py directly against the corrected saca_test.csv/saca_train.csv in this session (2026-09-09). Matches Azzam's originally reported 94% and the figure in svm.py's docstring — independently confirmed, not just re-stated.",
       "per_class": {
-        "CRITICAL": {
-          "precision": 0.4436,
-          "recall": 0.5909,
-          "f1": 0.5067,
-          "support": 286
-        },
-        "HIGH": {
-          "precision": 0.3371,
-          "recall": 0.3179,
-          "f1": 0.3272,
-          "support": 280
-        },
-        "LOW": {
-          "precision": 0.435,
-          "recall": 0.9059,
-          "f1": 0.5878,
-          "support": 85
-        },
-        "MEDIUM": {
-          "precision": 0.3148,
-          "recall": 0.1532,
-          "f1": 0.2061,
-          "support": 333
-        }
+        "CRITICAL": {"precision": 0.9439, "recall": 1.0, "f1": 0.9711, "support": 286},
+        "HIGH": {"precision": 0.8855, "recall": 0.9393, "f1": 0.9116, "support": 280},
+        "LOW": {"precision": 0.9873, "recall": 0.9176, "f1": 0.9512, "support": 85},
+        "MEDIUM": {"precision": 0.977, "recall": 0.8949, "f1": 0.9342, "support": 333}
       }
+    },
+    {
+      "name": "logistic_regression",
+      "status": "not_verified",
+      "error": "Not independently verified. Ryan's classifier source (classifier/logistic_regression.py) was not available in this session to re-run — this is a placeholder status, not a test result. Per the handoff doc this is Sprint 5 task MH1/RY1: reproducible run + independent verification, still pending.",
+      "rows_tested": 0
+    },
+    {
+      "name": "random_forest",
+      "status": "not_verified",
+      "error": "Not independently verified. Mumba's classifier source (classifier/random_forest.py) was not available in this session to re-run — this is a placeholder status, not a test result. Per the handoff doc this is Sprint 5 task MH2/MB1: reproducible run + independent verification, still pending.",
+      "rows_tested": 0
     }
   ]
 }
