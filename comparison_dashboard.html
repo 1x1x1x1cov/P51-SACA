@@ -16,6 +16,9 @@
     --medium: #F1C40F;
     --low: #27AE60;
     --border: #E2E5EA;
+    --danger: #C0392B;
+    --warn: #E67E22;
+    --safe: #2A9D8F;
   }
 
   * { box-sizing: border-box; }
@@ -120,6 +123,12 @@
     margin-top: 0;
   }
 
+  .bar-section .section-sub {
+    font-size: 0.85rem;
+    color: var(--grey);
+    margin: -0.5rem 0 1rem 0;
+  }
+
   .bar-row {
     display: flex;
     align-items: center;
@@ -151,6 +160,10 @@
     transition: width 0.4s ease;
   }
 
+  .bar-fill.danger { background: var(--danger); }
+  .bar-fill.warn { background: var(--warn); }
+  .bar-fill.safe { background: var(--safe); }
+
   .bar-value {
     width: 55px;
     text-align: right;
@@ -158,6 +171,36 @@
     font-weight: 600;
     color: var(--charcoal);
     flex-shrink: 0;
+  }
+
+  .tier-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.1rem;
+  }
+
+  .tier-tab {
+    border: 1px solid var(--border);
+    background: #fff;
+    color: var(--charcoal);
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .tier-tab.active-CRITICAL { background: var(--critical); color: #fff; border-color: var(--critical); }
+  .tier-tab.active-HIGH { background: var(--high); color: #fff; border-color: var(--high); }
+  .tier-tab.active-MEDIUM { background: var(--medium); color: #4a3b00; border-color: var(--medium); }
+  .tier-tab.active-LOW { background: var(--low); color: #fff; border-color: var(--low); }
+
+  .safety-flag {
+    display: inline-block;
+    margin-left: 0.5rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--danger);
   }
 
   .per-class-table {
@@ -233,11 +276,84 @@
       <div id="accuracy-bars"></div>
     </div>
 
+    <div class="bar-section">
+      <h2>Recall by severity tier <span id="tier-safety-flag"></span></h2>
+      <div class="section-sub">
+        Recall = of the real cases at this tier, how many did the classifier actually catch. For a triage tool, a low CRITICAL
+        recall means real critical cases are being missed - a much more dangerous failure than a low overall accuracy score
+        would suggest. Sorted worst to best so the weakest classifier at this tier is immediately visible.
+      </div>
+      <div class="tier-tabs" id="tier-tabs"></div>
+      <div id="tier-bars"></div>
+    </div>
+
     <div class="card-grid" id="cards"></div>
   </div>
 </main>
 
 <script>
+const TIERS = ['CRITICAL', 'HIGH', 'MEDIUM', 'LOW'];
+// Below this recall, flag the classifier as a safety concern for this tier.
+// Placeholder thresholds - adjust to whatever the team/supervisor considers
+// clinically acceptable; these are not derived from any clinical standard.
+const SAFETY_THRESHOLD = { CRITICAL: 0.90, HIGH: 0.80, MEDIUM: 0.70, LOW: 0.70 };
+
+let RESULTS = [];
+let activeTier = 'CRITICAL';
+
+function renderTierTabs() {
+  const tabsEl = document.getElementById('tier-tabs');
+  tabsEl.innerHTML = '';
+  TIERS.forEach(tier => {
+    const btn = document.createElement('button');
+    btn.className = 'tier-tab' + (tier === activeTier ? ` active-${tier}` : '');
+    btn.textContent = tier;
+    btn.onclick = () => { activeTier = tier; renderTierTabs(); renderTierBars(); };
+    tabsEl.appendChild(btn);
+  });
+}
+
+function renderTierBars() {
+  const barsEl = document.getElementById('tier-bars');
+  const flagEl = document.getElementById('tier-safety-flag');
+  barsEl.innerHTML = '';
+
+  const ok = RESULTS.filter(r => r.status === 'ok' && r.per_class && r.per_class[activeTier]);
+  const threshold = SAFETY_THRESHOLD[activeTier];
+
+  const rows = ok.map(r => ({
+    name: r.name,
+    recall: r.per_class[activeTier].recall,
+    support: r.per_class[activeTier].support,
+  })).sort((a, b) => a.recall - b.recall); // worst first
+
+  const belowThreshold = rows.filter(r => r.recall < threshold);
+  flagEl.innerHTML = belowThreshold.length
+    ? `<span class="safety-flag">${belowThreshold.length} classifier(s) below ${(threshold * 100).toFixed(0)}% recall on ${activeTier}</span>`
+    : '';
+
+  if (rows.length === 0) {
+    barsEl.innerHTML = '<div class="section-sub">No classifier has test rows for this tier.</div>';
+    return;
+  }
+
+  rows.forEach(r => {
+    const row = document.createElement('div');
+    row.className = 'bar-row';
+    const pct = (r.recall * 100).toFixed(1);
+    const widthPct = Math.max(r.recall * 100, 2); // keep a sliver visible even near 0
+    let cls = 'safe';
+    if (r.recall < threshold) cls = 'danger';
+    else if (r.recall < threshold + 0.05) cls = 'warn';
+    row.innerHTML = `
+      <div class="bar-label">${r.name.replace(/_/g, ' ')}</div>
+      <div class="bar-track"><div class="bar-fill ${cls}" style="width:${widthPct}%"></div></div>
+      <div class="bar-value">${pct}%</div>
+    `;
+    barsEl.appendChild(row);
+  });
+}
+
 async function load() {
   const statusEl = document.getElementById('status');
   const contentEl = document.getElementById('content');
@@ -262,10 +378,12 @@ async function load() {
 
   metaEl.textContent = `Generated ${new Date(data.generated_at).toLocaleString()} - ${data.test_rows} test rows`;
 
-  const ok = data.results.filter(r => r.status === 'ok');
+  RESULTS = data.results;
+
+  const ok = RESULTS.filter(r => r.status === 'ok');
   const maxAcc = Math.max(...ok.map(r => r.accuracy), 0.01);
 
-  ok.sort((a, b) => b.accuracy - a.accuracy).forEach(r => {
+  ok.slice().sort((a, b) => b.accuracy - a.accuracy).forEach(r => {
     const row = document.createElement('div');
     row.className = 'bar-row';
     const pct = (r.accuracy * 100).toFixed(1);
@@ -278,7 +396,10 @@ async function load() {
     barsEl.appendChild(row);
   });
 
-  data.results.forEach(r => {
+  renderTierTabs();
+  renderTierBars();
+
+  RESULTS.forEach(r => {
     const card = document.createElement('div');
     card.className = 'classifier-card' + (r.status !== 'ok' ? ' failed' : '');
 
