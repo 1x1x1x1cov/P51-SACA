@@ -1,0 +1,557 @@
+<title>Dalili Console</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F5F6F1;
+    --paper-raised: #FFFFFF;
+    --paper-sunken: #ECEEE7;
+    --ink: #17211D;
+    --ink-soft: #55604F;
+    --ink-faint: #8A9384;
+    --border: #DCE0D5;
+    --border-strong: #C4CABB;
+    --brand: #2A5C8A;
+    --brand-soft: #E6EEF4;
+    --brand-ink: #1D4266;
+    --critical: #A93227;
+    --critical-soft: #F6E3E0;
+    --critical-ink: #7C241C;
+    --high: #B8641F;
+    --high-soft: #F5E5D2;
+    --high-ink: #8A4A16;
+    --medium: #9C7A17;
+    --medium-soft: #F1E7C9;
+    --medium-ink: #6E5610;
+    --low: #34714A;
+    --low-soft: #DEECE1;
+    --low-ink: #245335;
+    --shadow: 0 1px 2px rgba(23,33,29,0.06), 0 8px 24px -12px rgba(23,33,29,0.18);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #12160F;
+      --paper-raised: #1A211A;
+      --paper-sunken: #0D110B;
+      --ink: #ECEFE6;
+      --ink-soft: #AEB6A6;
+      --ink-faint: #6E7768;
+      --border: #303829;
+      --border-strong: #414B37;
+      --brand: #7CADDA;
+      --brand-soft: #1D2C3A;
+      --brand-ink: #A9CAE8;
+      --critical: #E2786A;
+      --critical-soft: #3A231F;
+      --critical-ink: #F0A79C;
+      --high: #E0A25E;
+      --high-soft: #392C1B;
+      --high-ink: #EFC290;
+      --medium: #D6BD6C;
+      --medium-soft: #362F19;
+      --medium-ink: #E9D89A;
+      --low: #74C08A;
+      --low-soft: #1B3324;
+      --low-ink: #A6DCB6;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 28px -12px rgba(0,0,0,0.55);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #12160F;
+    --paper-raised: #1A211A;
+    --paper-sunken: #0D110B;
+    --ink: #ECEFE6;
+    --ink-soft: #AEB6A6;
+    --ink-faint: #6E7768;
+    --border: #303829;
+    --border-strong: #414B37;
+    --brand: #7CADDA;
+    --brand-soft: #1D2C3A;
+    --brand-ink: #A9CAE8;
+    --critical: #E2786A;
+    --critical-soft: #3A231F;
+    --critical-ink: #F0A79C;
+    --high: #E0A25E;
+    --high-soft: #392C1B;
+    --high-ink: #EFC290;
+    --medium: #D6BD6C;
+    --medium-soft: #362F19;
+    --medium-ink: #E9D89A;
+    --low: #74C08A;
+    --low-soft: #1B3324;
+    --low-ink: #A6DCB6;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 28px -12px rgba(0,0,0,0.55);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Work Sans", -apple-system, "Segoe UI", sans-serif;
+    padding: clamp(1.25rem, 3vw, 2.75rem);
+  }
+  h1, h2, .display {
+    font-family: "Fraunces", Georgia, serif;
+    text-wrap: balance;
+  }
+  code, .mono, .num { font-family: "IBM Plex Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+
+  .shell { max-width: 980px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.75rem; }
+
+  /* ---------- Masthead ---------- */
+  .masthead {
+    display: flex; flex-wrap: wrap; gap: 1.5rem 2rem; justify-content: space-between; align-items: flex-end;
+    padding-bottom: 1.5rem; border-bottom: 1px solid var(--border);
+  }
+  .mast-left { max-width: 620px; }
+  .eyebrow {
+    font-family: "IBM Plex Mono", monospace; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--brand-ink); margin: 0 0 0.5rem 0;
+  }
+  h1 { font-size: clamp(1.7rem, 3vw, 2.25rem); font-weight: 600; margin: 0 0 0.5rem 0; letter-spacing: -0.01em; }
+  .tagline { color: var(--ink-soft); font-size: 0.98rem; line-height: 1.55; margin: 0; max-width: 54ch; }
+
+  .tier-legend { list-style: none; display: flex; gap: 0.6rem; margin: 0; padding: 0; flex-wrap: wrap; }
+  .tier-chip {
+    display: flex; align-items: baseline; gap: 0.4rem; padding: 0.4rem 0.7rem; border-radius: 999px;
+    font-family: "IBM Plex Mono", monospace; font-size: 0.78rem; font-weight: 600; border: 1px solid transparent;
+  }
+  .tier-chip small { font-family: "Work Sans", sans-serif; font-weight: 500; opacity: 0.75; font-size: 0.72rem; }
+  .tier-chip .dot { width: 7px; height: 7px; border-radius: 50%; flex: none; }
+  .tier-critical { background: var(--critical-soft); color: var(--critical-ink); }
+  .tier-critical .dot { background: var(--critical); }
+  .tier-high { background: var(--high-soft); color: var(--high-ink); }
+  .tier-high .dot { background: var(--high); }
+  .tier-medium { background: var(--medium-soft); color: var(--medium-ink); }
+  .tier-medium .dot { background: var(--medium); }
+  .tier-low { background: var(--low-soft); color: var(--low-ink); }
+  .tier-low .dot { background: var(--low); }
+
+  /* ---------- Mode switch ---------- */
+  .mode-switch { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  .mode-btn {
+    text-align: left; padding: 0.9rem 1.1rem; border-radius: 12px; border: 1.5px solid var(--border);
+    background: var(--paper-raised); color: var(--ink-soft); cursor: pointer; font-family: "Work Sans", sans-serif;
+    font-size: 0.95rem; font-weight: 600; transition: border-color .15s ease, background .15s ease, color .15s ease;
+  }
+  .mode-btn .mode-sub { display: block; font-weight: 500; font-size: 0.8rem; color: var(--ink-faint); margin-top: 0.2rem; }
+  .mode-btn:hover { border-color: var(--border-strong); }
+  .mode-btn.active { border-color: var(--brand); background: var(--brand-soft); color: var(--brand-ink); }
+  .mode-btn.active .mode-sub { color: var(--brand-ink); opacity: 0.8; }
+  .mode-btn:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+
+  /* ---------- Console ---------- */
+  .console {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; align-items: start;
+  }
+  @media (max-width: 760px) { .console { grid-template-columns: 1fr; } }
+
+  .panel {
+    background: var(--paper-raised); border: 1px solid var(--border); border-radius: 14px;
+    padding: 1.4rem; box-shadow: var(--shadow);
+  }
+  .panel h2 {
+    font-size: 1rem; font-weight: 600; margin: 0 0 0.15rem 0; display: flex; align-items: center; gap: 0.5rem;
+  }
+  .panel .sub { color: var(--ink-faint); font-size: 0.82rem; margin: 0 0 1rem 0; }
+
+  label { display: block; font-size: 0.82rem; font-weight: 600; color: var(--ink-soft); margin-bottom: 0.45rem; }
+  textarea {
+    width: 100%; resize: vertical; min-height: 84px; border-radius: 10px; border: 1.5px solid var(--border);
+    background: var(--paper-sunken); color: var(--ink); font-family: "IBM Plex Mono", monospace; font-size: 0.92rem;
+    padding: 0.75rem 0.85rem; line-height: 1.5;
+  }
+  textarea:focus-visible { outline: 2px solid var(--brand); outline-offset: 1px; border-color: var(--brand); }
+  [lang="sw"] textarea, textarea[dir] { font-family: "Work Sans", sans-serif; }
+
+  .chip-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.85rem; }
+  .chip-row-label { font-size: 0.72rem; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.06em;
+    font-weight: 600; width: 100%; margin-bottom: 0.15rem; }
+  .example-chip {
+    font-size: 0.78rem; padding: 0.35rem 0.65rem; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--paper-sunken); color: var(--ink-soft); cursor: pointer; font-family: "IBM Plex Mono", monospace;
+  }
+  .example-chip:hover { border-color: var(--brand); color: var(--brand-ink); }
+  .example-chip .tier-tag { opacity: 0.65; margin-left: 0.3rem; }
+
+  .hint { margin-top: 1rem; font-size: 0.82rem; color: var(--ink-faint); line-height: 1.5; padding: 0.7rem 0.85rem;
+    background: var(--paper-sunken); border-radius: 10px; border: 1px dashed var(--border-strong); }
+
+  /* ---------- Result panel ---------- */
+  .result-panel { grid-column: 1 / -1; }
+  .result-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.1rem; }
+  .badge-wrap { display: flex; align-items: center; gap: 0.85rem; }
+  .severity-badge {
+    font-family: "Fraunces", serif; font-weight: 600; font-size: 1.5rem; padding: 0.5rem 1.1rem; border-radius: 12px;
+    display: inline-flex; align-items: baseline; gap: 0.5rem; transition: background .2s ease, color .2s ease;
+  }
+  .severity-badge .en { font-family: "Work Sans", sans-serif; font-size: 0.82rem; font-weight: 600; opacity: 0.8; }
+  .latency { font-family: "IBM Plex Mono", monospace; font-size: 0.8rem; color: var(--ink-faint); text-align: right; }
+  .latency .num { color: var(--ink-soft); font-weight: 600; }
+
+  .prob-bars { display: flex; flex-direction: column; gap: 0.55rem; margin-bottom: 1.1rem; }
+  .prob-row { display: grid; grid-template-columns: 90px 1fr 52px; align-items: center; gap: 0.75rem; font-size: 0.85rem; }
+  .prob-label { font-family: "IBM Plex Mono", monospace; font-weight: 600; }
+  .prob-track { background: var(--paper-sunken); border-radius: 6px; height: 16px; overflow: hidden; border: 1px solid var(--border); }
+  .prob-fill { height: 100%; border-radius: 5px 0 0 5px; transition: width .35s cubic-bezier(.2,.7,.3,1); }
+  .prob-value { text-align: right; font-family: "IBM Plex Mono", monospace; font-weight: 600; }
+
+  .reason-line { font-size: 0.98rem; line-height: 1.5; margin: 0 0 1rem 0; color: var(--ink); }
+  .reason-line .sw { }
+
+  .symptom-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.25rem; }
+  .symptom-chip {
+    font-size: 0.78rem; padding: 0.3rem 0.6rem; border-radius: 999px; background: var(--brand-soft);
+    color: var(--brand-ink); border: 1px solid transparent;
+  }
+  .symptom-chip.oov { background: transparent; border: 1px dashed var(--border-strong); color: var(--ink-faint); }
+
+  details.explain { margin-top: 0.9rem; border-top: 1px solid var(--border); padding-top: 0.8rem; }
+  details.explain summary { cursor: pointer; font-size: 0.82rem; font-weight: 600; color: var(--brand-ink); }
+  .explain-table { width: 100%; border-collapse: collapse; margin-top: 0.7rem; font-size: 0.8rem; }
+  .explain-table th, .explain-table td { text-align: left; padding: 0.3rem 0.5rem; border-bottom: 1px solid var(--border); }
+  .explain-table th { color: var(--ink-faint); font-weight: 600; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; }
+  .explain-table td.tok { font-family: "IBM Plex Mono", monospace; }
+  .explain-note { font-size: 0.78rem; color: var(--ink-faint); margin-top: 0.6rem; line-height: 1.5; }
+
+  .empty-state { color: var(--ink-faint); font-size: 0.92rem; padding: 1rem 0; }
+
+  /* ---------- Footer ---------- */
+  .provenance {
+    border-top: 1px solid var(--border); padding-top: 1.25rem; display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1.5rem; font-size: 0.82rem; color: var(--ink-soft); line-height: 1.55;
+  }
+  @media (max-width: 760px) { .provenance { grid-template-columns: 1fr; } }
+  .provenance h3 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-faint);
+    margin: 0 0 0.5rem 0; font-weight: 600; }
+  .provenance .disclaimer { font-style: italic; color: var(--ink-faint); margin-top: 0.6rem; }
+  .provenance .fig { font-family: "IBM Plex Mono", monospace; font-weight: 600; color: var(--ink); }
+
+  [hidden] { display: none !important; }
+</style>
+
+<div class="shell">
+
+  <header class="masthead">
+    <div class="mast-left">
+      <p class="eyebrow">SACA · Sprint 5 · live console</p>
+      <h1>Dalili Console</h1>
+      <p class="tagline">Two intake pipelines feeding one triage. Type real symptoms below and watch the actual trained classifier decide — computed live in your browser, on the real model weights and keyword tables, not a canned response.</p>
+    </div>
+    <ul class="tier-legend" aria-label="Severity tiers">
+      <li class="tier-chip tier-critical"><span class="dot"></span>HATARI <small>Critical</small></li>
+      <li class="tier-chip tier-high"><span class="dot"></span>HARAKA <small>High</small></li>
+      <li class="tier-chip tier-medium"><span class="dot"></span>WASTANI <small>Medium</small></li>
+      <li class="tier-chip tier-low"><span class="dot"></span>SALAMA <small>Low</small></li>
+    </ul>
+  </header>
+
+  <nav class="mode-switch" role="tablist">
+    <button class="mode-btn active" data-mode="en" role="tab" aria-selected="true" id="tab-en">
+      English intake
+      <span class="mode-sub">→ logistic_regression.py / svm.py (real trained weights)</span>
+    </button>
+    <button class="mode-btn" data-mode="sw" role="tab" aria-selected="false" id="tab-sw">
+      Kiswahili intake
+      <span class="mode-sub">→ rule_based.py (real keyword table, 232 phrases)</span>
+    </button>
+  </nav>
+
+  <main class="console">
+    <section class="panel" id="panel-en">
+      <h2>English symptom text</h2>
+      <p class="sub">Space-separated tokens, matching the training data's format (e.g. <code>high_fever</code>, <code>abdominal_pain</code>)</p>
+      <label for="input-en">Symptom text</label>
+      <textarea id="input-en" placeholder="e.g. high_fever headache chills vomiting muscle_pain"></textarea>
+      <div class="chip-row">
+        <div class="chip-row-label">Real test-set cases</div>
+        <div id="examples-en" class="chip-row" style="margin-top:0"></div>
+      </div>
+    </section>
+
+    <section class="panel" id="panel-sw" hidden>
+      <h2 lang="sw">Maandishi ya dalili (Kiswahili)</h2>
+      <p class="sub">Free-form Kiswahili sentence describing the patient's symptoms</p>
+      <label for="input-sw" lang="sw">Dalili</label>
+      <textarea id="input-sw" lang="sw" placeholder="mfano: mgonjwa ana homa na degedege"></textarea>
+      <div class="chip-row">
+        <div class="chip-row-label">rule_based.py's own test cases</div>
+        <div id="examples-sw" class="chip-row" style="margin-top:0"></div>
+      </div>
+      <p class="hint">This is the real <code>rule_based.py</code> logic — Swahili phrase matching only. Try typing an English sentence here and watch it fall through to LOW: that's the exact language-mismatch bug found this session, reproduced live.</p>
+    </section>
+
+    <section class="panel result-panel" id="result">
+      <div class="empty-state">Type a symptom above to see a live prediction.</div>
+    </section>
+  </main>
+
+  <footer class="provenance">
+    <div>
+      <h3>English pipeline</h3>
+      <p><span class="fig">69.6%</span> accuracy, verified 2026-09-09 against a leak-checked 888-row held-out test set (0 <code>symptom_text</code> overlap with train). Logistic Regression and SVM predict identically on every one of those 888 rows — this console runs the real Logistic Regression weights (135-token vocabulary, 4-class softmax), and that result represents both.</p>
+    </div>
+    <div>
+      <h3>Kiswahili pipeline</h3>
+      <p><span class="fig">232</span> Swahili phrase→symptom mappings, hand-authored decision tree, no ML. Scores <span class="fig">6.08%</span> when tested against English text — a language mismatch in that evaluation, not a defect in the logic itself, which is exactly what the Kiswahili panel above demonstrates working as intended.</p>
+      <p class="disclaimer" lang="sw">Matokeo haya ni ya msaada tu. Tafadhali wasiliana na mtoa huduma wa afya.</p>
+    </div>
+  </footer>
+</div>
+
+<script>
+const LR = {"vocab":{"itching":56,"skin_rash":101,"nodal_skin_eruptions":74,"dischromic":33,"_patches":0,"continuous_sneezing":26,"shivering":97,"chills":20,"watering_from_eyes":126,"stomach_pain":108,"acidity":3,"ulcers_on_tongue":120,"vomiting":125,"cough":27,"chest_pain":19,"yellowish_skin":134,"nausea":72,"loss_of_appetite":61,"abdominal_pain":1,"yellowing_of_eyes":133,"burning_micturition":18,"spotting_":105,"urination":122,"indigestion":50,"passage_of_gases":81,"internal_itching":52,"muscle_wasting":70,"patches_in_throat":82,"high_fever":46,"extra_marital_contacts":39,"fatigue":42,"weight_loss":130,"restlessness":93,"lethargy":60,"irregular_sugar_level":53,"blurred_and_distorted_vision":14,"obesity":75,"excessive_hunger":38,"increased_appetite":49,"polyuria":84,"sunken_eyes":109,"dehydration":30,"diarrhoea":32,"breathlessness":15,"family_history":40,"mucoid_sputum":68,"dizziness":35,"loss_of_balance":62,"lack_of_concentration":59,"headache":45,"stiff_neck":106,"depression":31,"irritability":54,"visual_disturbances":124,"weakness_in_limbs":127,"neck_pain":73,"back_pain":7,"weakness_of_one_body_side":128,"altered_sensorium":5,"dark_urine":29,"sweating":110,"muscle_pain":69,"mild_fever":65,"swelled_lymph_nodes":111,"malaise":64,"red_spots_over_body":91,"joint_pain":57,"pain_behind_the_eyes":76,"constipation":24,"toxic_look_":118,"typhos":119,"belly_pain":8,"yellow_urine":132,"receiving_blood_transfusion":88,"receiving_unsterile_injections":89,"coma":22,"stomach_bleeding":107,"acute_liver_failure":4,"swelling_of_stomach":113,"distention_of_abdomen":34,"history_of_alcohol_consumption":48,"fluid_overload":43,"phlegm":83,"blood_in_sputum":12,"throat_irritation":117,"redness_of_eyes":92,"sinus_pressure":99,"runny_nose":94,"congestion":23,"loss_of_smell":63,"fast_heart_rate":41,"rusty_sputum":95,"pain_during_bowel_movements":77,"pain_in_anal_region":78,"bloody_stool":13,"irritation_in_anus":55,"cramps":28,"bruising":17,"swollen_legs":116,"swollen_blood_vessels":114,"prominent_veins_on_calf":85,"weight_gain":129,"cold_hands_and_feets":21,"mood_swings":66,"puffy_face_and_eyes":86,"enlarged_thyroid":37,"brittle_nails":16,"swollen_extremeties":115,"abnormal_menstruation":2,"muscle_weakness":71,"anxiety":6,"drying_and_tingling_lips":36,"slurred_speech":102,"palpitations":80,"knee_pain":58,"hip_joint_pain":47,"swelling_joints":112,"painful_walking":79,"movement_stiffness":67,"spinning_movements":104,"unsteadiness":121,"pus_filled_pimples":87,"blackheads":9,"scurring":96,"bladder_discomfort":10,"foul_smell_of":44,"urine":123,"continuous_feel_of_urine":25,"skin_peeling":100,"silver_like_dusting":98,"small_dents_in_nails":103,"inflammatory_nails":51,"blister":11,"red_sore_around_nose":90,"yellow_crust_ooze":131},"classes":["CRITICAL","HIGH","LOW","MEDIUM"],"coef":[[-0.004483236411521553,0.7850982089288642,0.724669220833927,-0.3796698710461652,1.2955133730078958,-0.012393225685042817,0.734486604048939,1.7813300350639165,1.0228348063949892,-0.005042167493138536,-0.005234596776738852,-0.004669514962577537,0.10527690729261333,-0.012115503112842992,2.105242615624135,0.6286215780436533,0.7542181452455572,-0.016367227648763617,-0.0056611383377554916,1.3613072316616401,1.1163695728246767,0.7276649254961479,1.7678903720124268,0.21650501987299137,1.1514404111374856,-0.004503200614240407,0.19507949707447636,0.9347249397217152,-0.016367227648763617,1.6121299433743244,-0.026678967495029755,0.39106241495252386,2.8360377706498148,-0.004483236411521553,-0.007165362645106273,0.7492431772692841,0.8120323534307847,0.7542181452455572,2.838786740039377,-0.0063390901849585055,-0.5158485493308882,1.0597464205557283,2.6400464291109587,-0.007165362645106273,-0.004610273984031341,0.07228248367188292,1.3938961609173728,-0.0027538719506984195,-0.007165362645106273,-0.04690889566210536,-0.34730697008101463,-0.0070937267981187315,-0.0033449693769799296,1.619182792665962,1.1524877345595177,-0.012115503112842992,-1.7411854700749372,1.073442201910543,-0.00293788733919393,-0.003026574728016624,1.8236119830990203,1.0296448945454457,-0.00828335834492003,0.21650501987299137,1.6250175318664244,2.589958144636841,0.39334458272740125,-0.0028043677959498576,-0.38744827692744355,1.3010322444462377,-0.007426234771003431,-0.032527675433816544,0.6216886392884783,-0.005058281457485767,-0.004627023621333731,-0.06090660394017516,1.783403974638263,-0.012115503112842992,-0.012115503112842992,-0.005490150223567119,0.8120323534307847,-0.0033449693769799296,-0.0063390901849585055,1.1965960859613087,-0.04690889566210536,-0.014846099774768359,0.7542181452455572,-0.005042167493138536,0.28937378641987155,0.28937378641987155,-0.004669514962577537,0.12026839742528102,0.21650501987299137,-0.07645782007373436,0.21650501987299137,1.0892953449673586,-0.005798484103349536,-0.013437428729335224,-0.006772405747433739,0.21650501987299137,-0.0070937267981187315,-0.004834381389892643,0.8120323534307847,-0.0070937267981187315,-0.0029720566686874408,-0.002541163983649175,-0.3299589559816313,1.7678903720124268,-0.016512593062524353,-0.026678967495029755,-0.4343854433394293,1.929891914931743,-0.005490150223567119,-0.007165362645106273,-0.013553111844235388,0.7542181452455572,-0.014846099774768359,0.21650501987299137,1.1641896830959697,1.1641896830959697,-0.0159629240656852,-0.0035872374769665657,-0.002541163983649175,-0.004610273984031341,-0.3280858223310511,0.9204086944142306,-0.013437428729335224,-0.001828632099677465,-0.015121965035042739,0.7276649254961479,-0.2672689607249327,-0.004669514962577537,1.6845208923562671,0.3693395403454509,0.07291960008847484],[-0.011041455745165872,1.2075839555729677,0.3994395802445363,0.18318855725221453,-1.2143912312898513,-0.5353213025241963,-0.6320652038391728,-1.7394375965848605,-1.0024746845530215,-0.020192589864235794,-0.019731249846827056,-0.24066838822842312,-0.10412850155506867,1.5672609979315173,-0.205273983691678,-0.4699915332270667,-0.31143797061123685,1.402111486757207,-0.1013783495564577,1.0540571790420312,0.10457983599557641,-0.29216129925435114,-1.6812138563965275,-0.18066075197646433,0.8549398266827896,-0.016408536774589318,-0.21337478692594467,1.2265540908802055,1.402111486757207,0.09413295068010953,-0.05295803523867431,1.1304323205079667,-1.0746243780476834,-0.011041455745165872,0.9684316548375735,-0.331607018795553,-0.7054479436828189,-0.31143797061123685,-0.4651173688678875,-0.10249579585692911,1.959383635757918,-0.2380678403148182,0.10830610914081287,0.9684316548375735,-0.018011158874788224,1.9318449876326038,2.5644167219989518,-0.010885045771262833,0.9684316548375735,0.7802128821283546,1.1205940040372546,-0.13922247592195175,-0.31733238485454623,-0.9098538481203288,1.3143296082341487,1.5672609979315173,-0.381520442801799,0.9127813097988253,-0.011590753332258128,-0.023599632916159546,0.6499385882711907,-0.6425325058317238,-0.33601610233151535,-0.18066075197646433,0.49831566142462363,-1.4716570465984966,0.6977785326671131,-0.04764450338665111,1.1067224265508626,0.02778588579128432,-0.13216191907711092,0.6580078252396238,1.3317648817423864,-0.015028977373068627,-0.012103588820008115,1.838236275359907,-1.7365789064217143,1.5672609979315173,1.5672609979315173,-0.05664733877538989,-0.7054479436828189,-0.31733238485454623,-0.10249579585692911,-1.023278196844893,0.7802128821283546,1.249226686180322,-0.31143797061123685,-0.020192589864235794,0.3026300014865606,0.3026300014865606,-0.24066838822842312,1.2463899082618712,-0.18066075197646433,1.4910904329841426,-0.18066075197646433,-0.9489453911705902,-0.02508316960974833,-0.04094316564868595,-0.13206939081766128,-0.18066075197646433,-0.13922247592195175,0.7681667585674812,-0.7054479436828189,-0.13922247592195175,-0.33051549593166646,-0.14144593362724459,1.4057151694197236,-1.6812138563965275,2.235450677284274,-0.05295803523867431,0.6978920534698951,-0.863108508538529,-0.05664733877538989,0.9684316548375735,1.137745720128162,-0.31143797061123685,1.249226686180322,-0.18066075197646433,-1.1418586401509168,-1.1418586401509168,1.570870416834706,-0.40650137039285067,-0.14144593362724459,-0.018011158874788224,1.3897701322055354,1.8486046314873645,-0.04094316564868595,-0.003117743069465414,-0.9209991718721708,-0.29216129925435114,1.0693219877255749,-0.24066838822842318,-1.1152795010869323,2.0399839962952773,1.9694170787291712],[0.7316204607298901,-1.541899257199223,-0.5339090624176902,-0.4342278572705416,-0.0003531550154757395,-1.028635201568155,-0.006082356516497424,-0.6178130419632629,-0.0006097139534883901,0.8239494741535035,0.6617391095495403,0.43772488093520384,-0.0002302402937002256,-1.3659474369505524,-0.82132457821812,0.13828267751507778,-0.29133878115587863,-0.7269747352099186,-2.4320666179212074,-3.6510204312499286,2.318288873516412,-0.2887015444423927,-0.0003700672003715331,-0.0006163017453998295,-1.4594850419796774,-2.0444275835723644,-1.609602519150446,-1.0596213899077114,-0.7269747352099186,-0.381810807661019,-0.8445418441995725,-0.6746185056115283,-1.7871937174368584,0.7316204607298901,-0.336081836752703,-1.0322570885421525,-0.00618494806169631,-0.29133878115587863,-1.0281159279751915,-0.6675965230251822,-1.1458030740245975,-0.3152033625172633,-2.3638236428178963,-0.336081836752703,0.7229552479393726,-2.57803425408044,-4.106368856218808,-0.1434859867197757,-0.336081836752703,-0.45665261379927574,-0.6694396422443061,0.11286655721415868,-0.25985519664885653,-0.4431545392028464,-0.9416359261210026,-1.3659474369505524,1.5815288984032416,-2.6658241315761044,-0.15135978014241805,-0.10302880017035194,-1.0510993719179937,-1.3413880256445616,-0.7884195198227913,-0.0006163017453998295,-0.45468122981334513,-0.020745880435574147,-0.5270400346247918,-0.7271372853659471,-0.959079566858883,-0.5512182822126733,-0.7335018453858404,-1.0780559171685253,-1.4968710905718043,-0.800519228962765,1.0840373196488005,-1.0095424876018355,-0.0009503892466860013,-1.3659474369505524,-1.3659474369505524,-0.8188991696067162,-0.00618494806169631,-0.25985519664885653,-0.6675965230251822,-0.07171653773780311,-0.45665261379927574,-0.6551855695886974,-0.29133878115587863,0.8239494741535035,-0.35941771684232865,-0.35941771684232865,0.43772488093520384,-0.021852470457638707,-0.0006163017453998295,-0.6992228950610848,-0.0006163017453998295,-0.0726330812554532,1.1802128289886469,-1.5934231962618421,0.45720731673030984,-0.0006163017453998295,0.11286655721415868,-1.2868829546705092,-0.00618494806169631,0.11286655721415868,-0.09987476773330539,1.3529174480645456,-1.126641591277982,-0.0003700672003715331,-3.11179923681932,-0.8445418441995725,0.283732132952899,-0.020679143051927418,-0.8188991696067162,-0.336081836752703,-0.6025983998193811,-0.29133878115587863,-0.6551855695886974,-0.0006163017453998295,-0.0006466886358452091,-0.0006466886358452091,-0.04028137889539418,-0.1033027235674661,1.3529174480645456,0.7229552479393726,-0.3830811867040355,-2.7412585798853795,-1.5934231962618421,-0.6071709209880415,2.8115974259425074,-0.2887015444423927,-0.7398335558867611,0.43772488093520334,-0.3495969678309586,-1.1667108900700276,-1.393202708721972],[-0.7160957685731993,-0.4507829073026111,-0.5901997386607786,0.6307091710644904,-0.08076898670256788,1.5763497297773972,-0.09633904369326991,0.5759206034842004,-0.01975040788847636,-0.7987147167961381,-0.6367732629259821,-0.192386977744203,-0.0009181654438455703,-0.18919805786811997,-1.0786440537143502,-0.2969127223316711,-0.1514413934784383,-0.6587695238985208,2.5391061058154123,1.2356560205462308,-3.5392382823366444,-0.1468020817994021,-0.08630644841552924,-0.03522796615112606,-0.5468951958405955,2.0653393209611983,1.6278978090019047,-1.1016576406941772,-0.6587695238985208,-1.3244520863934146,0.9241788469332762,-0.8468762298489604,0.02578032483473224,-0.7160957685731993,-0.6251844554397661,0.6146209300684199,-0.10039946168626959,-0.1514413934784383,-1.345553443196301,0.7764314090670708,-0.2977320124024239,-0.506475217723655,-0.3845288954338767,-0.6251844554397661,-0.7003338150805584,0.5739067827759559,0.14805597330243964,0.15712490444173433,-0.6251844554397661,-0.27665137266697654,-0.103847391711931,0.03344964550590471,0.580532550880381,-0.2661744053427878,-1.525181416672671,-0.18919805786811997,0.5411770144734718,0.6796006198667296,0.1658884208138679,0.12965500781452707,-1.4224511994522089,0.9542756369308356,1.1327189804992268,-0.03522796615112606,-1.6686519634777215,-1.0975552176027625,-0.5640830807697249,0.7775861565485482,0.2398054172354638,-0.7775998480248449,0.8730899992339559,0.45257576736271504,-0.4565824304590438,0.820606487793316,-1.067306707207453,-0.7677871838178952,-0.04587467896986412,-0.18919805786811997,-0.18919805786811997,0.8810366586056705,-0.10039946168626959,0.580532550880381,0.7764314090670708,-0.1016013513786093,-0.27665137266697654,-0.579195016816856,-0.1514413934784383,-0.7987147167961381,-0.23258607106410006,-0.23258607106410006,-0.192386977744203,-1.3448058352295154,-0.03522796615112606,-0.7154097178493163,-0.03522796615112606,-0.06771687254131296,-1.1493311752755542,1.64780379063986,-0.3183655201652235,-0.03522796615112606,0.03344964550590471,0.523550577492876,-0.10039946168626959,0.03344964550590471,0.43336232033366084,-1.20893035045366,0.050885377839895926,-0.08630644841552924,0.8928611525975688,0.9241788469332762,-0.5472387430833872,-1.0461042633412896,0.8810366586056705,-0.6251844554397661,-0.5215942084645425,-0.1514413934784383,-0.579195016816856,-0.03522796615112606,-0.02168435430920688,-0.02168435430920688,-1.5146261138736299,0.5133913314372819,-1.20893035045366,-0.7003338150805584,-0.6786031231704458,-0.02775474601623479,1.64780379063986,0.6121172961571851,-1.875476289035294,-0.1468020817994021,-0.0622194711138855,-0.1923869777442032,-0.21964442343837293,-1.2426126465706926,-0.6491339700956966]],"intercept":[-6.66711665051734,-2.943158372701974,6.02574211379726,3.5845329094222738]};
+const SYMPTOM_MAP = {"homa":"fever","homa kali":"high_fever","homa ya juu":"high_fever","homa ya chini":"low_fever","homa ya muda mrefu":"prolonged_fever","baridi na kutetemeka":"chills_rigors","kutetemeka":"rigors","jasho la usiku":"night_sweats","mwili wa joto":"fever","joto la mwili":"fever","degedege":"convulsions","kifafa":"convulsions","mshtuko":"convulsions","mshtuko wa moyo":"convulsions","kupoteza fahamu":"unconscious","kupoteza ufahamu":"unconscious","kuzimia":"unconscious","kutokuwa macho":"altered_consciousness","usingizi mzito":"altered_consciousness","kulala sana":"altered_consciousness","kutokujibu":"unresponsive","kutokujibu sauti":"unresponsive","shingo ngumu":"stiff_neck","ugumu wa shingo":"stiff_neck","maumivu ya shingo":"neck_pain","maumivu ya kichwa":"headache","kichwa kuuma":"headache","maumivu makali ya kichwa":"severe_headache","kizunguzungu":"dizziness","kuchanganyikiwa":"confusion","kutokuwa na akili":"confusion","maono ya uongo":"hallucinations","udhaifu wa upande mmoja":"focal_weakness","kutoweza kutembea":"unable_to_walk","kutoweza kusimama":"unable_to_stand","kutoweza kukaa":"unable_to_sit","unyonge":"prostration","udhaifu mkubwa":"prostration","kuchelewa kujibu":"altered_consciousness","macho kuepuka mwanga":"photophobia","kutopenda mwanga":"photophobia","fontaneli kuvimba":"bulging_fontanelle","kikohozi":"cough","kukohoa":"cough","kikohozi cha muda mrefu":"chronic_cough","kukohoa damu":"haemoptysis","damu kwenye makohozi":"haemoptysis","upungufu wa pumzi":"difficulty_breathing","kushindwa kupumua":"difficulty_breathing","kupumua kwa shida":"respiratory_distress","kupumua haraka":"fast_breathing","pumzi fupi fupi":"fast_breathing","kupumua polepole":"slow_breathing","kukohoa na damu":"haemoptysis","kifua kushuka ndani":"chest_indrawing","kushuka kwa kifua":"chest_indrawing","maumivu ya kifua":"chest_pain","kifua kuuma":"chest_pain","midomo ya buluu":"cyanosis","ulimi wa buluu":"cyanosis","ngozi ya buluu":"cyanosis","kupumua kwa kelele":"stridor","sauti ya kupumua":"stridor","kupiga kelele kupumua":"stridor","kupumua kwa nguvu":"respiratory_distress","kutoweza kuzungumza kwa kupumua":"severe_respiratory_distress","kutoweza kula kwa kupumua":"severe_respiratory_distress","kutoa sauti ya kugongana":"grunting","kupiga filimbi kupumua":"wheezing","mzio wa njia ya hewa":"wheezing","kuhara":"diarrhoea","tumbo kuendesha":"diarrhoea","kuhara damu":"bloody_stool","damu kwenye kinyesi":"bloody_stool","kinyesi chekundu":"bloody_stool","kuhara kwa muda mrefu":"persistent_diarrhoea","kuhara zaidi ya wiki mbili":"persistent_diarrhoea","kutapika":"vomiting","kutapika kila kitu":"vomits_everything","kutapika mara kwa mara":"persistent_vomiting","kutapika damu":"haematemesis","damu kwenye matapishi":"haematemesis","kichefuchefu":"nausea","tumbo kuuma":"abdominal_pain","maumivu ya tumbo":"abdominal_pain","maumivu makali ya tumbo":"severe_abdominal_pain","tumbo gumu":"abdominal_rigidity","tumbo kujaa":"abdominal_distension","tumbo kuvimba":"abdominal_distension","kushindwa kunywa":"unable_to_drink","kutoweza kunywa":"unable_to_drink","kushindwa kunyonyesha":"unable_to_breastfeed","kutoweza kunyonya":"unable_to_breastfeed","ini kuvimba":"hepatomegaly","wengu kuvimba":"splenomegaly","ini na wengu kuvimba":"hepatosplenomegaly","macho ya njano":"jaundice","ngozi ya njano":"jaundice","manjano macho":"jaundice","mkojo mweusi":"dark_urine","mkojo wa kahawia":"dark_urine","kuvimbiwa":"constipation","kutokupata haja kubwa":"constipation","macho yaliyozama":"sunken_eyes","macho ya ndani":"sunken_eyes","kiu kikubwa":"extreme_thirst","kiu sana":"extreme_thirst","ngozi isiyo na unyevu":"skin_turgor_reduced","ngozi kuumia ukishika":"skin_turgor_reduced","mdomo mkavu":"dry_mouth","midomo ya ukame":"dry_mouth","mkojo kidogo":"reduced_urine","kukojoa kidogo":"reduced_urine","kutokojoa":"no_urine_output","wasiwasi na kukera":"restless_irritable","kukera sana":"restless_irritable","miguu baridi":"cold_extremities","mikono baridi":"cold_extremities","mapigo ya moyo haraka":"tachycardia","moyo kupiga haraka":"tachycardia","mapigo dhaifu":"weak_pulse","pigo dhaifu":"weak_pulse","kutokudumisha damu":"uncontrolled_bleeding","kutoka damu nyingi":"uncontrolled_bleeding","damu nyingi":"uncontrolled_bleeding","shinikizo la damu chini":"low_blood_pressure","shinikizo la damu juu":"high_blood_pressure","vidole vya buluu":"cyanosis","weupe wa viganja":"severe_pallor","viganja vya rangi nyeupe":"severe_pallor","rangi ya ngozi kupotea":"severe_pallor","upele mdogo mdogo":"petechial_rash","upele wa damu":"purpuric_rash","vidonda vya ngozi":"skin_lesions","uvimbe wa miguu miwili":"bilateral_oedema","miguu kuvimba":"bilateral_oedema","mikono kuvimba":"oedema","uso kuvimba":"oedema","kuuma mahali palipoumwa na nyoka":"bite_site_pain","uvimbe mahali palipoumwa":"bite_site_swelling","vidonda vya kuoza":"necrosis","ngozi kufa":"necrosis","mabubujiko":"blistering","maumivu ya viungo":"joint_pain","viungo kuuma":"joint_pain","maumivu ya misuli":"myalgia","misuli kuuma":"myalgia","maumivu ya mgongo":"back_pain","mgongo kuuma":"back_pain","mfupa kuvunjika":"fracture","mfupa uliovunjika":"fracture","mfupa wazi":"compound_fracture","kutoweza kutumia mkono":"limb_dysfunction","kutoweza kutumia mguu":"limb_dysfunction","kupoteza uzito":"weight_loss","uzito kupungua":"weight_loss","kukua polepole":"failure_to_thrive","kutokukua vizuri":"failure_to_thrive","kukonda sana":"severe_wasting","mwili kukonda":"severe_wasting","kutokula":"anorexia","kutaka kula":"appetite_loss","hamu ya kula kupotea":"appetite_loss","nywele za rangi ya njano":"kwashiorkor_signs","nywele nyekundu":"kwashiorkor_signs","kukohoa zaidi ya wiki mbili":"chronic_cough","jasho usiku":"night_sweats","uzito kupotea":"weight_loss","homa ya muda mrefu na kikohozi":"tb_symptoms","kuwasiliana na mtu mwenye kifua kikuu":"tb_contact","mawasiliano na mgonjwa wa tb":"tb_contact","malaria":"malaria_confirmed","vipimo vya malaria chanya":"malaria_confirmed","homa ya malaria":"malaria_confirmed","baridi ya malaria":"malaria_confirmed","ugonjwa wa malaria":"malaria_confirmed","mimba":"pregnancy","mjamzito":"pregnancy","kutoka damu ukiwa mjamzito":"antepartum_bleeding","damu wakati wa mimba":"antepartum_bleeding","kutoka damu baada ya kujifungua":"postpartum_haemorrhage","damu nyingi baada ya kujifungua":"postpartum_haemorrhage","degedege ukiwa mjamzito":"eclampsia","mshtuko wakati wa mimba":"eclampsia","kichwa kuuma na macho ya ukungu ukiwa mjamzito":"pre_eclampsia","shinikizo la damu juu ukiwa mjamzito":"pre_eclampsia","kuzaa kwa muda mrefu":"prolonged_labour","uchungu wa kuzaa zaidi ya masaa kumi na mbili":"prolonged_labour","placenta kutoka baadaye":"retained_placenta","kondo la nyuma kutoka baadaye":"retained_placenta","homa baada ya kujifungua":"puerperal_sepsis","harufu mbaya ya uke baada ya kujifungua":"puerperal_sepsis","maumivu ya tumbo baada ya kujifungua":"puerperal_sepsis","damu kidogo ukiwa mjamzito":"antepartum_bleeding","maumivu ya mkojo":"dysuria","kukojoa kwa uchungu":"dysuria","kukojoa mara kwa mara":"urinary_frequency","damu kwenye mkojo":"haematuria","mkojo wenye damu":"haematuria","kuumia":"trauma","ajali":"trauma","kuanguka":"fall","kupigwa":"assault","jeraha":"wound","jeraha kubwa":"significant_wound","jeraha dogo":"minor_wound","kuungua":"burns","moto kuungua":"burns","mdomo wa moto":"burns","jeraha la kichwa":"head_injury","kichwa kuumia":"head_injury","michubuko":"bruising","kuvimba baada ya kuumia":"swelling_post_trauma","damu isiyosimama":"uncontrolled_bleeding","kuumwa na nyoka":"snake_bite","nyoka kuuma":"snake_bite","sumu ya nyoka":"snake_envenomation","uvimbe baada ya kuumwa na nyoka":"bite_site_swelling","maumivu ya kuumwa na nyoka":"bite_site_pain","kushindwa kupumua baada ya kuumwa na nyoka":"neurotoxic_envenomation","kope kushuka baada ya kuumwa na nyoka":"ptosis","damu isiyokauka baada ya kuumwa na nyoka":"coagulopathy","uvimbe mkubwa":"bite_site_swelling","uvimbe wa haraka":"bite_site_swelling","hawezi kunywa":"unable_to_drink","anatapika kila kitu":"vomits_everything","amepoteza fahamu":"unconscious","ana degedege":"convulsions","hana nguvu kabisa":"prostration","pumzi ya haraka sana":"fast_breathing","kifua kushuka":"chest_indrawing","shingo ngumu na homa":"stiff_neck_with_fever"};
+const CRITICAL_OVERRIDE = ["unconscious","convulsions","unable_to_drink","unable_to_breastfeed","vomits_everything","severe_respiratory_distress","cyanosis","uncontrolled_bleeding","stridor","eclampsia","purpuric_rash","cold_extremities"];
+const SYMPTOM_DESC = {"fever":"Fever","high_fever":"High fever","low_fever":"Low-grade fever","prolonged_fever":"Prolonged fever (more than 7 days)","chills_rigors":"Chills and rigors","rigors":"Rigors (shaking chills)","night_sweats":"Night sweats","convulsions":"Convulsions / seizures (IMCI danger sign)","unconscious":"Loss of consciousness (IMCI danger sign)","altered_consciousness":"Altered consciousness / drowsiness","unresponsive":"Unresponsive to voice or touch","stiff_neck":"Stiff neck (meningitis sign)","neck_pain":"Neck pain","headache":"Headache","severe_headache":"Severe headache","dizziness":"Dizziness","confusion":"Confusion / disorientation","hallucinations":"Hallucinations","focal_weakness":"Weakness on one side of body","unable_to_walk":"Unable to walk","unable_to_stand":"Unable to stand","unable_to_sit":"Unable to sit up","prostration":"Prostration / severe weakness (danger sign)","photophobia":"Sensitivity to light (meningitis sign)","bulging_fontanelle":"Bulging fontanelle in infant (meningitis sign)","cough":"Cough","chronic_cough":"Chronic cough more than 2 weeks (TB sign)","haemoptysis":"Coughing blood (haemoptysis)","difficulty_breathing":"Difficulty breathing","respiratory_distress":"Respiratory distress","severe_respiratory_distress":"Severe respiratory distress (danger sign)","fast_breathing":"Fast breathing / tachypnoea (pneumonia sign)","slow_breathing":"Slow breathing","chest_indrawing":"Chest indrawing (severe pneumonia sign)","chest_pain":"Chest pain","cyanosis":"Cyanosis - blue lips or tongue (danger sign)","stridor":"Stridor - noisy breathing (danger sign)","grunting":"Grunting sound when breathing","wheezing":"Wheezing","diarrhoea":"Diarrhoea","bloody_stool":"Blood in stool - dysentery","persistent_diarrhoea":"Persistent diarrhoea more than 14 days","vomiting":"Vomiting","vomits_everything":"Vomiting everything (IMCI danger sign)","persistent_vomiting":"Persistent / repeated vomiting","haematemesis":"Vomiting blood","nausea":"Nausea","abdominal_pain":"Abdominal pain","severe_abdominal_pain":"Severe abdominal pain","abdominal_rigidity":"Rigid abdomen (peritonitis sign)","abdominal_distension":"Abdominal distension / bloating","unable_to_drink":"Unable to drink (IMCI danger sign)","unable_to_breastfeed":"Unable to breastfeed (IMCI danger sign)","hepatomegaly":"Enlarged liver","splenomegaly":"Enlarged spleen","hepatosplenomegaly":"Enlarged liver and spleen (malaria sign)","jaundice":"Jaundice - yellow eyes or skin","dark_urine":"Dark urine (jaundice / malaria sign)","constipation":"Constipation","sunken_eyes":"Sunken eyes (dehydration sign)","extreme_thirst":"Extreme thirst (dehydration sign)","skin_turgor_reduced":"Slow skin pinch - dehydration sign","dry_mouth":"Dry mouth (dehydration sign)","reduced_urine":"Reduced urine output","no_urine_output":"No urine output","restless_irritable":"Restless or irritable (dehydration sign)","cold_extremities":"Cold hands or feet (shock sign - CRITICAL)","tachycardia":"Rapid heartbeat (tachycardia)","weak_pulse":"Weak pulse (shock sign)","uncontrolled_bleeding":"Uncontrolled / heavy bleeding (danger sign)","low_blood_pressure":"Low blood pressure","high_blood_pressure":"High blood pressure (hypertension)","severe_pallor":"Severe pallor - white palms (severe anaemia sign)","petechial_rash":"Petechial rash - small red spots","purpuric_rash":"Purpuric rash (meningococcaemia sign - CRITICAL)","skin_lesions":"Skin lesions / sores","bilateral_oedema":"Bilateral leg oedema (kwashiorkor / heart failure sign)","oedema":"Swelling / oedema","bite_site_pain":"Pain at bite site (snake bite)","bite_site_swelling":"Swelling at bite site (snake bite)","necrosis":"Tissue death / necrosis at bite site","blistering":"Blistering at wound site","joint_pain":"Joint pain (malaria / typhoid sign)","myalgia":"Muscle pain (myalgia)","back_pain":"Back pain","fracture":"Fracture / broken bone","compound_fracture":"Compound fracture (bone piercing skin)","limb_dysfunction":"Unable to use limb","weight_loss":"Weight loss (TB / malnutrition / HIV sign)","failure_to_thrive":"Failure to thrive in child","severe_wasting":"Severe wasting / extreme thinness (SAM)","anorexia":"Loss of appetite / anorexia","appetite_loss":"Loss of appetite","kwashiorkor_signs":"Kwashiorkor signs (yellow or reddish hair)","tb_symptoms":"TB symptom cluster (fever + cough)","tb_contact":"Contact with TB patient","malaria_confirmed":"Confirmed malaria (positive test)","pregnancy":"Pregnancy","antepartum_bleeding":"Vaginal bleeding during pregnancy","postpartum_haemorrhage":"Heavy bleeding after delivery (PPH - CRITICAL)","eclampsia":"Convulsions in pregnancy (eclampsia - CRITICAL)","pre_eclampsia":"Pre-eclampsia (severe headache + high BP in pregnancy)","prolonged_labour":"Prolonged labour more than 12 hours","retained_placenta":"Retained placenta after delivery","puerperal_sepsis":"Puerperal sepsis (fever + foul discharge after delivery)","dysuria":"Painful urination (UTI sign)","urinary_frequency":"Frequent urination","haematuria":"Blood in urine (haematuria)","trauma":"Trauma / injury","fall":"Fall / fall from height","assault":"Assault / physical attack","wound":"Wound / laceration","significant_wound":"Significant wound","minor_wound":"Minor wound","burns":"Burns","head_injury":"Head injury","bruising":"Bruising / contusion","swelling_post_trauma":"Swelling after trauma","snake_bite":"Snake bite","snake_envenomation":"Snake envenomation","neurotoxic_envenomation":"Neurotoxic snake envenomation (respiratory paralysis)","ptosis":"Drooping eyelids (neurotoxic snake sign)","coagulopathy":"Bleeding disorder after snake bite","stiff_neck_with_fever":"Stiff neck with fever (meningitis - CRITICAL)"};
+const EN_EXAMPLES = [{"text":"itching skin_rash fatigue lethargy high_fever headache loss_of_appetite mild_fever swelled_lymph_nodes malaise red_spots_over_body","trueSeverity":"CRITICAL","disease":"Chicken pox"},{"text":"skin_rash fatigue lethargy high_fever headache loss_of_appetite mild_fever swelled_lymph_nodes malaise red_spots_over_body","trueSeverity":"CRITICAL","disease":"Chicken pox"},{"text":"vomiting indigestion loss_of_appetite abdominal_pain passage_of_gases internal_itching","trueSeverity":"HIGH","disease":"Peptic ulcer diseae"},{"text":"fatigue restlessness lethargy irregular_sugar_level blurred_and_distorted_vision obesity excessive_hunger increased_appetite polyuria","trueSeverity":"HIGH","disease":"Diabetes"},{"text":"continuous_sneezing shivering watering_from_eyes","trueSeverity":"MEDIUM","disease":"Allergy"},{"text":"itching vomiting yellowish_skin nausea abdominal_pain yellowing_of_eyes","trueSeverity":"MEDIUM","disease":"Chronic cholestasis"},{"text":"itching stomach_pain burning_micturition spotting_ urination","trueSeverity":"LOW","disease":"Drug Reaction"},{"text":"vomiting sunken_eyes dehydration","trueSeverity":"LOW","disease":"Gastroenteritis"}];
+const SW_EXAMPLES = [
+  { text: "mgonjwa ana homa na degedege", note: "fever + convulsions" },
+  { text: "ana kikohozi na kupumua haraka", note: "cough + fast breathing" },
+  { text: "ana kuhara na macho yaliyozama", note: "diarrhoea + sunken eyes" },
+  { text: "maumivu ya kichwa na shingo ngumu", note: "headache + stiff neck" },
+  { text: "kuumwa na nyoka na uvimbe mkubwa", note: "snake bite + swelling" },
+  { text: "mjamzito ana damu nyingi", note: "pregnancy + heavy bleeding" },
+  { text: "ana homa tu", note: "fever alone" },
+  { text: "ana kikohozi kidogo", note: "mild cough" },
+];
+
+const TIER_ORDER = ["CRITICAL", "HIGH", "MEDIUM", "LOW"];
+const TIER_SW = { CRITICAL: "HATARI", HIGH: "HARAKA", MEDIUM: "WASTANI", LOW: "SALAMA" };
+
+let mode = "en";
+
+// ---------- rule_based.py port ----------
+function extractSymptoms(text) {
+  text = text.toLowerCase().trim();
+  const found = [];
+  const keywords = Object.keys(SYMPTOM_MAP).sort((a, b) => b.length - a.length);
+  for (const kw of keywords) {
+    if (text.includes(kw)) {
+      const code = SYMPTOM_MAP[kw];
+      if (!found.includes(code)) found.push(code);
+    }
+  }
+  return found;
+}
+
+function classifyRuleBased(text) {
+  if (!text || !text.trim()) {
+    return { severity: "LOW", symptoms: [], reason: "Hakuna dalili zilizoingizwa — tafadhali ingiza dalili za mgonjwa." };
+  }
+  const symptoms = extractSymptoms(text);
+  if (symptoms.length === 0) {
+    return { severity: "LOW", symptoms: [], reason: "Dalili hazikutambuliwa — tafadhali eleza dalili kwa undani zaidi." };
+  }
+  const has = (s) => symptoms.includes(s);
+  const hasAny = (arr) => arr.some((s) => symptoms.includes(s));
+
+  for (const s of symptoms) {
+    if (CRITICAL_OVERRIDE.includes(s)) {
+      return { severity: "CRITICAL", symptoms, reason: `Dalili ya hatari imegunduliwa: ${s}` };
+    }
+  }
+  if (has("fever") && has("stiff_neck")) return { severity: "CRITICAL", symptoms, reason: "Homa na shingo ngumu — meningitis inashukiwa" };
+  if (has("fever") && has("altered_consciousness")) return { severity: "CRITICAL", symptoms, reason: "Homa na kupoteza fahamu — malaria ya ubongo inashukiwa" };
+  if (has("fever") && has("severe_pallor")) return { severity: "CRITICAL", symptoms, reason: "Homa na udhaifu mkubwa — upungufu wa damu unaohusiana na malaria" };
+  if (has("diarrhoea") && has("sunken_eyes")) return { severity: "CRITICAL", symptoms, reason: "Kuhara na macho yaliyozama — ukosefu mkubwa wa maji" };
+  if (has("snake_bite") && hasAny(["neurotoxic_envenomation", "coagulopathy"])) return { severity: "CRITICAL", symptoms, reason: "Kuumwa na nyoka na sumu kali — dharura ya kimatibabu" };
+  if (has("pregnancy") && hasAny(["antepartum_bleeding", "eclampsia", "uncontrolled_bleeding"])) return { severity: "CRITICAL", symptoms, reason: "Dharura ya uzazi — tafadhali piga simu hospitali mara moja" };
+
+  if (has("stiff_neck")) return { severity: "HIGH", symptoms, reason: "Shingo ngumu — meningitis haiwezi kutengwa, peleka hospitali" };
+  if (has("fast_breathing") && has("cough")) return { severity: "HIGH", symptoms, reason: "Kupumua haraka na kikohozi — nimonia inashukiwa" };
+  if (has("fast_breathing")) return { severity: "HIGH", symptoms, reason: "Kupumua haraka — tatizo la kupumua" };
+  if (has("fever") && has("fast_breathing")) return { severity: "HIGH", symptoms, reason: "Homa na kupumua haraka — nimonia inashukiwa" };
+  if (has("fever") && has("malaria_confirmed")) return { severity: "HIGH", symptoms, reason: "Malaria iliyothibitishwa na homa" };
+  if (has("chronic_cough") && has("weight_loss") && has("night_sweats")) return { severity: "HIGH", symptoms, reason: "Dalili tatu za TB — peleka kwa kipimo cha makohozi" };
+  if (has("diarrhoea") && has("restless_irritable")) return { severity: "HIGH", symptoms, reason: "Kuhara na wasiwasi — upungufu wa maji wa wastani" };
+  if (has("bloody_stool") && has("fever")) return { severity: "HIGH", symptoms, reason: "Kuhara damu na homa — kuhara damu (dysentery)" };
+  if (has("snake_bite") && has("bite_site_swelling")) return { severity: "HIGH", symptoms, reason: "Kuumwa na nyoka na uvimbe — sumu ya eneo" };
+  if (has("pregnancy") && has("severe_headache")) return { severity: "HIGH", symptoms, reason: "Maumivu makali ya kichwa ukiwa mjamzito — pre-eclampsia inashukiwa" };
+  if (has("head_injury") && has("confusion")) return { severity: "HIGH", symptoms, reason: "Jeraha la kichwa na mkanganyiko — tatizo la kichwa" };
+
+  if (has("fever") && has("headache")) return { severity: "MEDIUM", symptoms, reason: "Homa na maumivu ya kichwa — chunguza malaria au typhoid" };
+  if (has("diarrhoea") && has("vomiting")) return { severity: "MEDIUM", symptoms, reason: "Kuhara na kutapika — angalia upungufu wa maji" };
+  if (has("cough") && has("fever")) return { severity: "MEDIUM", symptoms, reason: "Kikohozi na homa — uwezekano wa maambukizi ya chini ya njia ya hewa" };
+  if (has("chronic_cough")) return { severity: "MEDIUM", symptoms, reason: "Kikohozi cha muda mrefu — chunguza TB" };
+  if (has("abdominal_pain") && has("fever")) return { severity: "MEDIUM", symptoms, reason: "Maumivu ya tumbo na homa — chunguza zaidi" };
+  if (has("bloody_stool")) return { severity: "MEDIUM", symptoms, reason: "Damu kwenye kinyesi — mgonjwa thabiti, chunguza" };
+  if (has("snake_bite")) return { severity: "MEDIUM", symptoms, reason: "Kuumwa na nyoka — angalia kwa masaa 6-24" };
+
+  if (has("fever")) return { severity: "LOW", symptoms, reason: "Homa tu — fuatilia hali ya mgonjwa" };
+  if (has("cough")) return { severity: "LOW", symptoms, reason: "Kikohozi tu — uwezekano wa maambukizi ya juu ya njia ya hewa" };
+  if (has("headache")) return { severity: "LOW", symptoms, reason: "Maumivu ya kichwa tu — fuatilia" };
+  if (has("diarrhoea")) return { severity: "LOW", symptoms, reason: "Kuhara bila dalili za hatari — mpe ORS na zinki" };
+
+  return { severity: "LOW", symptoms, reason: "Hakuna dalili kubwa zilizogunduliwa" };
+}
+
+// ---------- logistic_regression.py / svm.py port (real trained weights) ----------
+function tokenize(text) {
+  return (text.toLowerCase().match(/\b\w\w+\b/g) || []);
+}
+function predictLR(text) {
+  const tokens = tokenize(text);
+  const counts = {};
+  for (const t of tokens) if (t in LR.vocab) counts[t] = (counts[t] || 0) + 1;
+  const scores = LR.classes.map((c, ci) => {
+    let s = LR.intercept[ci];
+    for (const tok in counts) s += LR.coef[ci][LR.vocab[tok]] * counts[tok];
+    return s;
+  });
+  const maxS = Math.max(...scores);
+  const exps = scores.map((s) => Math.exp(s - maxS));
+  const sumExp = exps.reduce((a, b) => a + b, 0);
+  const probs = LR.classes.map((c, i) => ({ tier: c, prob: exps[i] / sumExp }));
+  const best = probs.reduce((a, b) => (b.prob > a.prob ? b : a));
+  const bestClassIdx = LR.classes.indexOf(best.tier);
+  const contributions = Object.keys(counts).map((tok) => ({
+    token: tok,
+    count: counts[tok],
+    weight: LR.coef[bestClassIdx][LR.vocab[tok]],
+  })).sort((a, b) => Math.abs(b.weight) - Math.abs(a.weight));
+  return {
+    severity: best.tier,
+    probs,
+    matched: Object.keys(counts),
+    unmatched: tokens.filter((t) => !(t in LR.vocab)),
+    contributions,
+  };
+}
+
+// ---------- rendering ----------
+function fmtPct(p) { return (p * 100).toFixed(1) + "%"; }
+function tierClass(t) { return "tier-" + t.toLowerCase(); }
+
+function renderExamples() {
+  const enWrap = document.getElementById("examples-en");
+  enWrap.innerHTML = "";
+  EN_EXAMPLES.forEach((ex) => {
+    const b = document.createElement("button");
+    b.className = "example-chip";
+    b.type = "button";
+    b.innerHTML = ex.text.length > 46 ? ex.text.slice(0, 44) + "…" : ex.text;
+    b.innerHTML += `<span class="tier-tag">${ex.trueSeverity}</span>`;
+    b.title = ex.text + "  (true label: " + ex.trueSeverity + ", " + ex.disease + ")";
+    b.onclick = () => { document.getElementById("input-en").value = ex.text; runEnglish(); };
+    enWrap.appendChild(b);
+  });
+
+  const swWrap = document.getElementById("examples-sw");
+  swWrap.innerHTML = "";
+  SW_EXAMPLES.forEach((ex) => {
+    const b = document.createElement("button");
+    b.className = "example-chip";
+    b.type = "button";
+    b.textContent = ex.text;
+    b.title = ex.note;
+    b.onclick = () => { document.getElementById("input-sw").value = ex.text; runSwahili(); };
+    swWrap.appendChild(b);
+  });
+}
+
+function renderResultEnglish(text, result, ms) {
+  const el = document.getElementById("result");
+  const sev = result.severity;
+  const probRows = TIER_ORDER.map((t) => {
+    const p = result.probs.find((x) => x.tier === t).prob;
+    return `
+      <div class="prob-row">
+        <div class="prob-label" style="color:var(--${t.toLowerCase()})">${TIER_SW[t]}</div>
+        <div class="prob-track"><div class="prob-fill" style="width:${(p * 100).toFixed(1)}%; background:var(--${t.toLowerCase()})"></div></div>
+        <div class="prob-value">${fmtPct(p)}</div>
+      </div>`;
+  }).join("");
+
+  const matchedChips = result.matched.length
+    ? result.matched.map((t) => `<span class="symptom-chip">${t}</span>`).join("")
+    : `<span class="empty-state" style="padding:0;font-size:0.82rem">No tokens matched the model's 135-word vocabulary.</span>`;
+  const unmatchedChips = result.unmatched.length
+    ? result.unmatched.map((t) => `<span class="symptom-chip oov">${t} (unseen)</span>`).join("")
+    : "";
+
+  const contribRows = result.contributions.slice(0, 8).map((c) => `
+    <tr>
+      <td class="tok">${c.token}${c.count > 1 ? " ×" + c.count : ""}</td>
+      <td>${c.weight >= 0 ? "+" : ""}${c.weight.toFixed(3)}</td>
+    </tr>`).join("");
+
+  el.innerHTML = `
+    <div class="result-head">
+      <div class="badge-wrap">
+        <span class="severity-badge" style="background:var(--${sev.toLowerCase()}-soft); color:var(--${sev.toLowerCase()}-ink)">
+          ${TIER_SW[sev]} <span class="en">${sev}</span>
+        </span>
+      </div>
+      <div class="latency">predicted in <span class="num">${ms.toFixed(2)}</span> ms · live in your browser</div>
+    </div>
+    <div class="prob-bars">${probRows}</div>
+    <div class="symptom-chips">${matchedChips}${unmatchedChips}</div>
+    <details class="explain">
+      <summary>How this was computed (real model weights)</summary>
+      <p class="explain-note">Logistic Regression, 135-token vocabulary. Each matched token contributes a signed weight toward the predicted tier (<code>${sev}</code>); scores across all 4 tiers are combined with softmax to get the percentages above. Top contributing tokens:</p>
+      <table class="explain-table"><thead><tr><th>Token</th><th>Weight toward ${sev}</th></tr></thead><tbody>${contribRows || '<tr><td colspan="2">No vocabulary tokens matched — prediction is the intercept-only (class-balance) default.</td></tr>'}</tbody></table>
+    </details>
+  `;
+}
+
+function renderResultSwahili(text, result, ms) {
+  const el = document.getElementById("result");
+  const sev = result.severity;
+  const chips = result.symptoms.length
+    ? result.symptoms.map((code) => `<span class="symptom-chip">${SYMPTOM_DESC[code] || code}</span>`).join("")
+    : "";
+  el.innerHTML = `
+    <div class="result-head">
+      <div class="badge-wrap">
+        <span class="severity-badge" style="background:var(--${sev.toLowerCase()}-soft); color:var(--${sev.toLowerCase()}-ink)">
+          ${TIER_SW[sev]} <span class="en">${sev}</span>
+        </span>
+      </div>
+      <div class="latency">predicted in <span class="num">${ms.toFixed(2)}</span> ms · live in your browser</div>
+    </div>
+    <p class="reason-line" lang="sw">${result.reason}</p>
+    ${result.symptoms.length ? `<div class="chip-row-label" style="margin-bottom:0.4rem">Matched dalili (symptom codes)</div><div class="symptom-chips">${chips}</div>` : `<p class="explain-note">No Swahili phrase from the 232-entry keyword table matched this text — that is rule_based.py's actual fallback behaviour, the same mechanism that produced its 6.08% score against the English test set.</p>`}
+  `;
+}
+
+function runEnglish() {
+  const text = document.getElementById("input-en").value;
+  if (!text.trim()) { document.getElementById("result").innerHTML = '<div class="empty-state">Type a symptom above to see a live prediction.</div>'; return; }
+  const t0 = performance.now();
+  const result = predictLR(text);
+  const t1 = performance.now();
+  renderResultEnglish(text, result, t1 - t0);
+}
+
+function runSwahili() {
+  const text = document.getElementById("input-sw").value;
+  if (!text.trim()) { document.getElementById("result").innerHTML = '<div class="empty-state">Type a symptom above to see a live prediction.</div>'; return; }
+  const t0 = performance.now();
+  const result = classifyRuleBased(text);
+  const t1 = performance.now();
+  renderResultSwahili(text, result, t1 - t0);
+}
+
+function setMode(m) {
+  mode = m;
+  document.getElementById("tab-en").classList.toggle("active", m === "en");
+  document.getElementById("tab-sw").classList.toggle("active", m === "sw");
+  document.getElementById("tab-en").setAttribute("aria-selected", m === "en");
+  document.getElementById("tab-sw").setAttribute("aria-selected", m === "sw");
+  document.getElementById("panel-en").hidden = m !== "en";
+  document.getElementById("panel-sw").hidden = m !== "sw";
+  if (m === "en") runEnglish(); else runSwahili();
+}
+
+document.getElementById("tab-en").onclick = () => setMode("en");
+document.getElementById("tab-sw").onclick = () => setMode("sw");
+document.getElementById("input-en").addEventListener("input", runEnglish);
+document.getElementById("input-sw").addEventListener("input", runSwahili);
+
+renderExamples();
+document.getElementById("input-en").value = EN_EXAMPLES[0].text;
+runEnglish();
+</script>
