@@ -78,26 +78,35 @@ class LogisticRegressionClassifier(BaseClassifier):
         print("[LogisticRegression] Training complete.")
         
     def classify(self, symptom_text: str) -> dict:
+        # Empty/whitespace-only input: same convention as rule_based.py
+        # and classifier/svm.py -- don't run the model on nothing, just
+        # report LOW with no detected symptoms.
+        if not symptom_text or not symptom_text.strip():
+            return self.build_result(
+                "LOW", [], "Hakuna dalili zilizoingizwa — tafadhali ingiza dalili za mgonjwa."
+            )
+
         if not self.is_trained:
             self.train()
-        
+
         cleaned_text = symptom_text.lower().strip()
         X = [cleaned_text]
         pred_encoded = self.pipeline.predict(X)[0]
         proba = self.pipeline.predict_proba(X)[0]
-        
+
         severity = self.label_encoder.inverse_transform([pred_encoded])[0]
-        confidence = np.max(proba) * 100
-        reason = f"Model predicted {severity} with {confidence:.1f}% confidence"
-        
+        confidence = float(np.max(proba))  # 0.0-1.0, as base.py's build_result() requires
+        reason = f"Model predicted {severity} with {confidence * 100:.1f}% confidence"
+
         allowed = {"CRITICAL", "HIGH", "MEDIUM", "LOW"}
         if severity not in allowed:
             severity = "LOW"
-        
+
         return self.build_result(
             severity=severity,
-            symptoms=symptom_text,
-            reason=reason
+            symptoms=symptom_text.split(),
+            reason=reason,
+            confidence=confidence
         )
 
 

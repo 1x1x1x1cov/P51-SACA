@@ -55,13 +55,14 @@ class SVMClassifier(BaseClassifier):
         """
 
         # Find the project root.
-        # svm.py is expected to be inside:
-        #
-        #     project/
-        #         classifier/
-        #             svm.py
-        #
-        self.project_root = Path(__file__).resolve().parent.parent
+        # Fixed 2026-09-15: this file sits directly at the repo root
+        # (project/svm_classifier.py), not one level down inside
+        # classifier/ -- the .parent.parent this comment used to
+        # describe was copied over from classifier/svm.py (which
+        # really is one level down) and pointed one directory above
+        # the actual repo, raising FileNotFoundError on saca_train.csv
+        # for anyone who actually ran this as-is.
+        self.project_root = Path(__file__).resolve().parent
 
         self.train_path = self.project_root / "saca_train.csv"
 
@@ -229,7 +230,9 @@ def evaluate_model():
     The test dataset is NOT used during hyperparameter tuning.
     """
 
-    project_root = Path(__file__).resolve().parent.parent
+    # Same fix as __init__ above -- this file is at the repo root, one
+    # level up was wrong.
+    project_root = Path(__file__).resolve().parent
 
     train_path = project_root / "saca_train.csv"
     test_path = project_root / "saca_test.csv"

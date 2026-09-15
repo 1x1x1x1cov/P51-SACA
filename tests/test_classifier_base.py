@@ -68,9 +68,18 @@ class TestBuildResultRejectsInvalidSeverities:
 
 class TestBuildResultOutputShape:
     def test_output_contains_all_required_keys(self):
+        """Fixed 2026-09-15: base.py's build_result() has always
+        returned a 'confidence' key (see its own docstring -- ML
+        approaches pass a real value, others leave it None); this test's
+        expected_keys just never included it, so it was failing on any
+        classifier's output before this file was touched, unrelated to
+        the LR rollout."""
         c = DummyClassifier()
         result = c.build_result("HIGH", ["fever", "cough"], "test reason")
-        expected_keys = {"severity", "severity_sw", "symptoms", "reason", "disclaimer", "classifier"}
+        expected_keys = {
+            "severity", "severity_sw", "symptoms", "reason", "disclaimer",
+            "classifier", "confidence",
+        }
         assert set(result.keys()) == expected_keys
 
     def test_severity_sw_matches_severity_mapping(self):
