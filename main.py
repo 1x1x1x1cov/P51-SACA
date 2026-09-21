@@ -4,8 +4,11 @@ from classifier.rule_based import RuleBasedClassifier
 from database import init_db, save_session, get_all_sessions
 from keywords import SYMPTOM_MAP, SYMPTOM_DESCRIPTIONS
 from fastapi.middleware.cors import CORSMiddleware
+from ammu_api import router as ammu_router
+from fastapi.responses import FileResponse
 
 app = FastAPI(title="SACA - Smart Adaptive Clinical Assistant")
+app.include_router(ammu_router)
 
 # Active classifier for this endpoint. Swap this out (or make it
 # selectable per-request) once the other four approaches land.
@@ -69,3 +72,7 @@ def get_keywords():
 @app.get("/")
 def root():
     return {"message": "SACA API is running"}
+
+@app.get("/ammu")
+def ammu_page():
+    return FileResponse("ammu.html")
