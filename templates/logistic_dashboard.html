@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SACA Clinical Assistant</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 40px;
+            background-color: #f4f6f8;
+            color: #222;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        h1 {
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            resize: vertical;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            background-color: #2563eb;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1d4ed8;
+        }
+
+        .result {
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+
+        .severity {
+            font-size: 34px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .LOW {
+            background-color: #dcfce7;
+            border-left: 8px solid #16a34a;
+        }
+
+        .MEDIUM {
+            background-color: #fef9c3;
+            border-left: 8px solid #eab308;
+        }
+
+        .HIGH {
+            background-color: #ffedd5;
+            border-left: 8px solid #f97316;
+        }
+
+        .CRITICAL {
+            background-color: #fee2e2;
+            border-left: 8px solid #dc2626;
+        }
+
+        .info {
+            background-color: #f1f5f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .fallback {
+            background-color: #fff7ed;
+            border-left: 5px solid #f97316;
+        }
+
+        .success {
+            background-color: #f0fdf4;
+            border-left: 5px solid #16a34a;
+        }
+
+        .symptom {
+            display: inline-block;
+            background-color: #e5e7eb;
+            padding: 6px 10px;
+            border-radius: 6px;
+            margin: 4px;
+        }
+
+        .confidence {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <h1>SACA Clinical Assistant</h1>
+
+    <p class="subtitle">
+        Logistic Regression Clinical Severity Classifier
+    </p>
+
+
+    <!-- INPUT -->
+
+    <div class="card">
+
+        <form method="POST">
+
+            <label for="symptom_text">
+                <strong>Patient symptoms</strong>
+            </label>
+
+            <br><br>
+
+            <textarea
+                id="symptom_text"
+                name="symptom_text"
+                placeholder="Example: The patient has a high fever, vomiting and abdominal pain."
+            >{{ symptom_text }}</textarea>
+
+            <br>
+
+            <button type="submit">
+                Analyse Symptoms
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- RESULT -->
+
+    {% if result %}
+
+    <div class="result {{ result['severity'] }}">
+
+        <div class="severity">
+            {{ result['severity'] }}
+        </div>
+
+
+        {% if result.get('confidence') is not none %}
+
+        <div class="confidence">
+
+            Confidence:
+            {{ "%.1f"|format(result['confidence'] * 100) }}%
+
+        </div>
+
+        {% endif %}
+
+
+        <p>
+
+            <strong>Reason:</strong>
+
+            {{ result['reason'] }}
+
+        </p>
+
+
+        <!-- Extraction status -->
+
+        {% if result.get('fallback_used') %}
+
+        <div class="info fallback">
+
+            <strong>Offline fallback used</strong>
+
+            <p>
+                Symptom extraction was unavailable or failed.
+                The original patient text was passed directly
+                to the Logistic Regression classifier.
+            </p>
+
+        </div>
+
+        {% else %}
+
+        <div class="info success">
+
+            <strong>Symptom extraction successful</strong>
+
+            {% if result.get('extracted_text') %}
+
+            <p>
+
+                <strong>Extracted symptoms:</strong>
+
+                {{ result['extracted_text'] }}
+
+            </p>
+
+            {% endif %}
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- Detected symptoms -->
+
+        {% if result.get('symptoms') %}
+
+        <div class="info">
+
+            <strong>Classifier input:</strong>
+
+            <br><br>
+
+            {% for symptom in result['symptoms'] %}
+
+            <span class="symptom">
+                {{ symptom }}
+            </span>
+
+            {% endfor %}
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+
+</html>

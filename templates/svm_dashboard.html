@@ -1,0 +1,713 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SACA Clinical Assistant</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 40px;
+            background-color: #f4f6f8;
+            color: #222;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        /* -------------------------------------------------
+           LANGUAGE SWITCH
+        ------------------------------------------------- */
+
+        .language-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 15px;
+        }
+
+        .language-switch {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .language-switch label {
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .language-switch select {
+            padding: 8px 12px;
+            font-size: 14px;
+            border: 1px solid #aaa;
+            border-radius: 6px;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        /* -------------------------------------------------
+           HEADER
+        ------------------------------------------------- */
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #555;
+            margin-bottom: 35px;
+        }
+
+        /* -------------------------------------------------
+           CARDS
+        ------------------------------------------------- */
+
+        .card {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* -------------------------------------------------
+           TEXT AREA
+        ------------------------------------------------- */
+
+        textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #aaa;
+            border-radius: 8px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        /* -------------------------------------------------
+           BUTTON
+        ------------------------------------------------- */
+
+        button {
+            margin-top: 15px;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            background-color: #0066cc;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #004c99;
+        }
+
+        /* -------------------------------------------------
+           SEVERITY BOX
+        ------------------------------------------------- */
+
+        .severity-box {
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 25px;
+            border: 3px solid;
+        }
+
+        .severity-box h2 {
+            margin: 0 0 10px 0;
+            font-size: 32px;
+        }
+
+        .severity-box p {
+            margin: 5px 0;
+            font-size: 18px;
+        }
+
+        /* -------------------------------------------------
+           LOW
+        ------------------------------------------------- */
+
+        .severity-low {
+            background-color: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+
+        /* -------------------------------------------------
+           MEDIUM
+        ------------------------------------------------- */
+
+        .severity-medium {
+            background-color: #fff3cd;
+            border-color: #ffc107;
+            color: #856404;
+        }
+
+        /* -------------------------------------------------
+           HIGH
+        ------------------------------------------------- */
+
+        .severity-high {
+            background-color: #ffe0b2;
+            border-color: #ff9800;
+            color: #8a4b00;
+        }
+
+        /* -------------------------------------------------
+           CRITICAL
+        ------------------------------------------------- */
+
+        .severity-critical {
+            background-color: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+
+        /* -------------------------------------------------
+           SECTION TITLES
+        ------------------------------------------------- */
+
+        .section-title {
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+        }
+
+        /* -------------------------------------------------
+           SYMPTOMS
+        ------------------------------------------------- */
+
+        .symptoms {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .symptom {
+            background-color: #e9ecef;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        /* -------------------------------------------------
+           REASON
+        ------------------------------------------------- */
+
+        .reason {
+            font-size: 17px;
+            line-height: 1.6;
+        }
+
+        /* -------------------------------------------------
+           DISCLAIMER
+        ------------------------------------------------- */
+
+        .disclaimer {
+            background-color: #f1f1f1;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #555;
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+    <!-- =================================================
+         LANGUAGE SELECTOR
+    ================================================== -->
+
+    <div class="language-container">
+
+        <div class="language-switch">
+
+            <label for="language">
+                Language:
+            </label>
+
+            <select id="language" onchange="changeLanguage()">
+
+                <option value="en">
+                    English
+                </option>
+
+                <option value="sw">
+                    Kiswahili
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         HEADER
+    ================================================== -->
+
+    <h1 id="title">
+        SACA Clinical Assistant
+    </h1>
+
+    <p class="subtitle" id="subtitle">
+        Symptom-based clinical severity assessment
+    </p>
+
+
+    <!-- =================================================
+         INPUT
+    ================================================== -->
+
+    <div class="card">
+
+        <h2 class="section-title" id="assessment-title">
+            Symptom Assessment
+        </h2>
+
+
+        <form method="POST">
+
+            <label
+                for="symptom_text"
+                id="symptom-label"
+            >
+                Enter patient's symptoms:
+            </label>
+
+
+            <textarea
+                id="symptom_text"
+                name="symptom_text"
+                placeholder="Enter symptoms here..."
+            >{{ symptom_text }}</textarea>
+
+
+            <button
+                type="submit"
+                id="analyse-button"
+            >
+                Analyse Symptoms
+            </button>
+
+        </form>
+
+    </div>
+
+
+    {% if result %}
+
+
+    <!-- =================================================
+         SEVERITY
+    ================================================== -->
+
+    <div class="severity-box
+        {% if result.severity == 'LOW' %}
+            severity-low
+        {% elif result.severity == 'MEDIUM' %}
+            severity-medium
+        {% elif result.severity == 'HIGH' %}
+            severity-high
+        {% elif result.severity == 'CRITICAL' %}
+            severity-critical
+        {% endif %}
+    ">
+
+        <!-- English severity -->
+
+        <h2
+            id="severity-english"
+            data-severity="{{ result.severity }}"
+        >
+            {{ result.severity }}
+        </h2>
+
+
+        <!-- Swahili severity -->
+
+        <p id="severity-swahili">
+
+            {% if result.severity == 'LOW' %}
+
+                CHINI
+
+            {% elif result.severity == 'MEDIUM' %}
+
+                WASTANI
+
+            {% elif result.severity == 'HIGH' %}
+
+                JUU
+
+            {% elif result.severity == 'CRITICAL' %}
+
+                HATARI KUBWA
+
+            {% endif %}
+
+        </p>
+
+    </div>
+
+
+    <!-- =================================================
+         RECOGNISED SYMPTOMS
+    ================================================== -->
+
+    <div class="card">
+
+        <h2
+            class="section-title"
+            id="recognised-title"
+        >
+            Recognised Symptoms
+        </h2>
+
+
+        <div class="symptoms">
+
+            {% for symptom in result.symptoms %}
+
+                <span class="symptom">
+
+                    {{ symptom.replace('_', ' ') }}
+
+                </span>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         ASSESSMENT
+    ================================================== -->
+
+    <div class="card">
+
+        <h2
+            class="section-title"
+            id="assessment-heading"
+        >
+            Assessment
+        </h2>
+
+
+        <p
+            class="reason"
+            id="assessment-reason"
+        >
+
+            {{ result.reason }}
+
+        </p>
+
+    </div>
+
+
+    <!-- =================================================
+         DISCLAIMER
+    ================================================== -->
+
+    <div
+        class="disclaimer"
+        id="disclaimer"
+    >
+
+        <strong id="important">
+            Important:
+        </strong>
+
+        <span id="disclaimer-text">
+            {{ result.disclaimer }}
+        </span>
+
+    </div>
+
+
+    {% endif %}
+
+
+</div>
+
+
+<!-- =====================================================
+     LANGUAGE JAVASCRIPT
+====================================================== -->
+
+<script>
+
+    /*
+     * SACA Language Translation
+     *
+     * English = en
+     * Swahili = sw
+     */
+
+    const translations = {
+
+        en: {
+
+            title:
+                "SACA Clinical Assistant",
+
+            subtitle:
+                "Symptom-based clinical severity assessment",
+
+            assessmentTitle:
+                "Symptom Assessment",
+
+            symptomLabel:
+                "Enter patient's symptoms:",
+
+            placeholder:
+                "Enter symptoms here...",
+
+            analyse:
+                "Analyse Symptoms",
+
+            recognised:
+                "Recognised Symptoms",
+
+            assessment:
+                "Assessment",
+
+            important:
+                "Important:",
+
+            severityLow:
+                "LOW",
+
+            severityMedium:
+                "MEDIUM",
+
+            severityHigh:
+                "HIGH",
+
+            severityCritical:
+                "CRITICAL"
+
+        },
+
+
+        sw: {
+
+            title:
+                "Msaidizi wa Kliniki wa SACA",
+
+            subtitle:
+                "Tathmini ya kiwango cha ukali wa dalili",
+
+            assessmentTitle:
+                "Tathmini ya Dalili",
+
+            symptomLabel:
+                "Ingiza dalili za mgonjwa:",
+
+            placeholder:
+                "Ingiza dalili hapa...",
+
+            analyse:
+                "Changanua Dalili",
+
+            recognised:
+                "Dalili Zilizotambuliwa",
+
+            assessment:
+                "Tathmini",
+
+            important:
+                "Muhimu:",
+
+            severityLow:
+                "CHINI",
+
+            severityMedium:
+                "WASTANI",
+
+            severityHigh:
+                "JUU",
+
+            severityCritical:
+                "HATARI KUBWA"
+
+        }
+
+    };
+
+
+    /*
+     * Change the language of the dashboard.
+     */
+
+    function changeLanguage() {
+
+        const language =
+            document.getElementById("language").value;
+
+
+        const text =
+            translations[language];
+
+
+        /*
+         * Header
+         */
+
+        document.getElementById("title").textContent =
+            text.title;
+
+        document.getElementById("subtitle").textContent =
+            text.subtitle;
+
+
+        /*
+         * Symptom input
+         */
+
+        document.getElementById("assessment-title").textContent =
+            text.assessmentTitle;
+
+        document.getElementById("symptom-label").textContent =
+            text.symptomLabel;
+
+        document.getElementById("symptom_text").placeholder =
+            text.placeholder;
+
+        document.getElementById("analyse-button").textContent =
+            text.analyse;
+
+
+        /*
+         * Other sections
+         */
+
+        document.getElementById("recognised-title").textContent =
+            text.recognised;
+
+        document.getElementById("assessment-heading").textContent =
+            text.assessment;
+
+        document.getElementById("important").textContent =
+            text.important;
+
+
+        /*
+         * Severity
+         *
+         * The SVM still returns:
+         *
+         * LOW
+         * MEDIUM
+         * HIGH
+         * CRITICAL
+         *
+         * Only the display language changes.
+         */
+
+        const severityElement =
+            document.getElementById("severity-english");
+
+        const swahiliElement =
+            document.getElementById("severity-swahili");
+
+
+        if (severityElement && swahiliElement) {
+
+            const severity =
+                severityElement.dataset.severity;
+
+
+            if (language === "en") {
+
+                severityElement.style.display = "block";
+
+                swahiliElement.style.display = "none";
+
+            }
+
+            else {
+
+                severityElement.style.display = "block";
+
+                swahiliElement.style.display = "block";
+
+            }
+
+        }
+
+
+        /*
+         * Save selected language.
+         */
+
+        localStorage.setItem(
+            "sacaLanguage",
+            language
+        );
+
+
+        /*
+         * Change HTML language attribute.
+         */
+
+        document.documentElement.lang =
+            language === "sw" ? "sw" : "en";
+    }
+
+
+    /*
+     * Load saved language when the page opens.
+     */
+
+    window.onload = function () {
+
+        const savedLanguage =
+            localStorage.getItem("sacaLanguage") || "en";
+
+
+        document.getElementById("language").value =
+            savedLanguage;
+
+
+        changeLanguage();
+
+    };
+
+</script>
+
+
+</body>
+
+</html>
+```
