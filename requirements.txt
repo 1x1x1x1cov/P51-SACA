@@ -4,3 +4,7 @@ pandas
 pytest
 httpx
 scikit-learn
+numpy
+joblib
+groq
+python-dotenv

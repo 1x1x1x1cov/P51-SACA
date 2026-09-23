@@ -2,14 +2,36 @@
 
 from fastapi import APIRouter
 from pydantic import BaseModel
-from classifier.rule_based import RuleBasedClassifier
+from classifier.logistic_regression import LogisticRegressionClassifier
 from ammu_safety import make_llm_reply, check_reply, write_log
 
 # this is my own router just for AMMU
 router = APIRouter()
 
-# AMMU uses the same rule based classifier
-classifier = RuleBasedClassifier()
+# AMMU uses the same classifier as /classify -- Logistic Regression is the
+# team's sole classifier as of the 2026-09-11 decision (see main.py's
+# active_classifier comment / the project handoff doc). This used to be
+# RuleBasedClassifier(); switched to LogisticRegressionClassifier() on
+# 2026-09-23 so AMMU isn't running a retired classifier independently of
+# the rest of the app.
+#
+# KNOWN BEHAVIOR CHANGE vs. rule_based: LogisticRegressionClassifier.classify()
+# returns symptoms as symptom_text.split() -- i.e. every raw whitespace-
+# separated token from the input, not a filtered list of matched symptom
+# keywords the way rule_based's extract_symptoms() did. Two concrete effects:
+#   1. list_symptoms() below will now read out ordinary Swahili words
+#      (conjunctions, stopwords, etc.) as if they were symptoms, since
+#      nothing filters the token list down to a known vocabulary.
+#   2. The "len(result['symptoms']) == 0" checks further down, which used
+#      to trigger AMMU's "I didn't catch that, can you say more" retry
+#      flow whenever rule_based found no recognizable keyword, are now
+#      effectively unreachable -- LR's .split() means any non-blank input
+#      produces a non-empty symptoms list, so that retry path no longer
+#      fires for genuinely unclear input.
+# Neither is a safety issue (severity still comes from the trained model,
+# and ammu_safety.check_reply() still gates the LLM phrasing), but both
+# are real UX regressions worth a follow-up pass once the team has bandwidth.
+classifier = LogisticRegressionClassifier()
 
 # ammu replies for each level
 replies = {
