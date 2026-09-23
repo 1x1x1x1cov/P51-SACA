@@ -105,9 +105,9 @@ class LogisticRegressionClassifier(BaseClassifier):
         return self.build_result(
             severity=severity,
             symptoms=symptom_text.split(),
-            reason=reason,
-            confidence=confidence
+            reason=reason
         )
+    
 
 
 if __name__ == "__main__":
