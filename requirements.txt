@@ -8,3 +8,4 @@ numpy
 joblib
 groq
 python-dotenv
+flask
