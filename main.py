@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from classifier.rule_based import RuleBasedClassifier
+from classifier.logistic_regression import LogisticRegressionClassifier
 
 from database import (
     init_db,
@@ -21,7 +21,7 @@ app.include_router(ammu_router)
 
 
 # Active classifier for this endpoint.
-active_classifier = RuleBasedClassifier()
+active_classifier = LogisticRegressionClassifier()
 
 
 app.add_middleware(
