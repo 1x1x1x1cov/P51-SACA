@@ -1,12 +1,30 @@
+import os
+import sys
+
 from flask import Flask, render_template, request
 
 from classifier.pipeline import SACAPipeline
 from classifier.llm_extractor import extract_symptoms
 
 
-app = Flask(__name__)
+def resource_path(relative_path):
+    if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
+        base_path = sys._MEIPASS
+    else:
+        base_path = os.path.dirname(os.path.abspath(__file__))
 
-# Create the SACA classification pipeline
+    return os.path.join(base_path, relative_path)
+
+
+template_folder = resource_path("templates")
+
+
+app = Flask(
+    __name__,
+    template_folder=template_folder
+)
+
+
 pipeline = SACAPipeline(
     extractor=extract_symptoms
 )
@@ -39,4 +57,6 @@ def dashboard():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(
+        debug=True
+    )
