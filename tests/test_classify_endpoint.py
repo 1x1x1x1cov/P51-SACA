@@ -98,9 +98,9 @@ class TestClassifyEndpointValidInput:
     def test_symptoms_returned_are_the_input_tokens(self, client):
         """Unlike rule_based.py, LR doesn't map input to a recognised
         symptom vocabulary -- `symptoms` is just the input, tokenised."""
-        response = client.post("/classify", json={"symptom_text": "fever cough breathlessness"})
+        response = client.post("/classify", json={"symptom_text": "high_fever vomiting abdominal_pain"})
         data = response.json()
-        assert data["symptoms"] == ["fever", "cough", "breathlessness"]
+        assert data["symptoms"] == ["high_fever", "vomiting", "abdominal_pain"]
 
 
 class TestClassifyEndpointEmptyInput:
@@ -133,16 +133,18 @@ class TestClassifyEndpointGibberishInput:
         response = client.post("/classify", json={"symptom_text": "asdkjfh qlwkejr zzzxxx"})
         assert response.status_code == 200
 
-    def test_gibberish_text_returns_low_severity(self, client):
-        """Verified directly: the trained model predicts LOW (0.9198
-        confidence) on this input. `symptoms` is NOT expected to be []
-        here -- see module docstring: unlike rule_based.py, LR reports
-        whatever was typed, recognised or not, it doesn't filter to a
-        known vocabulary."""
+    def test_gibberish_text_is_not_assessed_and_never_low(self, client):
+        """Input guard (replaces the old "gibberish -> LOW" test, which
+        asserted the D1 defect: a feature vector of all zeros was rated LOW
+        at ~95%). Nothing in the input is a known symptom, so the endpoint
+        must say it could not assess it, not claim the person is fine."""
         response = client.post("/classify", json={"symptom_text": "random gibberish text here zzxxqq"})
         data = response.json()
-        assert data["severity"] == "LOW"
-        assert data["symptoms"] == ["random", "gibberish", "text", "here", "zzxxqq"]
+        assert data["assessed"] is False
+        assert data["severity"] != "LOW"
+        assert data["confidence"] is None
+        assert data["symptoms"] == []
+        assert "zzxxqq" in data["unrecognised"]
 
     def test_unrecognised_text_handled_without_crashing(self, client):
         """Input the model wasn't trained on shouldn't crash the endpoint,
@@ -190,4 +192,4 @@ class TestClassifyEndpointDatabaseWrites:
         response = client.get("/sessions")
         sessions = response.json()
         assert sessions[0]["symptom_text"] == "second request"
-        assert sessions[1]["symptom_text"] == "first request"
+        assert sessions[1]["symptom_text"] == "first request"

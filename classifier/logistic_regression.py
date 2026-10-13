@@ -17,6 +17,26 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from classifier.base import BaseClassifier
 
 
+# Swahili function / template words that sit in the CountVectorizer
+# vocabulary only because the Swahili training rows are built from three
+# sentence templates ("Nina dalili hizi: ...", "Ninapata dalili zifuatazo: ...",
+# "Dalili ninazopata ni ..."). They carry no symptom meaning, so they must not
+# count as "recognised symptoms" -- otherwise "na" or "dalili" alone would pass
+# the input guard in classify().
+SW_FUNCTION_WORDS = frozenset({
+    "na", "ya", "wa", "kwa", "ni", "au", "la", "za", "cha", "vya", "kwenye",
+    "kuwa", "dalili", "hizi", "nina", "ninapata", "ninazopata", "zifuatazo",
+    "ana", "una", "yangu", "wangu",
+})
+
+# Severity returned when the input could not be assessed. build_result() only
+# accepts the four real severities (and ammu_api.py indexes its replies by
+# them), so an unassessed input is reported as HIGH -- the safe direction: it
+# tells the user to see a health worker -- with assessed=False so every caller
+# can tell it apart from a real model prediction.
+UNASSESSED_SEVERITY = "HIGH"
+
+
 class LogisticRegressionClassifier(BaseClassifier):
 
     name = "logistic_regression"
@@ -82,14 +102,41 @@ class LogisticRegressionClassifier(BaseClassifier):
         # and classifier/svm.py -- don't run the model on nothing, just
         # report LOW with no detected symptoms.
         if not symptom_text or not symptom_text.strip():
-            return self.build_result(
+            result = self.build_result(
                 "LOW", [], "Hakuna dalili zilizoingizwa — tafadhali ingiza dalili za mgonjwa."
             )
+            result.update(assessed=False, unrecognised=[])
+            return result
 
         if not self.is_trained:
             self.train()
 
         cleaned_text = symptom_text.lower().strip()
+
+        # --- Input guard -------------------------------------------------
+        # The model was trained on a fixed vocabulary (symptom codes such as
+        # "high_fever" plus Swahili symptom phrases). A word outside it adds
+        # nothing to the feature vector, and an all-zero vector is predicted
+        # LOW at ~95%. So "I cannot breathe and have crushing chest pain" or
+        # "ana homa na degedege" used to come back as LOW. Two rules:
+        #   1. no recognised symptom word at all  -> not assessed
+        #   2. some words not understood AND the model says LOW -> not assessed
+        #      (LOW is the "safe to wait" claim; never make it while ignoring
+        #      part of what the person said. MEDIUM and above still pass, with
+        #      the unread words returned in `unrecognised` for the UI to show.)
+        recognised, unrecognised = self._read_input(cleaned_text)
+
+        if not recognised:
+            return self._unassessed(
+                symptoms=[],
+                unrecognised=unrecognised,
+                reason=(
+                    "Hakuna dalili iliyotambulika. Tafadhali muone mtoa huduma wa afya. "
+                    "/ No known symptom was recognised, so no severity was assessed. "
+                    "Please see a health worker."
+                ),
+            )
+
         X = [cleaned_text]
         pred_encoded = self.pipeline.predict(X)[0]
         proba = self.pipeline.predict_proba(X)[0]
@@ -102,12 +149,51 @@ class LogisticRegressionClassifier(BaseClassifier):
         if severity not in allowed:
             severity = "LOW"
 
-        return self.build_result(
+        if severity == "LOW" and unrecognised:
+            return self._unassessed(
+                symptoms=recognised,
+                unrecognised=unrecognised,
+                reason=(
+                    "Maneno mengine hayakueleweka: " + ", ".join(unrecognised) + ". "
+                    "Tafadhali muone mtoa huduma wa afya. "
+                    "/ Some words were not understood, so a LOW result was not given. "
+                    "Please see a health worker."
+                ),
+            )
+
+        result = self.build_result(
             severity=severity,
             symptoms=symptom_text.split(),
             reason=reason,
             confidence=confidence
         )
+        result.update(assessed=True, unrecognised=unrecognised)
+        return result
+
+    def _read_input(self, cleaned_text):
+        """Split the input into (recognised, unrecognised) content words.
+
+        Uses the fitted vectorizer's own analyzer, so tokenisation, accent
+        stripping and English stop-word removal match training exactly.
+        Swahili function words are ignored on both sides.
+        """
+        vectorizer = self.pipeline.named_steps["vectorizer"]
+        vocabulary = vectorizer.vocabulary_
+        tokens = [t for t in vectorizer.build_analyzer()(cleaned_text)
+                  if t not in SW_FUNCTION_WORDS]
+        recognised = [t for t in tokens if t in vocabulary]
+        unrecognised = [t for t in tokens if t not in vocabulary]
+        return recognised, unrecognised
+
+    def _unassessed(self, symptoms, unrecognised, reason):
+        result = self.build_result(
+            severity=UNASSESSED_SEVERITY,
+            symptoms=symptoms,
+            reason=reason,
+            confidence=None,
+        )
+        result.update(assessed=False, unrecognised=unrecognised)
+        return result
 
 
 if __name__ == "__main__":
