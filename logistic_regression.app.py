@@ -49,11 +49,23 @@ def dashboard():
                 symptom_text
             )
 
+    else:
+
+        symptom_text = request.args.get(
+            "symptom_text",
+            ""
+        )
+
     return render_template(
         "logistic_dashboard.html",
         result=result,
         symptom_text=symptom_text
     )
+
+
+@app.route("/body-map")
+def body_map():
+    return render_template("body_map.html")
 
 
 if __name__ == "__main__":

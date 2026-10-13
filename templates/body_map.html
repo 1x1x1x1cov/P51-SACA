@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Body Map</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 40px;
+            background-color: #f4f6f8;
+            color: #222;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+
+        .row .card {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .map {
+            text-align: center;
+        }
+
+        svg {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .part {
+            fill: #f8fafc;
+            stroke: #334155;
+            stroke-width: 2;
+            cursor: pointer;
+        }
+
+        .part:hover {
+            fill: #dbeafe;
+        }
+
+        .part.active {
+            fill: #93c5fd;
+        }
+
+        .label {
+            font-size: 13px;
+            fill: #334155;
+            cursor: pointer;
+        }
+
+        .inside {
+            font-size: 12px;
+            text-anchor: middle;
+            pointer-events: none;
+        }
+
+        .chip {
+            display: inline-block;
+            margin: 4px;
+            padding: 8px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 20px;
+            background-color: #f1f5f9;
+            cursor: pointer;
+        }
+
+        .chip.selected {
+            background-color: #2563eb;
+            border-color: #2563eb;
+            color: white;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            background-color: #2563eb;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1d4ed8;
+        }
+
+        .white-btn {
+            background-color: white;
+            color: #2563eb;
+            border: 2px solid #2563eb;
+        }
+
+        .white-btn:hover {
+            background-color: #eff6ff;
+        }
+
+        .warning {
+            background-color: #fee2e2;
+            border-left: 5px solid #dc2626;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        a {
+            color: #2563eb;
+        }
+
+        @media (max-width: 700px) {
+            body {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <a href="/">Back to home</a>
+
+    <h1>SACA Clinical Assistant</h1>
+    <p>Tap the body part where you have a problem, then pick what you feel.</p>
+
+    <div class="row">
+
+        <div class="card map">
+            <h2>Body Map - Tap Where it Hurts</h2>
+
+            <svg viewBox="0 0 400 640">
+                <ellipse class="part" id="head" cx="200" cy="58" rx="30" ry="38" onclick="showPart('head', 'Head')"/>
+                <path class="part" id="neck" d="M186,94 L214,94 L217,120 L183,120 Z" onclick="showPart('neck', 'Neck')"/>
+                <path class="part" id="shoulders" d="M183,120 L217,120 Q248,122 262,134 Q270,143 270,158 L240,158 Q200,150 160,158 L130,158 Q130,143 138,134 Q152,122 183,120 Z" onclick="showPart('shoulders', 'Shoulders')"/>
+                <path class="part" id="chest" d="M160,158 Q200,150 240,158 L244,242 Q200,250 156,242 Z" onclick="showPart('chest', 'Chest')"/>
+                <path class="part" id="abdomen" d="M156,242 Q200,250 244,242 L246,300 Q248,330 238,348 L200,362 L162,348 Q152,330 154,300 Z" onclick="showPart('abdomen', 'Abdomen')"/>
+
+                <path class="part" id="right_arm" d="M130,158 L160,158 Q158,200 148,252 L136,338 L108,338 L116,252 Q120,200 130,158 Z" onclick="showPart('right_arm', 'Right Arm')"/>
+                <path class="part" id="right_hand" d="M108,338 L136,338 Q142,360 136,384 Q124,400 110,390 Q100,370 108,338 Z" onclick="showPart('right_hand', 'Right Hand')"/>
+                <path class="part" id="right_leg" d="M162,348 L200,362 L197,440 L192,576 L164,576 L158,440 Q152,390 162,348 Z" onclick="showPart('right_leg', 'Right Leg')"/>
+                <path class="part" id="right_foot" d="M164,576 L192,576 L194,604 Q188,620 158,618 Q148,612 162,598 Z" onclick="showPart('right_foot', 'Right Foot')"/>
+
+                <path class="part" id="left_arm" d="M270,158 L240,158 Q242,200 252,252 L264,338 L292,338 L284,252 Q280,200 270,158 Z" onclick="showPart('left_arm', 'Left Arm')"/>
+                <path class="part" id="left_hand" d="M292,338 L264,338 Q258,360 264,384 Q276,400 290,390 Q300,370 292,338 Z" onclick="showPart('left_hand', 'Left Hand')"/>
+                <path class="part" id="left_leg" d="M238,348 L200,362 L203,440 L208,576 L236,576 L242,440 Q248,390 238,348 Z" onclick="showPart('left_leg', 'Left Leg')"/>
+                <path class="part" id="left_foot" d="M236,576 L208,576 L206,604 Q212,620 242,618 Q252,612 238,598 Z" onclick="showPart('left_foot', 'Left Foot')"/>
+
+                <text class="label inside" x="200" y="62">Head</text>
+                <text class="label inside" x="200" y="111" style="font-size: 10px;">Neck</text>
+                <text class="label inside" x="200" y="142">Shoulders</text>
+                <text class="label inside" x="200" y="198">Chest</text>
+                <text class="label inside" x="200" y="213" style="font-size: 8px;">(cough, chest pain)</text>
+                <text class="label inside" x="200" y="295">Abdomen</text>
+
+                <text class="label" x="108" y="235" text-anchor="end" onclick="showPart('right_arm', 'Right Arm')">Right Arm</text>
+                <text class="label" x="98" y="372" text-anchor="end" onclick="showPart('right_hand', 'Right Hand')">Right Hand</text>
+                <text class="label" x="150" y="480" text-anchor="end" onclick="showPart('right_leg', 'Right Leg')">Right Leg</text>
+                <text class="label" x="146" y="630" text-anchor="end" onclick="showPart('right_foot', 'Right Foot')">Right Foot</text>
+                <text class="label" x="292" y="235" onclick="showPart('left_arm', 'Left Arm')">Left Arm</text>
+                <text class="label" x="302" y="372" onclick="showPart('left_hand', 'Left Hand')">Left Hand</text>
+                <text class="label" x="250" y="480" onclick="showPart('left_leg', 'Left Leg')">Left Leg</text>
+                <text class="label" x="254" y="630" onclick="showPart('left_foot', 'Left Foot')">Left Foot</text>
+            </svg>
+
+            <br>
+            <button class="white-btn" onclick="showPart('general', 'Whole Body')">Whole body (fever, tiredness)</button>
+        </div>
+
+        <div class="card">
+            <h2 id="part-name">Choose a body part</h2>
+            <p>Tap a part of the body, then pick your symptoms.</p>
+
+            <div id="chips"></div>
+
+            <hr>
+
+            <p><strong>Your symptoms:</strong></p>
+            <p id="picked">Nothing picked yet.</p>
+
+            <button onclick="goToSymptoms()">Go to symptoms</button>
+            <button class="white-btn" onclick="clearAll()" style="margin-left: 8px;">Clear</button>
+
+            <div class="warning">
+                <strong>Emergency?</strong> If you have bad chest pain, trouble breathing
+                or you passed out, call your local emergency number now.
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    var symptoms = {
+        head: {
+            headache: "Headache",
+            dizziness: "Dizziness",
+            blurred_and_distorted_vision: "Blurry vision",
+            redness_of_eyes: "Red eyes",
+            pain_behind_the_eyes: "Pain behind the eyes",
+            runny_nose: "Runny nose",
+            sinus_pressure: "Sinus pressure",
+            loss_of_smell: "Loss of smell",
+            ulcers_on_tongue: "Ulcers on tongue",
+            slurred_speech: "Slurred speech"
+        },
+        neck: {
+            neck_pain: "Neck pain",
+            stiff_neck: "Stiff neck",
+            throat_irritation: "Sore throat",
+            patches_in_throat: "Patches in throat",
+            swelled_lymph_nodes: "Swollen glands",
+            enlarged_thyroid: "Swelling at front of neck"
+        },
+        shoulders: {
+            joint_pain: "Joint pain",
+            muscle_pain: "Muscle pain",
+            movement_stiffness: "Stiffness",
+            back_pain: "Upper back pain"
+        },
+        chest: {
+            chest_pain: "Chest pain",
+            breathlessness: "Hard to breathe",
+            cough: "Cough",
+            phlegm: "Phlegm",
+            blood_in_sputum: "Coughing up blood",
+            fast_heart_rate: "Fast heart rate",
+            palpitations: "Heart pounding"
+        },
+        abdomen: {
+            stomach_pain: "Stomach pain",
+            abdominal_pain: "Belly pain",
+            vomiting: "Vomiting",
+            nausea: "Feeling sick",
+            diarrhoea: "Diarrhoea",
+            constipation: "Constipation",
+            acidity: "Heartburn",
+            indigestion: "Indigestion",
+            swelling_of_stomach: "Swollen stomach",
+            burning_micturition: "Burning when peeing"
+        },
+        arm: {
+            muscle_pain: "Muscle pain",
+            joint_pain: "Joint pain",
+            weakness_in_limbs: "Weakness",
+            skin_rash: "Skin rash",
+            itching: "Itching"
+        },
+        hand: {
+            swelling_joints: "Swollen joints",
+            cold_hands_and_feets: "Cold hands",
+            weakness_in_limbs: "Weakness",
+            skin_peeling: "Peeling skin",
+            brittle_nails: "Brittle nails"
+        },
+        leg: {
+            knee_pain: "Knee pain",
+            hip_joint_pain: "Hip pain",
+            swollen_legs: "Swollen legs",
+            painful_walking: "Pain when walking",
+            muscle_weakness: "Muscle weakness",
+            cramps: "Cramps",
+            prominent_veins_on_calf: "Veins showing on calf"
+        },
+        foot: {
+            painful_walking: "Pain when walking",
+            swelling_joints: "Swollen joints",
+            cold_hands_and_feets: "Cold feet",
+            skin_peeling: "Peeling skin",
+            loss_of_balance: "Loss of balance"
+        },
+        general: {
+            high_fever: "High fever",
+            mild_fever: "Mild fever",
+            chills: "Chills",
+            fatigue: "Tiredness",
+            sweating: "Sweating",
+            itching: "Itching",
+            skin_rash: "Skin rash",
+            weight_loss: "Weight loss",
+            dehydration: "Dehydration"
+        }
+    };
+
+    var picked = {};
+
+    function showPart(id, name) {
+        var parts = document.getElementsByClassName("part");
+        for (var i = 0; i < parts.length; i++) {
+            parts[i].classList.remove("active");
+        }
+
+        var part = document.getElementById(id);
+        if (part) {
+            part.classList.add("active");
+        }
+
+        var key = id.replace("right_", "").replace("left_", "");
+        var list = symptoms[key];
+
+        document.getElementById("part-name").innerHTML = name;
+
+        var html = "";
+        for (var s in list) {
+            var cls = "chip";
+            if (picked[s]) {
+                cls = "chip selected";
+            }
+            html += '<span class="' + cls + '" onclick="toggleSymptom(this, \'' + s + '\', \'' + list[s] + '\')">' + list[s] + '</span>';
+        }
+        document.getElementById("chips").innerHTML = html;
+    }
+
+    function toggleSymptom(chip, symptom, label) {
+        if (picked[symptom]) {
+            delete picked[symptom];
+            chip.classList.remove("selected");
+        } else {
+            picked[symptom] = label;
+            chip.classList.add("selected");
+        }
+        showPicked();
+    }
+
+    function showPicked() {
+        var labels = [];
+        for (var s in picked) {
+            labels.push(picked[s]);
+        }
+
+        if (labels.length == 0) {
+            document.getElementById("picked").innerHTML = "Nothing picked yet.";
+        } else {
+            document.getElementById("picked").innerHTML = labels.join(", ");
+        }
+    }
+
+    function goToSymptoms() {
+        var list = Object.keys(picked);
+
+        if (list.length == 0) {
+            alert("Please pick at least one symptom.");
+            return;
+        }
+
+        window.location.href = "/?symptom_text=" + encodeURIComponent(list.join(" "));
+    }
+
+    function clearAll() {
+        picked = {};
+        showPicked();
+
+        var chips = document.getElementsByClassName("chip");
+        for (var i = 0; i < chips.length; i++) {
+            chips[i].classList.remove("selected");
+        }
+    }
+</script>
+
+</body>
+</html>

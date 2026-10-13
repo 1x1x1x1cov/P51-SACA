@@ -130,6 +130,17 @@
             font-weight: bold;
         }
 
+        .map-btn {
+            display: inline-block;
+            margin-left: 15px;
+            padding: 12px 25px;
+            border-radius: 8px;
+            background-color: #1d4ed8;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
     </style>
 
 </head>
@@ -152,25 +163,27 @@
 
         <form method="POST">
 
-            <label for="symptom_text">
-                <strong>Patient symptoms</strong>
-            </label>
+    <label for="symptom_text">
+        <strong>Patient symptoms</strong>
+    </label>
 
-            <br><br>
+    <br><br>
 
-            <textarea
-                id="symptom_text"
-                name="symptom_text"
-                placeholder="Example: The patient has a high fever, vomiting and abdominal pain."
-            >{{ symptom_text }}</textarea>
+    <textarea
+        id="symptom_text"
+        name="symptom_text"
+        placeholder="Example: The patient has a high fever, vomiting and abdominal pain."
+    >{{ symptom_text }}</textarea>
 
-            <br>
+    <br>
 
-            <button type="submit">
-                Analyse Symptoms
-            </button>
+    <button type="submit">
+        Analyse Symptoms
+    </button>
 
-        </form>
+    <a href="/body-map" class="map-btn">Body Map</a>
+
+</form>
 
     </div>
 
