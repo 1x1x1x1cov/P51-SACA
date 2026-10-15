@@ -1,0 +1,47 @@
+distinct symptom sets: 6320  (train 5057, test 1263)
+
+vocabulary: 131 Kaggle codes + 11 added red-flag codes: ['cold_extremities', 'convulsions', 'cyanosis', 'eclampsia', 'purpuric_rash', 'severe_respiratory_distress', 'stridor', 'unable_to_breastfeed', 'unable_to_drink', 'uncontrolled_bleeding', 'vomits_everything']
+
+source counts:
+source
+partial     4613
+redflag     1403
+observed     304
+
+label counts (policy=min):
+severity
+LOW         1261
+MEDIUM      1846
+HIGH        2101
+CRITICAL    1112
+
+train labels:
+severity
+LOW         1009
+MEDIUM      1477
+HIGH        1681
+CRITICAL     890
+
+test labels:
+severity
+LOW         252
+MEDIUM      369
+HIGH        420
+CRITICAL    222
+
+label counts by partial-presentation policy:
+           min  median   max
+LOW       1261    1212  1157
+MEDIUM    1846    1817  1568
+HIGH      2101    2179  2473
+CRITICAL  1112    1112  1122
+
+sets whose label differs between 'min' and 'max' policy: 412 of 6320
+
+label basis:
+label_basis
+partial     3189
+redflag     2985
+observed     146
+
+observed combos produced by diseases of different tiers: 0 of 304

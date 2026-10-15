@@ -60,15 +60,13 @@ def client(tmp_path, monkeypatch):
     return TestClient(main.app)
 
 
-# A real saca_test.csv row (leak-free test set) that the trained LR
-# model actually predicts CRITICAL on, verified directly (0.9874
-# confidence) rather than assumed -- see module docstring for why this
-# replaces the old hardcoded-Swahili-keyword approach.
-REAL_CRITICAL_TEXT = (
-    "skin_rash chills vomiting fatigue high_fever headache nausea "
-    "loss_of_appetite pain_behind_the_eyes back_pain malaise muscle_pain "
-    "red_spots_over_body"
-)
+# The Kaggle "Heart attack" symptom set. Updated with the v2 dataset: it is
+# CRITICAL because chest_pain + breathlessness (and chest_pain + sweating) are
+# red-flag rules in dataset_v2/red_flags.csv, and the app applies those rules
+# after the model, so this holds whatever the model predicts. (The previous
+# value, a dengue-like row, was CRITICAL only because the old labels were a
+# symptom count.)
+REAL_CRITICAL_TEXT = "chest_pain breathlessness sweating vomiting"
 
 
 class TestClassifyEndpointValidInput:
@@ -86,11 +84,8 @@ class TestClassifyEndpointValidInput:
         assert expected_keys.issubset(set(data.keys()))
 
     def test_high_confidence_critical_input_returns_critical(self, client):
-        """See REAL_CRITICAL_TEXT above: a real test-set row the trained
-        model predicts CRITICAL on with 0.9874 confidence, not a
-        deterministic keyword rule -- LR has no keyword safety net
-        (deliberate, see module docstring), so this only demonstrates the
-        model getting a clear-cut real case right, not a guarantee."""
+        """See REAL_CRITICAL_TEXT above: CRITICAL by red-flag rule, so this
+        is a guarantee, not just the model getting a clear case right."""
         response = client.post("/classify", json={"symptom_text": REAL_CRITICAL_TEXT})
         data = response.json()
         assert data["severity"] == "CRITICAL"

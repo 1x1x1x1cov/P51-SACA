@@ -15,18 +15,26 @@ import joblib
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from classifier.base import BaseClassifier
+from classifier.symptom_codes import read_swahili, red_flag_floor, RANK
+
+# v2 training data: symptom codes only, labelled by red-flag rules + disease
+# urgency (see dataset_v2/README_v2.md). The old saca_train.csv labelled by
+# symptom-count and is no longer used by the app.
+DEFAULT_TRAIN_PATH = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+    "dataset_v2", "saca_v2_train.csv",
+)
 
 
-# Swahili function / template words that sit in the CountVectorizer
-# vocabulary only because the Swahili training rows are built from three
-# sentence templates ("Nina dalili hizi: ...", "Ninapata dalili zifuatazo: ...",
-# "Dalili ninazopata ni ..."). They carry no symptom meaning, so they must not
-# count as "recognised symptoms" -- otherwise "na" or "dalili" alone would pass
-# the input guard in classify().
+# Swahili filler words. They carry no symptom meaning, so they are ignored
+# when deciding which words of the input were "not understood" (otherwise
+# "ana homa na ..." would always report "ana" and "na"). Keep this list to
+# words that cannot change a severity.
 SW_FUNCTION_WORDS = frozenset({
     "na", "ya", "wa", "kwa", "ni", "au", "la", "za", "cha", "vya", "kwenye",
     "kuwa", "dalili", "hizi", "nina", "ninapata", "ninazopata", "zifuatazo",
-    "ana", "una", "yangu", "wangu",
+    "ana", "una", "yangu", "wangu", "yake", "wake", "pia",
+    "mtoto", "mgonjwa",
 })
 
 # Severity returned when the input could not be assessed. build_result() only
@@ -58,7 +66,9 @@ class LogisticRegressionClassifier(BaseClassifier):
         df['severity'] = df['severity'].astype(str).str.upper().str.strip()
         return df
 
-    def train(self, train_path="saca_train.csv"):
+    def train(self, train_path=None):
+        if train_path is None:
+            train_path = DEFAULT_TRAIN_PATH
         print(f"[LogisticRegression] Loading training data from {train_path}...")
         df = self._load_data(train_path)
 
@@ -113,20 +123,20 @@ class LogisticRegressionClassifier(BaseClassifier):
 
         cleaned_text = symptom_text.lower().strip()
 
-        # --- Input guard -------------------------------------------------
-        # The model was trained on a fixed vocabulary (symptom codes such as
-        # "high_fever" plus Swahili symptom phrases). A word outside it adds
-        # nothing to the feature vector, and an all-zero vector is predicted
-        # LOW at ~95%. So "I cannot breathe and have crushing chest pain" or
-        # "ana homa na degedege" used to come back as LOW. Two rules:
-        #   1. no recognised symptom word at all  -> not assessed
-        #   2. some words not understood AND the model says LOW -> not assessed
-        #      (LOW is the "safe to wait" claim; never make it while ignoring
-        #      part of what the person said. MEDIUM and above still pass, with
-        #      the unread words returned in `unrecognised` for the UI to show.)
-        recognised, unrecognised = self._read_input(cleaned_text)
+        # --- Input reading + guard ---------------------------------------
+        # The model only knows symptom CODES ("high_fever", "chest_pain", ...).
+        # Input can arrive as codes (from the LLM extractor) or as Swahili
+        # text; read_swahili() turns Swahili phrases into codes first. A word
+        # that is neither a code nor a known phrase adds nothing to the
+        # feature vector, and an all-zero vector is predicted LOW. So:
+        #   1. no recognised symptom at all  -> not assessed
+        #   2. some words not understood AND the final severity is LOW
+        #      -> not assessed (LOW is the "safe to wait" claim; never make it
+        #      while ignoring part of what the person said. MEDIUM and above
+        #      still pass, with the unread words returned in `unrecognised`.)
+        codes, unrecognised = self._read_input(cleaned_text)
 
-        if not recognised:
+        if not codes:
             return self._unassessed(
                 symptoms=[],
                 unrecognised=unrecognised,
@@ -137,7 +147,7 @@ class LogisticRegressionClassifier(BaseClassifier):
                 ),
             )
 
-        X = [cleaned_text]
+        X = [" ".join(codes)]
         pred_encoded = self.pipeline.predict(X)[0]
         proba = self.pipeline.predict_proba(X)[0]
 
@@ -149,9 +159,22 @@ class LogisticRegressionClassifier(BaseClassifier):
         if severity not in allowed:
             severity = "LOW"
 
+        # --- Red-flag floor ------------------------------------------------
+        # Deterministic safety net (dataset_v2/red_flags.csv): a danger sign
+        # can raise the severity, never lower it. The model alone misses some
+        # combinations (e.g. stiff_neck + high_fever + headache -> MEDIUM).
+        floor, rule_ids = red_flag_floor(codes)
+        if floor is not None and RANK[floor] > RANK[severity]:
+            reason = (
+                f"Red-flag rule {', '.join(rule_ids)} raised the result to {floor} "
+                f"(model alone predicted {severity})"
+            )
+            severity = floor
+            confidence = None  # the model's probability no longer describes this result
+
         if severity == "LOW" and unrecognised:
             return self._unassessed(
-                symptoms=recognised,
+                symptoms=codes,
                 unrecognised=unrecognised,
                 reason=(
                     "Maneno mengine hayakueleweka: " + ", ".join(unrecognised) + ". "
@@ -163,27 +186,41 @@ class LogisticRegressionClassifier(BaseClassifier):
 
         result = self.build_result(
             severity=severity,
-            symptoms=symptom_text.split(),
+            symptoms=codes,
             reason=reason,
             confidence=confidence
         )
-        result.update(assessed=True, unrecognised=unrecognised)
+        result.update(assessed=True, unrecognised=unrecognised, red_flag_rules=rule_ids)
         return result
 
     def _read_input(self, cleaned_text):
-        """Split the input into (recognised, unrecognised) content words.
+        """Split the input into (codes, unrecognised).
 
-        Uses the fitted vectorizer's own analyzer, so tokenisation, accent
-        stripping and English stop-word removal match training exactly.
-        Swahili function words are ignored on both sides.
+        codes         symptom codes the model knows: code tokens typed or
+                      extracted directly, plus codes mapped from Swahili
+                      phrases (order of appearance, no duplicates).
+        unrecognised  content words that are neither -- including Swahili
+                      phrases that are known but have no v2 code (e.g. snake
+                      bite), which the model cannot rate.
+        Uses the fitted vectorizer's own analyzer on the text left over after
+        Swahili phrases are consumed, so tokenisation, accent stripping and
+        English stop-word removal match training exactly.
         """
         vectorizer = self.pipeline.named_steps["vectorizer"]
         vocabulary = vectorizer.vocabulary_
-        tokens = [t for t in vectorizer.build_analyzer()(cleaned_text)
+
+        reading = read_swahili(cleaned_text)
+        tokens = [t for t in vectorizer.build_analyzer()(reading.residual)
                   if t not in SW_FUNCTION_WORDS]
-        recognised = [t for t in tokens if t in vocabulary]
+
+        codes = []
+        for t in tokens + reading.codes:
+            if t in vocabulary and t not in codes:
+                codes.append(t)
         unrecognised = [t for t in tokens if t not in vocabulary]
-        return recognised, unrecognised
+        unrecognised += list(reading.unmapped)
+        unrecognised += [c for c in reading.codes if c not in vocabulary]
+        return codes, unrecognised
 
     def _unassessed(self, symptoms, unrecognised, reason):
         result = self.build_result(
@@ -202,16 +239,18 @@ if __name__ == "__main__":
     print("=" * 60)
 
     clf = LogisticRegressionClassifier()
-    clf.train("saca_train.csv")
+    clf.train()
 
     test_cases = [
-        "itching skin rash fever",
-        "shortness of breath chest pain cough",
-        "headache fatigue nausea"
+        "itching skin_rash high_fever",
+        "chest_pain breathlessness",
+        "headache fatigue nausea",
+        "ana homa na degedege",
+        "kukohoa damu",
     ]
 
     for symptoms in test_cases:
         result = clf.classify(symptoms)
         print(f"\nInput: '{symptoms}'")
-        print(f"Severity: {result['severity']}")
+        print(f"Severity: {result['severity']}  (assessed={result['assessed']})")
         print(f"Reason: {result['reason']}")

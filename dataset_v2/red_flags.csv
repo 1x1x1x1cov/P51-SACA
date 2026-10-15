@@ -1,0 +1,41 @@
+rule_id,codes,min_tier,basis
+RF01,coma,CRITICAL,WHO ETAT emergency sign: coma
+RF02,altered_sensorium,CRITICAL,WHO ETAT: coma / altered consciousness
+RF03,convulsions,CRITICAL,WHO ETAT emergency sign: convulsing
+RF04,cyanosis,CRITICAL,WHO ETAT breathing: central cyanosis
+RF05,severe_respiratory_distress,CRITICAL,WHO ETAT breathing: severe respiratory distress
+RF06,stridor,CRITICAL,WHO ETAT airway/breathing (team override list)
+RF07,uncontrolled_bleeding,CRITICAL,WHO ETAT circulation (team override list)
+RF08,eclampsia,CRITICAL,Obstetric emergency (team override list)
+RF09,purpuric_rash,CRITICAL,Meningococcaemia / DIC sign (team override list)
+RF10,cold_extremities,CRITICAL,WHO ETAT circulation: cold hands (team override list)
+RF11,unable_to_drink,CRITICAL,IMCI general danger sign (team override list)
+RF12,unable_to_breastfeed,CRITICAL,IMCI general danger sign (team override list)
+RF13,vomits_everything,CRITICAL,IMCI general danger sign (team override list)
+RF14,acute_liver_failure,CRITICAL,Named organ failure
+RF15,weakness_of_one_body_side,CRITICAL,Stroke FAST sign (WHO-ICRC Basic Emergency Care)
+RF16,slurred_speech,HIGH,Stroke FAST sign; alone may have other causes
+RF17,slurred_speech;weakness_in_limbs,CRITICAL,Stroke: speech + limb weakness
+RF18,slurred_speech;loss_of_balance,CRITICAL,Stroke: speech + balance
+RF19,chest_pain,HIGH,Chest pain needs same-day assessment
+RF20,chest_pain;breathlessness,CRITICAL,Possible acute coronary syndrome / PE
+RF21,chest_pain;sweating,CRITICAL,Possible acute coronary syndrome
+RF22,chest_pain;fast_heart_rate,CRITICAL,Possible cardiac emergency
+RF23,chest_pain;palpitations,CRITICAL,Possible cardiac emergency
+RF24,breathlessness,HIGH,WHO ETAT breathing: respiratory difficulty
+RF25,blood_in_sputum,HIGH,Haemoptysis: TB / PE / pneumonia
+RF26,stomach_bleeding,HIGH,GI bleeding
+RF27,bloody_stool,MEDIUM,IMCI dysentery sign
+RF28,fast_heart_rate,MEDIUM,Tachycardia
+RF29,palpitations,MEDIUM,Possible arrhythmia
+RF30,stiff_neck;high_fever,CRITICAL,Meningitis
+RF31,stiff_neck,MEDIUM,Meningism sign
+RF32,high_fever,MEDIUM,Fever in malaria-endemic area needs testing (IMCI / national malaria guidance)
+RF33,mild_fever,MEDIUM,Fever in malaria-endemic area needs testing
+RF34,dehydration;diarrhoea,HIGH,IMCI some dehydration
+RF35,dehydration;vomiting,HIGH,IMCI some dehydration
+RF36,sunken_eyes;diarrhoea,HIGH,IMCI dehydration sign
+RF37,lethargy;sunken_eyes;diarrhoea,CRITICAL,IMCI/ETAT severe dehydration
+RF38,lethargy,MEDIUM,ETAT priority sign
+RF39,irregular_sugar_level;sweating,HIGH,Possible hypoglycaemia
+RF40,irregular_sugar_level;lethargy,HIGH,Possible hypoglycaemia

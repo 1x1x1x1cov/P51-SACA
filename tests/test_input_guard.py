@@ -1,15 +1,15 @@
 """
 Input guard tests for LogisticRegressionClassifier.classify().
 
-Background: the model only knows the words in its training vocabulary
-(symptom codes like "high_fever" plus Swahili symptom phrases). Words
+Background: the model only knows symptom codes (the v2 vocabulary). Words
 outside it add nothing to the feature vector, and an all-zero vector was
 predicted LOW at ~95% -- so "I cannot breathe and have crushing chest pain"
-and "ana homa na degedege" (fever and convulsions) came back as LOW.
+came back as LOW. Swahili phrases are now converted to codes first
+(classifier/symptom_codes.py), see tests/test_v2_normalisation.py.
 
 The guard: no recognised symptom -> not assessed; some words not understood
-AND the model says LOW -> not assessed. A not-assessed result is reported as
-HIGH (the safe direction) with assessed=False.
+AND the final severity is LOW -> not assessed. A not-assessed result is
+reported as HIGH (the safe direction) with assessed=False.
 """
 
 import pytest
@@ -25,7 +25,7 @@ def clf():
 
 @pytest.mark.parametrize("text", [
     "I cannot breathe and have crushing chest pain",   # free English text
-    "mtoto ana degedege",                              # Swahili: child has convulsions
+    "nina maumivu ya meno",                            # Swahili, symptom not in the vocabulary
     "asdfgh qwerty",                                   # gibberish
     "na ya kwa",                                       # Swahili function words only
     "the patient is unwell",
@@ -39,18 +39,18 @@ def test_input_with_no_known_symptom_is_not_assessed(clf, text):
 
 
 def test_partly_understood_input_cannot_be_low(clf):
-    """'homa' (fever) is known, 'degedege' (convulsions) is not. The raw model
-    rates this LOW at ~97%; the guard must refuse to make that claim."""
-    r = clf.classify("ana homa na degedege")
+    """'kikohozi' (cough) is known and rated LOW on its own; 'xyzabc' is not
+    understood. The guard must refuse to make a LOW claim while ignoring it."""
+    r = clf.classify("kikohozi xyzabc")
     assert r["assessed"] is False
     assert r["severity"] != "LOW"
-    assert "degedege" in r["unrecognised"]
-    assert "homa" in r["symptoms"]
+    assert "xyzabc" in r["unrecognised"]
+    assert "cough" in r["symptoms"]
 
 
 def test_unread_words_are_listed_in_reason(clf):
-    r = clf.classify("ana homa na degedege")
-    assert "degedege" in r["reason"]
+    r = clf.classify("kikohozi xyzabc")
+    assert "xyzabc" in r["reason"]
 
 
 def test_fully_recognised_input_is_assessed_normally(clf):
@@ -64,7 +64,8 @@ def test_fully_recognised_input_is_assessed_normally(clf):
 def test_fully_recognised_low_input_is_still_allowed_to_be_low(clf):
     """The guard must not turn every LOW into 'not assessed': only LOW given
     while ignoring part of the input is blocked."""
-    r = clf.classify("slurred_speech loss_of_balance")  # known words, model says LOW
+    r = clf.classify("cough")  # known word, rated LOW
+    assert r["severity"] == "LOW"
     assert r["assessed"] is True
 
 
