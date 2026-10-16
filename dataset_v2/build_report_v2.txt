@@ -1,47 +1,49 @@
-distinct symptom sets: 6320  (train 5057, test 1263)
+distinct symptom sets: 8279  (train 6624, test 1655)
 
-vocabulary: 131 Kaggle codes + 11 added red-flag codes: ['cold_extremities', 'convulsions', 'cyanosis', 'eclampsia', 'purpuric_rash', 'severe_respiratory_distress', 'stridor', 'unable_to_breastfeed', 'unable_to_drink', 'uncontrolled_bleeding', 'vomits_everything']
+vocabulary: 131 Kaggle codes + 47 added red-flag codes: ['abdominal_rigidity', 'assault', 'bulging_fontanelle', 'burns', 'coagulopathy', 'cold_extremities', 'compound_fracture', 'convulsions', 'cyanosis', 'eclampsia', 'failure_to_thrive', 'fall', 'fracture', 'haematuria', 'head_injury', 'high_blood_pressure', 'kwashiorkor_signs', 'low_blood_pressure', 'malaria_confirmed', 'minor_wound', 'necrosis', 'photophobia', 'pre_eclampsia', 'pregnancy', 'prolonged_labour', 'puerperal_sepsis', 'purpuric_rash', 'retained_placenta', 'severe_pallor', 'severe_respiratory_distress', 'significant_wound', 'slow_breathing', 'snake_bite', 'snake_envenomation', 'stridor', 'swelling_post_trauma', 'tb_contact', 'trauma', 'unable_to_breastfeed', 'unable_to_drink', 'unable_to_sit', 'unable_to_stand', 'unable_to_walk', 'uncontrolled_bleeding', 'vomits_everything', 'weak_pulse', 'wound']
 
 source counts:
 source
 partial     4613
-redflag     1403
+redflag     3362
 observed     304
 
 label counts (policy=min):
 severity
-LOW         1261
-MEDIUM      1846
-HIGH        2101
-CRITICAL    1112
+LOW         1386
+MEDIUM      2345
+HIGH        3127
+CRITICAL    1421
 
 train labels:
 severity
-LOW         1009
-MEDIUM      1477
-HIGH        1681
-CRITICAL     890
+LOW         1109
+MEDIUM      1876
+HIGH        2502
+CRITICAL    1137
 
 test labels:
 severity
-LOW         252
-MEDIUM      369
-HIGH        420
-CRITICAL    222
+LOW         277
+MEDIUM      469
+HIGH        625
+CRITICAL    284
 
 label counts by partial-presentation policy:
            min  median   max
-LOW       1261    1212  1157
-MEDIUM    1846    1817  1568
-HIGH      2101    2179  2473
-CRITICAL  1112    1112  1122
+LOW       1386    1337  1282
+MEDIUM    2345    2339  2145
+HIGH      3127    3182  3424
+CRITICAL  1421    1421  1428
 
-sets whose label differs between 'min' and 'max' policy: 412 of 6320
+sets whose label differs between 'min' and 'max' policy: 356 of 8279
 
 label basis:
 label_basis
-partial     3189
-redflag     2985
-observed     146
+redflag           4819
+partial           3107
+observed           146
+no_disease         125
+partial_capped      82
 
 observed combos produced by diseases of different tiers: 0 of 304

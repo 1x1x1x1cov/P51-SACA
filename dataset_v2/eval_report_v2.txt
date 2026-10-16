@@ -1,48 +1,61 @@
-v2 train rows 5057, test rows 1263, vocabulary 143 tokens
-== v2 LR on v2 test  (n=1263)
-accuracy 0.899   macro-F1 0.908
-recall  LOW 0.968  MEDIUM 0.870  HIGH 0.852  CRITICAL 0.959
-under-triage (pred below true): 4.988%   over-triage: 5.067%
-dangerous under-triage (true HIGH/CRITICAL predicted LOW/MEDIUM): 53 of 642
-CRITICAL predicted below HIGH: 7 of 222
+v2 train rows 6624, test rows 1655, vocabulary 179 tokens
+== v2 LR on v2 test  (n=1655)
+accuracy 0.885   macro-F1 0.895
+recall  LOW 0.968  MEDIUM 0.906  HIGH 0.787  CRITICAL 0.986
+under-triage (pred below true): 6.284%   over-triage: 5.196%
+dangerous under-triage (true HIGH/CRITICAL predicted LOW/MEDIUM): 93 of 909
+CRITICAL predicted below HIGH: 4 of 284
 confusion (rows=true, cols=pred; LOW MED HIGH CRIT):
-     244     5     3     0
-       8   321    36     4
-       4    42   358    16
-       1     6     2   213
+     268     1     8     0
+      11   425    32     1
+      18    71   492    44
+       1     3     0   280
 
-== v2 LR + red-flag floor on v2 test  (n=1263)
-accuracy 0.913   macro-F1 0.922
-recall  LOW 0.968  MEDIUM 0.878  HIGH 0.864  CRITICAL 1.000
-under-triage (pred below true): 3.642%   over-triage: 5.067%
-dangerous under-triage (true HIGH/CRITICAL predicted LOW/MEDIUM): 41 of 642
-CRITICAL predicted below HIGH: 0 of 222
+== v2 LR + red-flag floor on v2 test  (n=1655)
+accuracy 0.908   macro-F1 0.916
+recall  LOW 0.968  MEDIUM 0.910  HIGH 0.837  CRITICAL 1.000
+under-triage (pred below true): 4.048%   over-triage: 5.196%
+dangerous under-triage (true HIGH/CRITICAL predicted LOW/MEDIUM): 58 of 909
+CRITICAL predicted below HIGH: 0 of 284
 confusion (rows=true, cols=pred; LOW MED HIGH CRIT):
-     244     5     3     0
-       5   324    36     4
-       4    37   363    16
-       0     0     0   222
+     268     1     8     0
+       9   427    32     1
+       6    52   523    44
+       0     0     0   284
 
-   source=observed: n=58 acc=0.879
-   source=partial: n=904 acc=0.902
-   source=redflag: n=301 acc=0.897
-majority-class baseline accuracy 0.333
-
-== OLD v1 model on v2 test (v2 labels)  (n=1263)
-accuracy 0.263   macro-F1 0.185
-recall  LOW 0.813  MEDIUM 0.317  HIGH 0.017  CRITICAL 0.014
-under-triage (pred below true): 67.775%   over-triage: 5.938%
-dangerous under-triage (true HIGH/CRITICAL predicted LOW/MEDIUM): 623 of 642
-CRITICAL predicted below HIGH: 219 of 222
+== v2 LR + non-specific ceiling + red-flag floor (what the app returns) on v2 test  (n=1655)
+accuracy 0.909   macro-F1 0.917
+recall  LOW 0.968  MEDIUM 0.915  HIGH 0.837  CRITICAL 1.000
+under-triage (pred below true): 4.048%   over-triage: 5.076%
+dangerous under-triage (true HIGH/CRITICAL predicted LOW/MEDIUM): 58 of 909
+CRITICAL predicted below HIGH: 0 of 284
 confusion (rows=true, cols=pred; LOW MED HIGH CRIT):
-     205    46     1     0
-     233   117     9    10
-     220   184     7     9
-     122    97     0     3
+     268     1     8     0
+       9   429    30     1
+       6    52   523    44
+       0     0     0   284
 
-v2 model: acceptance (codes) LR-only passes 36/37; LR + red-flag floor passes 37/37
+   source=observed: n=55 acc=0.873
+   source=partial: n=918 acc=0.876
+   source=redflag: n=682 acc=0.899
+majority-class baseline accuracy 0.378
+
+== OLD v1 model on v2 test (v2 labels)  (n=1655)
+accuracy 0.232   macro-F1 0.168
+recall  LOW 0.805  MEDIUM 0.324  HIGH 0.008  CRITICAL 0.014
+under-triage (pred below true): 72.024%   over-triage: 4.773%
+dangerous under-triage (true HIGH/CRITICAL predicted LOW/MEDIUM): 890 of 909
+CRITICAL predicted below HIGH: 280 of 284
+confusion (rows=true, cols=pred; LOW MED HIGH CRIT):
+     223    52     2     0
+     302   152    10     5
+     370   240     5    10
+     163   117     0     4
+
+v2 model: acceptance (codes) LR-only passes 53/55; LR + red-flag floor passes 55/55
     LR fail: [stiff_neck high_fever headache] need >= CRITICAL, got MEDIUM  (meningitis)
-v1 model: acceptance (codes) LR-only passes 4/37; LR + red-flag floor passes 37/37
+    LR fail: [pregnancy headache] need >= HIGH, got LOW  (pre-eclampsia sign)
+v1 model: acceptance (codes) LR-only passes 4/55; LR + red-flag floor passes 55/55
     LR fail: [coma] need >= CRITICAL, got LOW  (ETAT coma)
     LR fail: [convulsions] need >= CRITICAL, got LOW  (ETAT convulsing)
     LR fail: [convulsions high_fever] need >= CRITICAL, got MEDIUM  (febrile convulsion)
@@ -76,8 +89,44 @@ v1 model: acceptance (codes) LR-only passes 4/37; LR + red-flag floor passes 37/
     LR fail: [fast_heart_rate] need >= MEDIUM, got LOW  (tachycardia)
     LR fail: [lethargy] need >= MEDIUM, got LOW  (ETAT priority sign)
     LR fail: [stiff_neck] need >= MEDIUM, got LOW  (meningism)
+    LR fail: [snake_bite] need >= HIGH, got LOW  (snakebite needs facility)
+    LR fail: [snake_envenomation] need >= CRITICAL, got LOW  (systemic envenoming)
+    LR fail: [snake_bite breathlessness] need >= CRITICAL, got LOW  (neurotoxic respiratory failure)
+    LR fail: [head_injury vomiting] need >= CRITICAL, got LOW  (raised intracranial pressure)
+    LR fail: [head_injury] need >= HIGH, got LOW  (head injury)
+    LR fail: [pregnancy headache] need >= HIGH, got MEDIUM  (pre-eclampsia sign)
+    LR fail: [pregnancy blurred_and_distorted_vision] need >= HIGH, got LOW  (pre-eclampsia sign)
+    LR fail: [pregnancy abdominal_pain] need >= HIGH, got LOW  (pregnancy danger sign)
+    LR fail: [pre_eclampsia] need >= HIGH, got LOW  (needs referral)
+    LR fail: [puerperal_sepsis] need >= CRITICAL, got LOW  (maternal sepsis)
+    LR fail: [bulging_fontanelle] need >= CRITICAL, got LOW  (infant meningitis)
+    LR fail: [abdominal_rigidity] need >= CRITICAL, got LOW  (peritonitis)
+    LR fail: [weak_pulse] need >= HIGH, got LOW  (shock sign)
+    LR fail: [severe_pallor] need >= HIGH, got LOW  (severe anaemia)
+    LR fail: [kwashiorkor_signs] need >= HIGH, got LOW  (severe malnutrition)
+    LR fail: [burns] need >= HIGH, got LOW  (burns)
+    LR fail: [fracture] need >= HIGH, got LOW  (fracture)
+    LR fail: [low_blood_pressure] need >= HIGH, got LOW  (possible shock)
+non-specific upper-bound check: LR alone 9/11; with the ceiling 11/11 stay at or below MEDIUM
 
-Swahili end-to-end (classifier.symptom_codes.read_swahili -> v2 codes -> LR + red-flag floor):
+English end-to-end (classifier.symptom_codes.read_input -> v2 codes -> LR + red-flag floor):
+   PASS  'I cannot breathe and have crushing chest pain' -> ['chest_pain', 'breathlessness'] -> CRITICAL   (need >= CRITICAL)
+   PASS  'she coughed up blood this morning' -> ['blood_in_sputum'] -> HIGH   (need >= HIGH)
+   PASS  'my child is unconscious' -> ['coma'] -> CRITICAL   (need >= CRITICAL)
+   PASS  'he has had a seizure' -> ['convulsions'] -> CRITICAL   (need >= CRITICAL)
+   PASS  'blue lips and fast breathing' -> ['breathlessness', 'cyanosis'] -> CRITICAL   (need >= CRITICAL)
+   PASS  'bitten by a snake yesterday' -> ['snake_bite'] -> HIGH   (need >= HIGH)
+   PASS  'he fell and hit his head and keeps vomiting' -> ['head_injury', 'vomiting', 'fall'] -> CRITICAL   (need >= CRITICAL)
+   PASS  'pregnant woman with headache and blurred vision' -> ['blurred_and_distorted_vision', 'headache', 'pregnancy'] -> HIGH   (need >= HIGH)
+   PASS  'child is floppy and has diarrhea and sunken eyes' -> ['sunken_eyes', 'diarrhoea', 'lethargy'] -> CRITICAL   (need >= CRITICAL)
+   PASS  'stiff neck and high fever' -> ['stiff_neck', 'high_fever'] -> CRITICAL   (need >= CRITICAL)
+   PASS  'pain in my chest' -> ['chest_pain'] -> HIGH   (need >= HIGH)
+   PASS  'high fever and vomiting' -> ['high_fever', 'vomiting'] -> MEDIUM   (need >= MEDIUM)
+   PASS  'just a mild headache' -> ['headache'] -> LOW   (need >= LOW)
+   PASS  'I have a cough' -> ['cough'] -> LOW   (need >= LOW)
+   English passes 14/14
+
+Swahili end-to-end (classifier.symptom_codes.read_input -> v2 codes -> LR + red-flag floor):
    PASS  'mtoto hajitambui' -> ['coma'] -> CRITICAL   (need >= CRITICAL)
    PASS  'ana degedege' -> ['convulsions'] -> CRITICAL   (need >= CRITICAL)
    PASS  'ana homa na degedege' -> ['convulsions', 'mild_fever'] -> CRITICAL   (need >= CRITICAL)
@@ -97,12 +146,12 @@ Swahili end-to-end (classifier.symptom_codes.read_swahili -> v2 codes -> LR + re
    PASS  'kikohozi cha damu' -> ['blood_in_sputum'] -> HIGH   (need >= HIGH)
    PASS  'kikohozi' -> ['cough'] -> LOW   (need >= LOW)
    PASS  'maumivu ya kichwa' -> ['headache'] -> LOW   (need >= LOW)
-   Swahili passes 19/19  (LR + red-flag floor)
+   Swahili passes 19/19  (LR + ceiling + red-flag floor)
 
 crosswalk status of the team's 124 codes:
 status
-mapped           51
-uncovered        43
+mapped           55
+added_redflag    47
 same             19
-added_redflag    11
-uncovered team codes: abdominal_rigidity, assault, bite_site_pain, bite_site_swelling, bulging_fontanelle, burns, coagulopathy, compound_fracture, failure_to_thrive, fall, fracture, haematuria, head_injury, hepatomegaly, hepatosplenomegaly, high_blood_pressure, kwashiorkor_signs, low_blood_pressure, malaria_confirmed, minor_wound, necrosis, neurotoxic_envenomation, photophobia, pre_eclampsia, pregnancy, prolonged_labour, ptosis, puerperal_sepsis, retained_placenta, severe_pallor, significant_wound, slow_breathing, snake_bite, snake_envenomation, splenomegaly, swelling_post_trauma, tb_contact, trauma, unable_to_sit, unable_to_stand, unable_to_walk, weak_pulse, wound
+uncovered         3
+uncovered team codes: hepatomegaly, hepatosplenomegaly, splenomegaly

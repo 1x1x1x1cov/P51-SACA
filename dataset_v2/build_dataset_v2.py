@@ -2,7 +2,7 @@
 """
 Build the SACA v2 training / test data.
 
-Run from inside dataset_v2/.   Inputs:
+Run from inside dataset_v2/.   Inputs (also here: nonspecific_symptoms.csv):
     ../dataset.csv         Kaggle disease -> symptom rows (4,920)
     disease_urgency.csv    DRAFT urgency tier per disease   (editable)
     red_flags.csv          DRAFT red-flag rules             (editable)
@@ -12,6 +12,8 @@ Outputs:
     build_report_v2.txt                    counts, checks, label-policy sensitivity
 
 Label of a symptom set S  =  max( red-flag floor(S), disease tier(S) )
+  (a partial presentation made only of symptoms listed in nonspecific_symptoms.csv has its
+   disease tier capped at MEDIUM)
   red-flag floor  : highest min_tier of any rule in red_flags.csv whose codes are all in S
   disease tier    : S equals an observed Kaggle row-set  -> max tier of the diseases that produced it
                     otherwise S is a partial presentation -> LOWEST tier among the diseases whose symptom
@@ -58,6 +60,7 @@ def main(policy="min"):
     df = pd.read_csv(DATASET)
     tiers = pd.read_csv("disease_urgency.csv")
     rules = pd.read_csv("red_flags.csv")
+    nonspec = set(pd.read_csv("nonspecific_symptoms.csv").code)
     sym_cols = [c for c in df.columns if c.startswith("Symptom")]
     tier_of = {d.strip(): t for d, t in zip(tiers.disease, tiers.tier)}
     df["Disease"] = df["Disease"].str.strip()
@@ -100,6 +103,14 @@ def main(policy="min"):
 
     def label(s, how=policy):
         dt, kind = disease_component(s, how)
+        # Non-specific cap: a partial presentation made only of symptoms that fit
+        # very many conditions (nonspecific_symptoms.csv) is not rated above MEDIUM
+        # on disease grounds alone. Without this, a set such as
+        # "fatigue headache nausea" came out HIGH only because, among the 41
+        # diseases in this data, only Dengue/Typhoid/Hypoglycemia contain all three.
+        # Red-flag rules still apply on top.
+        if kind == "partial" and set(s) <= nonspec and RANK[dt] > RANK["MEDIUM"]:
+            dt, kind = "MEDIUM", "partial_capped"
         fl, rid = floor_of(s)
         lab = NAME[max(RANK[dt], fl)]
         return lab, kind, rid if fl >= RANK[dt] and fl > 0 else ""
@@ -116,7 +127,11 @@ def main(policy="min"):
     for cs, t, rid in rule_list:
         base = sorted(cs)
         cands.setdefault(canon(base), "redflag")
-        for _ in range(25):
+        # Context rules (tier LOW, e.g. "pregnancy") get many more noise variants:
+        # otherwise the context code appears mostly inside danger rules (pregnancy +
+        # headache ...) and the model learns "pregnancy => HIGH".
+        n_var = 120 if t == "LOW" else 25
+        for _ in range(n_var):
             extra = random.sample(NOISE_CODES, random.choice([1, 2]))
             cands.setdefault(canon(base + extra), "redflag")
         for c in sorted(kaggle_codes):                      # each rule with every other single code once

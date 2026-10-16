@@ -24,7 +24,7 @@ def clf():
 
 
 @pytest.mark.parametrize("text", [
-    "I cannot breathe and have crushing chest pain",   # free English text
+    "my tooth hurts and my hair is falling out",       # free English text, no known symptom
     "nina maumivu ya meno",                            # Swahili, symptom not in the vocabulary
     "asdfgh qwerty",                                   # gibberish
     "na ya kwa",                                       # Swahili function words only

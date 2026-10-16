@@ -15,7 +15,7 @@ import joblib
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from classifier.base import BaseClassifier
-from classifier.symptom_codes import read_swahili, red_flag_floor, RANK
+from classifier.symptom_codes import read_input, red_flag_floor, only_nonspecific, RANK, EN_FILLER_WORDS
 
 # v2 training data: symptom codes only, labelled by red-flag rules + disease
 # urgency (see dataset_v2/README_v2.md). The old saca_train.csv labelled by
@@ -35,7 +35,7 @@ SW_FUNCTION_WORDS = frozenset({
     "kuwa", "dalili", "hizi", "nina", "ninapata", "ninazopata", "zifuatazo",
     "ana", "una", "yangu", "wangu", "yake", "wake", "pia",
     "mtoto", "mgonjwa",
-})
+}) | EN_FILLER_WORDS
 
 # Severity returned when the input could not be assessed. build_result() only
 # accepts the four real severities (and ammu_api.py indexes its replies by
@@ -159,6 +159,21 @@ class LogisticRegressionClassifier(BaseClassifier):
         if severity not in allowed:
             severity = "LOW"
 
+        # --- Non-specific ceiling ------------------------------------------
+        # One to three symptoms that fit very many conditions (headache,
+        # nausea, ...) are never rated above MEDIUM on their own: the model,
+        # trained on bag-of-words, otherwise drifts to HIGH for them. Same rule
+        # the dataset labels use (dataset_v2/nonspecific_symptoms.csv). It can
+        # only lower HIGH/CRITICAL to MEDIUM, and the red-flag floor below still
+        # applies afterwards.
+        if RANK[severity] > RANK["MEDIUM"] and only_nonspecific(codes):
+            reason = (
+                f"Only non-specific symptoms reported, so the result is capped at MEDIUM "
+                f"(model alone predicted {severity})"
+            )
+            severity = "MEDIUM"
+            confidence = None
+
         # --- Red-flag floor ------------------------------------------------
         # Deterministic safety net (dataset_v2/red_flags.csv): a danger sign
         # can raise the severity, never lower it. The model alone misses some
@@ -197,8 +212,8 @@ class LogisticRegressionClassifier(BaseClassifier):
         """Split the input into (codes, unrecognised).
 
         codes         symptom codes the model knows: code tokens typed or
-                      extracted directly, plus codes mapped from Swahili
-                      phrases (order of appearance, no duplicates).
+                      extracted directly, plus codes mapped from English and
+                      Swahili phrases (no duplicates).
         unrecognised  content words that are neither -- including Swahili
                       phrases that are known but have no v2 code (e.g. snake
                       bite), which the model cannot rate.
@@ -209,7 +224,7 @@ class LogisticRegressionClassifier(BaseClassifier):
         vectorizer = self.pipeline.named_steps["vectorizer"]
         vocabulary = vectorizer.vocabulary_
 
-        reading = read_swahili(cleaned_text)
+        reading = read_input(cleaned_text)
         tokens = [t for t in vectorizer.build_analyzer()(reading.residual)
                   if t not in SW_FUNCTION_WORDS]
 
@@ -217,6 +232,13 @@ class LogisticRegressionClassifier(BaseClassifier):
         for t in tokens + reading.codes:
             if t in vocabulary and t not in codes:
                 codes.append(t)
+        # show the codes in the order they appeared in the input
+        def _pos(c):
+            if c in reading.positions:
+                return reading.positions[c]
+            i = cleaned_text.find(c)
+            return i if i >= 0 else len(cleaned_text)
+        codes.sort(key=_pos)
         unrecognised = [t for t in tokens if t not in vocabulary]
         unrecognised += list(reading.unmapped)
         unrecognised += [c for c in reading.codes if c not in vocabulary]

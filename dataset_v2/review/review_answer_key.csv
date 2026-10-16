@@ -1,0 +1,121 @@
+id,symptom_text,rule_label,source,app_prediction
+R001,inflammatory_nails joint_pain silver_like_dusting skin_peeling skin_rash,LOW,observed,LOW
+R002,unable_to_stand visual_disturbances,MEDIUM,redflag,MEDIUM
+R003,blood_in_sputum breathlessness high_fever,HIGH,partial,HIGH
+R004,acute_liver_failure high_fever stomach_bleeding,CRITICAL,partial,CRITICAL
+R005,brittle_nails depression weight_gain,LOW,partial,LOW
+R006,fatigue headache high_blood_pressure muscle_pain,HIGH,redflag,HIGH
+R007,abdominal_pain minor_wound muscle_pain,LOW,redflag,LOW
+R008,acute_liver_failure nausea,CRITICAL,partial,CRITICAL
+R009,pain_behind_the_eyes tb_contact,MEDIUM,redflag,HIGH
+R010,muscle_pain unable_to_walk vomiting,MEDIUM,redflag,MEDIUM
+R011,diarrhoea history_of_alcohol_consumption sunken_eyes,HIGH,redflag,HIGH
+R012,abdominal_pain coma stomach_bleeding,CRITICAL,partial,CRITICAL
+R013,chest_pain continuous_sneezing headache,HIGH,partial,HIGH
+R014,dehydration diarrhoea sunken_eyes,HIGH,observed,HIGH
+R015,constipation diarrhoea,HIGH,partial,HIGH
+R016,brittle_nails enlarged_thyroid irritability,LOW,partial,LOW
+R017,breathlessness chest_pain weight_loss,CRITICAL,partial,CRITICAL
+R018,abdominal_pain dark_urine fatigue joint_pain loss_of_appetite nausea vomiting yellowish_skin,HIGH,observed,MEDIUM
+R019,knee_pain painful_walking,LOW,partial,LOW
+R020,lethargy malaise,MEDIUM,partial,MEDIUM
+R021,headache phlegm runny_nose,LOW,partial,LOW
+R022,muscle_pain unable_to_sit,MEDIUM,redflag,MEDIUM
+R023,dark_urine stomach_bleeding yellowing_of_eyes,HIGH,partial,HIGH
+R024,hip_joint_pain joint_pain knee_pain painful_walking swelling_joints,LOW,observed,LOW
+R025,irritability swollen_extremeties,LOW,partial,LOW
+R026,breathlessness chest_pain cough,CRITICAL,partial,CRITICAL
+R027,bladder_discomfort burning_micturition continuous_feel_of_urine,MEDIUM,observed,MEDIUM
+R028,bloody_stool constipation pain_during_bowel_movements,MEDIUM,partial,MEDIUM
+R029,fatigue loss_of_appetite nausea yellowing_of_eyes yellowish_skin,MEDIUM,observed,MEDIUM
+R030,abdominal_pain minor_wound,LOW,redflag,LOW
+R031,acute_liver_failure joint_pain loss_of_appetite,CRITICAL,partial,CRITICAL
+R032,diarrhoea dizziness nausea sunken_eyes,HIGH,redflag,HIGH
+R033,chest_pain fast_heart_rate malaise,CRITICAL,partial,CRITICAL
+R034,brittle_nails cold_hands_and_feets dizziness,LOW,partial,LOW
+R035,abdominal_pain muscle_pain vomiting,MEDIUM,partial,MEDIUM
+R036,high_fever pregnancy spinning_movements,HIGH,redflag,HIGH
+R037,breathlessness fatigue vomiting,HIGH,partial,HIGH
+R038,minor_wound movement_stiffness,LOW,redflag,LOW
+R039,dark_urine receiving_unsterile_injections yellowing_of_eyes,MEDIUM,partial,MEDIUM
+R040,chest_pain cold_hands_and_feets palpitations,CRITICAL,redflag,CRITICAL
+R041,prominent_veins_on_calf swollen_legs,LOW,partial,LOW
+R042,abdominal_pain dark_urine fatigue joint_pain loss_of_appetite nausea vomiting yellowing_of_eyes,HIGH,observed,MEDIUM
+R043,head_injury muscle_pain,HIGH,redflag,CRITICAL
+R044,abdominal_pain distention_of_abdomen fluid_overload history_of_alcohol_consumption vomiting yellowish_skin,HIGH,observed,HIGH
+R045,acute_liver_failure yellowing_of_eyes,CRITICAL,partial,CRITICAL
+R046,blood_in_sputum phlegm vomiting,HIGH,partial,HIGH
+R047,back_pain irregular_sugar_level lethargy loss_of_appetite,HIGH,redflag,HIGH
+R048,cough high_fever joint_pain stiff_neck,CRITICAL,redflag,CRITICAL
+R049,indigestion internal_itching loss_of_appetite passage_of_gases vomiting,MEDIUM,observed,MEDIUM
+R050,fatigue minor_wound nausea,LOW,redflag,LOW
+R051,itching skin_rash spotting_urination stomach_pain,MEDIUM,observed,MEDIUM
+R052,bruising cramps fatigue obesity prominent_veins_on_calf swollen_blood_vessels swollen_legs,LOW,observed,LOW
+R053,continuous_sneezing fatigue sinus_pressure,LOW,partial,LOW
+R054,headache mild_fever swelled_lymph_nodes,MEDIUM,partial,MEDIUM
+R055,continuous_sneezing shivering,LOW,partial,LOW
+R056,headache malaise unable_to_breastfeed,CRITICAL,redflag,CRITICAL
+R057,continuous_sneezing cough runny_nose,LOW,partial,LOW
+R058,back_pain tb_contact,MEDIUM,redflag,HIGH
+R059,dehydration diarrhoea vomiting,HIGH,observed,HIGH
+R060,obesity unable_to_breastfeed,CRITICAL,redflag,CRITICAL
+R061,fast_heart_rate fatigue irritability,MEDIUM,partial,MEDIUM
+R062,bruising cramps obesity prominent_veins_on_calf swollen_blood_vessels swollen_legs,LOW,observed,LOW
+R063,abdominal_pain coma yellowish_skin,CRITICAL,partial,CRITICAL
+R064,headache pain_behind_the_eyes vomiting,HIGH,partial,HIGH
+R065,back_pain dizziness loss_of_balance neck_pain weakness_in_limbs,LOW,observed,LOW
+R066,fatigue high_fever yellowing_of_eyes,MEDIUM,partial,MEDIUM
+R067,cough sinus_pressure throat_irritation,LOW,partial,LOW
+R068,dizziness loss_of_balance neck_pain weakness_in_limbs,LOW,observed,LOW
+R069,irregular_sugar_level polyuria,MEDIUM,partial,MEDIUM
+R070,breathlessness chest_pain dizziness loss_of_appetite,CRITICAL,redflag,CRITICAL
+R071,knee_pain slurred_speech weakness_in_limbs,CRITICAL,redflag,CRITICAL
+R072,dark_urine unable_to_drink,CRITICAL,redflag,CRITICAL
+R073,irregular_sugar_level runny_nose sweating,HIGH,redflag,HIGH
+R074,sinus_pressure,LOW,partial,LOW
+R075,assault headache muscle_pain,HIGH,redflag,HIGH
+R076,acute_liver_failure fatigue joint_pain,CRITICAL,partial,CRITICAL
+R077,chills diarrhoea headache high_fever muscle_pain nausea sweating vomiting,HIGH,observed,HIGH
+R078,coma high_fever yellowing_of_eyes,CRITICAL,partial,CRITICAL
+R079,abdominal_pain dark_urine fatigue high_fever itching vomiting yellowish_skin,MEDIUM,observed,MEDIUM
+R080,blood_in_sputum malaise sweating,HIGH,partial,HIGH
+R081,headache loss_of_balance slurred_speech,CRITICAL,redflag,CRITICAL
+R082,malaise sweating yellowing_of_eyes,HIGH,partial,HIGH
+R083,breathlessness neck_pain snake_bite,CRITICAL,redflag,CRITICAL
+R084,chills red_spots_over_body,HIGH,partial,HIGH
+R085,abdominal_pain fatigue high_fever itching vomiting weight_loss yellowish_skin,MEDIUM,observed,MEDIUM
+R086,dizziness purpuric_rash vomiting,CRITICAL,redflag,CRITICAL
+R087,abdominal_pain fall,MEDIUM,redflag,MEDIUM
+R088,inflammatory_nails joint_pain skin_rash,LOW,partial,LOW
+R089,acute_liver_failure dark_urine loss_of_appetite,CRITICAL,partial,CRITICAL
+R090,acidity chest_pain stomach_pain ulcers_on_tongue vomiting,HIGH,observed,HIGH
+R091,chills headache high_fever muscle_pain nausea sweating vomiting,HIGH,observed,HIGH
+R092,excessive_hunger indigestion stiff_neck,MEDIUM,partial,MEDIUM
+R093,joint_pain minor_wound nausea,LOW,redflag,LOW
+R094,diarrhoea headache vomiting,HIGH,partial,HIGH
+R095,fast_heart_rate malaise rusty_sputum,HIGH,partial,HIGH
+R096,diarrhoea restlessness,MEDIUM,partial,MEDIUM
+R097,dark_urine receiving_unsterile_injections yellow_urine,MEDIUM,partial,MEDIUM
+R098,coma fatigue joint_pain,CRITICAL,partial,CRITICAL
+R099,back_pain joint_pain minor_wound,LOW,redflag,LOW
+R100,family_history yellowing_of_eyes yellowish_skin,MEDIUM,partial,MEDIUM
+R101,high_fever phlegm throat_irritation,MEDIUM,partial,HIGH
+R102,increased_appetite pregnancy,LOW,redflag,HIGH
+R103,back_pain chest_pain malaise palpitations,CRITICAL,redflag,CRITICAL
+R104,coma high_fever,CRITICAL,partial,CRITICAL
+R105,belly_pain mild_fever,MEDIUM,redflag,HIGH
+R106,headache muscle_pain unable_to_stand,MEDIUM,redflag,MEDIUM
+R107,anxiety,HIGH,partial,HIGH
+R108,stridor swelling_joints,CRITICAL,redflag,CRITICAL
+R109,coma dark_urine yellowish_skin,CRITICAL,partial,CRITICAL
+R110,convulsions fatigue joint_pain,CRITICAL,redflag,CRITICAL
+R111,high_fever mucoid_sputum,HIGH,partial,HIGH
+R112,movement_stiffness muscle_weakness stiff_neck swelling_joints,MEDIUM,observed,MEDIUM
+R113,fatigue minor_wound muscle_pain,LOW,redflag,LOW
+R114,abnormal_menstruation cold_hands_and_feets fatigue,LOW,partial,LOW
+R115,cold_hands_and_feets mood_swings swollen_extremeties,LOW,partial,LOW
+R116,breathlessness chest_pain vomiting,CRITICAL,observed,CRITICAL
+R117,blister high_fever red_sore_around_nose skin_rash,MEDIUM,observed,MEDIUM
+R118,blurred_and_distorted_vision irritability visual_disturbances,LOW,partial,HIGH
+R119,acute_liver_failure loss_of_appetite,CRITICAL,partial,CRITICAL
+R120,headache lethargy swelled_lymph_nodes,MEDIUM,partial,MEDIUM

@@ -39,3 +39,52 @@ RF37,lethargy;sunken_eyes;diarrhoea,CRITICAL,IMCI/ETAT severe dehydration
 RF38,lethargy,MEDIUM,ETAT priority sign
 RF39,irregular_sugar_level;sweating,HIGH,Possible hypoglycaemia
 RF40,irregular_sugar_level;lethargy,HIGH,Possible hypoglycaemia
+RF41,snake_bite,HIGH,WHO snakebite guidance: every bite needs facility assessment. DRAFT
+RF42,snake_envenomation,CRITICAL,Systemic / neurotoxic envenoming. DRAFT
+RF43,snake_bite;breathlessness,CRITICAL,Neurotoxic respiratory failure risk. DRAFT
+RF44,head_injury,HIGH,Basic Emergency Care: head injury needs assessment. DRAFT
+RF45,head_injury;vomiting,CRITICAL,Head injury + vomiting: raised intracranial pressure sign. DRAFT
+RF46,head_injury;lethargy,CRITICAL,Head injury + drowsiness. DRAFT
+RF47,trauma,HIGH,Injury needs assessment. DRAFT
+RF48,fracture,HIGH,Possible fracture. DRAFT
+RF49,compound_fracture,HIGH,Open fracture: bleeding and infection risk. DRAFT
+RF50,significant_wound,HIGH,Significant wound. DRAFT
+RF51,burns,HIGH,Burns need facility assessment. DRAFT
+RF52,assault,HIGH,Assault: occult injury. DRAFT
+RF53,fall,MEDIUM,Fall: possible injury. DRAFT
+RF54,wound,MEDIUM,Unspecified wound. DRAFT
+RF55,minor_wound,LOW,Minor wound. DRAFT
+RF56,swelling_post_trauma,MEDIUM,Swelling after injury. DRAFT
+RF57,pregnancy,LOW,Context code: pregnancy alone is not a symptom. DRAFT
+RF58,pregnancy;headache,HIGH,Pregnancy danger sign: severe headache (pre-eclampsia). DRAFT
+RF59,pregnancy;blurred_and_distorted_vision,HIGH,Pregnancy danger sign: blurred vision. DRAFT
+RF60,pregnancy;visual_disturbances,HIGH,Pregnancy danger sign: visual disturbance. DRAFT
+RF61,pregnancy;abdominal_pain,HIGH,Pregnancy danger sign: severe abdominal pain. DRAFT
+RF62,pregnancy;high_fever,HIGH,Pregnancy danger sign: fever. DRAFT
+RF63,pregnancy;puffy_face_and_eyes,HIGH,Pregnancy danger sign: swelling of face (pre-eclampsia). DRAFT
+RF64,pre_eclampsia,HIGH,Pre-eclampsia needs referral. DRAFT
+RF65,prolonged_labour,HIGH,Obstructed / prolonged labour. DRAFT
+RF66,retained_placenta,HIGH,Retained placenta: haemorrhage risk. DRAFT
+RF67,puerperal_sepsis,CRITICAL,Maternal sepsis. DRAFT
+RF68,severe_pallor,HIGH,IMCI severe palmar pallor: severe anaemia. DRAFT
+RF69,weak_pulse,HIGH,ETAT circulation: weak pulse (shock sign). DRAFT
+RF70,slow_breathing,HIGH,Possible respiratory depression. DRAFT
+RF71,low_blood_pressure,HIGH,Possible shock. DRAFT
+RF72,high_blood_pressure,MEDIUM,Hypertension needs review. DRAFT
+RF73,high_blood_pressure;headache,HIGH,Possible hypertensive urgency. DRAFT
+RF74,high_blood_pressure;visual_disturbances,HIGH,Possible hypertensive urgency. DRAFT
+RF75,kwashiorkor_signs,HIGH,IMCI severe malnutrition: urgent referral. DRAFT
+RF76,failure_to_thrive,MEDIUM,Growth failure. DRAFT
+RF77,bulging_fontanelle,CRITICAL,Infant meningitis sign. DRAFT
+RF78,abdominal_rigidity,CRITICAL,Rigid abdomen: peritonitis / surgical emergency. DRAFT
+RF79,coagulopathy,HIGH,Bleeding disorder. DRAFT
+RF80,haematuria,MEDIUM,Blood in urine. DRAFT
+RF81,necrosis,HIGH,Tissue necrosis. DRAFT
+RF82,tb_contact,MEDIUM,TB exposure. DRAFT
+RF83,tb_contact;cough,HIGH,TB contact with cough. DRAFT
+RF84,malaria_confirmed,HIGH,Confirmed malaria needs treatment today. DRAFT
+RF85,photophobia,MEDIUM,Possible meningism. DRAFT
+RF86,photophobia;high_fever,HIGH,Fever + photophobia: possible meningitis. DRAFT
+RF87,unable_to_sit,MEDIUM,Loss of function. DRAFT
+RF88,unable_to_stand,MEDIUM,Loss of function. DRAFT
+RF89,unable_to_walk,MEDIUM,Loss of function. DRAFT

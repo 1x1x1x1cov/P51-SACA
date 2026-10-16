@@ -8,6 +8,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.metrics import accuracy_score, f1_score, confusion_matrix, recall_score
 from sklearn.dummy import DummyClassifier
 from symptom_codes import to_v2_codes
+from classifier.symptom_codes import only_nonspecific
 
 LAB = ["LOW", "MEDIUM", "HIGH", "CRITICAL"]
 R = {l: i for i, l in enumerate(LAB)}
@@ -64,6 +65,26 @@ ACCEPT = [
  ("mild_fever cough", "MEDIUM", "fever"), ("fast_heart_rate", "MEDIUM", "tachycardia"),
  ("bloody_stool diarrhoea", "MEDIUM", "dysentery"), ("lethargy", "MEDIUM", "ETAT priority sign"),
  ("stiff_neck", "MEDIUM", "meningism"),
+ ("snake_bite", "HIGH", "snakebite needs facility"), ("snake_envenomation", "CRITICAL", "systemic envenoming"),
+ ("snake_bite breathlessness", "CRITICAL", "neurotoxic respiratory failure"),
+ ("head_injury vomiting", "CRITICAL", "raised intracranial pressure"), ("head_injury", "HIGH", "head injury"),
+ ("pregnancy headache", "HIGH", "pre-eclampsia sign"), ("pregnancy blurred_and_distorted_vision", "HIGH", "pre-eclampsia sign"),
+ ("pregnancy abdominal_pain", "HIGH", "pregnancy danger sign"), ("pre_eclampsia", "HIGH", "needs referral"),
+ ("puerperal_sepsis", "CRITICAL", "maternal sepsis"), ("bulging_fontanelle", "CRITICAL", "infant meningitis"),
+ ("abdominal_rigidity", "CRITICAL", "peritonitis"), ("weak_pulse", "HIGH", "shock sign"),
+ ("severe_pallor", "HIGH", "severe anaemia"), ("kwashiorkor_signs", "HIGH", "severe malnutrition"),
+ ("burns", "HIGH", "burns"), ("fracture", "HIGH", "fracture"), ("low_blood_pressure", "HIGH", "possible shock"),
+]
+# upper bounds: vague, non-specific symptoms must not be rated above MEDIUM
+ACCEPT_MAX = ["headache", "nausea", "vomiting", "fatigue", "cough", "headache nausea", "fatigue headache nausea",
+              "fatigue headache vomiting", "back_pain headache", "malaise muscle_pain", "abdominal_pain nausea vomiting"]
+EN = [  # English sentence, minimum acceptable severity
+ ("I cannot breathe and have crushing chest pain", "CRITICAL"), ("she coughed up blood this morning", "HIGH"),
+ ("my child is unconscious", "CRITICAL"), ("he has had a seizure", "CRITICAL"), ("blue lips and fast breathing", "CRITICAL"),
+ ("bitten by a snake yesterday", "HIGH"), ("he fell and hit his head and keeps vomiting", "CRITICAL"),
+ ("pregnant woman with headache and blurred vision", "HIGH"), ("child is floppy and has diarrhea and sunken eyes", "CRITICAL"),
+ ("stiff neck and high fever", "CRITICAL"), ("pain in my chest", "HIGH"), ("high fever and vomiting", "MEDIUM"),
+ ("just a mild headache", "LOW"), ("I have a cough", "LOW"),
 ]
 SW = [  # Swahili phrase, minimum acceptable severity
  ("mtoto hajitambui", "CRITICAL"), ("ana degedege", "CRITICAL"), ("ana homa na degedege", "CRITICAL"),
@@ -89,6 +110,10 @@ def main():
     pf = np.array([LAB[max(R[p], fl(t))] for p, t in zip(pred, te.symptom_text)])
     out.append("")
     report("v2 LR + red-flag floor on v2 test", te.severity, pf, out)
+    ceil = lambda p, t: min(R[p], 1) if (R[p] > 1 and only_nonspecific(t.split())) else R[p]
+    pa = np.array([LAB[max(ceil(p, t), fl(t))] for p, t in zip(pred, te.symptom_text)])
+    out.append("")
+    report("v2 LR + non-specific ceiling + red-flag floor (what the app returns) on v2 test", te.severity, pa, out)
     out.append("")
     for s in ("observed", "partial", "redflag"):
         k = te.source == s
@@ -120,21 +145,51 @@ def main():
     out.append("")
     run(m, "v2 model"); run(m1, "v1 model")
 
+    # upper bounds
+    def fin(codes):
+        """What the app returns: LR, non-specific ceiling, then red-flag floor."""
+        p = R[m.predict([codes])[0]]
+        if p > 1 and only_nonspecific(codes.split()):
+            p = 1
+        return LAB[max(p, floor(codes))]
+    lr_only_over = [c for c in ACCEPT_MAX if R[m.predict([c])[0]] > R["MEDIUM"]]
+    over = [c for c in ACCEPT_MAX if R[fin(c)] > R["MEDIUM"]]
+    out.append(f"non-specific upper-bound check: LR alone {len(ACCEPT_MAX)-len(lr_only_over)}/{len(ACCEPT_MAX)}; "
+               f"with the ceiling {len(ACCEPT_MAX)-len(over)}/{len(ACCEPT_MAX)} stay at or below MEDIUM"
+               + (": over " + "; ".join(over) if over else ""))
+
+    # English end-to-end
+    out.append("\nEnglish end-to-end (classifier.symptom_codes.read_input -> v2 codes -> LR + red-flag floor):")
+    from classifier.symptom_codes import read_input
+    from classifier.logistic_regression import SW_FUNCTION_WORDS
+    okE = 0
+    for ph, need in EN:
+        rd = read_input(ph)
+        if not rd.codes:
+            res, good = "NOT ASSESSED (no code)", False
+        else:
+            p = fin(" ".join(rd.codes))
+            left = [t for t in m.named_steps["v"].build_analyzer()(rd.residual) if t not in SW_FUNCTION_WORDS]
+            res = p + (f"  [words not understood: {','.join(left)}]" if left else "")
+            good = R[p] >= R[need] and not (p == "LOW" and left)
+        okE += good
+        out.append(f"   {'PASS' if good else 'FAIL'}  '{ph}' -> {rd.codes} -> {res}   (need >= {need})")
+    out.append(f"   English passes {okE}/{len(EN)}")
+
     # Swahili end-to-end
-    out.append("\nSwahili end-to-end (classifier.symptom_codes.read_swahili -> v2 codes -> LR + red-flag floor):")
+    out.append("\nSwahili end-to-end (classifier.symptom_codes.read_input -> v2 codes -> LR + red-flag floor):")
     ok = 0
     for ph, need in SW:
         codes, unmapped = to_v2_codes(ph)
         if not codes:
             res = "NOT ASSESSED (no v2 code)"; good = False
         else:
-            p = m.predict([" ".join(codes)])[0]
-            p = LAB[max(R[p], floor(" ".join(codes)))]
+            p = fin(" ".join(codes))
             res = p + (f"  [unmapped: {','.join(unmapped)}]" if unmapped else "")
             good = R[p] >= R[need]
         ok += good
         out.append(f"   {'PASS' if good else 'FAIL'}  '{ph}' -> {codes} -> {res}   (need >= {need})")
-    out.append(f"   Swahili passes {ok}/{len(SW)}  (LR + red-flag floor)")
+    out.append(f"   Swahili passes {ok}/{len(SW)}  (LR + ceiling + red-flag floor)")
     # coverage of team vocabulary
     xw = pd.read_csv("code_crosswalk.csv", keep_default_na=False)
     out.append("\ncrosswalk status of the team's 124 codes:\n" + xw.status.value_counts().to_string())
