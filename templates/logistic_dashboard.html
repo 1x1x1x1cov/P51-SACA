@@ -100,16 +100,6 @@
             border-left: 8px solid #dc2626;
         }
 
-        .NOTASSESSED {
-            background-color: #f3e8ff;
-            border-left: 8px solid #7c3aed;
-        }
-
-        .warn {
-            background-color: #fefce8;
-            border-left: 5px solid #eab308;
-        }
-
         .info {
             background-color: #f1f5f9;
             padding: 15px;
@@ -191,7 +181,15 @@
         Analyse Symptoms
     </button>
 
-    <a href="/body-map" class="map-btn">Body Map</a>
+    <a href="{{ url_for('body_map') }}" class="map-btn">
+    Body Map
+
+    <a href="{{ url_for('history') }}" class="map-btn">
+    History
+</a>
+</a>
+
+
 
 </form>
 
@@ -202,20 +200,11 @@
 
     {% if result %}
 
-    {% set not_assessed = result.get('assessed') is false %}
-
-    <div class="result {{ 'NOTASSESSED' if not_assessed else result['severity'] }}">
+    <div class="result {{ result['severity'] }}">
 
         <div class="severity">
-            {% if not_assessed %}NOT ASSESSED{% else %}{{ result['severity'] }}{% endif %}
+            {{ result['severity'] }}
         </div>
-
-        {% if not_assessed %}
-        <p>
-            <strong>The system could not understand this input well enough to rate it.
-            This is not a "low risk" result. Please see a health worker.</strong>
-        </p>
-        {% endif %}
 
 
         {% if result.get('confidence') is not none %}
@@ -237,28 +226,6 @@
             {{ result['reason'] }}
 
         </p>
-
-
-        {% if result.get('unrecognised') %}
-
-        <div class="info warn">
-
-            <strong>Words not understood:</strong>
-
-            {% for w in result['unrecognised'] %}
-            <span class="symptom">{{ w }}</span>
-            {% endfor %}
-
-            {% if not not_assessed %}
-            <p>
-                The result above only reflects the symptoms the system recognised.
-                If these words describe a serious problem, see a health worker.
-            </p>
-            {% endif %}
-
-        </div>
-
-        {% endif %}
 
 
         <!-- Extraction status -->
@@ -330,4 +297,4 @@
 
 </body>
 
-</html>
+</html>

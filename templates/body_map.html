@@ -140,7 +140,9 @@
 
 <div class="container">
 
-    <a href="/">Back to home</a>
+    <a href="{{ url_for('body_map') }}" class="map-btn">
+    Body Map
+</a>
 
     <h1>SACA Clinical Assistant</h1>
     <p>Tap the body part where you have a problem, then pick what you feel.</p>
@@ -377,6 +379,9 @@
             chips[i].classList.remove("selected");
         }
     }
+
+
+    
 </script>
 
 </body>
