@@ -1,300 +1,350 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SACA Clinical Assistant</title>
 
     <style>
+        * { box-sizing: border-box; }
 
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 40px;
-            background-color: #f4f6f8;
+            padding: 32px 20px;
+            background: #f4f6f8;
             color: #222;
         }
 
-        .container {
-            max-width: 900px;
-            margin: auto;
+        .container { max-width: 900px; margin: auto; }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
         }
 
-        h1 {
-            margin-bottom: 5px;
+        h1 { margin: 0; }
+
+        .language-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .subtitle {
-            color: #666;
-            margin-bottom: 30px;
+        select {
+            padding: 9px;
+            border: 1px solid #aaa;
+            border-radius: 6px;
+            background: white;
         }
+
+        .subtitle { color: #666; margin: 12px 0 28px; }
 
         .card {
             background: white;
             padding: 25px;
             border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            margin-bottom: 25px;
+            box-shadow: 0 2px 10px #0001;
+            margin-bottom: 24px;
         }
 
         textarea {
             width: 100%;
             min-height: 150px;
             padding: 15px;
-            box-sizing: border-box;
             border: 1px solid #ccc;
             border-radius: 8px;
-            font-size: 16px;
+            font: 16px Arial, sans-serif;
             resize: vertical;
         }
 
-        button {
-            margin-top: 15px;
-            padding: 12px 25px;
+        button, .map-btn {
+            display: inline-block;
+            margin: 15px 8px 0 0;
+            padding: 12px 20px;
             border: none;
             border-radius: 8px;
-            background-color: #2563eb;
+            background: #2563eb;
             color: white;
             font-size: 16px;
             cursor: pointer;
+            text-decoration: none;
         }
 
-        button:hover {
-            background-color: #1d4ed8;
-        }
+        button:hover, .map-btn:hover { background: #1d4ed8; }
 
         .result {
             padding: 25px;
             border-radius: 12px;
             margin-top: 20px;
+            overflow-wrap: anywhere;
         }
 
-        .severity {
-            font-size: 34px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
+        .severity { font-size: 30px; font-weight: bold; }
 
-        .LOW {
-            background-color: #dcfce7;
-            border-left: 8px solid #16a34a;
-        }
-
-        .MEDIUM {
-            background-color: #fef9c3;
-            border-left: 8px solid #eab308;
-        }
-
-        .HIGH {
-            background-color: #ffedd5;
-            border-left: 8px solid #f97316;
-        }
-
-        .CRITICAL {
-            background-color: #fee2e2;
-            border-left: 8px solid #dc2626;
-        }
+        .LOW { background: #dcfce7; border-left: 8px solid #16a34a; }
+        .MEDIUM { background: #fef9c3; border-left: 8px solid #eab308; }
+        .HIGH { background: #ffedd5; border-left: 8px solid #f97316; }
+        .CRITICAL { background: #fee2e2; border-left: 8px solid #dc2626; }
 
         .info {
-            background-color: #f1f5f9;
+            background: #f1f5f9;
             padding: 15px;
             border-radius: 8px;
             margin-top: 15px;
         }
 
-        .fallback {
-            background-color: #fff7ed;
-            border-left: 5px solid #f97316;
-        }
-
-        .success {
-            background-color: #f0fdf4;
-            border-left: 5px solid #16a34a;
-        }
+        .fallback { background: #fff7ed; border-left: 5px solid #f97316; }
+        .success { background: #f0fdf4; border-left: 5px solid #16a34a; }
 
         .symptom {
             display: inline-block;
-            background-color: #e5e7eb;
+            background: #e5e7eb;
             padding: 6px 10px;
             border-radius: 6px;
             margin: 4px;
         }
 
-        .confidence {
-            font-size: 18px;
-            font-weight: bold;
-        }
+        .confidence { font-size: 18px; font-weight: bold; }
 
-        .map-btn {
-            display: inline-block;
-            margin-left: 15px;
-            padding: 12px 25px;
-            border-radius: 8px;
-            background-color: #1d4ed8;
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
+        @media (max-width: 600px) {
+            body { padding: 20px 12px; }
+            .topbar { align-items: flex-start; flex-direction: column; }
+            .card, .result { padding: 18px; }
         }
-
     </style>
-
 </head>
 
-
 <body>
-
 <div class="container">
 
-    <h1>SACA Clinical Assistant</h1>
+    <header>
+        <div class="topbar">
+            <h1 id="title">SACA Clinical Assistant</h1>
 
-    <p class="subtitle">
-        Logistic Regression Clinical Severity Classifier
-    </p>
+            <div class="language-control">
+                <label for="language" id="language-label">Language:</label>
+                <select id="language" onchange="changeLanguage()">
+                    <option value="en">English</option>
+                    <option value="sw">Kiswahili</option>
+                </select>
+            </div>
+        </div>
 
+        <p class="subtitle" id="subtitle">
+            Logistic Regression Clinical Severity Classifier
+        </p>
+    </header>
 
-    <!-- INPUT -->
-
-    <div class="card">
-
+    <section class="card">
         <form method="POST">
+            <label for="symptom_text" id="symptom-label">
+                <strong>Patient symptoms</strong>
+            </label>
+            <br><br>
 
-    <label for="symptom_text">
-        <strong>Patient symptoms</strong>
-    </label>
+            <textarea
+                id="symptom_text"
+                name="symptom_text"
+                placeholder="Example: The patient has a high fever, vomiting and abdominal pain."
+            >{{ symptom_text | e }}</textarea>
 
-    <br><br>
+            <br>
 
-    <textarea
-        id="symptom_text"
-        name="symptom_text"
-        placeholder="Example: The patient has a high fever, vomiting and abdominal pain."
-    >{{ symptom_text }}</textarea>
+            <button type="submit" id="analyse-button">
+                Analyse Symptoms
+            </button>
 
-    <br>
+            <a href="{{ url_for('body_map') }}" class="map-btn" id="body-map-link">
+                Body Map
+            </a>
 
-    <button type="submit">
-        Analyse Symptoms
-    </button>
-
-    <a href="{{ url_for('body_map') }}" class="map-btn">
-    Body Map
-
-    <a href="{{ url_for('history') }}" class="map-btn">
-    History
-</a>
-</a>
-
-
-
-</form>
-
-    </div>
-
-
-    <!-- RESULT -->
+            <a href="{{ url_for('history') }}" class="map-btn" id="history-link">
+                History
+            </a>
+        </form>
+    </section>
 
     {% if result %}
-
-    <div class="result {{ result['severity'] }}">
+    <section class="result {{ result['severity'] | e }}">
 
         <div class="severity">
-            {{ result['severity'] }}
-        </div>
+            <span id="severity-label">Severity:</span>
 
+            <span id="severity-value">{{ result['severity'] | e }}</span>
+            <span id="severity-swahili" hidden></span>
+        </div>
 
         {% if result.get('confidence') is not none %}
-
         <div class="confidence">
-
-            Confidence:
+            <span id="confidence-label">Confidence:</span>
             {{ "%.1f"|format(result['confidence'] * 100) }}%
-
         </div>
-
         {% endif %}
-
 
         <p>
-
-            <strong>Reason:</strong>
-
-            {{ result['reason'] }}
-
+            <strong id="reason-label">Reason:</strong>
+            {{ result['reason'] | e }}
         </p>
 
-
-        <!-- Extraction status -->
-
         {% if result.get('fallback_used') %}
-
         <div class="info fallback">
-
-            <strong>Offline fallback used</strong>
-
-            <p>
+            <strong id="fallback-title">Offline fallback used</strong>
+            <p id="fallback-message">
                 Symptom extraction was unavailable or failed.
-                The original patient text was passed directly
-                to the Logistic Regression classifier.
+                The original patient text was passed directly to the
+                Logistic Regression classifier.
             </p>
-
         </div>
-
         {% else %}
-
         <div class="info success">
-
-            <strong>Symptom extraction successful</strong>
+            <strong id="extraction-title">Symptom extraction successful</strong>
 
             {% if result.get('extracted_text') %}
-
             <p>
-
-                <strong>Extracted symptoms:</strong>
-
-                {{ result['extracted_text'] }}
-
+                <strong id="extracted-label">Extracted symptoms:</strong>
+                {{ result['extracted_text'] | e }}
             </p>
-
             {% endif %}
-
         </div>
-
         {% endif %}
 
-
-        <!-- Detected symptoms -->
-
         {% if result.get('symptoms') %}
-
         <div class="info">
-
-            <strong>Classifier input:</strong>
-
+            <strong id="classifier-input-label">Classifier input:</strong>
             <br><br>
 
             {% for symptom in result['symptoms'] %}
-
-            <span class="symptom">
-                {{ symptom }}
-            </span>
-
+            <span class="symptom">{{ symptom | e }}</span>
             {% endfor %}
-
         </div>
-
         {% endif %}
 
-    </div>
-
+    </section>
     {% endif %}
 
 </div>
 
-</body>
+<script>
+const translations = {
+    en: {
+        title: "SACA Clinical Assistant",
+        subtitle: "Logistic Regression Clinical Severity Classifier",
+        language: "Language:",
+        symptomLabel: "Patient symptoms",
+        placeholder: "Example: The patient has a high fever, vomiting and abdominal pain.",
+        analyse: "Analyse Symptoms",
+        bodyMap: "Body Map",
+        history: "History",
+        severity: "Severity:",
+        confidence: "Confidence:",
+        reason: "Reason:",
+        fallbackTitle: "Offline fallback used",
+        fallbackMessage: "Symptom extraction was unavailable or failed. The original patient text was passed directly to the Logistic Regression classifier.",
+        extractionTitle: "Symptom extraction successful",
+        extracted: "Extracted symptoms:",
+        classifierInput: "Classifier input:",
+        levels: {
+            LOW: "LOW",
+            MEDIUM: "MEDIUM",
+            HIGH: "HIGH",
+            CRITICAL: "CRITICAL"
+        }
+    },
 
+    sw: {
+        title: "Msaidizi wa Kliniki wa SACA",
+        subtitle: "Mfumo wa kutathmini ukali wa dalili",
+        language: "Lugha:",
+        symptomLabel: "Dalili za mgonjwa",
+        placeholder: "Mfano: Mgonjwa ana homa kali, kutapika na maumivu ya tumbo.",
+        analyse: "Changanua Dalili",
+        bodyMap: "Ramani ya Mwili",
+        history: "Historia",
+        severity: "Kiwango cha ukali:",
+        confidence: "Kiwango cha uhakika:",
+        reason: "Sababu:",
+        fallbackTitle: "Mfumo mbadala wa nje ya mtandao umetumika",
+        fallbackMessage: "Uchimbaji wa dalili haukupatikana au haukufaulu. Maelezo ya awali ya mgonjwa yalitumwa moja kwa moja kwa mfumo wa Logistic Regression.",
+        extractionTitle: "Uchimbaji wa dalili umefaulu",
+        extracted: "Dalili zilizotolewa:",
+        classifierInput: "Ingizo la mfumo wa uainishaji:",
+        levels: {
+            LOW: "CHINI",
+            MEDIUM: "WASTANI",
+            HIGH: "JUU",
+            CRITICAL: "HATARI KUBWA"
+        }
+    }
+};
+
+function changeLanguage() {
+    const language = document.getElementById("language").value;
+    const t = translations[language] || translations.en;
+
+    function setText(id, value) {
+        const element = document.getElementById(id);
+        if (element) element.textContent = value;
+    }
+
+    setText("title", t.title);
+    setText("subtitle", t.subtitle);
+    setText("language-label", t.language);
+    setText("symptom-label", t.symptomLabel);
+    setText("analyse-button", t.analyse);
+    setText("body-map-link", t.bodyMap);
+    setText("history-link", t.history);
+    setText("severity-label", t.severity);
+    setText("confidence-label", t.confidence);
+    setText("reason-label", t.reason);
+    setText("fallback-title", t.fallbackTitle);
+    setText("fallback-message", t.fallbackMessage);
+    setText("extraction-title", t.extractionTitle);
+    setText("extracted-label", t.extracted);
+    setText("classifier-input-label", t.classifierInput);
+
+    const input = document.getElementById("symptom_text");
+    if (input) input.placeholder = t.placeholder;
+
+    const severity = document.getElementById("severity-value");
+    const translatedSeverity = document.getElementById("severity-swahili");
+
+    if (severity && translatedSeverity) {
+        if (language === "sw") {
+            translatedSeverity.textContent =
+                t.levels[severity.textContent.trim()] || severity.textContent;
+            severity.hidden = true;
+            translatedSeverity.hidden = false;
+        } else {
+            severity.hidden = false;
+            translatedSeverity.hidden = true;
+        }
+    }
+
+    document.documentElement.lang = language;
+
+    try {
+        localStorage.setItem("sacaLanguage", language);
+    } catch (error) {
+        // Language switching still works if storage is unavailable.
+    }
+}
+
+window.addEventListener("DOMContentLoaded", function () {
+    let language = "en";
+
+    try {
+        language = localStorage.getItem("sacaLanguage") || "en";
+    } catch (error) {
+        // Use English by default.
+    }
+
+    document.getElementById("language").value = language;
+    changeLanguage();
+});
+</script>
+</body>
 </html>

@@ -1,9 +1,12 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SACA - Saved Analysis</title>
+    <title>SACA - Analysis Details</title>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,70 +17,260 @@
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: auto;
+        }
+
+        .language-bar {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .language-bar select {
+            padding: 8px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 15px;
+            background: white;
         }
 
         .card {
             background: white;
-            padding: 25px;
-            margin: 20px 0;
+            padding: 24px;
+            margin: 18px 0;
             border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-        }
-
-        .LOW { border-left: 8px solid #16a34a; }
-        .MEDIUM { border-left: 8px solid #eab308; }
-        .HIGH { border-left: 8px solid #f97316; }
-        .CRITICAL { border-left: 8px solid #dc2626; }
-
-        .text {
-            white-space: pre-wrap;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
             overflow-wrap: anywhere;
         }
 
-        a {
-            color: #2563eb;
+        .button {
+            display: inline-block;
+            padding: 10px 16px;
+            margin: 10px 8px 0 0;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+        }
+
+        .button:hover {
+            background: #1d4ed8;
+        }
+
+        .LOW {
+            color: #15803d;
+        }
+
+        .MEDIUM {
+            color: #a16207;
+        }
+
+        .HIGH {
+            color: #c2410c;
+        }
+
+        .CRITICAL {
+            color: #b91c1c;
+        }
+
+        .muted {
+            color: #666;
+        }
+
+        .symptoms {
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            background: #f8fafc;
+            padding: 14px;
+            border-radius: 8px;
+        }
+
+        .detail-row {
+            margin: 18px 0;
+        }
+
+        .detail-row strong {
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 15px;
+            }
+
+            .card {
+                padding: 16px;
+            }
         }
     </style>
 </head>
+
 <body>
 <div class="container">
-    <p><a href="{{ url_for('history') }}">← Back to History</a></p>
 
-    <div class="card {{ record.severity or '' }}">
-        <h1>{{ record.severity or 'No severity recorded' }}</h1>
-        <p><strong>Date:</strong> {{ record.created_at }}</p>
+    <!-- Language selector -->
+    <div class="language-bar">
+        <label for="languageSelect"
+               data-en="Language:"
+               data-sw="Lugha:">
+            Language:
+        </label>
 
-        {% if record.confidence is not none %}
-        <p><strong>Confidence:</strong>
-            {{ "%.1f"|format(record.confidence * 100) }}%
-        </p>
-        {% endif %}
-
-        <h3>Original Symptoms</h3>
-        <p class="text">{{ record.symptom_text }}</p>
-
-        <h3>Reason</h3>
-        <p class="text">{{ record.reason or 'Not recorded' }}</p>
-
-        <h3>Extracted Text</h3>
-        <p class="text">{{ record.extracted_text or 'Not recorded' }}</p>
-
-        <h3>Detected Symptoms</h3>
-        <p class="text">{{ record.symptoms or 'Not recorded' }}</p>
-
-        <h3>Extraction Status</h3>
-        <p>
-            {% if record.fallback_used %}
-                Offline fallback used
-            {% else %}
-                Normal extraction path used
-            {% endif %}
-        </p>
+        <select id="languageSelect">
+            <option value="en">English</option>
+            <option value="sw">Kiswahili</option>
+        </select>
     </div>
 
-    <a href="/">Return to Dashboard</a>
+    <h1 data-en="Analysis Details"
+        data-sw="Maelezo ya Uchambuzi">
+        Analysis Details
+    </h1>
+
+    <p class="muted"
+       data-en="Detailed information about this saved symptom analysis."
+       data-sw="Maelezo ya kina kuhusu uchambuzi huu wa dalili uliohifadhiwa.">
+        Detailed information about this saved symptom analysis.
+    </p>
+
+    <a class="button"
+       href="{{ url_for('history') }}"
+       data-en="Back to History"
+       data-sw="Rudi kwenye Historia">
+        Back to History
+    </a>
+
+    <a class="button"
+       href="{{ url_for('dashboard') }}"
+       data-en="Back to Dashboard"
+       data-sw="Rudi kwenye Dashibodi">
+        Back to Dashboard
+    </a>
+
+    <div class="card">
+
+        <!-- Record date -->
+        <div class="detail-row">
+            <strong data-en="Date:"
+                     data-sw="Tarehe:">
+                Date:
+            </strong>
+
+            <span>{{ record.created_at }}</span>
+        </div>
+
+        <!-- Severity -->
+        <div class="detail-row">
+            <strong data-en="Severity:"
+                     data-sw="Kiwango cha ukali:">
+                Severity:
+            </strong>
+
+            <h2 class="{{ record.severity or '' }}">
+                {% if record.severity == 'LOW' %}
+                    <span data-en="LOW"
+                          data-sw="CHINI">LOW</span>
+
+                {% elif record.severity == 'MEDIUM' %}
+                    <span data-en="MEDIUM"
+                          data-sw="WASTANI">MEDIUM</span>
+
+                {% elif record.severity == 'HIGH' %}
+                    <span data-en="HIGH"
+                          data-sw="JUU">HIGH</span>
+
+                {% elif record.severity == 'CRITICAL' %}
+                    <span data-en="CRITICAL"
+                          data-sw="HATARI KUBWA">CRITICAL</span>
+
+                {% else %}
+                    <span data-en="No severity recorded"
+                          data-sw="Hakuna kiwango cha ukali kilichorekodiwa">
+                        No severity recorded
+                    </span>
+                {% endif %}
+            </h2>
+        </div>
+
+        <!-- Symptoms -->
+        <div class="detail-row">
+            <strong data-en="Symptoms entered:"
+                     data-sw="Dalili zilizoingizwa:">
+                Symptoms entered:
+            </strong>
+
+            <p class="symptoms">{{ record.symptom_text }}</p>
+        </div>
+
+        <!-- Confidence -->
+        {% if record.confidence is not none %}
+        <div class="detail-row">
+            <strong data-en="Confidence:"
+                     data-sw="Kiwango cha uhakika:">
+                Confidence:
+            </strong>
+
+            <span>{{ "%.1f"|format(record.confidence * 100) }}%</span>
+        </div>
+        {% endif %}
+
+        <!-- Record ID -->
+        <div class="detail-row">
+            <strong data-en="Record ID:"
+                     data-sw="Nambari ya rekodi:">
+                Record ID:
+            </strong>
+
+            <span>{{ record.id }}</span>
+        </div>
+
+    </div>
+
 </div>
+
+<script>
+    // Use the same language setting as the other SACA pages.
+    function getSavedLanguage() {
+        return localStorage.getItem("sacaLanguage") || "en";
+    }
+
+    function applyLanguage(language) {
+        document.documentElement.lang = language;
+
+        document.querySelectorAll("[data-en][data-sw]").forEach(element => {
+            element.textContent =
+                language === "sw"
+                    ? element.dataset.sw
+                    : element.dataset.en;
+        });
+
+        const selector = document.getElementById("languageSelect");
+
+        if (selector) {
+            selector.value = language;
+        }
+
+        document.title = language === "sw"
+            ? "SACA - Maelezo ya Uchambuzi"
+            : "SACA - Analysis Details";
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const selector = document.getElementById("languageSelect");
+
+        // Restore the language selected on another SACA page.
+        applyLanguage(getSavedLanguage());
+
+        // Save language changes for all SACA pages.
+        selector.addEventListener("change", function () {
+            const language = selector.value;
+
+            localStorage.setItem("sacaLanguage", language);
+            applyLanguage(language);
+        });
+    });
+</script>
+
 </body>
 </html>
