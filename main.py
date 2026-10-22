@@ -1,6 +1,7 @@
-from fastapi import FastAPI
+﻿from fastapi import FastAPI
 from pydantic import BaseModel
-from classifier.logistic_regression import LogisticRegressionClassifier
+from classifier.pipeline import SACAPipeline
+from classifier.llm_extractor import extract_symptoms
 
 from database import (
     init_db,
@@ -13,35 +14,33 @@ from database import (
 from keywords import SYMPTOM_MAP, SYMPTOM_DESCRIPTIONS
 from fastapi.middleware.cors import CORSMiddleware
 from ammu_api import router as ammu_router
+from voice_api import router as voice_router
 from fastapi.responses import FileResponse
 
 
 app = FastAPI(title="SACA - Smart Adaptive Clinical Assistant")
 app.include_router(ammu_router)
+app.include_router(voice_router)  # POST /transcribe (voice input)
 
 
-# Active classifier for this endpoint. Logistic Regression is the sole
-# classifier per the team's 2026-09-11 decision (see the project handoff
-# doc's "TEAM AND SCOPE CHANGE" section): SVM was dropped (predicts
-# identically to LR, LR has a native confidence interface), Random Forest
-# was cancelled, and rule_based.py was explicitly retired from the app --
-# not kept even as a safety-net check, a tradeoff the team weighed and
-# accepted. rule_based.py, rule_based_en.py and svm.py stay in classifier/
-# for score_classifiers.py's comparison scoring (that's a real, separate
-# purpose, not dead code), but this is the only classifier the live
-# /classify endpoint (and the AMMU endpoint below) uses.
+# Classification pipeline for /classify: LLM symptom extraction -> Logistic
+# Regression. SACAPipeline builds its own LogisticRegressionClassifier(), which
+# remains the SOLE classifier per the team's 2026-09-11 decision (SVM dropped,
+# Random Forest cancelled, rule_based.py retired from the live app). The LLM
+# (classifier/llm_extractor.py) only turns free text into known symptom tokens;
+# it never decides severity. If extraction fails, times out, or finds nothing,
+# the pipeline classifies the raw text instead (fallback_used=True).
 #
-# NOTE (2026-09-23): this line was previously reverted back to
-# RuleBasedClassifier() by a bad merge (commit a236f56) that pulled in
-# Shayan's AMMU branch, which had forked from a commit predating this
-# decision. Fixed again here -- if you're reading this while investigating
-# another regression, check `git log --graph -- main.py` for a repeat.
+# REVIEW ON EVERY MERGE THAT TOUCHES THIS FILE: a bad merge already reverted
+# this to RuleBasedClassifier() once (2026-09-23, commit a236f56). Check that
+# the pipeline below is still SACAPipeline and that classifier/pipeline.py
+# still constructs LogisticRegressionClassifier().
 #
-# Trained eagerly here (not lazily on first request) so a missing/bad
-# saca_train.csv fails loudly at startup instead of on someone's first
-# API call.
-active_classifier = LogisticRegressionClassifier()
-active_classifier.train()
+# The classifier is trained eagerly here (not lazily on first request) so a
+# missing/bad saca_train.csv fails loudly at startup instead of on someone's
+# first API call.
+pipeline = SACAPipeline(extractor=extract_symptoms)
+pipeline.classifier.train()
 
 
 app.add_middleware(
@@ -66,7 +65,7 @@ class SyncConfirmRequest(BaseModel):
 @app.post("/classify")
 def classify_symptoms(data: SymptomInput):
 
-    result = active_classifier.classify(data.symptom_text)
+    result = pipeline.classify(data.symptom_text)
 
     save_session(
         symptom_text=data.symptom_text,
@@ -158,6 +157,12 @@ def get_keywords():
 def root():
     return {"message": "SACA API is running"}
 
+
 @app.get("/ammu")
 def ammu_page():
     return FileResponse("ammu.html")
+
+
+@app.get("/voice.js")
+def voice_js():
+    return FileResponse("voice_input.js", media_type="application/javascript")
