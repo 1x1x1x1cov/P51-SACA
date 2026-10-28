@@ -110,10 +110,16 @@
 
         .confidence { font-size: 18px; font-weight: bold; }
 
+        .redflag {
+            background-color: #fef2f2;
+            border-left: 5px solid #dc2626;
+        }
+
         @media (max-width: 600px) {
             body { padding: 20px 12px; }
             .topbar { align-items: flex-start; flex-direction: column; }
             .card, .result { padding: 18px; }
+        }
         }
     </style>
 </head>
@@ -189,6 +195,17 @@
             <strong id="reason-label">Reason:</strong>
             {{ result['reason'] | e }}
         </p>
+        {% if result.get('override_applied') %}
+        <div class="info redflag">
+            <strong>Red flag detected: {{ result['red_flags']|join(', ') }}</strong>
+            <p>
+                The classifier alone predicted {{ result['model_severity'] }}, but these
+                danger signs raise the result to {{ result['severity'] }}.
+            </p>
+        </div>
+        {% endif %}
+
+        <!-- Extraction status -->
 
         {% if result.get('fallback_used') %}
         <div class="info fallback">
@@ -346,5 +363,11 @@ window.addEventListener("DOMContentLoaded", function () {
     changeLanguage();
 });
 </script>
+
+<!-- YOUR VOICE FEATURE IS KEPT HERE AT THE BOTTOM -->
+<script src="/voice.js" data-target="symptom_text"></script>
+
+</body>
+</html>
 </body>
 </html>

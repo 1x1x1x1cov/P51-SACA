@@ -1,8 +1,6 @@
-
 import os
 import sys
-
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_from_directory
 
 from classifier.pipeline import SACAPipeline
 from classifier.llm_extractor import extract_symptoms
@@ -26,10 +24,16 @@ app = Flask(
     template_folder=template_folder
 )
 
+# --- IMPORT AND REGISTER THE VOICE BLUEPRINT ---
+from voice_flask import voice_bp
+app.register_blueprint(voice_bp)
 
+# Create the SACA classification pipeline
+pipeline = SACAPipeline(
 pipeline = SACAPipeline(
     extractor=extract_symptoms
 )
+pipeline.classifier.train()
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -64,6 +68,11 @@ def dashboard():
     )
 
 
+# --- ROUTE TO SERVE THE VOICE SCRIPT ---
+@app.route('/voice.js')
+def serve_voice_js():
+    return send_from_directory(os.getcwd(), 'voice_input.js', mimetype='application/javascript')
+
 @app.route("/body-map")
 def body_map():
     return render_template("body_map.html")
@@ -90,7 +99,6 @@ def history_detail(record_id):
         "history_detail.html",
         record=record
     )
-
 
 if __name__ == "__main__":
     app.run(
