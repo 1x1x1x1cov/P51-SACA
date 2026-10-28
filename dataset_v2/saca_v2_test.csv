@@ -1,0 +1,1656 @@
+symptom_text,severity,source,n_symptoms
+abdominal_pain,MEDIUM,partial,1
+abdominal_pain abdominal_rigidity loss_of_appetite,CRITICAL,redflag,3
+abdominal_pain acute_liver_failure coma dark_urine fatigue high_fever joint_pain loss_of_appetite nausea stomach_bleeding vomiting yellowing_of_eyes,CRITICAL,observed,12
+abdominal_pain acute_liver_failure coma dark_urine fatigue high_fever joint_pain loss_of_appetite nausea stomach_bleeding yellowing_of_eyes yellowish_skin,CRITICAL,observed,12
+abdominal_pain acute_liver_failure dizziness,CRITICAL,redflag,3
+abdominal_pain acute_liver_failure fatigue,CRITICAL,partial,3
+abdominal_pain altered_sensorium back_pain,CRITICAL,redflag,3
+abdominal_pain back_pain dehydration diarrhoea,HIGH,redflag,4
+abdominal_pain back_pain head_injury lethargy,CRITICAL,redflag,4
+abdominal_pain belly_pain chills constipation diarrhoea fatigue headache high_fever toxic_look_(typhos) vomiting,HIGH,observed,10
+abdominal_pain belly_pain constipation,HIGH,partial,3
+abdominal_pain belly_pain pregnancy,HIGH,redflag,3
+abdominal_pain bloody_stool,MEDIUM,redflag,2
+abdominal_pain bulging_fontanelle,CRITICAL,redflag,2
+abdominal_pain chest_pain fast_heart_rate,CRITICAL,redflag,3
+abdominal_pain cold_extremities loss_of_appetite,CRITICAL,redflag,3
+abdominal_pain coma dark_urine,CRITICAL,partial,3
+abdominal_pain coma stomach_bleeding,CRITICAL,partial,3
+abdominal_pain coma yellowish_skin,CRITICAL,partial,3
+abdominal_pain constipation fatigue,HIGH,partial,3
+abdominal_pain constipation headache,HIGH,partial,3
+abdominal_pain convulsions,CRITICAL,redflag,2
+abdominal_pain cough head_injury,HIGH,redflag,3
+abdominal_pain cough joint_pain pregnancy,HIGH,redflag,4
+abdominal_pain cough minor_wound,LOW,redflag,3
+abdominal_pain cough nausea tb_contact,HIGH,redflag,4
+abdominal_pain dark_urine fatigue high_fever itching vomiting yellowish_skin,MEDIUM,observed,7
+abdominal_pain dark_urine fatigue joint_pain loss_of_appetite nausea vomiting yellowing_of_eyes,HIGH,observed,8
+abdominal_pain dark_urine fatigue joint_pain loss_of_appetite nausea vomiting yellowish_skin,HIGH,observed,8
+abdominal_pain dark_urine fatigue lethargy loss_of_appetite malaise receiving_blood_transfusion receiving_unsterile_injections yellow_urine yellowing_of_eyes yellowish_skin,MEDIUM,observed,11
+abdominal_pain dark_urine high_fever itching vomiting weight_loss yellowish_skin,MEDIUM,observed,7
+abdominal_pain dark_urine lethargy,MEDIUM,partial,3
+abdominal_pain dark_urine mild_fever,MEDIUM,partial,3
+abdominal_pain dark_urine muscle_pain,MEDIUM,partial,3
+abdominal_pain dark_urine receiving_blood_transfusion,MEDIUM,partial,3
+abdominal_pain dark_urine yellowing_of_eyes,MEDIUM,partial,3
+abdominal_pain diarrhoea,MEDIUM,partial,2
+abdominal_pain diarrhoea loss_of_appetite,MEDIUM,partial,3
+abdominal_pain diarrhoea muscle_pain,MEDIUM,partial,3
+abdominal_pain diarrhoea vomiting,MEDIUM,partial,3
+abdominal_pain distention_of_abdomen fluid_overload history_of_alcohol_consumption vomiting yellowish_skin,HIGH,observed,6
+abdominal_pain distention_of_abdomen history_of_alcohol_consumption,HIGH,partial,3
+abdominal_pain dizziness malaise pregnancy,HIGH,redflag,4
+abdominal_pain dizziness snake_bite,HIGH,redflag,3
+abdominal_pain fall,MEDIUM,redflag,2
+abdominal_pain fall vomiting,MEDIUM,redflag,3
+abdominal_pain fatigue high_fever itching vomiting weight_loss yellowish_skin,MEDIUM,observed,7
+abdominal_pain fatigue pregnancy vomiting,HIGH,redflag,4
+abdominal_pain fatigue severe_pallor,HIGH,redflag,3
+abdominal_pain fatigue unable_to_walk,MEDIUM,redflag,3
+abdominal_pain fatigue yellow_urine,MEDIUM,partial,3
+abdominal_pain fatigue yellowish_skin,MEDIUM,partial,3
+abdominal_pain head_injury nausea vomiting,CRITICAL,redflag,4
+abdominal_pain headache pregnancy vomiting,HIGH,redflag,4
+abdominal_pain headache snake_bite,HIGH,redflag,3
+abdominal_pain headache vomiting,MEDIUM,partial,3
+abdominal_pain high_blood_pressure loss_of_appetite,MEDIUM,redflag,3
+abdominal_pain high_fever,MEDIUM,partial,2
+abdominal_pain high_fever itching,MEDIUM,partial,3
+abdominal_pain high_fever joint_pain,MEDIUM,partial,3
+abdominal_pain high_fever joint_pain stiff_neck,CRITICAL,redflag,4
+abdominal_pain high_fever malaise pregnancy,HIGH,redflag,4
+abdominal_pain high_fever photophobia vomiting,HIGH,redflag,4
+abdominal_pain history_of_alcohol_consumption,HIGH,partial,2
+abdominal_pain internal_itching,MEDIUM,partial,2
+abdominal_pain internal_itching passage_of_gases,MEDIUM,partial,3
+abdominal_pain itching nausea vomiting yellowing_of_eyes yellowish_skin,MEDIUM,observed,6
+abdominal_pain itching yellow_urine,MEDIUM,partial,3
+abdominal_pain itching yellowing_of_eyes,MEDIUM,partial,3
+abdominal_pain itching yellowish_skin,MEDIUM,partial,3
+abdominal_pain joint_pain malaise pregnancy,HIGH,redflag,4
+abdominal_pain joint_pain photophobia,MEDIUM,redflag,3
+abdominal_pain joint_pain pregnancy,HIGH,redflag,3
+abdominal_pain joint_pain snake_envenomation,CRITICAL,redflag,3
+abdominal_pain joint_pain stomach_bleeding,HIGH,partial,3
+abdominal_pain joint_pain vomiting,MEDIUM,partial,3
+abdominal_pain lethargy,MEDIUM,partial,2
+abdominal_pain lethargy yellow_urine,MEDIUM,partial,3
+abdominal_pain loss_of_appetite nausea,MEDIUM,partial,3
+abdominal_pain loss_of_appetite nausea vomiting yellowing_of_eyes yellowish_skin,MEDIUM,observed,6
+abdominal_pain loss_of_appetite pregnancy,HIGH,redflag,3
+abdominal_pain loss_of_appetite prolonged_labour,HIGH,redflag,3
+abdominal_pain loss_of_appetite stomach_bleeding,HIGH,partial,3
+abdominal_pain loss_of_appetite yellowing_of_eyes,MEDIUM,partial,3
+abdominal_pain loss_of_balance slurred_speech vomiting,CRITICAL,redflag,4
+abdominal_pain malaise receiving_unsterile_injections,MEDIUM,partial,3
+abdominal_pain malaise yellow_urine,MEDIUM,partial,3
+abdominal_pain malaria_confirmed,HIGH,redflag,2
+abdominal_pain mild_fever muscle_pain,MEDIUM,partial,3
+abdominal_pain mild_fever vomiting,MEDIUM,partial,3
+abdominal_pain mild_fever yellowing_of_eyes,MEDIUM,partial,3
+abdominal_pain minor_wound,LOW,redflag,2
+abdominal_pain minor_wound muscle_pain,LOW,redflag,3
+abdominal_pain muscle_pain photophobia,MEDIUM,redflag,3
+abdominal_pain muscle_pain vomiting,MEDIUM,partial,3
+abdominal_pain nausea,MEDIUM,partial,2
+abdominal_pain nausea severe_respiratory_distress,CRITICAL,redflag,3
+abdominal_pain nausea toxic_look_(typhos),HIGH,partial,3
+abdominal_pain pregnancy slurred_speech,HIGH,redflag,3
+abdominal_pain pregnancy weight_loss,HIGH,redflag,3
+abdominal_pain severe_pallor,HIGH,redflag,2
+abdominal_pain significant_wound,HIGH,redflag,2
+abdominal_pain slow_breathing,HIGH,redflag,2
+abdominal_pain slurred_speech vomiting weakness_in_limbs,CRITICAL,redflag,4
+abdominal_pain stomach_bleeding,HIGH,partial,2
+abdominal_pain swelling_of_stomach yellowish_skin,HIGH,partial,3
+abdominal_pain tb_contact,MEDIUM,redflag,2
+abdominal_pain unable_to_drink vomiting,CRITICAL,redflag,3
+abdominal_pain unable_to_walk,MEDIUM,redflag,2
+abdominal_pain vomiting vomits_everything,CRITICAL,redflag,3
+abdominal_pain vomiting weight_loss,MEDIUM,partial,3
+abdominal_pain yellow_urine yellowing_of_eyes,MEDIUM,partial,3
+abdominal_rigidity abnormal_menstruation,CRITICAL,redflag,2
+abdominal_rigidity constipation,CRITICAL,redflag,2
+abdominal_rigidity cough,CRITICAL,redflag,2
+abdominal_rigidity dizziness,CRITICAL,redflag,2
+abdominal_rigidity headache,CRITICAL,redflag,2
+abdominal_rigidity joint_pain,CRITICAL,redflag,2
+abdominal_rigidity joint_pain malaise,CRITICAL,redflag,3
+abdominal_rigidity lethargy,CRITICAL,redflag,2
+abdominal_rigidity loss_of_appetite muscle_pain,CRITICAL,redflag,3
+abdominal_rigidity pus_filled_pimples,CRITICAL,redflag,2
+abnormal_menstruation blood_in_sputum,HIGH,redflag,2
+abnormal_menstruation brittle_nails cold_hands_and_feets,LOW,partial,3
+abnormal_menstruation brittle_nails cold_hands_and_feets depression dizziness enlarged_thyroid fatigue irritability lethargy mood_swings swollen_extremeties weight_gain,MEDIUM,observed,12
+abnormal_menstruation brittle_nails cold_hands_and_feets depression dizziness enlarged_thyroid fatigue irritability lethargy puffy_face_and_eyes swollen_extremeties weight_gain,MEDIUM,observed,12
+abnormal_menstruation cold_hands_and_feets,LOW,partial,2
+abnormal_menstruation cold_hands_and_feets fatigue,LOW,partial,3
+abnormal_menstruation cold_hands_and_feets mood_swings,LOW,partial,3
+abnormal_menstruation cold_hands_and_feets puffy_face_and_eyes,LOW,partial,3
+abnormal_menstruation compound_fracture,HIGH,redflag,2
+abnormal_menstruation cough tb_contact,HIGH,redflag,3
+abnormal_menstruation depression lethargy,MEDIUM,partial,3
+abnormal_menstruation depression swollen_extremeties,LOW,partial,3
+abnormal_menstruation diarrhoea excessive_hunger,MEDIUM,partial,3
+abnormal_menstruation diarrhoea excessive_hunger fast_heart_rate fatigue irritability mood_swings muscle_weakness restlessness sweating,MEDIUM,observed,10
+abnormal_menstruation diarrhoea fast_heart_rate fatigue irritability mood_swings muscle_weakness restlessness sweating weight_loss,MEDIUM,observed,10
+abnormal_menstruation diarrhoea sweating,MEDIUM,partial,3
+abnormal_menstruation diarrhoea weight_loss,MEDIUM,partial,3
+abnormal_menstruation dizziness enlarged_thyroid,LOW,partial,3
+abnormal_menstruation dizziness fatigue,LOW,partial,3
+abnormal_menstruation dizziness swollen_extremeties,LOW,partial,3
+abnormal_menstruation excessive_hunger,MEDIUM,partial,2
+abnormal_menstruation fast_heart_rate fatigue,MEDIUM,partial,3
+abnormal_menstruation fatigue muscle_weakness,MEDIUM,partial,3
+abnormal_menstruation irritability,LOW,partial,2
+abnormal_menstruation irritability muscle_weakness,MEDIUM,partial,3
+abnormal_menstruation irritability weight_loss,MEDIUM,partial,3
+abnormal_menstruation mild_fever,MEDIUM,redflag,2
+abnormal_menstruation muscle_weakness restlessness,MEDIUM,partial,3
+abnormal_menstruation muscle_weakness sweating,MEDIUM,partial,3
+abnormal_menstruation muscle_weakness weight_loss,MEDIUM,partial,3
+abnormal_menstruation purpuric_rash,CRITICAL,redflag,2
+abnormal_menstruation restlessness,MEDIUM,partial,2
+abnormal_menstruation weight_gain,LOW,partial,2
+acidity blurred_and_distorted_vision depression,LOW,partial,3
+acidity blurred_and_distorted_vision depression excessive_hunger headache indigestion irritability stiff_neck,MEDIUM,observed,8
+acidity blurred_and_distorted_vision depression excessive_hunger indigestion irritability stiff_neck visual_disturbances,MEDIUM,observed,8
+acidity blurred_and_distorted_vision indigestion,LOW,partial,3
+acidity bulging_fontanelle,CRITICAL,redflag,2
+acidity chest_pain stomach_pain ulcers_on_tongue vomiting,HIGH,observed,5
+acidity depression visual_disturbances,LOW,partial,3
+acidity excessive_hunger,LOW,partial,2
+acidity excessive_hunger headache,LOW,partial,3
+acidity excessive_hunger visual_disturbances,LOW,partial,3
+acidity headache,LOW,partial,2
+acidity headache visual_disturbances,LOW,partial,3
+acidity indigestion,LOW,partial,2
+acidity irregular_sugar_level sweating,HIGH,redflag,3
+acidity ulcers_on_tongue,LOW,partial,2
+acidity wound,MEDIUM,redflag,2
+acute_liver_failure blurred_and_distorted_vision,CRITICAL,redflag,2
+acute_liver_failure chest_pain,CRITICAL,redflag,2
+acute_liver_failure coma stomach_bleeding,CRITICAL,partial,3
+acute_liver_failure coma yellowish_skin,CRITICAL,partial,3
+acute_liver_failure continuous_feel_of_urine,CRITICAL,redflag,2
+acute_liver_failure cough dizziness,CRITICAL,redflag,3
+acute_liver_failure dark_urine loss_of_appetite,CRITICAL,partial,3
+acute_liver_failure dark_urine stomach_bleeding,CRITICAL,partial,3
+acute_liver_failure dark_urine vomiting,CRITICAL,partial,3
+acute_liver_failure fast_heart_rate,CRITICAL,redflag,2
+acute_liver_failure fatigue joint_pain,CRITICAL,partial,3
+acute_liver_failure headache,CRITICAL,redflag,2
+acute_liver_failure high_fever stomach_bleeding,CRITICAL,partial,3
+acute_liver_failure high_fever vomiting,CRITICAL,partial,3
+acute_liver_failure joint_pain loss_of_appetite,CRITICAL,partial,3
+acute_liver_failure joint_pain nausea,CRITICAL,partial,3
+acute_liver_failure loss_of_appetite,CRITICAL,partial,2
+acute_liver_failure nausea,CRITICAL,partial,2
+acute_liver_failure shivering,CRITICAL,redflag,2
+acute_liver_failure spinning_movements,CRITICAL,redflag,2
+acute_liver_failure swelled_lymph_nodes,CRITICAL,redflag,2
+acute_liver_failure yellowing_of_eyes,CRITICAL,partial,2
+altered_sensorium cramps,CRITICAL,redflag,2
+altered_sensorium dizziness joint_pain,CRITICAL,redflag,3
+altered_sensorium failure_to_thrive,CRITICAL,redflag,2
+altered_sensorium headache high_blood_pressure,CRITICAL,redflag,3
+altered_sensorium pain_during_bowel_movements,CRITICAL,redflag,2
+altered_sensorium spotting_urination,CRITICAL,redflag,2
+altered_sensorium stiff_neck,CRITICAL,redflag,2
+altered_sensorium weakness_of_one_body_side,CRITICAL,partial,2
+anxiety,HIGH,partial,1
+anxiety blurred_and_distorted_vision drying_and_tingling_lips excessive_hunger fatigue headache irritability nausea palpitations slurred_speech sweating vomiting,HIGH,observed,12
+anxiety blurred_and_distorted_vision drying_and_tingling_lips excessive_hunger fatigue headache irritability nausea palpitations slurred_speech vomiting,HIGH,observed,11
+anxiety blurred_and_distorted_vision slurred_speech,HIGH,partial,3
+anxiety bulging_fontanelle,CRITICAL,redflag,2
+anxiety cyanosis,CRITICAL,redflag,2
+anxiety drying_and_tingling_lips excessive_hunger fatigue headache irritability nausea palpitations slurred_speech sweating vomiting,HIGH,observed,11
+anxiety drying_and_tingling_lips headache,HIGH,partial,3
+anxiety drying_and_tingling_lips irritability,HIGH,partial,3
+anxiety drying_and_tingling_lips palpitations,HIGH,partial,3
+anxiety excessive_hunger headache,HIGH,partial,3
+anxiety fatigue nausea,HIGH,partial,3
+anxiety headache irritability,HIGH,partial,3
+anxiety headache palpitations,HIGH,partial,3
+anxiety irritability,HIGH,partial,2
+anxiety irritability sweating,HIGH,partial,3
+anxiety nausea,HIGH,partial,2
+anxiety nausea slurred_speech,HIGH,partial,3
+anxiety nausea vomiting,HIGH,partial,3
+anxiety palpitations vomiting,HIGH,partial,3
+anxiety pregnancy puffy_face_and_eyes,HIGH,redflag,3
+anxiety slurred_speech,HIGH,partial,2
+anxiety sweating,HIGH,partial,2
+assault,HIGH,redflag,1
+assault bladder_discomfort,HIGH,redflag,2
+assault bloody_stool,HIGH,redflag,2
+assault cough malaise,HIGH,redflag,3
+assault fatigue joint_pain,HIGH,redflag,3
+assault headache,HIGH,redflag,2
+assault headache muscle_pain,HIGH,redflag,3
+assault indigestion,HIGH,redflag,2
+assault inflammatory_nails,HIGH,redflag,2
+assault palpitations,HIGH,redflag,2
+back_pain blood_in_sputum cough,HIGH,redflag,3
+back_pain bloody_stool,MEDIUM,redflag,2
+back_pain bloody_stool muscle_pain,MEDIUM,redflag,3
+back_pain blurred_and_distorted_vision pregnancy,HIGH,redflag,3
+back_pain breathlessness chest_pain cough,CRITICAL,redflag,4
+back_pain breathlessness cough,HIGH,redflag,3
+back_pain breathlessness nausea snake_bite,CRITICAL,redflag,4
+back_pain breathlessness snake_bite,CRITICAL,redflag,3
+back_pain chest_pain joint_pain palpitations,CRITICAL,redflag,4
+back_pain chest_pain loss_of_appetite,HIGH,redflag,3
+back_pain chest_pain malaise palpitations,CRITICAL,redflag,4
+back_pain chest_pain muscle_pain,HIGH,redflag,3
+back_pain chest_pain muscle_pain sweating,CRITICAL,redflag,4
+back_pain chills fatigue headache high_fever joint_pain loss_of_appetite malaise muscle_pain nausea pain_behind_the_eyes red_spots_over_body vomiting,HIGH,observed,13
+back_pain chills fatigue headache high_fever joint_pain loss_of_appetite malaise nausea pain_behind_the_eyes red_spots_over_body skin_rash vomiting,HIGH,observed,13
+back_pain chills high_fever,HIGH,partial,3
+back_pain coagulopathy,HIGH,redflag,2
+back_pain coagulopathy nausea,HIGH,redflag,3
+back_pain cough weak_pulse,HIGH,redflag,3
+back_pain cyanosis,CRITICAL,redflag,2
+back_pain diarrhoea loss_of_appetite sunken_eyes,HIGH,redflag,4
+back_pain diarrhoea malaise sunken_eyes,HIGH,redflag,4
+back_pain diarrhoea sunken_eyes vomiting,HIGH,redflag,4
+back_pain dizziness fracture,HIGH,redflag,3
+back_pain dizziness loss_of_balance neck_pain weakness_in_limbs,LOW,observed,5
+back_pain dizziness stiff_neck,MEDIUM,redflag,3
+back_pain failure_to_thrive,MEDIUM,redflag,2
+back_pain fatigue,MEDIUM,partial,2
+back_pain fatigue irregular_sugar_level sweating,HIGH,redflag,4
+back_pain fatigue vomiting,MEDIUM,partial,3
+back_pain haematuria vomiting,MEDIUM,redflag,3
+back_pain head_injury,HIGH,redflag,2
+back_pain head_injury vomiting,CRITICAL,redflag,3
+back_pain headache high_blood_pressure,HIGH,redflag,3
+back_pain headache skin_rash,HIGH,partial,3
+back_pain headache snake_bite,HIGH,redflag,3
+back_pain high_fever red_spots_over_body,HIGH,partial,3
+back_pain high_fever skin_rash,HIGH,partial,3
+back_pain high_fever vomiting,HIGH,partial,3
+back_pain irregular_sugar_level lethargy,HIGH,redflag,3
+back_pain irregular_sugar_level lethargy loss_of_appetite,HIGH,redflag,4
+back_pain joint_pain minor_wound,LOW,redflag,3
+back_pain joint_pain vomits_everything,CRITICAL,redflag,3
+back_pain lethargy,MEDIUM,redflag,2
+back_pain loss_of_appetite malaise,MEDIUM,partial,3
+back_pain loss_of_appetite mild_fever,MEDIUM,redflag,3
+back_pain malaise,MEDIUM,partial,2
+back_pain malaise nausea,MEDIUM,partial,3
+back_pain malaise skin_rash,HIGH,partial,3
+back_pain muscle_pain stiff_neck,MEDIUM,redflag,3
+back_pain muscle_pain vomiting,MEDIUM,partial,3
+back_pain nausea red_spots_over_body,HIGH,partial,3
+back_pain nausea skin_rash,HIGH,partial,3
+back_pain nausea unable_to_drink,CRITICAL,redflag,3
+back_pain nausea unable_to_stand,MEDIUM,redflag,3
+back_pain nausea weakness_of_one_body_side,CRITICAL,redflag,3
+back_pain pregnancy visual_disturbances vomiting,HIGH,redflag,4
+back_pain prolonged_labour,HIGH,redflag,2
+back_pain significant_wound,HIGH,redflag,2
+back_pain stridor,CRITICAL,redflag,2
+back_pain tb_contact,MEDIUM,redflag,2
+back_pain trauma,HIGH,redflag,2
+back_pain unable_to_breastfeed,CRITICAL,redflag,2
+belly_pain chills constipation,HIGH,partial,3
+belly_pain chills constipation diarrhoea fatigue headache high_fever nausea toxic_look_(typhos) vomiting,HIGH,observed,10
+belly_pain chills headache,HIGH,partial,3
+belly_pain chills vomiting,HIGH,partial,3
+belly_pain diarrhoea,HIGH,partial,2
+belly_pain diarrhoea vomiting,HIGH,partial,3
+belly_pain headache toxic_look_(typhos),HIGH,partial,3
+belly_pain headache vomiting,HIGH,partial,3
+belly_pain high_fever toxic_look_(typhos),HIGH,partial,3
+belly_pain irregular_sugar_level lethargy,HIGH,redflag,3
+belly_pain mild_fever,MEDIUM,redflag,2
+blackheads burns,HIGH,redflag,2
+blackheads photophobia,MEDIUM,redflag,2
+blackheads skin_rash,LOW,partial,2
+blackheads slow_breathing,HIGH,redflag,2
+bladder_discomfort burning_micturition continuous_feel_of_urine,MEDIUM,observed,3
+bladder_discomfort continuous_feel_of_urine,MEDIUM,partial,2
+bladder_discomfort continuous_feel_of_urine foul_smell_ofurine,MEDIUM,observed,3
+bladder_discomfort haematuria,MEDIUM,redflag,2
+bladder_discomfort irregular_sugar_level sweating,HIGH,redflag,3
+bladder_discomfort photophobia,MEDIUM,redflag,2
+bladder_discomfort severe_pallor,HIGH,redflag,2
+bladder_discomfort slurred_speech weakness_in_limbs,CRITICAL,redflag,3
+blister high_fever red_sore_around_nose skin_rash,MEDIUM,observed,4
+blister high_fever skin_rash,MEDIUM,partial,3
+blister skin_rash,LOW,partial,2
+blister slow_breathing,HIGH,redflag,2
+blister swelling_post_trauma,MEDIUM,redflag,2
+blister trauma,HIGH,redflag,2
+blister unable_to_stand,MEDIUM,redflag,2
+blister vomits_everything,CRITICAL,redflag,2
+blood_in_sputum breathlessness,HIGH,partial,2
+blood_in_sputum breathlessness chills,HIGH,partial,3
+blood_in_sputum breathlessness high_fever,HIGH,partial,3
+blood_in_sputum breathlessness sweating,HIGH,partial,3
+blood_in_sputum breathlessness weight_loss,HIGH,partial,3
+blood_in_sputum chest_pain,HIGH,partial,2
+blood_in_sputum chest_pain chills,HIGH,partial,3
+blood_in_sputum chest_pain phlegm,HIGH,partial,3
+blood_in_sputum chest_pain swelled_lymph_nodes,HIGH,partial,3
+blood_in_sputum chills cough,HIGH,partial,3
+blood_in_sputum chills high_fever,HIGH,partial,3
+blood_in_sputum chills loss_of_appetite,HIGH,partial,3
+blood_in_sputum chills phlegm,HIGH,partial,3
+blood_in_sputum cough,HIGH,partial,2
+blood_in_sputum cough phlegm,HIGH,partial,3
+blood_in_sputum dischromic_patches,HIGH,redflag,2
+blood_in_sputum failure_to_thrive,HIGH,redflag,2
+blood_in_sputum family_history,HIGH,redflag,2
+blood_in_sputum headache pregnancy,HIGH,redflag,3
+blood_in_sputum high_fever mild_fever,HIGH,partial,3
+blood_in_sputum high_fever yellowing_of_eyes,HIGH,partial,3
+blood_in_sputum malaise,HIGH,partial,2
+blood_in_sputum malaise sweating,HIGH,partial,3
+blood_in_sputum malaise yellowing_of_eyes,HIGH,partial,3
+blood_in_sputum mild_fever yellowing_of_eyes,HIGH,partial,3
+blood_in_sputum muscle_pain,HIGH,redflag,2
+blood_in_sputum phlegm vomiting,HIGH,partial,3
+blood_in_sputum sweating yellowing_of_eyes,HIGH,partial,3
+blood_in_sputum swelled_lymph_nodes,HIGH,partial,2
+blood_in_sputum swelled_lymph_nodes vomiting,HIGH,partial,3
+blood_in_sputum swelling_joints,HIGH,redflag,2
+blood_in_sputum visual_disturbances,HIGH,redflag,2
+bloody_stool constipation irritation_in_anus pain_during_bowel_movements pain_in_anal_region,MEDIUM,observed,5
+bloody_stool constipation pain_during_bowel_movements,MEDIUM,partial,3
+bloody_stool cough fatigue,MEDIUM,redflag,3
+bloody_stool cough malaise,MEDIUM,redflag,3
+bloody_stool headache malaise,MEDIUM,redflag,3
+bloody_stool headache muscle_pain,MEDIUM,redflag,3
+bloody_stool mild_fever,MEDIUM,redflag,2
+bloody_stool spotting_urination,MEDIUM,redflag,2
+bloody_stool unable_to_drink,CRITICAL,redflag,2
+blurred_and_distorted_vision dehydration pregnancy,HIGH,redflag,3
+blurred_and_distorted_vision dizziness fatigue pregnancy,HIGH,redflag,4
+blurred_and_distorted_vision drying_and_tingling_lips excessive_hunger,HIGH,partial,3
+blurred_and_distorted_vision excessive_hunger fatigue increased_appetite irregular_sugar_level lethargy obesity polyuria restlessness weight_loss,HIGH,observed,10
+blurred_and_distorted_vision excessive_hunger increased_appetite,MEDIUM,partial,3
+blurred_and_distorted_vision excessive_hunger nausea,HIGH,partial,3
+blurred_and_distorted_vision excessive_hunger restlessness,MEDIUM,partial,3
+blurred_and_distorted_vision fatigue irritability,HIGH,partial,3
+blurred_and_distorted_vision high_blood_pressure,MEDIUM,redflag,2
+blurred_and_distorted_vision increased_appetite lethargy,MEDIUM,partial,3
+blurred_and_distorted_vision increased_appetite restlessness,MEDIUM,partial,3
+blurred_and_distorted_vision increased_appetite weight_loss,MEDIUM,partial,3
+blurred_and_distorted_vision indigestion,LOW,partial,2
+blurred_and_distorted_vision indigestion visual_disturbances,LOW,partial,3
+blurred_and_distorted_vision irregular_sugar_level,MEDIUM,partial,2
+blurred_and_distorted_vision irregular_sugar_level lethargy,HIGH,partial,3
+blurred_and_distorted_vision irregular_sugar_level obesity,MEDIUM,partial,3
+blurred_and_distorted_vision irritability stiff_neck,MEDIUM,partial,3
+blurred_and_distorted_vision irritability visual_disturbances,LOW,partial,3
+blurred_and_distorted_vision lethargy obesity,MEDIUM,partial,3
+blurred_and_distorted_vision loss_of_appetite pregnancy vomiting,HIGH,redflag,4
+blurred_and_distorted_vision nausea palpitations,HIGH,partial,3
+blurred_and_distorted_vision obesity restlessness,MEDIUM,partial,3
+blurred_and_distorted_vision polyuria restlessness,MEDIUM,partial,3
+blurred_and_distorted_vision pregnancy rusty_sputum,HIGH,redflag,3
+blurred_and_distorted_vision snake_envenomation,CRITICAL,redflag,2
+blurred_and_distorted_vision uncontrolled_bleeding,CRITICAL,redflag,2
+blurred_and_distorted_vision visual_disturbances,LOW,partial,2
+breathlessness burning_micturition snake_bite,CRITICAL,redflag,3
+breathlessness chest_pain chills,CRITICAL,partial,3
+breathlessness chest_pain chills cough fast_heart_rate fatigue high_fever malaise phlegm rusty_sputum,CRITICAL,observed,10
+breathlessness chest_pain chills cough fast_heart_rate fatigue high_fever malaise rusty_sputum sweating,CRITICAL,observed,10
+breathlessness chest_pain cough,CRITICAL,partial,3
+breathlessness chest_pain cramps,CRITICAL,redflag,3
+breathlessness chest_pain dizziness,CRITICAL,redflag,3
+breathlessness chest_pain dizziness loss_of_appetite,CRITICAL,redflag,4
+breathlessness chest_pain foul_smell_ofurine,CRITICAL,redflag,3
+breathlessness chest_pain headache nausea,CRITICAL,redflag,4
+breathlessness chest_pain joint_pain muscle_pain,CRITICAL,redflag,4
+breathlessness chest_pain loss_of_appetite,CRITICAL,partial,3
+breathlessness chest_pain malaise,CRITICAL,partial,3
+breathlessness chest_pain muscle_pain,CRITICAL,redflag,3
+breathlessness chest_pain silver_like_dusting,CRITICAL,redflag,3
+breathlessness chest_pain vomiting,CRITICAL,observed,3
+breathlessness chest_pain weight_loss,CRITICAL,partial,3
+breathlessness chills swelled_lymph_nodes,HIGH,partial,3
+breathlessness cough,HIGH,partial,2
+breathlessness cough fast_heart_rate,HIGH,partial,3
+breathlessness cough fatigue snake_bite,CRITICAL,redflag,4
+breathlessness cough high_fever,HIGH,partial,3
+breathlessness cough loss_of_appetite,HIGH,partial,3
+breathlessness cough malaise,HIGH,partial,3
+breathlessness cough mild_fever,HIGH,partial,3
+breathlessness cough snake_bite vomiting,CRITICAL,redflag,4
+breathlessness dizziness loss_of_appetite snake_bite,CRITICAL,redflag,4
+breathlessness fast_heart_rate high_fever,HIGH,partial,3
+breathlessness fast_heart_rate sweating,HIGH,partial,3
+breathlessness fatigue high_fever,HIGH,partial,3
+breathlessness fatigue snake_bite,CRITICAL,redflag,3
+breathlessness fatigue vomiting,HIGH,partial,3
+breathlessness fatigue weight_loss,HIGH,partial,3
+breathlessness high_fever mild_fever,HIGH,partial,3
+breathlessness high_fever mucoid_sputum,HIGH,partial,3
+breathlessness increased_appetite,HIGH,redflag,2
+breathlessness joint_pain muscle_pain snake_bite,CRITICAL,redflag,4
+breathlessness lethargy snake_bite,CRITICAL,redflag,3
+breathlessness loss_of_appetite sweating,HIGH,partial,3
+breathlessness malaise snake_bite,CRITICAL,redflag,3
+breathlessness mild_fever sweating,HIGH,partial,3
+breathlessness muscle_pain,HIGH,redflag,2
+breathlessness nausea,HIGH,redflag,2
+breathlessness neck_pain snake_bite,CRITICAL,redflag,3
+breathlessness phlegm sweating,HIGH,partial,3
+breathlessness phlegm swelled_lymph_nodes,HIGH,partial,3
+breathlessness phlegm yellowing_of_eyes,HIGH,partial,3
+breathlessness pus_filled_pimples,HIGH,redflag,2
+breathlessness redness_of_eyes snake_bite,CRITICAL,redflag,3
+breathlessness sweating,HIGH,partial,2
+breathlessness sweating weight_loss,HIGH,partial,3
+breathlessness swelled_lymph_nodes vomiting,HIGH,partial,3
+breathlessness unsteadiness,HIGH,redflag,2
+brittle_nails cold_hands_and_feets dizziness,LOW,partial,3
+brittle_nails cold_hands_and_feets mood_swings,LOW,partial,3
+brittle_nails cold_hands_and_feets puffy_face_and_eyes,LOW,partial,3
+brittle_nails depression dizziness,LOW,partial,3
+brittle_nails depression lethargy,MEDIUM,partial,3
+brittle_nails depression puffy_face_and_eyes,LOW,partial,3
+brittle_nails depression weight_gain,LOW,partial,3
+brittle_nails dizziness,LOW,partial,2
+brittle_nails dizziness irritability,LOW,partial,3
+brittle_nails dizziness puffy_face_and_eyes,LOW,partial,3
+brittle_nails dizziness weight_gain,LOW,partial,3
+brittle_nails enlarged_thyroid irritability,LOW,partial,3
+brittle_nails enlarged_thyroid puffy_face_and_eyes,LOW,partial,3
+brittle_nails enlarged_thyroid swollen_extremeties,LOW,partial,3
+brittle_nails enlarged_thyroid weight_gain,LOW,partial,3
+brittle_nails fatigue swollen_extremeties,LOW,partial,3
+brittle_nails irritability lethargy,MEDIUM,partial,3
+brittle_nails irritability swollen_extremeties,LOW,partial,3
+brittle_nails lethargy mood_swings,MEDIUM,partial,3
+brittle_nails mood_swings,LOW,partial,2
+brittle_nails puffy_face_and_eyes,LOW,partial,2
+brittle_nails swollen_extremeties weight_gain,LOW,partial,3
+bruising,LOW,partial,1
+bruising cramps fatigue obesity prominent_veins_on_calf swollen_blood_vessels swollen_legs,LOW,observed,7
+bruising cramps obesity prominent_veins_on_calf swollen_blood_vessels swollen_legs,LOW,observed,6
+bruising cramps prominent_veins_on_calf,LOW,partial,3
+bruising obesity,LOW,partial,2
+bruising prominent_veins_on_calf swollen_blood_vessels,LOW,partial,3
+bruising prominent_veins_on_calf swollen_legs,LOW,partial,3
+bruising swollen_legs,LOW,partial,2
+bulging_fontanelle joint_pain,CRITICAL,redflag,2
+bulging_fontanelle joint_pain malaise,CRITICAL,redflag,3
+bulging_fontanelle loss_of_appetite,CRITICAL,redflag,2
+bulging_fontanelle malaise,CRITICAL,redflag,2
+bulging_fontanelle malaise muscle_pain,CRITICAL,redflag,3
+bulging_fontanelle muscle_pain nausea,CRITICAL,redflag,3
+bulging_fontanelle muscle_weakness,CRITICAL,redflag,2
+bulging_fontanelle palpitations,CRITICAL,redflag,2
+burning_micturition chest_pain palpitations,CRITICAL,redflag,3
+burning_micturition dehydration diarrhoea,HIGH,redflag,3
+burning_micturition foul_smell_ofurine,MEDIUM,partial,2
+burning_micturition itching skin_rash spotting_urination,MEDIUM,observed,4
+burning_micturition mild_fever,MEDIUM,redflag,2
+burning_micturition photophobia,MEDIUM,redflag,2
+burning_micturition skin_rash spotting_urination,MEDIUM,partial,3
+burns dizziness muscle_pain,HIGH,redflag,3
+burns muscle_pain,HIGH,redflag,2
+burns red_spots_over_body,HIGH,redflag,2
+burns redness_of_eyes,HIGH,redflag,2
+chest_pain chills,HIGH,partial,2
+chest_pain chills congestion continuous_sneezing cough fatigue headache high_fever loss_of_smell malaise muscle_pain phlegm redness_of_eyes runny_nose sinus_pressure swelled_lymph_nodes throat_irritation,HIGH,observed,17
+chest_pain chills congestion continuous_sneezing cough fatigue headache high_fever loss_of_smell muscle_pain phlegm redness_of_eyes runny_nose sinus_pressure swelled_lymph_nodes throat_irritation,HIGH,observed,16
+chest_pain cold_hands_and_feets palpitations,CRITICAL,redflag,3
+chest_pain congestion palpitations,CRITICAL,redflag,3
+chest_pain continuous_sneezing,HIGH,partial,2
+chest_pain continuous_sneezing headache,HIGH,partial,3
+chest_pain cough muscle_pain,HIGH,partial,3
+chest_pain cough runny_nose,HIGH,partial,3
+chest_pain cough rusty_sputum,HIGH,partial,3
+chest_pain cough sinus_pressure,HIGH,partial,3
+chest_pain cough ulcers_on_tongue,HIGH,partial,3
+chest_pain cough vomiting,HIGH,partial,3
+chest_pain cough weight_loss,HIGH,partial,3
+chest_pain cyanosis,CRITICAL,redflag,2
+chest_pain family_history fast_heart_rate,CRITICAL,redflag,3
+chest_pain fast_heart_rate loss_of_appetite nausea,CRITICAL,redflag,4
+chest_pain fast_heart_rate malaise,CRITICAL,partial,3
+chest_pain fast_heart_rate patches_in_throat,CRITICAL,redflag,3
+chest_pain fast_heart_rate runny_nose,CRITICAL,redflag,3
+chest_pain fatigue headache,HIGH,partial,3
+chest_pain fatigue throat_irritation,HIGH,partial,3
+chest_pain fluid_overload,HIGH,redflag,2
+chest_pain headache high_fever,HIGH,partial,3
+chest_pain headache loss_of_balance,HIGH,partial,3
+chest_pain headache malaise palpitations,CRITICAL,redflag,4
+chest_pain headache phlegm,HIGH,partial,3
+chest_pain headache swelled_lymph_nodes,HIGH,partial,3
+chest_pain high_fever loss_of_smell,HIGH,partial,3
+chest_pain high_fever muscle_pain,HIGH,partial,3
+chest_pain high_fever redness_of_eyes,HIGH,partial,3
+chest_pain high_fever throat_irritation,HIGH,partial,3
+chest_pain joint_pain sweating,CRITICAL,redflag,3
+chest_pain lack_of_concentration loss_of_balance,HIGH,partial,3
+chest_pain loss_of_appetite palpitations,CRITICAL,redflag,3
+chest_pain loss_of_appetite yellowing_of_eyes,HIGH,partial,3
+chest_pain loss_of_balance slurred_speech,CRITICAL,redflag,3
+chest_pain loss_of_smell,HIGH,partial,2
+chest_pain loss_of_smell redness_of_eyes,HIGH,partial,3
+chest_pain loss_of_smell swelled_lymph_nodes,HIGH,partial,3
+chest_pain loss_of_smell throat_irritation,HIGH,partial,3
+chest_pain muscle_pain,HIGH,partial,2
+chest_pain muscle_pain nausea,HIGH,redflag,3
+chest_pain muscle_pain throat_irritation,HIGH,partial,3
+chest_pain palpitations receiving_blood_transfusion,CRITICAL,redflag,3
+chest_pain palpitations receiving_unsterile_injections,CRITICAL,redflag,3
+chest_pain polyuria,HIGH,redflag,2
+chest_pain redness_of_eyes swelled_lymph_nodes,HIGH,partial,3
+chest_pain restlessness,HIGH,redflag,2
+chest_pain runny_nose sinus_pressure,HIGH,partial,3
+chest_pain runny_nose swelled_lymph_nodes,HIGH,partial,3
+chest_pain rusty_sputum,HIGH,partial,2
+chest_pain sinus_pressure,HIGH,partial,2
+chest_pain stiff_neck,HIGH,redflag,2
+chest_pain stiff_neck sweating,CRITICAL,redflag,3
+chest_pain stomach_pain vomiting,HIGH,partial,3
+chest_pain swelled_lymph_nodes,HIGH,partial,2
+chest_pain swelled_lymph_nodes vomiting,HIGH,partial,3
+chest_pain vomiting,HIGH,partial,2
+chest_pain vomiting yellowing_of_eyes,HIGH,partial,3
+chills congestion continuous_sneezing,LOW,partial,3
+chills congestion cough,LOW,partial,3
+chills congestion muscle_pain,LOW,partial,3
+chills congestion runny_nose,LOW,partial,3
+chills constipation toxic_look_(typhos),HIGH,partial,3
+chills continuous_sneezing,LOW,partial,2
+chills cough fatigue,LOW,partial,3
+chills cough headache,LOW,partial,3
+chills cough swelled_lymph_nodes,LOW,partial,3
+chills diarrhoea,HIGH,partial,2
+chills diarrhoea fatigue,HIGH,partial,3
+chills diarrhoea headache high_fever muscle_pain nausea sweating vomiting,HIGH,observed,8
+chills diarrhoea high_fever,HIGH,partial,3
+chills diarrhoea toxic_look_(typhos),HIGH,partial,3
+chills fast_heart_rate,HIGH,partial,2
+chills fast_heart_rate fatigue,HIGH,partial,3
+chills fatigue redness_of_eyes,LOW,partial,3
+chills fatigue rusty_sputum,HIGH,partial,3
+chills fatigue sweating,HIGH,partial,3
+chills headache,LOW,partial,2
+chills headache high_fever muscle_pain nausea sweating vomiting,HIGH,observed,7
+chills headache malaise,LOW,partial,3
+chills headache toxic_look_(typhos),HIGH,partial,3
+chills high_fever,MEDIUM,partial,2
+chills high_fever joint_pain,HIGH,partial,3
+chills high_fever nausea,HIGH,partial,3
+chills high_fever pain_behind_the_eyes,HIGH,partial,3
+chills high_fever toxic_look_(typhos),HIGH,partial,3
+chills high_fever yellowing_of_eyes,HIGH,partial,3
+chills joint_pain pain_behind_the_eyes,HIGH,partial,3
+chills loss_of_appetite mild_fever,HIGH,partial,3
+chills loss_of_appetite muscle_pain,HIGH,partial,3
+chills loss_of_appetite pain_behind_the_eyes,HIGH,partial,3
+chills loss_of_appetite red_spots_over_body,HIGH,partial,3
+chills loss_of_appetite skin_rash,HIGH,partial,3
+chills loss_of_appetite yellowing_of_eyes,HIGH,partial,3
+chills loss_of_smell,LOW,partial,2
+chills loss_of_smell malaise,LOW,partial,3
+chills loss_of_smell muscle_pain,LOW,partial,3
+chills loss_of_smell runny_nose,LOW,partial,3
+chills malaise muscle_pain,LOW,partial,3
+chills malaise pain_behind_the_eyes,HIGH,partial,3
+chills malaise runny_nose,LOW,partial,3
+chills malaise yellowing_of_eyes,HIGH,partial,3
+chills mild_fever weight_loss,HIGH,partial,3
+chills mild_fever yellowing_of_eyes,HIGH,partial,3
+chills muscle_pain redness_of_eyes,LOW,partial,3
+chills muscle_pain sinus_pressure,LOW,partial,3
+chills phlegm runny_nose,LOW,partial,3
+chills phlegm rusty_sputum,HIGH,partial,3
+chills phlegm sweating,HIGH,partial,3
+chills phlegm weight_loss,HIGH,partial,3
+chills purpuric_rash,CRITICAL,redflag,2
+chills red_spots_over_body,HIGH,partial,2
+chills red_spots_over_body skin_rash,HIGH,partial,3
+chills red_spots_over_body vomiting,HIGH,partial,3
+chills redness_of_eyes throat_irritation,LOW,partial,3
+chills runny_nose swelled_lymph_nodes,LOW,partial,3
+chills rusty_sputum,HIGH,partial,2
+chills rusty_sputum sweating,HIGH,partial,3
+chills skin_rash vomiting,HIGH,partial,3
+chills slurred_speech,HIGH,redflag,2
+chills sweating,HIGH,partial,2
+chills sweating weight_loss,HIGH,partial,3
+chills swelled_lymph_nodes vomiting,HIGH,partial,3
+chills watering_from_eyes,LOW,partial,2
+coagulopathy cough,HIGH,redflag,2
+coagulopathy malaise,HIGH,redflag,2
+coagulopathy neck_pain,HIGH,redflag,2
+coagulopathy palpitations,HIGH,redflag,2
+coagulopathy weakness_in_limbs,HIGH,redflag,2
+cold_extremities continuous_sneezing,CRITICAL,redflag,2
+cold_extremities cough fatigue,CRITICAL,redflag,3
+cold_extremities dizziness malaise,CRITICAL,redflag,3
+cold_extremities headache joint_pain,CRITICAL,redflag,3
+cold_hands_and_feets,LOW,partial,1
+cold_hands_and_feets depression irritability,LOW,partial,3
+cold_hands_and_feets dizziness swollen_extremeties,LOW,partial,3
+cold_hands_and_feets enlarged_thyroid mood_swings,LOW,partial,3
+cold_hands_and_feets enlarged_thyroid weight_gain,LOW,partial,3
+cold_hands_and_feets fatigue lethargy,MEDIUM,partial,3
+cold_hands_and_feets fatigue puffy_face_and_eyes,LOW,partial,3
+cold_hands_and_feets fracture,HIGH,redflag,2
+cold_hands_and_feets irritability weight_gain,LOW,partial,3
+cold_hands_and_feets mild_fever,MEDIUM,redflag,2
+cold_hands_and_feets mood_swings swollen_extremeties,LOW,partial,3
+cold_hands_and_feets puffy_face_and_eyes,LOW,partial,2
+coma continuous_feel_of_urine,CRITICAL,redflag,2
+coma cough,CRITICAL,redflag,2
+coma dark_urine loss_of_appetite,CRITICAL,partial,3
+coma dark_urine yellowish_skin,CRITICAL,partial,3
+coma dischromic_patches,CRITICAL,redflag,2
+coma fall,CRITICAL,redflag,2
+coma fatigue joint_pain,CRITICAL,partial,3
+coma high_fever,CRITICAL,partial,2
+coma high_fever vomiting,CRITICAL,partial,3
+coma high_fever yellowing_of_eyes,CRITICAL,partial,3
+coma loss_of_appetite muscle_pain,CRITICAL,redflag,3
+coma loss_of_appetite nausea,CRITICAL,partial,3
+coma loss_of_appetite stomach_bleeding,CRITICAL,partial,3
+coma loss_of_appetite vomiting,CRITICAL,partial,3
+coma malaise,CRITICAL,redflag,2
+coma nausea vomiting,CRITICAL,partial,3
+coma stomach_bleeding vomiting,CRITICAL,partial,3
+coma vomiting,CRITICAL,partial,2
+compound_fracture diarrhoea,HIGH,redflag,2
+compound_fracture dizziness,HIGH,redflag,2
+compound_fracture dizziness fatigue,HIGH,redflag,3
+compound_fracture dizziness nausea,HIGH,redflag,3
+compound_fracture fatigue,HIGH,redflag,2
+compound_fracture joint_pain,HIGH,redflag,2
+compound_fracture mood_swings,HIGH,redflag,2
+compound_fracture palpitations,HIGH,redflag,2
+compound_fracture stiff_neck,HIGH,redflag,2
+compound_fracture swelling_joints,HIGH,redflag,2
+compound_fracture weakness_in_limbs,HIGH,redflag,2
+compound_fracture weakness_of_one_body_side,CRITICAL,redflag,2
+congestion continuous_sneezing,LOW,partial,2
+congestion continuous_sneezing runny_nose,LOW,partial,3
+congestion cough sinus_pressure,LOW,partial,3
+congestion cough throat_irritation,LOW,partial,3
+congestion dehydration vomiting,HIGH,redflag,3
+congestion fatigue headache,LOW,partial,3
+congestion fatigue loss_of_smell,LOW,partial,3
+congestion fatigue throat_irritation,LOW,partial,3
+congestion headache redness_of_eyes,LOW,partial,3
+congestion high_fever malaise,MEDIUM,partial,3
+congestion high_fever muscle_pain,MEDIUM,partial,3
+congestion loss_of_smell muscle_pain,LOW,partial,3
+congestion loss_of_smell phlegm,LOW,partial,3
+congestion malaise swelled_lymph_nodes,LOW,partial,3
+congestion pregnancy visual_disturbances,HIGH,redflag,3
+congestion redness_of_eyes,LOW,partial,2
+congestion redness_of_eyes runny_nose,LOW,partial,3
+congestion sinus_pressure,LOW,partial,2
+congestion swelled_lymph_nodes,LOW,partial,2
+congestion unable_to_stand,MEDIUM,redflag,2
+congestion uncontrolled_bleeding,CRITICAL,redflag,2
+constipation,LOW,partial,1
+constipation diarrhoea,HIGH,partial,2
+constipation diarrhoea headache,HIGH,partial,3
+constipation diarrhoea high_fever,HIGH,partial,3
+constipation headache vomiting,HIGH,partial,3
+constipation high_fever toxic_look_(typhos),HIGH,partial,3
+constipation irritation_in_anus,LOW,partial,2
+constipation nausea toxic_look_(typhos),HIGH,partial,3
+continuous_feel_of_urine kwashiorkor_signs,HIGH,redflag,2
+continuous_feel_of_urine snake_envenomation,CRITICAL,redflag,2
+continuous_sneezing cough high_fever,MEDIUM,partial,3
+continuous_sneezing cough loss_of_smell,LOW,partial,3
+continuous_sneezing cough phlegm,LOW,partial,3
+continuous_sneezing cough runny_nose,LOW,partial,3
+continuous_sneezing fatigue phlegm,LOW,partial,3
+continuous_sneezing fatigue sinus_pressure,LOW,partial,3
+continuous_sneezing headache loss_of_smell,LOW,partial,3
+continuous_sneezing high_fever loss_of_smell,MEDIUM,partial,3
+continuous_sneezing high_fever pregnancy,HIGH,redflag,3
+continuous_sneezing high_fever sinus_pressure,MEDIUM,partial,3
+continuous_sneezing high_fever swelled_lymph_nodes,MEDIUM,partial,3
+continuous_sneezing loss_of_smell redness_of_eyes,LOW,partial,3
+continuous_sneezing malaise runny_nose,LOW,partial,3
+continuous_sneezing phlegm throat_irritation,LOW,partial,3
+continuous_sneezing redness_of_eyes,LOW,partial,2
+continuous_sneezing runny_nose swelled_lymph_nodes,LOW,partial,3
+continuous_sneezing shivering,LOW,partial,2
+continuous_sneezing slurred_speech,HIGH,redflag,2
+continuous_sneezing weak_pulse,HIGH,redflag,2
+continuous_sneezing wound,MEDIUM,redflag,2
+convulsions dizziness joint_pain,CRITICAL,redflag,3
+convulsions fatigue joint_pain,CRITICAL,redflag,3
+convulsions malaise vomiting,CRITICAL,redflag,3
+cough dehydration dizziness vomiting,HIGH,redflag,4
+cough dizziness pregnancy,LOW,redflag,3
+cough failure_to_thrive,MEDIUM,redflag,2
+cough failure_to_thrive vomiting,MEDIUM,redflag,3
+cough family_history,HIGH,partial,2
+cough fast_heart_rate,HIGH,partial,2
+cough fast_heart_rate joint_pain,MEDIUM,redflag,3
+cough fatigue high_fever,MEDIUM,partial,3
+cough fatigue mucoid_sputum,HIGH,partial,3
+cough fatigue phlegm,LOW,partial,3
+cough fatigue rusty_sputum,HIGH,partial,3
+cough fatigue significant_wound,HIGH,redflag,3
+cough fatigue tb_contact,HIGH,redflag,3
+cough haematuria,MEDIUM,redflag,2
+cough head_injury lethargy,CRITICAL,redflag,3
+cough head_injury muscle_pain,HIGH,redflag,3
+cough headache high_blood_pressure,HIGH,redflag,3
+cough headache pregnancy,HIGH,redflag,3
+cough headache throat_irritation,LOW,partial,3
+cough high_blood_pressure visual_disturbances,HIGH,redflag,3
+cough high_fever joint_pain stiff_neck,CRITICAL,redflag,4
+cough high_fever loss_of_appetite,HIGH,partial,3
+cough high_fever loss_of_smell,MEDIUM,partial,3
+cough high_fever malaise,MEDIUM,partial,3
+cough high_fever mild_fever,HIGH,partial,3
+cough high_fever muscle_pain,MEDIUM,partial,3
+cough high_fever phlegm,MEDIUM,partial,3
+cough high_fever stiff_neck,CRITICAL,redflag,3
+cough irregular_sugar_level sweating vomiting,HIGH,redflag,4
+cough joint_pain loss_of_balance slurred_speech,CRITICAL,redflag,4
+cough joint_pain significant_wound,HIGH,redflag,3
+cough joint_pain unable_to_breastfeed,CRITICAL,redflag,3
+cough lethargy,MEDIUM,redflag,2
+cough loss_of_appetite minor_wound,LOW,redflag,3
+cough loss_of_appetite weight_loss,HIGH,partial,3
+cough loss_of_smell muscle_pain,LOW,partial,3
+cough malaise phlegm,LOW,partial,3
+cough malaise runny_nose,LOW,partial,3
+cough malaise wound,MEDIUM,redflag,3
+cough malaise yellowing_of_eyes,HIGH,partial,3
+cough muscle_pain snake_bite,HIGH,redflag,3
+cough nausea severe_respiratory_distress,CRITICAL,redflag,3
+cough nausea snake_bite,HIGH,redflag,3
+cough obesity tb_contact,HIGH,redflag,3
+cough phlegm,LOW,partial,2
+cough phlegm swelled_lymph_nodes,LOW,partial,3
+cough phlegm vomiting,HIGH,partial,3
+cough pre_eclampsia,HIGH,redflag,2
+cough pregnancy,LOW,redflag,2
+cough purpuric_rash,CRITICAL,redflag,2
+cough retained_placenta,HIGH,redflag,2
+cough scurring tb_contact,HIGH,redflag,3
+cough sinus_pressure throat_irritation,LOW,partial,3
+cough stomach_bleeding,HIGH,redflag,2
+cough stomach_pain,LOW,partial,2
+cough tb_contact vomiting,HIGH,redflag,3
+cough tb_contact yellowing_of_eyes,HIGH,redflag,3
+cough ulcers_on_tongue,LOW,partial,2
+cough ulcers_on_tongue vomiting,LOW,partial,3
+cough vomiting weight_loss,HIGH,partial,3
+cough weak_pulse,HIGH,redflag,2
+cough weight_loss yellowing_of_eyes,HIGH,partial,3
+cramps,LOW,partial,1
+cramps high_fever stiff_neck,CRITICAL,redflag,3
+cramps obesity,LOW,partial,2
+cramps slow_breathing,HIGH,redflag,2
+cramps trauma,HIGH,redflag,2
+cyanosis fast_heart_rate,CRITICAL,redflag,2
+cyanosis nausea,CRITICAL,redflag,2
+dark_urine dehydration vomiting,HIGH,redflag,3
+dark_urine diarrhoea mild_fever,MEDIUM,partial,3
+dark_urine diarrhoea yellowing_of_eyes,MEDIUM,partial,3
+dark_urine fatigue,MEDIUM,partial,2
+dark_urine head_injury vomiting,CRITICAL,redflag,3
+dark_urine high_fever itching,MEDIUM,partial,3
+dark_urine high_fever loss_of_appetite,MEDIUM,partial,3
+dark_urine high_fever weight_loss,MEDIUM,partial,3
+dark_urine itching loss_of_appetite,MEDIUM,partial,3
+dark_urine itching receiving_unsterile_injections,MEDIUM,partial,3
+dark_urine lethargy loss_of_appetite,MEDIUM,partial,3
+dark_urine lethargy malaise,MEDIUM,partial,3
+dark_urine lethargy yellowish_skin,MEDIUM,partial,3
+dark_urine loss_of_appetite,MEDIUM,partial,2
+dark_urine loss_of_appetite receiving_blood_transfusion,MEDIUM,partial,3
+dark_urine loss_of_appetite yellowish_skin,MEDIUM,partial,3
+dark_urine mild_fever yellowing_of_eyes,MEDIUM,partial,3
+dark_urine muscle_pain,MEDIUM,partial,2
+dark_urine muscle_pain yellowing_of_eyes,MEDIUM,partial,3
+dark_urine muscle_pain yellowish_skin,MEDIUM,partial,3
+dark_urine nausea yellowish_skin,MEDIUM,partial,3
+dark_urine receiving_blood_transfusion receiving_unsterile_injections,MEDIUM,partial,3
+dark_urine receiving_unsterile_injections yellow_urine,MEDIUM,partial,3
+dark_urine receiving_unsterile_injections yellowing_of_eyes,MEDIUM,partial,3
+dark_urine stomach_bleeding vomiting,HIGH,partial,3
+dark_urine stomach_bleeding yellowing_of_eyes,HIGH,partial,3
+dark_urine unable_to_drink,CRITICAL,redflag,2
+dark_urine vomiting,MEDIUM,partial,2
+dark_urine weight_loss yellowish_skin,MEDIUM,partial,3
+dark_urine yellow_urine yellowing_of_eyes,MEDIUM,partial,3
+dark_urine yellowing_of_eyes yellowish_skin,MEDIUM,partial,3
+dark_urine yellowish_skin,MEDIUM,partial,2
+dehydration depression diarrhoea,HIGH,redflag,3
+dehydration diarrhoea,HIGH,partial,2
+dehydration diarrhoea dizziness fatigue,HIGH,redflag,4
+dehydration diarrhoea family_history,HIGH,redflag,3
+dehydration diarrhoea indigestion,HIGH,redflag,3
+dehydration diarrhoea pain_behind_the_eyes,HIGH,redflag,3
+dehydration diarrhoea redness_of_eyes,HIGH,redflag,3
+dehydration diarrhoea slurred_speech,HIGH,redflag,3
+dehydration diarrhoea stiff_neck,HIGH,redflag,3
+dehydration diarrhoea sunken_eyes,HIGH,observed,3
+dehydration diarrhoea swollen_blood_vessels,HIGH,redflag,3
+dehydration diarrhoea vomiting,HIGH,observed,3
+dehydration diarrhoea yellowing_of_eyes,HIGH,redflag,3
+dehydration family_history vomiting,HIGH,redflag,3
+dehydration fatigue vomiting,HIGH,redflag,3
+dehydration headache vomiting,HIGH,redflag,3
+dehydration malaise vomiting,HIGH,redflag,3
+dehydration muscle_wasting vomiting,HIGH,redflag,3
+dehydration stomach_bleeding,HIGH,redflag,2
+dehydration stridor,CRITICAL,redflag,2
+dehydration swollen_blood_vessels vomiting,HIGH,redflag,3
+dehydration vomiting,HIGH,partial,2
+dehydration vomiting weakness_in_limbs,HIGH,redflag,3
+depression dizziness lethargy,MEDIUM,partial,3
+depression enlarged_thyroid,LOW,partial,2
+depression enlarged_thyroid swollen_extremeties,LOW,partial,3
+depression enlarged_thyroid weight_gain,LOW,partial,3
+depression excessive_hunger,LOW,partial,2
+depression excessive_hunger headache,LOW,partial,3
+depression excessive_hunger irritability,LOW,partial,3
+depression fatigue weight_gain,LOW,partial,3
+depression indigestion irritability,LOW,partial,3
+depression lethargy puffy_face_and_eyes,MEDIUM,partial,3
+depression puffy_face_and_eyes,LOW,partial,2
+depression puffy_face_and_eyes weight_gain,LOW,partial,3
+depression stiff_neck,MEDIUM,partial,2
+depression visual_disturbances,LOW,partial,2
+diarrhoea dizziness nausea sunken_eyes,HIGH,redflag,4
+diarrhoea excessive_hunger,MEDIUM,partial,2
+diarrhoea excessive_hunger fatigue,MEDIUM,partial,3
+diarrhoea excessive_hunger irritability,MEDIUM,partial,3
+diarrhoea family_history lethargy sunken_eyes,CRITICAL,redflag,4
+diarrhoea fast_heart_rate muscle_weakness,MEDIUM,partial,3
+diarrhoea fatigue lethargy malaise sunken_eyes,CRITICAL,redflag,5
+diarrhoea fatigue lethargy sunken_eyes vomiting,CRITICAL,redflag,5
+diarrhoea fatigue sunken_eyes,HIGH,redflag,3
+diarrhoea headache muscle_pain,HIGH,partial,3
+diarrhoea headache muscle_pain sunken_eyes,HIGH,redflag,4
+diarrhoea headache sweating,HIGH,partial,3
+diarrhoea headache vomiting,HIGH,partial,3
+diarrhoea high_fever muscle_pain,HIGH,partial,3
+diarrhoea high_fever sweating,HIGH,partial,3
+diarrhoea high_fever vomiting,HIGH,partial,3
+diarrhoea history_of_alcohol_consumption sunken_eyes,HIGH,redflag,3
+diarrhoea joint_pain muscle_pain,MEDIUM,partial,3
+diarrhoea lethargy loss_of_appetite malaise sunken_eyes,CRITICAL,redflag,5
+diarrhoea lethargy loss_of_appetite muscle_pain sunken_eyes,CRITICAL,redflag,5
+diarrhoea lethargy palpitations sunken_eyes,CRITICAL,redflag,4
+diarrhoea lethargy runny_nose sunken_eyes,CRITICAL,redflag,4
+diarrhoea lethargy sunken_eyes vomiting,CRITICAL,redflag,4
+diarrhoea lethargy sunken_eyes weakness_of_one_body_side,CRITICAL,redflag,4
+diarrhoea loss_of_appetite mild_fever,MEDIUM,partial,3
+diarrhoea loss_of_appetite muscle_pain,MEDIUM,partial,3
+diarrhoea loss_of_appetite sunken_eyes,HIGH,redflag,3
+diarrhoea loss_of_appetite sunken_eyes vomiting,HIGH,redflag,4
+diarrhoea mood_swings restlessness,MEDIUM,partial,3
+diarrhoea muscle_weakness restlessness,MEDIUM,partial,3
+diarrhoea nausea,MEDIUM,partial,2
+diarrhoea nausea vomiting,MEDIUM,partial,3
+diarrhoea restlessness,MEDIUM,partial,2
+diarrhoea sunken_eyes swollen_extremeties,HIGH,redflag,3
+diarrhoea sunken_eyes watering_from_eyes,HIGH,redflag,3
+diarrhoea sweating vomiting,HIGH,partial,3
+diarrhoea vomiting,MEDIUM,partial,2
+diarrhoea vomiting yellowing_of_eyes,MEDIUM,partial,3
+diarrhoea weight_loss,MEDIUM,partial,2
+dischromic_patches nodal_skin_eruptions,LOW,partial,2
+dischromic_patches skin_rash,LOW,partial,2
+distention_of_abdomen fluid_overload,HIGH,partial,2
+distention_of_abdomen fluid_overload history_of_alcohol_consumption,HIGH,partial,3
+distention_of_abdomen high_fever photophobia,HIGH,redflag,3
+distention_of_abdomen history_of_alcohol_consumption yellowish_skin,HIGH,partial,3
+distention_of_abdomen stridor,CRITICAL,redflag,2
+distention_of_abdomen swelling_of_stomach,HIGH,partial,2
+distention_of_abdomen vomiting,HIGH,partial,2
+dizziness,LOW,partial,1
+dizziness fall joint_pain,MEDIUM,redflag,3
+dizziness fast_heart_rate headache,MEDIUM,redflag,3
+dizziness fast_heart_rate malaise,MEDIUM,redflag,3
+dizziness fatigue high_fever,MEDIUM,redflag,3
+dizziness fatigue irritability,LOW,partial,3
+dizziness fatigue lethargy,MEDIUM,partial,3
+dizziness fatigue minor_wound,LOW,redflag,3
+dizziness fatigue mood_swings,LOW,partial,3
+dizziness fatigue weight_gain,LOW,partial,3
+dizziness head_injury joint_pain vomiting,CRITICAL,redflag,4
+dizziness high_blood_pressure,MEDIUM,redflag,2
+dizziness high_fever malaise pregnancy,HIGH,redflag,4
+dizziness high_fever muscle_pain pregnancy,HIGH,redflag,4
+dizziness irregular_sugar_level lethargy,HIGH,redflag,3
+dizziness lack_of_concentration,MEDIUM,partial,2
+dizziness loss_of_appetite trauma,HIGH,redflag,3
+dizziness loss_of_appetite wound,MEDIUM,redflag,3
+dizziness loss_of_balance malaise slurred_speech,CRITICAL,redflag,4
+dizziness loss_of_balance neck_pain weakness_in_limbs,LOW,observed,4
+dizziness malaise pregnancy puffy_face_and_eyes,HIGH,redflag,4
+dizziness muscle_pain significant_wound,HIGH,redflag,3
+dizziness nausea tb_contact,MEDIUM,redflag,3
+dizziness puffy_face_and_eyes,LOW,partial,2
+dizziness puffy_face_and_eyes swollen_extremeties,LOW,partial,3
+dizziness purpuric_rash,CRITICAL,redflag,2
+dizziness purpuric_rash vomiting,CRITICAL,redflag,3
+dizziness retained_placenta,HIGH,redflag,2
+dizziness severe_respiratory_distress,CRITICAL,redflag,2
+dizziness unable_to_breastfeed,CRITICAL,redflag,2
+dizziness unable_to_sit,MEDIUM,redflag,2
+dizziness unable_to_stand,MEDIUM,redflag,2
+dizziness weight_gain,LOW,partial,2
+dizziness wound,MEDIUM,redflag,2
+drying_and_tingling_lips excessive_hunger,HIGH,partial,2
+drying_and_tingling_lips excessive_hunger fatigue,HIGH,partial,3
+drying_and_tingling_lips excessive_hunger vomiting,HIGH,partial,3
+drying_and_tingling_lips fatigue sweating,HIGH,partial,3
+drying_and_tingling_lips irritability sweating,HIGH,partial,3
+drying_and_tingling_lips kwashiorkor_signs,HIGH,redflag,2
+drying_and_tingling_lips nausea palpitations,HIGH,partial,3
+drying_and_tingling_lips sweating vomiting,HIGH,partial,3
+eclampsia history_of_alcohol_consumption,CRITICAL,redflag,2
+eclampsia nausea,CRITICAL,redflag,2
+eclampsia palpitations,CRITICAL,redflag,2
+enlarged_thyroid,LOW,partial,1
+enlarged_thyroid lethargy swollen_extremeties,MEDIUM,partial,3
+enlarged_thyroid mood_swings,LOW,partial,2
+enlarged_thyroid mood_swings puffy_face_and_eyes,LOW,partial,3
+enlarged_thyroid palpitations,MEDIUM,redflag,2
+enlarged_thyroid puffy_face_and_eyes,LOW,partial,2
+enlarged_thyroid puffy_face_and_eyes weight_gain,LOW,partial,3
+enlarged_thyroid uncontrolled_bleeding,CRITICAL,redflag,2
+excessive_hunger,LOW,partial,1
+excessive_hunger fatigue,MEDIUM,partial,2
+excessive_hunger fatigue muscle_weakness,MEDIUM,partial,3
+excessive_hunger fatigue obesity,MEDIUM,partial,3
+excessive_hunger fatigue weight_loss,MEDIUM,partial,3
+excessive_hunger headache visual_disturbances,LOW,partial,3
+excessive_hunger increased_appetite,MEDIUM,partial,2
+excessive_hunger increased_appetite obesity,MEDIUM,partial,3
+excessive_hunger indigestion,LOW,partial,2
+excessive_hunger indigestion stiff_neck,MEDIUM,partial,3
+excessive_hunger irregular_sugar_level lethargy,HIGH,partial,3
+excessive_hunger irregular_sugar_level restlessness,MEDIUM,partial,3
+excessive_hunger irritability visual_disturbances,LOW,partial,3
+excessive_hunger lethargy obesity,MEDIUM,partial,3
+excessive_hunger mood_swings muscle_weakness,MEDIUM,partial,3
+excessive_hunger mood_swings restlessness,MEDIUM,partial,3
+excessive_hunger muscle_weakness restlessness,MEDIUM,partial,3
+excessive_hunger muscle_weakness sweating,MEDIUM,partial,3
+excessive_hunger muscle_weakness weight_loss,MEDIUM,partial,3
+excessive_hunger nausea vomiting,HIGH,partial,3
+excessive_hunger obesity,MEDIUM,partial,2
+excessive_hunger obesity polyuria,MEDIUM,partial,3
+excessive_hunger palpitations vomiting,HIGH,partial,3
+excessive_hunger stiff_neck visual_disturbances,MEDIUM,partial,3
+excessive_hunger swelling_post_trauma,MEDIUM,redflag,2
+excessive_hunger tb_contact,MEDIUM,redflag,2
+extra_marital_contacts high_fever muscle_wasting patches_in_throat,HIGH,observed,4
+extra_marital_contacts irregular_sugar_level lethargy,HIGH,redflag,3
+extra_marital_contacts pregnancy puffy_face_and_eyes,HIGH,redflag,3
+extra_marital_contacts snake_bite,HIGH,redflag,2
+failure_to_thrive internal_itching,MEDIUM,redflag,2
+failure_to_thrive irritation_in_anus,MEDIUM,redflag,2
+fall loss_of_appetite,MEDIUM,redflag,2
+fall malaise,MEDIUM,redflag,2
+fall muscle_pain,MEDIUM,redflag,2
+fall nodal_skin_eruptions,MEDIUM,redflag,2
+fall small_dents_in_nails,MEDIUM,redflag,2
+fall spinning_movements,MEDIUM,redflag,2
+fall vomiting,MEDIUM,redflag,2
+fall yellowish_skin,MEDIUM,redflag,2
+family_history fatigue yellowing_of_eyes,MEDIUM,partial,3
+family_history fatigue yellowish_skin,MEDIUM,partial,3
+family_history fracture,HIGH,redflag,2
+family_history uncontrolled_bleeding,CRITICAL,redflag,2
+family_history yellowing_of_eyes yellowish_skin,MEDIUM,partial,3
+fast_heart_rate fatigue high_fever,HIGH,partial,3
+fast_heart_rate fatigue irritability,MEDIUM,partial,3
+fast_heart_rate fatigue restlessness,MEDIUM,partial,3
+fast_heart_rate high_blood_pressure visual_disturbances,HIGH,redflag,3
+fast_heart_rate indigestion,MEDIUM,redflag,2
+fast_heart_rate irregular_sugar_level sweating,HIGH,redflag,3
+fast_heart_rate irritability,MEDIUM,partial,2
+fast_heart_rate malaise phlegm,HIGH,partial,3
+fast_heart_rate malaise rusty_sputum,HIGH,partial,3
+fast_heart_rate muscle_pain,MEDIUM,redflag,2
+fast_heart_rate muscle_weakness sweating,MEDIUM,partial,3
+fast_heart_rate muscle_weakness weight_loss,MEDIUM,partial,3
+fast_heart_rate phlegm,HIGH,partial,2
+fast_heart_rate skin_rash,MEDIUM,redflag,2
+fast_heart_rate unable_to_sit,MEDIUM,redflag,2
+fast_heart_rate weakness_of_one_body_side,CRITICAL,redflag,2
+fatigue fracture,HIGH,redflag,2
+fatigue haematuria joint_pain,MEDIUM,redflag,3
+fatigue headache high_blood_pressure muscle_pain,HIGH,redflag,4
+fatigue headache high_fever itching lethargy loss_of_appetite malaise red_spots_over_body skin_rash swelled_lymph_nodes,MEDIUM,observed,10
+fatigue headache loss_of_smell,LOW,partial,3
+fatigue headache mild_fever,MEDIUM,partial,3
+fatigue headache muscle_pain,LOW,partial,3
+fatigue headache pregnancy puffy_face_and_eyes,HIGH,redflag,4
+fatigue headache uncontrolled_bleeding,CRITICAL,redflag,3
+fatigue high_blood_pressure joint_pain visual_disturbances,HIGH,redflag,4
+fatigue high_fever,MEDIUM,partial,2
+fatigue high_fever malaise,MEDIUM,partial,3
+fatigue high_fever photophobia vomiting,HIGH,redflag,4
+fatigue high_fever pregnancy,HIGH,redflag,3
+fatigue high_fever stomach_bleeding,HIGH,partial,3
+fatigue high_fever yellowing_of_eyes,MEDIUM,partial,3
+fatigue increased_appetite lethargy,MEDIUM,partial,3
+fatigue irregular_sugar_level,MEDIUM,partial,2
+fatigue irritability muscle_weakness,MEDIUM,partial,3
+fatigue irritability puffy_face_and_eyes,LOW,partial,3
+fatigue irritability restlessness,MEDIUM,partial,3
+fatigue itching mild_fever,MEDIUM,partial,3
+fatigue itching vomiting,MEDIUM,partial,3
+fatigue joint_pain mild_fever,MEDIUM,redflag,3
+fatigue joint_pain significant_wound,HIGH,redflag,3
+fatigue joint_pain vomiting,MEDIUM,partial,3
+fatigue lethargy red_spots_over_body,MEDIUM,partial,3
+fatigue lethargy restlessness,MEDIUM,partial,3
+fatigue lethargy swollen_extremeties,MEDIUM,partial,3
+fatigue loss_of_appetite,MEDIUM,partial,2
+fatigue loss_of_appetite nausea,MEDIUM,partial,3
+fatigue loss_of_appetite nausea yellowing_of_eyes yellowish_skin,MEDIUM,observed,5
+fatigue loss_of_appetite receiving_unsterile_injections,MEDIUM,partial,3
+fatigue loss_of_balance slurred_speech,CRITICAL,redflag,3
+fatigue loss_of_smell throat_irritation,LOW,partial,3
+fatigue malaise muscle_pain,LOW,partial,3
+fatigue malaise receiving_blood_transfusion,MEDIUM,partial,3
+fatigue malaise receiving_unsterile_injections,MEDIUM,partial,3
+fatigue malaise rusty_sputum,HIGH,partial,3
+fatigue malaise sweating,HIGH,partial,3
+fatigue malaise yellow_urine,MEDIUM,partial,3
+fatigue malaria_confirmed,HIGH,redflag,2
+fatigue minor_wound muscle_pain,LOW,redflag,3
+fatigue minor_wound nausea,LOW,redflag,3
+fatigue mood_swings weight_gain,LOW,partial,3
+fatigue mood_swings weight_loss,MEDIUM,partial,3
+fatigue muscle_pain prolonged_labour,HIGH,redflag,3
+fatigue muscle_pain skin_rash,HIGH,partial,3
+fatigue muscle_pain throat_irritation,LOW,partial,3
+fatigue muscle_weakness sweating,MEDIUM,partial,3
+fatigue nausea palpitations,HIGH,partial,3
+fatigue nausea red_spots_over_body,HIGH,partial,3
+fatigue nausea retained_placenta,HIGH,redflag,3
+fatigue nausea vomiting,MEDIUM,partial,3
+fatigue nausea yellowing_of_eyes,MEDIUM,partial,3
+fatigue obesity polyuria,MEDIUM,partial,3
+fatigue obesity restlessness,MEDIUM,partial,3
+fatigue obesity weight_loss,MEDIUM,partial,3
+fatigue palpitations,HIGH,partial,2
+fatigue palpitations slurred_speech,HIGH,partial,3
+fatigue phlegm,LOW,partial,2
+fatigue phlegm runny_nose,LOW,partial,3
+fatigue polyuria weight_loss,MEDIUM,partial,3
+fatigue pre_eclampsia,HIGH,redflag,2
+fatigue pregnancy vomiting,LOW,redflag,3
+fatigue puffy_face_and_eyes,LOW,partial,2
+fatigue receiving_unsterile_injections,MEDIUM,partial,2
+fatigue receiving_unsterile_injections yellowish_skin,MEDIUM,partial,3
+fatigue red_spots_over_body skin_rash,MEDIUM,partial,3
+fatigue redness_of_eyes runny_nose,LOW,partial,3
+fatigue restlessness,MEDIUM,partial,2
+fatigue retained_placenta,HIGH,redflag,2
+fatigue runny_nose,LOW,partial,2
+fatigue runny_nose sinus_pressure,LOW,partial,3
+fatigue runny_nose swelled_lymph_nodes,LOW,partial,3
+fatigue sinus_pressure throat_irritation,LOW,partial,3
+fatigue slow_breathing vomiting,HIGH,redflag,3
+fatigue toxic_look_(typhos),HIGH,partial,2
+fatigue unable_to_sit,MEDIUM,redflag,2
+fatigue unable_to_stand,MEDIUM,redflag,2
+fatigue vomiting weight_loss,MEDIUM,partial,3
+fatigue vomiting yellowing_of_eyes,MEDIUM,partial,3
+fatigue yellowish_skin,MEDIUM,partial,2
+fluid_overload pre_eclampsia,HIGH,redflag,2
+fluid_overload swelling_of_stomach,HIGH,partial,2
+fluid_overload unable_to_sit,MEDIUM,redflag,2
+fluid_overload yellowish_skin,HIGH,partial,2
+foul_smell_ofurine pregnancy visual_disturbances,HIGH,redflag,3
+foul_smell_ofurine snake_envenomation,CRITICAL,redflag,2
+fracture loss_of_appetite,HIGH,redflag,2
+fracture malaise,HIGH,redflag,2
+fracture stomach_pain,HIGH,redflag,2
+haematuria,MEDIUM,redflag,1
+haematuria headache loss_of_appetite,MEDIUM,redflag,3
+haematuria loss_of_balance,MEDIUM,redflag,2
+haematuria nausea,MEDIUM,redflag,2
+head_injury headache lethargy loss_of_appetite,CRITICAL,redflag,4
+head_injury headache vomiting,CRITICAL,redflag,3
+head_injury joint_pain lethargy,CRITICAL,redflag,3
+head_injury lethargy,CRITICAL,redflag,2
+head_injury lethargy mild_fever,CRITICAL,redflag,3
+head_injury lethargy mood_swings,CRITICAL,redflag,3
+head_injury lethargy pain_in_anal_region,CRITICAL,redflag,3
+head_injury lethargy pus_filled_pimples,CRITICAL,redflag,3
+head_injury lethargy redness_of_eyes,CRITICAL,redflag,3
+head_injury muscle_pain,HIGH,redflag,2
+head_injury muscle_pain vomiting,CRITICAL,redflag,3
+head_injury muscle_weakness,HIGH,redflag,2
+head_injury nausea,HIGH,redflag,2
+head_injury sweating,HIGH,redflag,2
+head_injury swelled_lymph_nodes vomiting,CRITICAL,redflag,3
+head_injury visual_disturbances,HIGH,redflag,2
+head_injury vomiting,CRITICAL,redflag,2
+headache,LOW,partial,1
+headache high_blood_pressure joint_pain malaise,HIGH,redflag,4
+headache high_blood_pressure knee_pain,HIGH,redflag,3
+headache high_blood_pressure loss_of_appetite,HIGH,redflag,3
+headache high_blood_pressure vomiting,HIGH,redflag,3
+headache high_blood_pressure yellowing_of_eyes,HIGH,redflag,3
+headache high_fever,MEDIUM,partial,2
+headache high_fever itching lethargy loss_of_appetite malaise mild_fever red_spots_over_body skin_rash swelled_lymph_nodes,MEDIUM,observed,10
+headache high_fever lethargy,MEDIUM,partial,3
+headache high_fever loss_of_appetite stiff_neck,CRITICAL,redflag,4
+headache high_fever toxic_look_(typhos),HIGH,partial,3
+headache irregular_sugar_level sweating,HIGH,redflag,3
+headache itching lethargy,MEDIUM,partial,3
+headache itching malaise,MEDIUM,partial,3
+headache itching mild_fever,MEDIUM,partial,3
+headache itching red_spots_over_body,MEDIUM,partial,3
+headache itching skin_rash,MEDIUM,partial,3
+headache itching swelled_lymph_nodes,MEDIUM,partial,3
+headache joint_pain malaise,MEDIUM,partial,3
+headache joint_pain nausea,MEDIUM,partial,3
+headache joint_pain pain_behind_the_eyes,HIGH,partial,3
+headache joint_pain skin_rash,HIGH,partial,3
+headache joint_pain unable_to_drink,CRITICAL,redflag,3
+headache joint_pain uncontrolled_bleeding,CRITICAL,redflag,3
+headache lethargy swelled_lymph_nodes,MEDIUM,partial,3
+headache loss_of_appetite vomiting,MEDIUM,partial,3
+headache loss_of_balance nausea spinning_movements unsteadiness,MEDIUM,observed,5
+headache loss_of_balance nausea unsteadiness vomiting,MEDIUM,observed,5
+headache loss_of_balance slurred_speech,CRITICAL,redflag,3
+headache loss_of_smell phlegm,LOW,partial,3
+headache low_blood_pressure muscle_pain,HIGH,redflag,3
+headache low_blood_pressure vomiting,HIGH,redflag,3
+headache malaise minor_wound,LOW,redflag,3
+headache malaise pregnancy,HIGH,redflag,3
+headache malaise red_spots_over_body,MEDIUM,partial,3
+headache malaise redness_of_eyes,LOW,partial,3
+headache malaise skin_rash,MEDIUM,partial,3
+headache malaise unable_to_breastfeed,CRITICAL,redflag,3
+headache mild_fever swelled_lymph_nodes,MEDIUM,partial,3
+headache minor_wound vomiting,LOW,redflag,3
+headache muscle_pain nausea,MEDIUM,partial,3
+headache muscle_pain prolonged_labour,HIGH,redflag,3
+headache muscle_pain sinus_pressure,LOW,partial,3
+headache muscle_pain slurred_speech,HIGH,redflag,3
+headache muscle_pain throat_irritation,LOW,partial,3
+headache muscle_pain unable_to_stand,MEDIUM,redflag,3
+headache nausea palpitations,HIGH,partial,3
+headache nausea red_spots_over_body,HIGH,partial,3
+headache pain_behind_the_eyes vomiting,HIGH,partial,3
+headache passage_of_gases pregnancy,HIGH,redflag,3
+headache phlegm redness_of_eyes,LOW,partial,3
+headache phlegm runny_nose,LOW,partial,3
+headache pregnancy pus_filled_pimples,HIGH,redflag,3
+headache runny_nose sinus_pressure,LOW,partial,3
+headache severe_pallor,HIGH,redflag,2
+headache sinus_pressure swelled_lymph_nodes,LOW,partial,3
+headache skin_rash,MEDIUM,partial,2
+headache slurred_speech,HIGH,partial,2
+headache spinning_movements unsteadiness,MEDIUM,partial,3
+headache swelled_lymph_nodes throat_irritation,LOW,partial,3
+headache tb_contact,MEDIUM,redflag,2
+headache unable_to_drink,CRITICAL,redflag,2
+headache unable_to_walk,MEDIUM,redflag,2
+headache visual_disturbances,LOW,partial,2
+headache vomiting,MEDIUM,partial,2
+high_blood_pressure irregular_sugar_level visual_disturbances,HIGH,redflag,3
+high_blood_pressure joint_pain muscle_pain,MEDIUM,redflag,3
+high_blood_pressure loss_of_balance,MEDIUM,redflag,2
+high_blood_pressure malaise,MEDIUM,redflag,2
+high_blood_pressure nausea,MEDIUM,redflag,2
+high_blood_pressure pain_behind_the_eyes visual_disturbances,HIGH,redflag,3
+high_blood_pressure pain_in_anal_region,MEDIUM,redflag,2
+high_blood_pressure spinning_movements,MEDIUM,redflag,2
+high_fever internal_itching photophobia,HIGH,redflag,3
+high_fever itching red_spots_over_body,MEDIUM,partial,3
+high_fever joint_pain stomach_bleeding,HIGH,partial,3
+high_fever joint_pain yellowish_skin,MEDIUM,partial,3
+high_fever lethargy mild_fever,MEDIUM,partial,3
+high_fever lethargy red_spots_over_body,MEDIUM,partial,3
+high_fever loss_of_appetite photophobia,HIGH,redflag,3
+high_fever loss_of_appetite skin_rash,MEDIUM,partial,3
+high_fever loss_of_appetite sweating,HIGH,partial,3
+high_fever loss_of_appetite vomiting,MEDIUM,partial,3
+high_fever loss_of_smell,MEDIUM,partial,2
+high_fever malaise mild_fever,MEDIUM,partial,3
+high_fever malaise phlegm,MEDIUM,partial,3
+high_fever malaise rusty_sputum,HIGH,partial,3
+high_fever malaise swelled_lymph_nodes,MEDIUM,partial,3
+high_fever mild_fever phlegm,HIGH,partial,3
+high_fever mild_fever red_spots_over_body,MEDIUM,partial,3
+high_fever mild_fever vomiting,HIGH,partial,3
+high_fever mild_fever yellowing_of_eyes,HIGH,partial,3
+high_fever mucoid_sputum,HIGH,partial,2
+high_fever muscle_pain,MEDIUM,partial,2
+high_fever muscle_pain phlegm,MEDIUM,partial,3
+high_fever muscle_pain runny_nose,MEDIUM,partial,3
+high_fever muscle_pain skin_rash,HIGH,partial,3
+high_fever muscle_wasting pregnancy,HIGH,redflag,3
+high_fever nausea stiff_neck,CRITICAL,redflag,3
+high_fever nausea toxic_look_(typhos),HIGH,partial,3
+high_fever neck_pain photophobia,HIGH,redflag,3
+high_fever patches_in_throat,HIGH,partial,2
+high_fever phlegm rusty_sputum,HIGH,partial,3
+high_fever phlegm sweating,HIGH,partial,3
+high_fever phlegm throat_irritation,MEDIUM,partial,3
+high_fever photophobia redness_of_eyes,HIGH,redflag,3
+high_fever photophobia yellow_crust_ooze,HIGH,redflag,3
+high_fever pregnancy puffy_face_and_eyes,HIGH,redflag,3
+high_fever pregnancy rusty_sputum,HIGH,redflag,3
+high_fever pregnancy spinning_movements,HIGH,redflag,3
+high_fever receiving_unsterile_injections,MEDIUM,redflag,2
+high_fever red_spots_over_body skin_rash,MEDIUM,partial,3
+high_fever red_spots_over_body swelled_lymph_nodes,MEDIUM,partial,3
+high_fever red_spots_over_body vomiting,HIGH,partial,3
+high_fever redness_of_eyes throat_irritation,MEDIUM,partial,3
+high_fever sinus_pressure,MEDIUM,partial,2
+high_fever spinning_movements stiff_neck,CRITICAL,redflag,3
+high_fever sweating yellowing_of_eyes,HIGH,partial,3
+high_fever swelling_joints,MEDIUM,redflag,2
+high_fever throat_irritation,MEDIUM,partial,2
+high_fever toxic_look_(typhos) vomiting,HIGH,partial,3
+high_fever trauma,HIGH,redflag,2
+high_fever weight_loss yellowing_of_eyes,HIGH,partial,3
+high_fever weight_loss yellowish_skin,MEDIUM,partial,3
+high_fever yellow_urine,MEDIUM,redflag,2
+hip_joint_pain joint_pain knee_pain,LOW,partial,3
+hip_joint_pain joint_pain knee_pain painful_walking swelling_joints,LOW,observed,5
+hip_joint_pain joint_pain neck_pain,LOW,partial,3
+hip_joint_pain joint_pain painful_walking,LOW,partial,3
+hip_joint_pain joint_pain swelling_joints,LOW,partial,3
+hip_joint_pain knee_pain,LOW,partial,2
+hip_joint_pain knee_pain neck_pain,LOW,partial,3
+hip_joint_pain uncontrolled_bleeding,CRITICAL,redflag,2
+history_of_alcohol_consumption puerperal_sepsis,CRITICAL,redflag,2
+history_of_alcohol_consumption stomach_bleeding,HIGH,redflag,2
+history_of_alcohol_consumption swelling_of_stomach,HIGH,partial,2
+increased_appetite pregnancy,LOW,redflag,2
+increased_appetite weight_loss,MEDIUM,partial,2
+indigestion,LOW,partial,1
+indigestion internal_itching loss_of_appetite passage_of_gases vomiting,MEDIUM,observed,5
+indigestion internal_itching passage_of_gases,MEDIUM,partial,3
+indigestion irritability visual_disturbances,LOW,partial,3
+indigestion loss_of_appetite,MEDIUM,partial,2
+indigestion stiff_neck,MEDIUM,partial,2
+inflammatory_nails,LOW,partial,1
+inflammatory_nails joint_pain silver_like_dusting skin_peeling skin_rash,LOW,observed,5
+inflammatory_nails joint_pain skin_rash,LOW,partial,3
+inflammatory_nails weakness_of_one_body_side,CRITICAL,redflag,2
+internal_itching necrosis,HIGH,redflag,2
+internal_itching stridor,CRITICAL,redflag,2
+irregular_sugar_level,MEDIUM,partial,1
+irregular_sugar_level joint_pain sweating,HIGH,redflag,3
+irregular_sugar_level lethargy obesity,HIGH,partial,3
+irregular_sugar_level lethargy polyuria,HIGH,partial,3
+irregular_sugar_level lethargy yellowish_skin,HIGH,redflag,3
+irregular_sugar_level loss_of_smell sweating,HIGH,redflag,3
+irregular_sugar_level malaise muscle_pain sweating,HIGH,redflag,4
+irregular_sugar_level obesity restlessness,MEDIUM,partial,3
+irregular_sugar_level obesity weight_loss,MEDIUM,partial,3
+irregular_sugar_level painful_walking sweating,HIGH,redflag,3
+irregular_sugar_level polyuria,MEDIUM,partial,2
+irregular_sugar_level runny_nose sweating,HIGH,redflag,3
+irregular_sugar_level sweating,HIGH,redflag,2
+irregular_sugar_level vomits_everything,CRITICAL,redflag,2
+irritability,LOW,partial,1
+irritability mood_swings puffy_face_and_eyes,LOW,partial,3
+irritability mood_swings weight_loss,MEDIUM,partial,3
+irritability nausea,HIGH,partial,2
+irritability necrosis,HIGH,redflag,2
+irritability puffy_face_and_eyes swollen_extremeties,LOW,partial,3
+irritability snake_bite,HIGH,redflag,2
+irritability swollen_extremeties,LOW,partial,2
+irritability visual_disturbances,LOW,partial,2
+irritability weight_gain,LOW,partial,2
+irritation_in_anus stridor,CRITICAL,redflag,2
+irritation_in_anus unable_to_drink,CRITICAL,redflag,2
+itching lethargy swelled_lymph_nodes,MEDIUM,partial,3
+itching lethargy yellow_urine,MEDIUM,partial,3
+itching loss_of_appetite,MEDIUM,partial,2
+itching malaise,MEDIUM,partial,2
+itching malaise swelled_lymph_nodes,MEDIUM,partial,3
+itching malaise yellow_urine,MEDIUM,partial,3
+itching mild_fever skin_rash,MEDIUM,partial,3
+itching mild_fever swelled_lymph_nodes,MEDIUM,partial,3
+itching nausea vomiting,MEDIUM,partial,3
+itching nausea yellowing_of_eyes,MEDIUM,partial,3
+itching red_spots_over_body skin_rash,MEDIUM,partial,3
+itching skin_rash spotting_urination stomach_pain,MEDIUM,observed,4
+itching skin_rash stomach_pain,MEDIUM,partial,3
+itching snake_envenomation,CRITICAL,redflag,2
+itching yellow_urine yellowing_of_eyes,MEDIUM,partial,3
+joint_pain knee_pain,LOW,partial,2
+joint_pain lethargy,MEDIUM,redflag,2
+joint_pain loss_of_appetite pregnancy puffy_face_and_eyes,HIGH,redflag,4
+joint_pain loss_of_appetite slurred_speech weakness_in_limbs,CRITICAL,redflag,4
+joint_pain loss_of_appetite stomach_bleeding,HIGH,partial,3
+joint_pain loss_of_appetite trauma,HIGH,redflag,3
+joint_pain loss_of_appetite unable_to_drink,CRITICAL,redflag,3
+joint_pain loss_of_appetite yellowing_of_eyes,MEDIUM,partial,3
+joint_pain loss_of_balance slurred_speech vomiting,CRITICAL,redflag,4
+joint_pain malaise red_spots_over_body,HIGH,partial,3
+joint_pain malaise stridor,CRITICAL,redflag,3
+joint_pain malaise unable_to_sit,MEDIUM,redflag,3
+joint_pain minor_wound nausea,LOW,redflag,3
+joint_pain muscle_pain,MEDIUM,partial,2
+joint_pain muscle_pain red_spots_over_body,HIGH,partial,3
+joint_pain muscle_pain skin_rash,HIGH,partial,3
+joint_pain muscle_pain stridor,CRITICAL,redflag,3
+joint_pain nausea pain_behind_the_eyes,HIGH,partial,3
+joint_pain nausea stomach_bleeding,HIGH,partial,3
+joint_pain pain_behind_the_eyes red_spots_over_body,HIGH,partial,3
+joint_pain palpitations,MEDIUM,redflag,2
+joint_pain photophobia vomiting,MEDIUM,redflag,3
+joint_pain pregnancy visual_disturbances,HIGH,redflag,3
+joint_pain skin_rash vomiting,HIGH,partial,3
+joint_pain unable_to_drink,CRITICAL,redflag,2
+joint_pain unable_to_sit,MEDIUM,redflag,2
+joint_pain unable_to_walk vomiting,MEDIUM,redflag,3
+joint_pain uncontrolled_bleeding,CRITICAL,redflag,2
+knee_pain neck_pain painful_walking,LOW,partial,3
+knee_pain neck_pain swelling_joints,LOW,partial,3
+knee_pain painful_walking,LOW,partial,2
+knee_pain slurred_speech weakness_in_limbs,CRITICAL,redflag,3
+knee_pain swelling_joints,LOW,partial,2
+knee_pain tb_contact,MEDIUM,redflag,2
+kwashiorkor_signs malaise vomiting,HIGH,redflag,3
+kwashiorkor_signs nausea vomiting,HIGH,redflag,3
+lethargy loss_of_appetite receiving_unsterile_injections,MEDIUM,partial,3
+lethargy loss_of_appetite yellowish_skin,MEDIUM,partial,3
+lethargy malaise,MEDIUM,partial,2
+lethargy malaise skin_rash,MEDIUM,partial,3
+lethargy mild_fever,MEDIUM,partial,2
+lethargy mild_fever skin_rash,MEDIUM,partial,3
+lethargy pre_eclampsia,HIGH,redflag,2
+lethargy puffy_face_and_eyes,MEDIUM,partial,2
+lethargy puffy_face_and_eyes swollen_extremeties,MEDIUM,partial,3
+lethargy receiving_unsterile_injections,MEDIUM,partial,2
+lethargy skin_rash,MEDIUM,partial,2
+lethargy swollen_extremeties weight_gain,MEDIUM,partial,3
+lethargy weight_gain,MEDIUM,partial,2
+lethargy yellow_urine,MEDIUM,partial,2
+loss_of_appetite low_blood_pressure nausea,HIGH,redflag,3
+loss_of_appetite malaise phlegm,HIGH,partial,3
+loss_of_appetite malaise red_spots_over_body,MEDIUM,partial,3
+loss_of_appetite malaise sweating,HIGH,partial,3
+loss_of_appetite malaise weight_loss,HIGH,partial,3
+loss_of_appetite mild_fever,MEDIUM,partial,2
+loss_of_appetite mild_fever sweating,HIGH,partial,3
+loss_of_appetite mild_fever swelled_lymph_nodes,MEDIUM,partial,3
+loss_of_appetite minor_wound muscle_pain,LOW,redflag,3
+loss_of_appetite muscle_pain red_spots_over_body,HIGH,partial,3
+loss_of_appetite muscle_pain skin_rash,HIGH,partial,3
+loss_of_appetite muscle_pain snake_envenomation,CRITICAL,redflag,3
+loss_of_appetite nausea,MEDIUM,partial,2
+loss_of_appetite nausea photophobia,MEDIUM,redflag,3
+loss_of_appetite nausea red_spots_over_body,HIGH,partial,3
+loss_of_appetite nausea slurred_speech weakness_in_limbs,CRITICAL,redflag,4
+loss_of_appetite nausea uncontrolled_bleeding,CRITICAL,redflag,3
+loss_of_appetite pain_behind_the_eyes red_spots_over_body,HIGH,partial,3
+loss_of_appetite phlegm vomiting,HIGH,partial,3
+loss_of_appetite phlegm weight_loss,HIGH,partial,3
+loss_of_appetite phlegm yellowing_of_eyes,HIGH,partial,3
+loss_of_appetite puerperal_sepsis vomiting,CRITICAL,redflag,3
+loss_of_appetite receiving_blood_transfusion yellowing_of_eyes,MEDIUM,partial,3
+loss_of_appetite receiving_blood_transfusion yellowish_skin,MEDIUM,partial,3
+loss_of_appetite receiving_unsterile_injections yellow_urine,MEDIUM,partial,3
+loss_of_appetite red_spots_over_body swelled_lymph_nodes,MEDIUM,partial,3
+loss_of_appetite red_spots_over_body vomiting,HIGH,partial,3
+loss_of_appetite skin_rash,MEDIUM,partial,2
+loss_of_appetite stomach_bleeding vomiting,HIGH,partial,3
+loss_of_appetite stomach_bleeding yellowing_of_eyes,HIGH,partial,3
+loss_of_appetite stomach_bleeding yellowish_skin,HIGH,partial,3
+loss_of_appetite sweating yellowing_of_eyes,HIGH,partial,3
+loss_of_appetite swelled_lymph_nodes vomiting,HIGH,partial,3
+loss_of_appetite tb_contact,MEDIUM,redflag,2
+loss_of_appetite unable_to_stand,MEDIUM,redflag,2
+loss_of_appetite vomiting,MEDIUM,partial,2
+loss_of_appetite vomiting weight_loss,HIGH,partial,3
+loss_of_appetite vomiting yellowish_skin,MEDIUM,partial,3
+loss_of_appetite yellow_urine yellowish_skin,MEDIUM,partial,3
+loss_of_balance muscle_pain nausea slurred_speech,CRITICAL,redflag,4
+loss_of_balance vomiting,MEDIUM,partial,2
+loss_of_smell,LOW,partial,1
+loss_of_smell malaise runny_nose,LOW,partial,3
+loss_of_smell malaise swelled_lymph_nodes,LOW,partial,3
+loss_of_smell muscle_pain redness_of_eyes,LOW,partial,3
+loss_of_smell muscle_pain throat_irritation,LOW,partial,3
+loss_of_smell phlegm throat_irritation,LOW,partial,3
+loss_of_smell runny_nose swelled_lymph_nodes,LOW,partial,3
+loss_of_smell sinus_pressure swelled_lymph_nodes,LOW,partial,3
+loss_of_smell stridor,CRITICAL,redflag,2
+loss_of_smell weak_pulse,HIGH,redflag,2
+low_blood_pressure malaise,HIGH,redflag,2
+low_blood_pressure stiff_neck,HIGH,redflag,2
+low_blood_pressure vomiting,HIGH,redflag,2
+malaise,LOW,partial,1
+malaise malaria_confirmed muscle_pain,HIGH,redflag,3
+malaise mild_fever red_spots_over_body,MEDIUM,partial,3
+malaise mild_fever weight_loss,HIGH,partial,3
+malaise minor_wound nausea,LOW,redflag,3
+malaise muscle_pain sinus_pressure,LOW,partial,3
+malaise muscle_pain snake_bite,HIGH,redflag,3
+malaise muscle_pain unable_to_sit,MEDIUM,redflag,3
+malaise nausea pain_behind_the_eyes,HIGH,partial,3
+malaise nausea red_spots_over_body,HIGH,partial,3
+malaise phlegm rusty_sputum,HIGH,partial,3
+malaise receiving_blood_transfusion yellowing_of_eyes,MEDIUM,partial,3
+malaise red_spots_over_body vomiting,HIGH,partial,3
+malaise redness_of_eyes,LOW,partial,2
+malaise runny_nose swelled_lymph_nodes,LOW,partial,3
+malaise runny_nose throat_irritation,LOW,partial,3
+malaise skin_rash swelled_lymph_nodes,MEDIUM,partial,3
+malaise snake_envenomation,CRITICAL,redflag,2
+malaise sweating swelled_lymph_nodes,HIGH,partial,3
+malaise sweating yellowing_of_eyes,HIGH,partial,3
+malaise unable_to_breastfeed,CRITICAL,redflag,2
+malaise unable_to_stand,MEDIUM,redflag,2
+malaise unable_to_walk,MEDIUM,redflag,2
+malaise yellowish_skin,MEDIUM,partial,2
+malaria_confirmed nausea,HIGH,redflag,2
+malaria_confirmed puffy_face_and_eyes,HIGH,redflag,2
+mild_fever muscle_pain vomiting,MEDIUM,partial,3
+mild_fever nausea,MEDIUM,partial,2
+mild_fever phlegm,HIGH,partial,2
+mild_fever phlegm swelled_lymph_nodes,HIGH,partial,3
+mild_fever phlegm yellowing_of_eyes,HIGH,partial,3
+mild_fever pregnancy,MEDIUM,redflag,2
+mild_fever swelled_lymph_nodes vomiting,HIGH,partial,3
+mild_fever vomiting,MEDIUM,partial,2
+mild_fever vomiting weight_loss,HIGH,partial,3
+mild_fever yellowish_skin,MEDIUM,partial,2
+minor_wound movement_stiffness,LOW,redflag,2
+minor_wound muscle_pain nausea,LOW,redflag,3
+minor_wound receiving_blood_transfusion,LOW,redflag,2
+minor_wound vomiting,LOW,redflag,2
+mood_swings puffy_face_and_eyes,LOW,partial,2
+mood_swings swollen_extremeties weight_gain,LOW,partial,3
+movement_stiffness muscle_weakness stiff_neck,MEDIUM,partial,3
+movement_stiffness muscle_weakness stiff_neck swelling_joints,MEDIUM,observed,4
+movement_stiffness pre_eclampsia,HIGH,redflag,2
+muscle_pain nausea,MEDIUM,partial,2
+muscle_pain nausea pre_eclampsia,HIGH,redflag,3
+muscle_pain nausea vomiting,MEDIUM,partial,3
+muscle_pain pain_behind_the_eyes vomiting,HIGH,partial,3
+muscle_pain phlegm sinus_pressure,LOW,partial,3
+muscle_pain phlegm swelled_lymph_nodes,LOW,partial,3
+muscle_pain pregnancy visual_disturbances vomiting,HIGH,redflag,4
+muscle_pain redness_of_eyes swelled_lymph_nodes,LOW,partial,3
+muscle_pain runny_nose sinus_pressure,LOW,partial,3
+muscle_pain sinus_pressure swelled_lymph_nodes,LOW,partial,3
+muscle_pain skin_rash,HIGH,partial,2
+muscle_pain skin_rash vomiting,HIGH,partial,3
+muscle_pain sweating vomiting,HIGH,partial,3
+muscle_pain unable_to_drink vomiting,CRITICAL,redflag,3
+muscle_pain unable_to_sit,MEDIUM,redflag,2
+muscle_pain unable_to_walk vomiting,MEDIUM,redflag,3
+muscle_pain vomiting,MEDIUM,partial,2
+muscle_pain weakness_of_one_body_side,CRITICAL,redflag,2
+muscle_pain yellowing_of_eyes,MEDIUM,partial,2
+muscle_wasting patches_in_throat,HIGH,partial,2
+muscle_wasting severe_pallor,HIGH,redflag,2
+muscle_weakness necrosis,HIGH,redflag,2
+muscle_weakness painful_walking,LOW,partial,2
+muscle_weakness painful_walking stiff_neck,MEDIUM,partial,3
+muscle_weakness restlessness,MEDIUM,partial,2
+muscle_weakness sweating weight_loss,MEDIUM,partial,3
+nausea palpitations,HIGH,partial,2
+nausea palpitations vomiting,HIGH,partial,3
+nausea pregnancy,LOW,redflag,2
+nausea purpuric_rash vomiting,CRITICAL,redflag,3
+nausea red_spots_over_body skin_rash,HIGH,partial,3
+nausea significant_wound,HIGH,redflag,2
+nausea slurred_speech sweating,HIGH,partial,3
+nausea slurred_speech vomiting,HIGH,partial,3
+nausea snake_bite vomiting,HIGH,redflag,3
+nausea spinning_movements unsteadiness,MEDIUM,partial,3
+nausea unable_to_breastfeed,CRITICAL,redflag,2
+nausea vomiting yellowish_skin,MEDIUM,partial,3
+nausea yellowing_of_eyes,MEDIUM,partial,2
+neck_pain,LOW,partial,1
+neck_pain slurred_speech,HIGH,redflag,2
+neck_pain stridor,CRITICAL,redflag,2
+neck_pain unable_to_breastfeed,CRITICAL,redflag,2
+necrosis,HIGH,redflag,1
+necrosis redness_of_eyes,HIGH,redflag,2
+necrosis scurring,HIGH,redflag,2
+necrosis toxic_look_(typhos),HIGH,redflag,2
+obesity prominent_veins_on_calf swollen_legs,LOW,partial,3
+obesity swollen_blood_vessels,LOW,partial,2
+obesity unable_to_breastfeed,CRITICAL,redflag,2
+obesity weakness_of_one_body_side,CRITICAL,redflag,2
+pain_behind_the_eyes,HIGH,partial,1
+pain_behind_the_eyes red_spots_over_body,HIGH,partial,2
+pain_behind_the_eyes red_spots_over_body vomiting,HIGH,partial,3
+pain_behind_the_eyes skin_rash,HIGH,partial,2
+pain_behind_the_eyes tb_contact,MEDIUM,redflag,2
+pain_behind_the_eyes weakness_of_one_body_side,CRITICAL,redflag,2
+pain_during_bowel_movements puerperal_sepsis,CRITICAL,redflag,2
+pain_in_anal_region snake_envenomation,CRITICAL,redflag,2
+painful_walking tb_contact,MEDIUM,redflag,2
+palpitations sweating,HIGH,partial,2
+patches_in_throat,HIGH,partial,1
+patches_in_throat severe_pallor,HIGH,redflag,2
+phlegm runny_nose,LOW,partial,2
+phlegm runny_nose throat_irritation,LOW,partial,3
+phlegm sweating,HIGH,partial,2
+phlegm swelled_lymph_nodes yellowing_of_eyes,HIGH,partial,3
+phlegm unable_to_stand,MEDIUM,redflag,2
+phlegm vomiting yellowing_of_eyes,HIGH,partial,3
+photophobia slurred_speech,HIGH,redflag,2
+photophobia swelling_of_stomach,MEDIUM,redflag,2
+photophobia swollen_extremeties,MEDIUM,redflag,2
+polyuria purpuric_rash,CRITICAL,redflag,2
+polyuria restlessness,MEDIUM,partial,2
+polyuria stiff_neck,MEDIUM,redflag,2
+polyuria weight_loss,MEDIUM,partial,2
+pre_eclampsia puffy_face_and_eyes,HIGH,redflag,2
+pregnancy puffy_face_and_eyes visual_disturbances,HIGH,redflag,3
+pregnancy skin_rash,LOW,redflag,2
+pregnancy swelling_joints visual_disturbances,HIGH,redflag,3
+pregnancy visual_disturbances,HIGH,redflag,2
+prominent_veins_on_calf swollen_blood_vessels,LOW,partial,2
+prominent_veins_on_calf swollen_legs,LOW,partial,2
+prominent_veins_on_calf unable_to_drink,CRITICAL,redflag,2
+puerperal_sepsis swelled_lymph_nodes,CRITICAL,redflag,2
+puffy_face_and_eyes weight_gain,LOW,partial,2
+puffy_face_and_eyes wound,MEDIUM,redflag,2
+purpuric_rash,CRITICAL,redflag,1
+receiving_blood_transfusion receiving_unsterile_injections,MEDIUM,partial,2
+receiving_blood_transfusion receiving_unsterile_injections yellowish_skin,MEDIUM,partial,3
+red_sore_around_nose skin_rash,LOW,partial,2
+red_sore_around_nose skin_rash yellow_crust_ooze,LOW,partial,3
+red_sore_around_nose snake_bite,HIGH,redflag,2
+red_spots_over_body unable_to_breastfeed,CRITICAL,redflag,2
+redness_of_eyes runny_nose sinus_pressure,LOW,partial,3
+redness_of_eyes runny_nose throat_irritation,LOW,partial,3
+redness_of_eyes sinus_pressure throat_irritation,LOW,partial,3
+redness_of_eyes slow_breathing,HIGH,redflag,2
+redness_of_eyes stiff_neck,MEDIUM,redflag,2
+redness_of_eyes swelled_lymph_nodes,LOW,partial,2
+restlessness snake_envenomation,CRITICAL,redflag,2
+retained_placenta,HIGH,redflag,1
+retained_placenta rusty_sputum,HIGH,redflag,2
+runny_nose sinus_pressure swelled_lymph_nodes,LOW,partial,3
+runny_nose sinus_pressure throat_irritation,LOW,partial,3
+runny_nose unable_to_walk,MEDIUM,redflag,2
+severe_pallor spotting_urination,HIGH,redflag,2
+severe_pallor vomiting,HIGH,redflag,2
+severe_pallor yellow_crust_ooze,HIGH,redflag,2
+severe_respiratory_distress,CRITICAL,redflag,1
+shivering tb_contact,MEDIUM,redflag,2
+significant_wound sinus_pressure,HIGH,redflag,2
+significant_wound sweating,HIGH,redflag,2
+silver_like_dusting,LOW,partial,1
+silver_like_dusting skin_peeling skin_rash,LOW,partial,3
+silver_like_dusting trauma,HIGH,redflag,2
+sinus_pressure,LOW,partial,1
+sinus_pressure swelled_lymph_nodes throat_irritation,LOW,partial,3
+skin_peeling tb_contact,MEDIUM,redflag,2
+skin_rash spotting_urination stomach_pain,MEDIUM,partial,3
+skin_rash stomach_pain,MEDIUM,partial,2
+slurred_speech unable_to_breastfeed,CRITICAL,redflag,2
+slurred_speech weakness_in_limbs yellowing_of_eyes,CRITICAL,redflag,3
+small_dents_in_nails,LOW,partial,1
+small_dents_in_nails stomach_bleeding,HIGH,redflag,2
+snake_bite,HIGH,redflag,1
+snake_bite weight_gain,HIGH,redflag,2
+snake_envenomation vomiting,CRITICAL,redflag,2
+snake_envenomation weakness_of_one_body_side,CRITICAL,redflag,2
+stiff_neck stomach_pain,MEDIUM,redflag,2
+stiff_neck swelling_joints,MEDIUM,partial,2
+stiff_neck tb_contact,MEDIUM,redflag,2
+stomach_bleeding yellowing_of_eyes yellowish_skin,HIGH,partial,3
+stridor,CRITICAL,redflag,1
+stridor swelling_joints,CRITICAL,redflag,2
+stridor vomiting,CRITICAL,redflag,2
+sunken_eyes vomits_everything,CRITICAL,redflag,2
+sweating,MEDIUM,partial,1
+sweating swelled_lymph_nodes weight_loss,HIGH,partial,3
+sweating swelling_post_trauma,MEDIUM,redflag,2
+sweating vomiting,HIGH,partial,2
+sweating vomiting weight_loss,HIGH,partial,3
+sweating wound,MEDIUM,redflag,2
+swelled_lymph_nodes vomiting weight_loss,HIGH,partial,3
+swelled_lymph_nodes yellowing_of_eyes,HIGH,partial,2
+swelling_of_stomach unable_to_drink,CRITICAL,redflag,2
+swollen_blood_vessels tb_contact,MEDIUM,redflag,2
+swollen_extremeties,LOW,partial,1
+swollen_extremeties weakness_of_one_body_side,CRITICAL,redflag,2
+swollen_legs uncontrolled_bleeding,CRITICAL,redflag,2
+tb_contact ulcers_on_tongue,MEDIUM,redflag,2
+throat_irritation uncontrolled_bleeding,CRITICAL,redflag,2
+toxic_look_(typhos) unable_to_walk,MEDIUM,redflag,2
+ulcers_on_tongue vomiting,LOW,partial,2
+unable_to_breastfeed yellowing_of_eyes,CRITICAL,redflag,2
+unable_to_drink vomiting,CRITICAL,redflag,2
+unable_to_drink weight_loss,CRITICAL,redflag,2
+unable_to_sit weakness_in_limbs,MEDIUM,redflag,2
+unable_to_stand visual_disturbances,MEDIUM,redflag,2
+unable_to_stand yellowish_skin,MEDIUM,redflag,2
+uncontrolled_bleeding,CRITICAL,redflag,1
+unsteadiness,MEDIUM,partial,1
+visual_disturbances vomits_everything,CRITICAL,redflag,2
+vomiting weakness_of_one_body_side,CRITICAL,partial,2
+vomits_everything,CRITICAL,redflag,1
+vomits_everything weakness_of_one_body_side,CRITICAL,redflag,2
+weak_pulse,HIGH,redflag,1
+weakness_of_one_body_side wound,CRITICAL,redflag,2
+weight_gain,LOW,partial,1
+yellow_crust_ooze,LOW,partial,1
+yellow_urine,MEDIUM,partial,1
+yellow_urine yellowish_skin,MEDIUM,partial,2

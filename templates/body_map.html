@@ -1,0 +1,727 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SACA - Body Map</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 40px;
+            background-color: #f4f6f8;
+            color: #222;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .language-bar {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .language-bar select {
+            padding: 8px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+
+        .card {
+            flex: 1;
+            min-width: 280px;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+            box-sizing: border-box;
+        }
+
+        .map {
+            text-align: center;
+        }
+
+        svg {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .part {
+            fill: #f8fafc;
+            stroke: #334155;
+            stroke-width: 2;
+            cursor: pointer;
+        }
+
+        .part:hover {
+            fill: #dbeafe;
+        }
+
+        .part.active {
+            fill: #93c5fd;
+        }
+
+        .label {
+            font-size: 13px;
+            fill: #334155;
+            cursor: pointer;
+        }
+
+        .inside {
+            font-size: 12px;
+            text-anchor: middle;
+            pointer-events: none;
+        }
+
+        .chip {
+            display: inline-block;
+            margin: 4px;
+            padding: 8px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 20px;
+            background-color: #f1f5f9;
+            color: #222;
+            font-family: inherit;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .chip:hover {
+            background-color: #dbeafe;
+        }
+
+        .chip.selected {
+            background-color: #2563eb;
+            border-color: #2563eb;
+            color: white;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            background-color: #2563eb;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1d4ed8;
+        }
+
+        .white-btn {
+            background-color: white;
+            color: #2563eb;
+            border: 2px solid #2563eb;
+        }
+
+        .white-btn:hover {
+            background-color: #eff6ff;
+        }
+
+        .warning {
+            background-color: #fee2e2;
+            border-left: 5px solid #dc2626;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        a {
+            color: #2563eb;
+        }
+
+        .nav-link {
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 700px) {
+            body {
+                padding: 15px;
+            }
+
+            .card {
+                min-width: 0;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+
+    <div class="language-bar">
+        <label for="languageSelect"
+               data-en="Language:"
+               data-sw="Lugha:">Language:</label>
+
+        <select id="languageSelect">
+            <option value="en">English</option>
+            <option value="sw">Kiswahili</option>
+        </select>
+    </div>
+
+    <a href="{{ url_for('dashboard') }}"
+       class="nav-link"
+       data-en="Back to Dashboard"
+       data-sw="Rudi kwenye Dashibodi">
+        Back to Dashboard
+    </a>
+
+    <h1 data-en="SACA Clinical Assistant"
+        data-sw="Msaidizi wa Kliniki wa SACA">
+        SACA Clinical Assistant
+    </h1>
+
+    <p data-en="Tap the body part where you have a problem, then pick what you feel."
+       data-sw="Gusa sehemu ya mwili yenye tatizo, kisha chagua dalili unazohisi.">
+        Tap the body part where you have a problem, then pick what you feel.
+    </p>
+
+    <div class="row">
+
+        <div class="card map">
+            <h2 data-en="Body Map - Tap Where it Hurts"
+                data-sw="Ramani ya Mwili - Gusa Sehemu Inayouma">
+                Body Map - Tap Where it Hurts
+            </h2>
+
+            <svg viewBox="0 0 400 640" aria-label="Interactive body map">
+
+                <ellipse class="part" id="head"
+                    cx="200" cy="58" rx="30" ry="38"
+                    onclick="showPart('head')"/>
+
+                <path class="part" id="neck"
+                    d="M186,94 L214,94 L217,120 L183,120 Z"
+                    onclick="showPart('neck')"/>
+
+                <path class="part" id="shoulders"
+                    d="M183,120 L217,120 Q248,122 262,134 Q270,143 270,158 L240,158 Q200,150 160,158 L130,158 Q130,143 138,134 Q152,122 183,120 Z"
+                    onclick="showPart('shoulders')"/>
+
+                <path class="part" id="chest"
+                    d="M160,158 Q200,150 240,158 L244,242 Q200,250 156,242 Z"
+                    onclick="showPart('chest')"/>
+
+                <path class="part" id="abdomen"
+                    d="M156,242 Q200,250 244,242 L246,300 Q248,330 238,348 L200,362 L162,348 Q152,330 154,300 Z"
+                    onclick="showPart('abdomen')"/>
+
+                <path class="part" id="right_arm"
+                    d="M130,158 L160,158 Q158,200 148,252 L136,338 L108,338 L116,252 Q120,200 130,158 Z"
+                    onclick="showPart('right_arm')"/>
+
+                <path class="part" id="right_hand"
+                    d="M108,338 L136,338 Q142,360 136,384 Q124,400 110,390 Q100,370 108,338 Z"
+                    onclick="showPart('right_hand')"/>
+
+                <path class="part" id="right_leg"
+                    d="M162,348 L200,362 L197,440 L192,576 L164,576 L158,440 Q152,390 162,348 Z"
+                    onclick="showPart('right_leg')"/>
+
+                <path class="part" id="right_foot"
+                    d="M164,576 L192,576 L194,604 Q188,620 158,618 Q148,612 162,598 Z"
+                    onclick="showPart('right_foot')"/>
+
+                <path class="part" id="left_arm"
+                    d="M270,158 L240,158 Q242,200 252,252 L264,338 L292,338 L284,252 Q280,200 270,158 Z"
+                    onclick="showPart('left_arm')"/>
+
+                <path class="part" id="left_hand"
+                    d="M292,338 L264,338 Q258,360 264,384 Q276,400 290,390 Q300,370 292,338 Z"
+                    onclick="showPart('left_hand')"/>
+
+                <path class="part" id="left_leg"
+                    d="M238,348 L200,362 L203,440 L208,576 L236,576 L242,440 Q248,390 238,348 Z"
+                    onclick="showPart('left_leg')"/>
+
+                <path class="part" id="left_foot"
+                    d="M236,576 L208,576 L206,604 Q212,620 242,618 Q252,612 238,598 Z"
+                    onclick="showPart('left_foot')"/>
+
+                <text class="label inside" id="svg-head" x="200" y="62">Head</text>
+                <text class="label inside" id="svg-neck" x="200" y="111" style="font-size:10px;">Neck</text>
+                <text class="label inside" id="svg-shoulders" x="200" y="142">Shoulders</text>
+                <text class="label inside" id="svg-chest" x="200" y="198">Chest</text>
+                <text class="label inside" x="200" y="213" style="font-size:8px;">(cough, chest pain)</text>
+                <text class="label inside" id="svg-abdomen" x="200" y="295">Abdomen</text>
+
+                <text class="label" id="svg-right-arm" x="108" y="235"
+                    text-anchor="end" onclick="showPart('right_arm')">Right Arm</text>
+
+                <text class="label" id="svg-right-hand" x="98" y="372"
+                    text-anchor="end" onclick="showPart('right_hand')">Right Hand</text>
+
+                <text class="label" id="svg-right-leg" x="150" y="480"
+                    text-anchor="end" onclick="showPart('right_leg')">Right Leg</text>
+
+                <text class="label" id="svg-right-foot" x="146" y="630"
+                    text-anchor="end" onclick="showPart('right_foot')">Right Foot</text>
+
+                <text class="label" id="svg-left-arm" x="292" y="235"
+                    onclick="showPart('left_arm')">Left Arm</text>
+
+                <text class="label" id="svg-left-hand" x="302" y="372"
+                    onclick="showPart('left_hand')">Left Hand</text>
+
+                <text class="label" id="svg-left-leg" x="250" y="480"
+                    onclick="showPart('left_leg')">Left Leg</text>
+
+                <text class="label" id="svg-left-foot" x="254" y="630"
+                    onclick="showPart('left_foot')">Left Foot</text>
+            </svg>
+
+            <br>
+
+            <button class="white-btn"
+                    onclick="showPart('general')"
+                    data-en="Whole body (fever, tiredness)"
+                    data-sw="Mwili mzima (homa, uchovu)">
+                Whole body (fever, tiredness)
+            </button>
+        </div>
+
+        <div class="card">
+            <h2 id="part-name"
+                data-en="Choose a body part"
+                data-sw="Chagua sehemu ya mwili">
+                Choose a body part
+            </h2>
+
+            <p data-en="Tap a part of the body, then pick your symptoms."
+               data-sw="Gusa sehemu ya mwili, kisha chagua dalili zako.">
+                Tap a part of the body, then pick your symptoms.
+            </p>
+
+            <div id="chips"></div>
+
+            <hr>
+
+            <p>
+                <strong data-en="Your symptoms:"
+                         data-sw="Dalili zako:">
+                    Your symptoms:
+                </strong>
+            </p>
+
+            <p id="picked"
+               data-en="Nothing picked yet."
+               data-sw="Bado hujachagua dalili.">
+                Nothing picked yet.
+            </p>
+
+            <button onclick="goToSymptoms()"
+                    data-en="Go to symptoms"
+                    data-sw="Endelea na dalili">
+                Go to symptoms
+            </button>
+
+            <button class="white-btn"
+                    onclick="clearAll()"
+                    data-en="Clear"
+                    data-sw="Futa">
+                Clear
+            </button>
+
+            <div class="warning">
+                <strong data-en="Emergency?"
+                         data-sw="Dharura?">Emergency?</strong>
+
+                <span data-en="If you have bad chest pain, trouble breathing or you passed out, call your local emergency number now."
+                      data-sw="Ikiwa una maumivu makali ya kifua, unapata shida kupumua au umezimia, piga nambari ya dharura ya eneo lako sasa.">
+                    If you have bad chest pain, trouble breathing or you passed out,
+                    call your local emergency number now.
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+const symptoms = {
+    head: {
+        headache: "Headache",
+        dizziness: "Dizziness",
+        blurred_and_distorted_vision: "Blurry vision",
+        redness_of_eyes: "Red eyes",
+        pain_behind_the_eyes: "Pain behind the eyes",
+        runny_nose: "Runny nose",
+        sinus_pressure: "Sinus pressure",
+        loss_of_smell: "Loss of smell",
+        ulcers_on_tongue: "Ulcers on tongue",
+        slurred_speech: "Slurred speech"
+    },
+    neck: {
+        neck_pain: "Neck pain",
+        stiff_neck: "Stiff neck",
+        throat_irritation: "Sore throat",
+        patches_in_throat: "Patches in throat",
+        swelled_lymph_nodes: "Swollen glands",
+        enlarged_thyroid: "Swelling at front of neck"
+    },
+    shoulders: {
+        joint_pain: "Joint pain",
+        muscle_pain: "Muscle pain",
+        movement_stiffness: "Stiffness",
+        back_pain: "Upper back pain"
+    },
+    chest: {
+        chest_pain: "Chest pain",
+        breathlessness: "Hard to breathe",
+        cough: "Cough",
+        phlegm: "Phlegm",
+        blood_in_sputum: "Coughing up blood",
+        fast_heart_rate: "Fast heart rate",
+        palpitations: "Heart pounding"
+    },
+    abdomen: {
+        stomach_pain: "Stomach pain",
+        abdominal_pain: "Belly pain",
+        vomiting: "Vomiting",
+        nausea: "Feeling sick",
+        diarrhoea: "Diarrhoea",
+        constipation: "Constipation",
+        acidity: "Heartburn",
+        indigestion: "Indigestion",
+        swelling_of_stomach: "Swollen stomach",
+        burning_micturition: "Burning when peeing"
+    },
+    arm: {
+        muscle_pain: "Muscle pain",
+        joint_pain: "Joint pain",
+        weakness_in_limbs: "Weakness",
+        skin_rash: "Skin rash",
+        itching: "Itching"
+    },
+    hand: {
+        swelling_joints: "Swollen joints",
+        cold_hands_and_feets: "Cold hands",
+        weakness_in_limbs: "Weakness",
+        skin_peeling: "Peeling skin",
+        brittle_nails: "Brittle nails"
+    },
+    leg: {
+        knee_pain: "Knee pain",
+        hip_joint_pain: "Hip pain",
+        swollen_legs: "Swollen legs",
+        painful_walking: "Pain when walking",
+        muscle_weakness: "Muscle weakness",
+        cramps: "Cramps",
+        prominent_veins_on_calf: "Veins showing on calf"
+    },
+    foot: {
+        painful_walking: "Pain when walking",
+        swelling_joints: "Swollen joints",
+        cold_hands_and_feets: "Cold feet",
+        skin_peeling: "Peeling skin",
+        loss_of_balance: "Loss of balance"
+    },
+    general: {
+        high_fever: "High fever",
+        mild_fever: "Mild fever",
+        chills: "Chills",
+        fatigue: "Tiredness",
+        sweating: "Sweating",
+        itching: "Itching",
+        skin_rash: "Skin rash",
+        weight_loss: "Weight loss",
+        dehydration: "Dehydration"
+    }
+};
+
+const translations = {
+    "Head": "Kichwa",
+    "Neck": "Shingo",
+    "Shoulders": "Mabega",
+    "Chest": "Kifua",
+    "Abdomen": "Tumbo",
+    "Right Arm": "Mkono wa kulia",
+    "Left Arm": "Mkono wa kushoto",
+    "Right Hand": "Mkono wa kulia",
+    "Left Hand": "Mkono wa kushoto",
+    "Right Leg": "Mguu wa kulia",
+    "Left Leg": "Mguu wa kushoto",
+    "Right Foot": "Unyayo wa kulia",
+    "Left Foot": "Unyayo wa kushoto",
+    "Whole Body": "Mwili mzima",
+    "Headache": "Maumivu ya kichwa",
+    "Dizziness": "Kizunguzungu",
+    "Blurry vision": "Uoni hafifu",
+    "Red eyes": "Macho mekundu",
+    "Pain behind the eyes": "Maumivu nyuma ya macho",
+    "Runny nose": "Pua inayotiririka",
+    "Sinus pressure": "Shinikizo kwenye sinasi",
+    "Loss of smell": "Kupoteza uwezo wa kunusa",
+    "Ulcers on tongue": "Vidonda kwenye ulimi",
+    "Slurred speech": "Usemi usio wazi",
+    "Neck pain": "Maumivu ya shingo",
+    "Stiff neck": "Shingo kukakamaa",
+    "Sore throat": "Maumivu ya koo",
+    "Patches in throat": "Mabaka kwenye koo",
+    "Swollen glands": "Tezi zilizovimba",
+    "Swelling at front of neck": "Uvimbe mbele ya shingo",
+    "Joint pain": "Maumivu ya viungo",
+    "Muscle pain": "Maumivu ya misuli",
+    "Stiffness": "Kukakamaa",
+    "Upper back pain": "Maumivu ya sehemu ya juu ya mgongo",
+    "Chest pain": "Maumivu ya kifua",
+    "Hard to breathe": "Kupumua kwa shida",
+    "Cough": "Kikohozi",
+    "Phlegm": "Makrohozi",
+    "Coughing up blood": "Kukohoa damu",
+    "Fast heart rate": "Mapigo ya moyo kwenda kasi",
+    "Heart pounding": "Moyo kudunda kwa nguvu",
+    "Stomach pain": "Maumivu ya tumbo",
+    "Belly pain": "Maumivu ya tumbo",
+    "Vomiting": "Kutapika",
+    "Feeling sick": "Kichefuchefu",
+    "Diarrhoea": "Kuhara",
+    "Constipation": "Kufunga choo",
+    "Heartburn": "Kiungulia",
+    "Indigestion": "Kukosa kumeng'enya chakula vizuri",
+    "Swollen stomach": "Tumbo kuvimba",
+    "Burning when peeing": "Maumivu wakati wa kukojoa",
+    "Weakness": "Udhaifu",
+    "Skin rash": "Upele",
+    "Itching": "Kuwashwa",
+    "Swollen joints": "Viungo vilivyovimba",
+    "Cold hands": "Mikono baridi",
+    "Peeling skin": "Ngozi kuchubuka",
+    "Brittle nails": "Kucha zinazovunjika kwa urahisi",
+    "Knee pain": "Maumivu ya goti",
+    "Hip pain": "Maumivu ya nyonga",
+    "Swollen legs": "Miguu iliyovimba",
+    "Pain when walking": "Maumivu wakati wa kutembea",
+    "Muscle weakness": "Udhaifu wa misuli",
+    "Cramps": "Kukaza kwa misuli",
+    "Veins showing on calf": "Mishipa kuonekana kwenye muundi",
+    "Cold feet": "Miguu baridi",
+    "Loss of balance": "Kupoteza usawa",
+    "High fever": "Homa kali",
+    "Mild fever": "Homa ya kiwango cha chini",
+    "Chills": "Kutetemeka kwa baridi",
+    "Tiredness": "Uchovu",
+    "Sweating": "Kutokwa na jasho",
+    "Weight loss": "Kupungua uzito",
+    "Dehydration": "Upungufu wa maji mwilini",
+    "Choose a body part": "Chagua sehemu ya mwili",
+    "Tap a part of the body, then pick your symptoms.": "Gusa sehemu ya mwili, kisha chagua dalili zako.",
+    "Nothing picked yet.": "Bado hujachagua dalili.",
+    "Please pick at least one symptom.": "Tafadhali chagua angalau dalili moja.",
+    "Language:": "Lugha:",
+    "SACA Clinical Assistant": "Msaidizi wa Kliniki wa SACA",
+    "Body Map - Tap Where it Hurts": "Ramani ya Mwili - Gusa Sehemu Inayouma",
+    "Tap the body part where you have a problem, then pick what you feel.": "Gusa sehemu ya mwili yenye tatizo, kisha chagua dalili unazohisi.",
+    "Whole body (fever, tiredness)": "Mwili mzima (homa, uchovu)",
+    "Your symptoms:": "Dalili zako:",
+    "Go to symptoms": "Endelea na dalili",
+    "Clear": "Futa",
+    "Emergency?": "Dharura?",
+    "If you have bad chest pain, trouble breathing or you passed out, call your local emergency number now.": "Ikiwa una maumivu makali ya kifua, unapata shida kupumua au umezimia, piga nambari ya dharura ya eneo lako sasa.",
+    "Back to Dashboard": "Rudi kwenye Dashibodi"
+};
+
+function getLanguage() {
+    return localStorage.getItem("sacaLanguage") || "en";
+}
+
+function translate(text) {
+    return getLanguage() === "sw"
+        ? (translations[text] || text)
+        : text;
+}
+
+let picked = {};
+let currentPart = null;
+
+function getPartName(id) {
+    const names = {
+        head: "Head",
+        neck: "Neck",
+        shoulders: "Shoulders",
+        chest: "Chest",
+        abdomen: "Abdomen",
+        right_arm: "Right Arm",
+        left_arm: "Left Arm",
+        right_hand: "Right Hand",
+        left_hand: "Left Hand",
+        right_leg: "Right Leg",
+        left_leg: "Left Leg",
+        right_foot: "Right Foot",
+        left_foot: "Left Foot",
+        general: "Whole Body"
+    };
+
+    return names[id] || id;
+}
+
+function getSymptomsForPart(id) {
+    return id.replace("right_", "").replace("left_", "");
+}
+
+function renderSymptoms(id) {
+    const key = getSymptomsForPart(id);
+    const list = symptoms[key] || {};
+    const container = document.getElementById("chips");
+
+    container.replaceChildren();
+
+    for (const symptom in list) {
+        const chip = document.createElement("button");
+        chip.type = "button";
+        chip.className = "chip" + (picked[symptom] ? " selected" : "");
+        chip.textContent = translate(list[symptom]);
+
+        chip.addEventListener("click", () => toggleSymptom(symptom));
+        container.appendChild(chip);
+    }
+}
+
+function showPart(id) {
+    document.querySelectorAll(".part").forEach(part => {
+        part.classList.remove("active");
+    });
+
+    const part = document.getElementById(id);
+    if (part) {
+        part.classList.add("active");
+    }
+
+    currentPart = id;
+
+    document.getElementById("part-name").textContent =
+        translate(getPartName(id));
+
+    renderSymptoms(id);
+}
+
+function toggleSymptom(symptom) {
+    if (!currentPart) return;
+
+    const key = getSymptomsForPart(currentPart);
+    const list = symptoms[key] || {};
+
+    if (picked[symptom]) {
+        delete picked[symptom];
+    } else if (list[symptom]) {
+        picked[symptom] = list[symptom];
+    }
+
+    renderSymptoms(currentPart);
+    showPicked();
+}
+
+function showPicked() {
+    const labels = Object.values(picked).map(label => translate(label));
+
+    document.getElementById("picked").textContent =
+        labels.length ? labels.join(", ") : translate("Nothing picked yet.");
+}
+
+function goToSymptoms() {
+    const selectedSymptoms = Object.keys(picked);
+
+    if (selectedSymptoms.length === 0) {
+        alert(translate("Please pick at least one symptom."));
+        return;
+    }
+
+    // The classifier receives symptom codes, not translated display labels.
+    window.location.href =
+        "/?symptom_text=" + encodeURIComponent(selectedSymptoms.join(" "));
+}
+
+function clearAll() {
+    picked = {};
+    showPicked();
+
+    if (currentPart) {
+        renderSymptoms(currentPart);
+    }
+}
+
+function applyLanguage() {
+    const language = getLanguage();
+    document.documentElement.lang = language;
+
+    document.querySelectorAll("[data-en][data-sw]").forEach(element => {
+        element.textContent =
+            language === "sw"
+                ? element.dataset.sw
+                : element.dataset.en;
+    });
+
+    const selector = document.getElementById("languageSelect");
+    if (selector) {
+        selector.value = language;
+    }
+
+    // Translate the text labels inside the SVG.
+    const svgLabels = {
+        "svg-head": "Head",
+        "svg-neck": "Neck",
+        "svg-shoulders": "Shoulders",
+        "svg-chest": "Chest",
+        "svg-abdomen": "Abdomen",
+        "svg-right-arm": "Right Arm",
+        "svg-left-arm": "Left Arm",
+        "svg-right-hand": "Right Hand",
+        "svg-left-hand": "Left Hand",
+        "svg-right-leg": "Right Leg",
+        "svg-left-leg": "Left Leg",
+        "svg-right-foot": "Right Foot",
+        "svg-left-foot": "Left Foot"
+    };
+
+    for (const [elementId, englishText] of Object.entries(svgLabels)) {
+        const element = document.getElementById(elementId);
+        if (element) {
+            element.textContent = translate(englishText);
+        }
+    }
+
+    // Restore the currently selected body part and symptoms in the new language.
+    if (currentPart) {
+        showPart(currentPart);
+    }
+
+    showPicked();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const selector = document.getElementById("languageSelect");
+
+    if (selector) {
+        selector.value = getLanguage();
+
+        selector.addEventListener("change", () => {
+            localStorage.setItem("sacaLanguage", selector.value);
+            applyLanguage();
+        });
+    }
+
+    applyLanguage();
+});
+</script>
+
+</body>
+</html>

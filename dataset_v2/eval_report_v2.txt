@@ -1,0 +1,157 @@
+v2 train rows 6624, test rows 1655, vocabulary 179 tokens
+== v2 LR on v2 test  (n=1655)
+accuracy 0.885   macro-F1 0.895
+recall  LOW 0.968  MEDIUM 0.906  HIGH 0.787  CRITICAL 0.986
+under-triage (pred below true): 6.284%   over-triage: 5.196%
+dangerous under-triage (true HIGH/CRITICAL predicted LOW/MEDIUM): 93 of 909
+CRITICAL predicted below HIGH: 4 of 284
+confusion (rows=true, cols=pred; LOW MED HIGH CRIT):
+     268     1     8     0
+      11   425    32     1
+      18    71   492    44
+       1     3     0   280
+
+== v2 LR + red-flag floor on v2 test  (n=1655)
+accuracy 0.908   macro-F1 0.916
+recall  LOW 0.968  MEDIUM 0.910  HIGH 0.837  CRITICAL 1.000
+under-triage (pred below true): 4.048%   over-triage: 5.196%
+dangerous under-triage (true HIGH/CRITICAL predicted LOW/MEDIUM): 58 of 909
+CRITICAL predicted below HIGH: 0 of 284
+confusion (rows=true, cols=pred; LOW MED HIGH CRIT):
+     268     1     8     0
+       9   427    32     1
+       6    52   523    44
+       0     0     0   284
+
+== v2 LR + non-specific ceiling + red-flag floor (what the app returns) on v2 test  (n=1655)
+accuracy 0.909   macro-F1 0.917
+recall  LOW 0.968  MEDIUM 0.915  HIGH 0.837  CRITICAL 1.000
+under-triage (pred below true): 4.048%   over-triage: 5.076%
+dangerous under-triage (true HIGH/CRITICAL predicted LOW/MEDIUM): 58 of 909
+CRITICAL predicted below HIGH: 0 of 284
+confusion (rows=true, cols=pred; LOW MED HIGH CRIT):
+     268     1     8     0
+       9   429    30     1
+       6    52   523    44
+       0     0     0   284
+
+   source=observed: n=55 acc=0.873
+   source=partial: n=918 acc=0.876
+   source=redflag: n=682 acc=0.899
+majority-class baseline accuracy 0.378
+
+== OLD v1 model on v2 test (v2 labels)  (n=1655)
+accuracy 0.232   macro-F1 0.168
+recall  LOW 0.805  MEDIUM 0.324  HIGH 0.008  CRITICAL 0.014
+under-triage (pred below true): 72.024%   over-triage: 4.773%
+dangerous under-triage (true HIGH/CRITICAL predicted LOW/MEDIUM): 890 of 909
+CRITICAL predicted below HIGH: 280 of 284
+confusion (rows=true, cols=pred; LOW MED HIGH CRIT):
+     223    52     2     0
+     302   152    10     5
+     370   240     5    10
+     163   117     0     4
+
+v2 model: acceptance (codes) LR-only passes 53/55; LR + red-flag floor passes 55/55
+    LR fail: [stiff_neck high_fever headache] need >= CRITICAL, got MEDIUM  (meningitis)
+    LR fail: [pregnancy headache] need >= HIGH, got LOW  (pre-eclampsia sign)
+v1 model: acceptance (codes) LR-only passes 4/55; LR + red-flag floor passes 55/55
+    LR fail: [coma] need >= CRITICAL, got LOW  (ETAT coma)
+    LR fail: [convulsions] need >= CRITICAL, got LOW  (ETAT convulsing)
+    LR fail: [convulsions high_fever] need >= CRITICAL, got MEDIUM  (febrile convulsion)
+    LR fail: [cyanosis] need >= CRITICAL, got LOW  (ETAT central cyanosis)
+    LR fail: [severe_respiratory_distress cough] need >= CRITICAL, got LOW  (ETAT)
+    LR fail: [stridor] need >= CRITICAL, got LOW  (airway)
+    LR fail: [unable_to_drink vomiting] need >= CRITICAL, got LOW  (IMCI danger sign)
+    LR fail: [vomits_everything] need >= CRITICAL, got LOW  (IMCI danger sign)
+    LR fail: [unable_to_breastfeed] need >= CRITICAL, got LOW  (IMCI danger sign)
+    LR fail: [uncontrolled_bleeding] need >= CRITICAL, got LOW  (ETAT circulation)
+    LR fail: [cold_extremities lethargy] need >= CRITICAL, got LOW  (shock sign)
+    LR fail: [purpuric_rash high_fever] need >= CRITICAL, got MEDIUM  (meningococcaemia)
+    LR fail: [altered_sensorium] need >= CRITICAL, got LOW  (ETAT)
+    LR fail: [altered_sensorium headache] need >= CRITICAL, got MEDIUM  (ETAT)
+    LR fail: [chest_pain breathlessness] need >= CRITICAL, got MEDIUM  (ACS/PE)
+    LR fail: [chest_pain sweating vomiting] need >= CRITICAL, got MEDIUM  (ACS)
+    LR fail: [chest_pain fast_heart_rate] need >= CRITICAL, got MEDIUM  (cardiac)
+    LR fail: [weakness_of_one_body_side slurred_speech] need >= CRITICAL, got LOW  (stroke FAST)
+    LR fail: [weakness_of_one_body_side] need >= CRITICAL, got LOW  (stroke FAST)
+    LR fail: [stiff_neck high_fever headache] need >= CRITICAL, got MEDIUM  (meningitis)
+    LR fail: [lethargy sunken_eyes diarrhoea] need >= CRITICAL, got MEDIUM  (severe dehydration)
+    LR fail: [chest_pain] need >= HIGH, got MEDIUM  (single red flag)
+    LR fail: [breathlessness] need >= HIGH, got LOW  (single red flag)
+    LR fail: [blood_in_sputum] need >= HIGH, got LOW  (single red flag)
+    LR fail: [blood_in_sputum cough weight_loss] need >= HIGH, got LOW  (TB / PE)
+    LR fail: [stomach_bleeding] need >= HIGH, got LOW  (GI bleed)
+    LR fail: [slurred_speech] need >= HIGH, got LOW  (stroke sign)
+    LR fail: [breathlessness cough high_fever] need >= HIGH, got MEDIUM  (pneumonia)
+    LR fail: [dehydration diarrhoea vomiting] need >= HIGH, got MEDIUM  (IMCI dehydration)
+    LR fail: [mild_fever cough] need >= MEDIUM, got LOW  (fever)
+    LR fail: [fast_heart_rate] need >= MEDIUM, got LOW  (tachycardia)
+    LR fail: [lethargy] need >= MEDIUM, got LOW  (ETAT priority sign)
+    LR fail: [stiff_neck] need >= MEDIUM, got LOW  (meningism)
+    LR fail: [snake_bite] need >= HIGH, got LOW  (snakebite needs facility)
+    LR fail: [snake_envenomation] need >= CRITICAL, got LOW  (systemic envenoming)
+    LR fail: [snake_bite breathlessness] need >= CRITICAL, got LOW  (neurotoxic respiratory failure)
+    LR fail: [head_injury vomiting] need >= CRITICAL, got LOW  (raised intracranial pressure)
+    LR fail: [head_injury] need >= HIGH, got LOW  (head injury)
+    LR fail: [pregnancy headache] need >= HIGH, got MEDIUM  (pre-eclampsia sign)
+    LR fail: [pregnancy blurred_and_distorted_vision] need >= HIGH, got LOW  (pre-eclampsia sign)
+    LR fail: [pregnancy abdominal_pain] need >= HIGH, got LOW  (pregnancy danger sign)
+    LR fail: [pre_eclampsia] need >= HIGH, got LOW  (needs referral)
+    LR fail: [puerperal_sepsis] need >= CRITICAL, got LOW  (maternal sepsis)
+    LR fail: [bulging_fontanelle] need >= CRITICAL, got LOW  (infant meningitis)
+    LR fail: [abdominal_rigidity] need >= CRITICAL, got LOW  (peritonitis)
+    LR fail: [weak_pulse] need >= HIGH, got LOW  (shock sign)
+    LR fail: [severe_pallor] need >= HIGH, got LOW  (severe anaemia)
+    LR fail: [kwashiorkor_signs] need >= HIGH, got LOW  (severe malnutrition)
+    LR fail: [burns] need >= HIGH, got LOW  (burns)
+    LR fail: [fracture] need >= HIGH, got LOW  (fracture)
+    LR fail: [low_blood_pressure] need >= HIGH, got LOW  (possible shock)
+non-specific upper-bound check: LR alone 9/11; with the ceiling 11/11 stay at or below MEDIUM
+
+English end-to-end (classifier.symptom_codes.read_input -> v2 codes -> LR + red-flag floor):
+   PASS  'I cannot breathe and have crushing chest pain' -> ['chest_pain', 'breathlessness'] -> CRITICAL   (need >= CRITICAL)
+   PASS  'she coughed up blood this morning' -> ['blood_in_sputum'] -> HIGH   (need >= HIGH)
+   PASS  'my child is unconscious' -> ['coma'] -> CRITICAL   (need >= CRITICAL)
+   PASS  'he has had a seizure' -> ['convulsions'] -> CRITICAL   (need >= CRITICAL)
+   PASS  'blue lips and fast breathing' -> ['breathlessness', 'cyanosis'] -> CRITICAL   (need >= CRITICAL)
+   PASS  'bitten by a snake yesterday' -> ['snake_bite'] -> HIGH   (need >= HIGH)
+   PASS  'he fell and hit his head and keeps vomiting' -> ['head_injury', 'vomiting', 'fall'] -> CRITICAL   (need >= CRITICAL)
+   PASS  'pregnant woman with headache and blurred vision' -> ['blurred_and_distorted_vision', 'headache', 'pregnancy'] -> HIGH   (need >= HIGH)
+   PASS  'child is floppy and has diarrhea and sunken eyes' -> ['sunken_eyes', 'diarrhoea', 'lethargy'] -> CRITICAL   (need >= CRITICAL)
+   PASS  'stiff neck and high fever' -> ['stiff_neck', 'high_fever'] -> CRITICAL   (need >= CRITICAL)
+   PASS  'pain in my chest' -> ['chest_pain'] -> HIGH   (need >= HIGH)
+   PASS  'high fever and vomiting' -> ['high_fever', 'vomiting'] -> MEDIUM   (need >= MEDIUM)
+   PASS  'just a mild headache' -> ['headache'] -> LOW   (need >= LOW)
+   PASS  'I have a cough' -> ['cough'] -> LOW   (need >= LOW)
+   English passes 14/14
+
+Swahili end-to-end (classifier.symptom_codes.read_input -> v2 codes -> LR + red-flag floor):
+   PASS  'mtoto hajitambui' -> ['coma'] -> CRITICAL   (need >= CRITICAL)
+   PASS  'ana degedege' -> ['convulsions'] -> CRITICAL   (need >= CRITICAL)
+   PASS  'ana homa na degedege' -> ['convulsions', 'mild_fever'] -> CRITICAL   (need >= CRITICAL)
+   PASS  'ameshindwa kunywa na anatapika kila kitu' -> ['vomits_everything', 'unable_to_drink'] -> CRITICAL   (need >= CRITICAL)
+   PASS  'maumivu ya kifua na kupumua kwa shida' -> ['breathlessness', 'chest_pain'] -> CRITICAL   (need >= CRITICAL)
+   PASS  'ana kuhara na macho yaliyozama' -> ['sunken_eyes', 'diarrhoea'] -> HIGH   (need >= HIGH)
+   PASS  'anakohoa damu' -> ['blood_in_sputum'] -> HIGH   (need >= HIGH)
+   PASS  'ana homa kali na kutetemeka' -> ['shivering', 'high_fever'] -> MEDIUM   (need >= MEDIUM)
+   PASS  'ana homa' -> ['mild_fever'] -> MEDIUM   (need >= MEDIUM)
+   PASS  'maumivu ya kifua' -> ['chest_pain'] -> HIGH   (need >= HIGH)
+   PASS  'shingo ngumu na homa' -> ['stiff_neck', 'high_fever'] -> CRITICAL   (need >= CRITICAL)
+   PASS  'kupumua kwa shida' -> ['breathlessness'] -> HIGH   (need >= HIGH)
+   PASS  'kukohoa damu' -> ['blood_in_sputum'] -> HIGH   (need >= HIGH)
+   PASS  'kupoteza fahamu' -> ['coma'] -> CRITICAL   (need >= CRITICAL)
+   PASS  'amezimia' -> ['coma'] -> CRITICAL   (need >= CRITICAL)
+   PASS  'kukosa fahamu' -> ['coma'] -> CRITICAL   (need >= CRITICAL)
+   PASS  'kikohozi cha damu' -> ['blood_in_sputum'] -> HIGH   (need >= HIGH)
+   PASS  'kikohozi' -> ['cough'] -> LOW   (need >= LOW)
+   PASS  'maumivu ya kichwa' -> ['headache'] -> LOW   (need >= LOW)
+   Swahili passes 19/19  (LR + ceiling + red-flag floor)
+
+crosswalk status of the team's 124 codes:
+status
+mapped           55
+added_redflag    47
+same             19
+uncovered         3
+uncovered team codes: hepatomegaly, hepatosplenomegaly, splenomegaly

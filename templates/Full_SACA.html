@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>SACA Kiosk Prototype | Clinical Decision Support</title>
+
+<style>
+
+/* ========================================
+   RESET & BASE
+======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: #1a2a3a;
+    font-family: "Segoe UI", Roboto, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    transition: background 0.2s ease;
+}
+
+/* Dark mode body */
+body.dark-mode {
+    background: #0a0a0a;
+}
+
+/* ========================================
+   RESPONSIVE SCALING
+======================================== */
+
+@media (max-width: 650px) {
+    .kiosk-app {
+        transform: scale(0.75);
+        margin: -60px auto;
+    }
+    
+    .legend button {
+        transform: scale(0.9);
+        margin: 2px;
+    }
+    
+    body {
+        padding: 10px;
+        overflow-x: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .kiosk-app {
+        transform: scale(0.6);
+        margin: -120px auto;
+    }
+}
+
+/* ========================================
+   LEGEND / DEMO NAVIGATION
+======================================== */
+
+.legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    z-index: 10;
+}
+
+.legend button {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 30px;
+    background: #355b82;
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.legend button:hover {
+    background: #1e3a5f;
+    transform: scale(1.02);
+}
+
+/* ========================================
+   SCREEN CONTAINER
+======================================== */
+
+.screen-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ========================================
+   ALL PAGES
+======================================== */
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+/* ========================================
+   KIOSK MACHINE (HARDWARE BEZEL)
+======================================== */
+
+.kiosk-app {
+    width: 500px;
+    height: 920px;
+    background: #2c2c2c;
+    border-radius: 50px;
+    border: 8px solid #3a3a3a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+    position: relative;
+}
+
+/* Screen inner bezel */
+.kiosk-screen-wrapper {
+    padding: 14px;
+    background: #009688;
+    border-radius: 45px;
+    box-shadow: inset 0 0 0 2px rgba(255,255,255,0.1);
+}
+
+/* Actual display */
+.kiosk-screen {
+    width: 340px;
+    height: 720px;
+    background: #f6f6f3;
+    border: 12px solid #111;
+    border-radius: 35px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 16px;
+    position: relative;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+/* Custom scrollbar for kiosk screen */
+.kiosk-screen::-webkit-scrollbar {
+    width: 4px;
+}
+.kiosk-screen::-webkit-scrollbar-track {
+    background: #ddd;
+    border-radius: 4px;
+}
+.kiosk-screen::-webkit-scrollbar-thumb {
+    background: #355b82;
+    border-radius: 4px;
+}
+
+/* ========================================
+   TYPOGRAPHY
+======================================== */
+
+.screen-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #355b82;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+
+.title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1e4668;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* ========================================
+   CONTENT LAYOUT
+======================================== */
+
+.content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 18px;
+}
+
+/* ========================================
+   ACCESSIBILITY ROW
+======================================== */
+
+.accessibility-item {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid #d7d7d7;
+    font-size: 1rem;
+    color: #1e4668;
+    font-weight: 500;
+}
+
+/* ========================================
+   TOGGLE SWITCH (custom)
+======================================== */
+
+.toggle {
+    width: 55px;
+    height: 30px;
+    background: #bdbdbd;
+    border-radius: 30px;
+    position: relative;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.toggle::before {
+    content: "";
+    width: 22px;
+    height: 22px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    transition: 0.2s ease;
+}
+
+.toggle.active {
+    background: #5fc16d;
+}
+
+.toggle.active::before {
+    left: 29px;
+}
+
+/* ========================================
+   BUTTONS & INPUTS
+======================================== */
+
+.saca-btn {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 18px;
+    background: #355b82;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.saca-btn:hover {
+    background: #1e3a5f;
+    transform: scale(1.01);
+}
+
+.saca-btn-outline {
+    width: 100%;
+    padding: 16px;
+    border-radius: 18px;
+    border: 2px solid #355b82;
+    background: transparent;
+    color: #355b82;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.saca-btn-outline:hover {
+    background: #eef3fc;
+}
+
+.saca-input {
+    width: 100%;
+    padding: 14px;
+    border-radius: 14px;
+    border: 2px solid #d8d8d8;
+    font-size: 16px;
+    outline: none;
+}
+
+/* ========================================
+   SYMPTOM GRID
+======================================== */
+
+.symptom-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 12px;
+    margin: 10px 0;
+}
+
+.symptom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+    color: #1e4668;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 20px;
+    transition: 0.1s;
+}
+
+.symptom.selected {
+    background: #cfe3ff;
+    border: 2px solid #355b82;
+}
+
+.symptom-icon {
+    font-size: 40px;
+}
+
+/* ========================================
+   BODY MAP (SVG)
+======================================== */
+
+.interactive-body-map {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.body-svg {
+    width: 190px;
+    height: 390px;
+}
+
+.body-part {
+    fill: #d9d9d9;
+    stroke: #444;
+    stroke-width: 3;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.body-part:hover {
+    fill: #8ecae6;
+}
+
+.body-part.active {
+    fill: #ff6b6b;
+}
+
+.selected-area {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #1e4668;
+}
+
+/* ========================================
+   RESULT CARD
+======================================== */
+
+.result-card {
+    width: 100%;
+    background: white;
+    padding: 24px;
+    border-radius: 24px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin: 15px 0;
+}
+
+.risk-badge {
+    background: #355b82;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 30px;
+    width: fit-content;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.low-risk {
+    background: #5fc16d;
+}
+.moderate-risk {
+    background: #f4a261;
+}
+.critical-risk {
+    background: #e63946;
+}
+
+/* ========================================
+   CAMERA / SCAN AREA
+======================================== */
+
+.camera-area {
+    width: 100%;
+    background: #1e4668;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    gap: 20px;
+    padding: 20px;
+}
+
+.guide-text {
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.eye-outline {
+    display: flex;
+    gap: 24px;
+}
+
+.eye-circle {
+    width: 52px;
+    height: 52px;
+    border: 3px solid white;
+    border-radius: 50%;
+    position: relative;
+}
+
+.eye-circle::after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* ========================================
+   CRITICAL STATE (RED ALERT)
+======================================== */
+
+body.critical-alert .kiosk-screen {
+    background: #8b0000;
+    color: white;
+    border-color: #ffcc00;
+}
+
+body.critical-alert .title,
+body.critical-alert .screen-title,
+body.critical-alert .selected-area {
+    color: #ffcccc;
+}
+
+body.critical-alert .saca-btn {
+    background: #ffcc00;
+    color: #8b0000;
+}
+
+/* ========================================
+   DARK MODE OVERRIDES
+======================================== */
+
+body.dark-mode .kiosk-screen {
+    background: #1e1e2a;
+    color: #eee;
+}
+
+body.dark-mode .title,
+body.dark-mode .screen-title,
+body.dark-mode .selected-area,
+body.dark-mode .symptom {
+    color: #cbd5e6;
+}
+
+body.dark-mode .result-card {
+    background: #2a2a2a;
+}
+
+body.dark-mode .accessibility-item {
+    border-bottom-color: #444;
+    color: #ddd;
+}
+
+body.dark-mode .saca-input {
+    background: #2f2f2f;
+    color: white;
+    border-color: #555;
+}
+
+body.dark-mode .symptom.selected {
+    background: #2a4a6a;
+}
+
+/* ========================================
+   LARGE TEXT MODE
+======================================== */
+
+body.large-text {
+    font-size: 130%;
+}
+
+body.large-text .title {
+    font-size: 2.4rem;
+}
+
+body.large-text .screen-title {
+    font-size: 2rem;
+}
+
+body.large-text .symptom {
+    font-size: 1.3rem;
+}
+
+body.large-text .saca-btn,
+body.large-text .saca-btn-outline {
+    font-size: 1.3rem;
+    padding: 18px;
+}
+
+/* ========================================
+   UTILITIES
+======================================== */
+
+.footer-text {
+    text-align: center;
+    font-size: 13px;
+    color: #58729a;
+    font-weight: 600;
+    margin-top: 15px;
+}
+
+.settings-icon {
+    position: absolute;
+    bottom: 15px;
+    right: 20px;
+    font-size: 28px;
+    cursor: pointer;
+    background: #355b82;
+    color: white;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+    z-index: 5;
+}
+
+.settings-icon:hover {
+    background: #1e3a5f;
+    transform: scale(1.05);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="legend">
+    <button onclick="showPage('page1')">🏠 Home</button>
+    <button onclick="showPage('page2')">♿ Accessibility</button>
+    <button onclick="showPage('page3')">📍 Body Map</button>
+    <button onclick="showPage('page4')">🤒 Symptoms</button>
+    <button onclick="showPage('page5')">🔐 Login</button>
+    <button onclick="showPage('page6')">📊 Dashboard</button>
+    <button onclick="showPage('page7')">👁️ Eye Scan</button>
+    <button onclick="showPage('page9')">👅 Tongue Scan</button>
+    <button onclick="resetCritical()">🔄 Reset Critical</button>
+</div>
+
+<div class="screen-container">
+
+<!-- PAGE 1: TAP TO START + SETTINGS ICON -->
+<div class="page active" id="page1">
+    <div class="kiosk-app">
+        <div class="kiosk-screen-wrapper">
+            <div class="kiosk-screen tap-page" onclick="showPage('page3')" style="cursor:pointer;">
+                <div class="content">
+                    <div class="tap-icon">
+                        <svg width="90" height="90" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M72 150 L55 110 C50 98,58 92,66 98 L82 122 L82 55 C82 45,90 40,98 44 C104 47,107 53,108 61 L116 96 L116 75 C116 68,123 64,129 67 C134 69,137 74,137 81 L141 101 L141 84 C141 77,148 73,154 76 C160 79,162 84,162 91 L165 110 L165 98 C165 91,172 87,178 90 C184 93,186 99,186 106 L186 135 C186 155,175 170,155 176 C132 183,104 176,89 160 Z" stroke="#111" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        </svg>
+                    </div>
+                    <h1>Tap to Start</h1>
+                    <p>Touch anywhere to begin symptom check</p>
+                    <div class="footer-text">SACA | Offline Clinical Assistant</div>
+                </div>
+                <!-- Settings icon to reach accessibility -->
+                <div class="settings-icon" onclick="event.stopPropagation(); showPage('page2');">⚙️</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PAGE 2: ACCESSIBILITY FEATURES -->
+<div class="page" id="page2">
+    <div class="kiosk-app">
+        <div class="kiosk-screen-wrapper">
+            <div class="kiosk-screen">
+                <div class="screen-title">Accessibility Features</div>
+                <div class="content">
+                    <div class="accessibility-item">
+                        <span>🌙 Dark Mode</span>
+                        <div id="darkModeToggle" class="toggle" onclick="toggleDarkMode(this)"></div>
+                    </div>
+                    <div class="accessibility-item">
+                        <span>🔍 Large Text</span>
+                        <div id="largeTextToggle" class="toggle" onclick="toggleLargeText(this)"></div>
+                    </div>
+                    <div class="accessibility-item">
+                        <span>🎤 Audio Output</span>
+                        <div id="audioToggle" class="toggle" onclick="toggleAudioFeedback(this)"></div>
+                    </div>
+                    <button class="saca-btn" onclick="showPage('page3')">✓ Save & Continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PAGE 3: BODY MAP -->
+<div class="page" id="page3">
+    <div class="kiosk-app">
+        <div class="kiosk-screen-wrapper">
+            <div class="kiosk-screen">
+                <div class="title">📍 Tap Where It Hurts</div>
+                <div class="interactive-body-map">
+                    <svg viewBox="0 0 300 600" class="body-svg">
+                        <circle id="Head" class="body-part" cx="150" cy="60" r="35"/>
+                        <rect id="Chest" class="body-part" x="110" y="110" width="80" height="110" rx="25"/>
+                        <rect id="Stomach" class="body-part" x="120" y="225" width="60" height="75" rx="20"/>
+                        <rect id="Left Arm" class="body-part" x="70" y="120" width="30" height="140" rx="20"/>
+                        <rect id="Right Arm" class="body-part" x="200" y="120" width="30" height="140" rx="20"/>
+                        <rect id="Left Leg" class="body-part" x="120" y="310" width="25" height="170" rx="20"/>
+                        <rect id="Right Leg" class="body-part" x="155" y="310" width="25" height="170" rx="20"/>
+                    </svg>
+                </div>
+                <div class="selected-area">Selected: <span id="selectedPart">None</span></div>
+                <button class="saca-btn" onclick="saveBodyPart(); showPage('page4');">✓ Continue to Symptoms</button>
+                <div class="footer-text">Tap body parts to highlight</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PAGE 4: SYMPTOM GRID (SELECTABLE) -->
+<div class="page" id="page4">
+    <div class="kiosk-app">
+        <div class="kiosk-screen-wrapper">
+            <div class="kiosk-screen">
+                <div class="title">🤒 Select Symptoms</div>
+                <div class="symptom-grid" id="symptomGrid">
+                    <div class="symptom" data-symptom="Fever"> <div class="symptom-icon">🌡️</div> <span>Fever</span> </div>
+                    <div class="symptom" data-symptom="Cough"> <div class="symptom-icon">🤧</div> <span>Cough</span> </div>
+                    <div class="symptom" data-symptom="Headache"> <div class="symptom-icon">🤕</div> <span>Headache</span> </div>
+                    <div class="symptom" data-symptom="Nausea"> <div class="symptom-icon">🤢</div> <span>Nausea</span> </div>
+                    <div class="symptom" data-symptom="Fatigue"> <div class="symptom-icon">😴</div> <span>Fatigue</span> </div>
+                    <div class="symptom" data-symptom="Shortness"> <div class="symptom-icon">🫁</div> <span>Shortness of breath</span> </div>
+                </div>
+                <button class="saca-btn" onclick="saveSymptoms(); showPage('page5');">✓ Save & Continue</button>
+                <div class="footer-text">Tap any symptom to select</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PAGE 5: LOGIN / GUEST -->
+<div class="page" id="page5">
+    <div class="kiosk-app">
+        <div class="kiosk-screen-wrapper">
+            <div class="kiosk-screen">
+                <div class="content">
+                    <div class="title">SACA</div>
+                    <p>Smart Adaptive Clinical Assistant</p>
+                    <div class="accessibility-item" style="border:none; flex-direction:column; align-items:flex-start;">
+                        <span>👤 Username</span>
+                        <input type="text" id="username" placeholder="Enter username" class="saca-input">
+                    </div>
+                    <div class="accessibility-item" style="border:none; flex-direction:column; align-items:flex-start;">
+                        <span>🔒 Password</span>
+                        <input type="password" id="password" placeholder="Enter password" class="saca-input">
+                    </div>
+                    <button class="saca-btn" onclick="login()">Login</button>
+                    <button class="saca-btn-outline" onclick="continueAsGuest()">Continue as Guest</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PAGE 6: DASHBOARD with saved symptoms & critical button -->
+<div class="page" id="page6">
+    <div class="kiosk-app">
+        <div class="kiosk-screen-wrapper">
+            <div class="kiosk-screen">
+                <div class="title">📊 SACA Dashboard</div>
+                <div class="content">
+                    <div id="selectedSymptomsDisplay" style="background:#eef2f7; padding:12px; border-radius:16px; width:100%; font-size:14px;"></div>
+                    <button class="saca-btn" onclick="showPage('page7')">👁️ Eye Scan</button>
+                    <button class="saca-btn" onclick="showPage('page9')">👅 Tongue Scan</button>
+                    <button class="saca-btn-outline" id="criticalSimulateBtn" onclick="simulateCritical()">⚠️ SIMULATE CRITICAL (Demo)</button>
+                    <button class="saca-btn-outline" onclick="showPage('page1')">↻ Return to Start</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PAGE 7: EYE SCAN -->
+<div class="page" id="page7">
+    <div class="kiosk-app">
+        <div class="kiosk-screen-wrapper">
+            <div class="kiosk-screen">
+                <div class="content">
+                    <h1 style="font-size:24px;">👁️ Eye Scan</h1>
+                    <p>Jaundice & Anaemia Detection</p>
+                    <div style="background:#f3f3f3; padding:16px; border-radius:20px; text-align:left; width:100%;">
+                        <p><strong>📋 Instructions</strong></p>
+                        <p>1. Position face in view.<br>2. Look straight ahead.<br>3. System takes photo.</p>
+                    </div>
+                    <div class="camera-area">
+                        <div class="guide-text">ALIGN EYES HERE</div>
+                        <div class="eye-outline"><div class="eye-circle"></div><div class="eye-circle"></div></div>
+                    </div>
+                    <button class="saca-btn" onclick="runEyeScan()">START SCAN</button>
+                    <button class="saca-btn-outline" onclick="showPage('page6')">← Back</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PAGE 8: EYE RESULTS (dynamic based on stored symptoms) -->
+<div class="page" id="page8">
+    <div class="kiosk-app">
+        <div class="kiosk-screen-wrapper">
+            <div class="kiosk-screen" id="eyeResultsScreen">
+                <div class="title">Eye Results</div>
+                <div id="eyeResultCard" class="result-card"></div>
+                <button class="saca-btn-outline" onclick="showPage('page6')">Back Home</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PAGE 9: TONGUE SCAN -->
+<div class="page" id="page9">
+    <div class="kiosk-app">
+        <div class="kiosk-screen-wrapper">
+            <div class="kiosk-screen">
+                <div class="content">
+                    <h1 style="font-size:24px;">👅 Tongue Scan</h1>
+                    <p>Colour & Coating Analysis</p>
+                    <div style="background:#f3f3f3; padding:16px; border-radius:20px; text-align:left; width:100%;">
+                        <p><strong>📋 Instructions</strong></p>
+                        <p>1. Open mouth wide.<br>2. Stick out tongue.<br>3. Align with guide.</p>
+                    </div>
+                    <div class="camera-area">
+                        <div class="guide-text">ALIGN MOUTH & TONGUE</div>
+                    </div>
+                    <button class="saca-btn" onclick="runTongueScan()">START SCAN</button>
+                    <button class="saca-btn-outline" onclick="showPage('page6')">← Back</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PAGE 10: TONGUE RESULTS -->
+<div class="page" id="page10">
+    <div class="kiosk-app">
+        <div class="kiosk-screen-wrapper">
+            <div class="kiosk-screen">
+                <div class="title">Tongue Results</div>
+                <div id="tongueResultCard" class="result-card"></div>
+                <button class="saca-btn-outline" onclick="showPage('page6')">Back Home</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div> <!-- end screen-container -->
+
+<script>
+/* ========================================
+   GLOBAL STATE
+======================================== */
+let selectedBodyPart = "None";
+let selectedSymptomsList = [];
+let audioFeedbackEnabled = false;
+
+/* ========================================
+   PAGE SWITCHING
+======================================== */
+function showPage(pageId) {
+    document.querySelectorAll(".page").forEach(page => page.classList.remove("active"));
+    document.getElementById(pageId).classList.add("active");
+    // Refresh dashboard display when returning to page6
+    if (pageId === "page6") updateDashboardDisplay();
+}
+
+/* ========================================
+   BODY MAP
+======================================== */
+document.querySelectorAll(".body-part").forEach(part => {
+    part.addEventListener("click", () => {
+        document.querySelectorAll(".body-part").forEach(p => p.classList.remove("active"));
+        part.classList.add("active");
+        selectedBodyPart = part.id;
+        document.getElementById("selectedPart").innerText = selectedBodyPart;
+    });
+});
+
+function saveBodyPart() {
+    localStorage.setItem("saca_bodyPart", selectedBodyPart);
+}
+
+/* ========================================
+   SYMPTOM SELECTION (Toggle highlight & store)
+======================================== */
+function initSymptomSelection() {
+    document.querySelectorAll(".symptom").forEach(sym => {
+        sym.addEventListener("click", (e) => {
+            e.stopPropagation();
+            sym.classList.toggle("selected");
+        });
+    });
+}
+
+function saveSymptoms() {
+    const selected = [];
+    document.querySelectorAll(".symptom.selected").forEach(sym => {
+        const name = sym.querySelector("span")?.innerText || sym.getAttribute("data-symptom");
+        if (name) selected.push(name);
+    });
+    selectedSymptomsList = selected;
+    localStorage.setItem("saca_symptoms", JSON.stringify(selected));
+    updateDashboardDisplay();
+}
+
+function updateDashboardDisplay() {
+    const container = document.getElementById("selectedSymptomsDisplay");
+    if (container) {
+        const stored = JSON.parse(localStorage.getItem("saca_symptoms") || "[]");
+        const body = localStorage.getItem("saca_bodyPart") || "None";
+        if (stored.length === 0 && body === "None") {
+            container.innerHTML = "⚠️ No symptoms or body area selected yet.";
+        } else {
+            container.innerHTML = `<strong>📍 Body:</strong> ${body}<br><strong>🤒 Symptoms:</strong> ${stored.length ? stored.join(", ") : "None selected"}`;
+        }
+    }
+}
+
+/* ========================================
+   LOGIN / GUEST
+======================================== */
+function login() {
+    const username = document.getElementById("username").value;
+    if (!username.trim()) {
+        alert("Please enter a username");
+        return;
+    }
+    showPage("page6");
+}
+
+function continueAsGuest() {
+    showPage("page6");
+}
+
+/* ========================================
+   EYE SCAN LOGIC (Result reflects symptoms)
+======================================== */
+function runEyeScan() {
+    const symptoms = JSON.parse(localStorage.getItem("saca_symptoms") || "[]");
+    let riskLevel = "low";
+    let message = "Normal eye appearance detected.";
+    let recommendation = "Maintain regular checkups.";
+    
+    // Simple risk logic based on symptoms
+    if (symptoms.some(s => s.includes("Fever") || s.includes("Fatigue"))) {
+        riskLevel = "moderate";
+        message = "Possible mild jaundice detected. Eye colour shows slight yellowing.";
+        recommendation = "Consult a healthcare professional within 1 week.";
+    }
+    if (symptoms.some(s => s.includes("Shortness") || s.includes("Nausea"))) {
+        riskLevel = "high";
+        message = "Signs of potential anaemia or jaundice observed.";
+        recommendation = "Please visit a clinic within 48 hours.";
+    }
+    
+    // Build result card
+    const resultDiv = document.getElementById("eyeResultCard");
+    resultDiv.innerHTML = `
+        <div class="risk-badge ${riskLevel === 'low' ? 'low-risk' : (riskLevel === 'moderate' ? 'moderate-risk' : 'critical-risk')}">${riskLevel.toUpperCase()} RISK</div>
+        <p>${message}</p>
+        <p><strong>Recommendation:</strong> ${recommendation}</p>
+    `;
+    
+    // If high risk, trigger audio alert if enabled
+    if (riskLevel === "high" && audioFeedbackEnabled) {
+        speakSwahili("Hatari kubwa. Tafuta msaada wa afya sasa.");
+    }
+    
+    showPage("page8");
+}
+
+function runTongueScan() {
+    const symptoms = JSON.parse(localStorage.getItem("saca_symptoms") || "[]");
+    let riskLevel = "low";
+    let message = "Normal tongue colour and coating detected.";
+    
+    if (symptoms.includes("Fever")) {
+        riskLevel = "moderate";
+        message = "Slight white coating observed. Possible mild infection.";
+    }
+    if (symptoms.includes("Shortness")) {
+        riskLevel = "moderate";
+        message = "Tongue appears pale. Could indicate nutritional concern.";
+    }
+    
+    const resultDiv = document.getElementById("tongueResultCard");
+    resultDiv.innerHTML = `
+        <div class="risk-badge ${riskLevel === 'low' ? 'low-risk' : 'moderate-risk'}">${riskLevel.toUpperCase()} RISK</div>
+        <p>${message}</p>
+        <p><strong>Recommendation:</strong> Maintain hydration and monitor symptoms.</p>
+    `;
+    showPage("page10");
+}
+
+/* ========================================
+   CRITICAL SIMULATION (Red screen + audio + 112)
+======================================== */
+function simulateCritical() {
+    document.body.classList.add("critical-alert");
+    // Show emergency info in dashboard
+    const container = document.getElementById("selectedSymptomsDisplay");
+    if (container) {
+        container.innerHTML = "🚨 CRITICAL ALERT 🚨<br>Immediate medical attention required.<br><strong>EMERGENCY: Call 112</strong><br>Nearest facility: Mbinga District Hospital - 5km";
+        container.style.background = "#8b0000";
+        container.style.color = "white";
+    }
+    if (audioFeedbackEnabled) {
+        speakSwahili("Hatari kubwa. Piga simu kumi na mbili sasa.");
+    }
+    alert("🚨 CRITICAL SIMULATION: 112 EMERGENCY + Nearest facility displayed.");
+}
+
+function resetCritical() {
+    document.body.classList.remove("critical-alert");
+    const container = document.getElementById("selectedSymptomsDisplay");
+    if (container) {
+        container.style.background = "#eef2f7";
+        container.style.color = "inherit";
+        updateDashboardDisplay();
+    }
+}
+
+/* ========================================
+   AUDIO FEEDBACK (Swahili/English)
+======================================== */
+function speakSwahili(text) {
+    if (!window.speechSynthesis) return;
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "sw"; // Swahili
+    utterance.rate = 0.9;
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(utterance);
+}
+
+function toggleAudioFeedback(toggleEl) {
+    audioFeedbackEnabled = !audioFeedbackEnabled;
+    toggleEl.classList.toggle("active", audioFeedbackEnabled);
+    localStorage.setItem("saca_audioEnabled", audioFeedbackEnabled);
+    if (audioFeedbackEnabled) {
+        speakSwahili("Sauti imewashwa. Karibu SACA.");
+    }
+}
+
+/* ========================================
+   DARK MODE (persist)
+======================================== */
+function toggleDarkMode(toggle) {
+    toggle.classList.toggle("active");
+    document.body.classList.toggle("dark-mode");
+    localStorage.setItem("saca_darkMode", document.body.classList.contains("dark-mode"));
+}
+
+function toggleLargeText(toggle) {
+    toggle.classList.toggle("active");
+    document.body.classList.toggle("large-text");
+    localStorage.setItem("saca_largeText", document.body.classList.contains("large-text"));
+}
+
+/* ========================================
+   LOAD PERSISTENT SETTINGS ON START
+======================================== */
+function loadSettings() {
+    // Dark mode
+    const darkSaved = localStorage.getItem("saca_darkMode") === "true";
+    if (darkSaved) {
+        document.body.classList.add("dark-mode");
+        const darkToggle = document.getElementById("darkModeToggle");
+        if (darkToggle) darkToggle.classList.add("active");
+    }
+    // Large text
+    const largeSaved = localStorage.getItem("saca_largeText") === "true";
+    if (largeSaved) {
+        document.body.classList.add("large-text");
+        const largeToggle = document.getElementById("largeTextToggle");
+        if (largeToggle) largeToggle.classList.add("active");
+    }
+    // Audio
+    const audioSaved = localStorage.getItem("saca_audioEnabled") === "true";
+    if (audioSaved) {
+        audioFeedbackEnabled = true;
+        const audioToggle = document.getElementById("audioToggle");
+        if (audioToggle) audioToggle.classList.add("active");
+    }
+    // Load saved symptoms display
+    updateDashboardDisplay();
+}
+
+// Initialize event listeners
+document.addEventListener("DOMContentLoaded", () => {
+    initSymptomSelection();
+    loadSettings();
+});
+</script>
+
+</body>
+</html>
