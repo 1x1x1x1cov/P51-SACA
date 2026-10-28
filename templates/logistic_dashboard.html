@@ -7,150 +7,277 @@
     <title>SACA Clinical Assistant</title>
 
     <style>
-        * { box-sizing: border-box; }
-
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 32px 20px;
-            background: #f4f6f8;
-            color: #222;
+        :root {
+            --bg: #f1f5f9;
+            --surface: #ffffff;
+            --ink: #0f172a;
+            --muted: #475569;
+            --line: #d8e1ea;
+            --brand: #0f766e;
+            --brand-dark: #115e59;
+            --brand-tint: #ecfdf5;
+            --focus: #0369a1;
+            --radius: 14px;
+            --shadow: 0 1px 2px rgba(15, 23, 42, .06), 0 4px 14px rgba(15, 23, 42, .06);
         }
 
-        .container { max-width: 900px; margin: auto; }
+        * { box-sizing: border-box; }
+        [hidden] { display: none !important; }
 
-        .topbar {
+        html { -webkit-text-size-adjust: 100%; }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            background: var(--bg);
+            color: var(--ink);
+        }
+
+        :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+        /* ---------- Top bar ---------- */
+        .appbar {
+            background: var(--brand);
+            color: #fff;
+            border-bottom: 4px solid var(--brand-dark);
+        }
+
+        .appbar-in {
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 18px 20px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
             gap: 16px;
         }
 
-        h1 { margin: 0; }
+        .brand { display: flex; align-items: center; gap: 14px; min-width: 0; }
 
-        .language-control {
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .logo {
+            flex: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: #fff;
+            color: var(--brand);
+            display: grid;
+            place-items: center;
+            font-weight: 800;
+            font-size: 22px;
+            letter-spacing: -.5px;
         }
+
+        h1 { margin: 0; font-size: 22px; line-height: 1.2; font-weight: 700; }
+
+        .subtitle { margin: 2px 0 0; font-size: 14px; color: #ccfbf1; }
+
+        .language-control { display: flex; align-items: center; gap: 8px; font-size: 14px; flex: none; }
 
         select {
-            padding: 9px;
-            border: 1px solid #aaa;
-            border-radius: 6px;
-            background: white;
+            min-height: 40px;
+            padding: 8px 12px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: #fff;
+            color: var(--ink);
+            font: inherit;
+            font-size: 15px;
         }
 
-        .subtitle { color: #666; margin: 12px 0 28px; }
+        /* ---------- Page ---------- */
+        .container { max-width: 920px; margin: 0 auto; padding: 24px 20px 48px; }
 
         .card {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px #0001;
-            margin-bottom: 24px;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 24px;
         }
 
+        label.field-label { display: block; font-weight: 700; margin-bottom: 8px; }
+
         textarea {
+            display: block;
             width: 100%;
-            min-height: 150px;
-            padding: 15px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font: 16px Arial, sans-serif;
+            min-height: 140px;
+            padding: 14px 16px;
+            border: 1.5px solid #94a3b8;
+            border-radius: 10px;
+            background: #fff;
+            color: var(--ink);
+            font: inherit;
+            font-size: 17px;
+            line-height: 1.5;
             resize: vertical;
         }
 
-        button, .map-btn {
-            display: inline-block;
-            margin: 15px 8px 0 0;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 8px;
-            background: #2563eb;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
+        textarea::placeholder { color: #64748b; }
+        textarea:focus { outline: none; border-color: var(--focus); box-shadow: 0 0 0 3px rgba(3, 105, 161, .22); }
+
+        .saca-voice { margin: 10px 0 0 !important; }
+
+        .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 46px;
+            padding: 10px 22px;
+            border-radius: 10px;
+            border: 1.5px solid transparent;
+            font: inherit;
+            font-weight: 600;
             text-decoration: none;
+            cursor: pointer;
+            transition: background-color .15s, border-color .15s;
         }
 
-        button:hover, .map-btn:hover { background: #1d4ed8; }
+        .btn-primary { background: var(--brand); color: #fff; }
+        .btn-primary:hover { background: var(--brand-dark); }
 
+        .btn-secondary { background: #fff; color: var(--brand-dark); border-color: #99d5cc; }
+        .btn-secondary:hover { background: var(--brand-tint); border-color: var(--brand); }
+
+        /* ---------- Result ---------- */
         .result {
-            padding: 25px;
-            border-radius: 12px;
-            margin-top: 20px;
+            --sev: #475569; --sev-bg: #f8fafc; --sev-ink: #0f172a;
+            margin-top: 24px;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-top: 8px solid var(--sev);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
             overflow-wrap: anywhere;
         }
 
-        .severity { font-size: 30px; font-weight: bold; }
+        .result.LOW      { --sev: #15803d; --sev-bg: #f0fdf4; --sev-ink: #14532d; }
+        .result.MEDIUM   { --sev: #ca8a04; --sev-bg: #fefce8; --sev-ink: #713f12; }
+        .result.HIGH     { --sev: #ea580c; --sev-bg: #fff7ed; --sev-ink: #7c2d12; }
+        .result.CRITICAL { --sev: #dc2626; --sev-bg: #fef2f2; --sev-ink: #7f1d1d; }
 
-        .LOW { background: #dcfce7; border-left: 8px solid #16a34a; }
-        .MEDIUM { background: #fef9c3; border-left: 8px solid #eab308; }
-        .HIGH { background: #ffedd5; border-left: 8px solid #f97316; }
-        .CRITICAL { background: #fee2e2; border-left: 8px solid #dc2626; }
-
-        .info {
-            background: #f1f5f9;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
+        .result-head {
+            background: var(--sev-bg);
+            color: var(--sev-ink);
+            padding: 20px 24px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px 32px;
         }
 
-        .fallback { background: #fff7ed; border-left: 5px solid #f97316; }
-        .success { background: #f0fdf4; border-left: 5px solid #16a34a; }
+        .eyebrow {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            opacity: .85;
+        }
+
+        .severity-value {
+            display: block;
+            font-size: 36px;
+            line-height: 1.15;
+            font-weight: 800;
+            letter-spacing: .01em;
+        }
+
+        .confidence { min-width: 200px; flex: 0 1 280px; }
+
+        .confidence-num { font-size: 24px; font-weight: 700; line-height: 1.2; }
+
+        .meter {
+            height: 10px;
+            margin-top: 6px;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, .12);
+            overflow: hidden;
+        }
+
+        .meter > span { display: block; height: 100%; border-radius: 999px; background: var(--sev); }
+
+        .result-body { padding: 20px 24px 24px; }
+
+        .reason { margin: 0 0 4px; font-size: 17px; }
+
+        .info {
+            margin-top: 16px;
+            padding: 14px 16px;
+            border-radius: 10px;
+            background: #f1f5f9;
+            border-left: 5px solid #94a3b8;
+        }
+
+        .info p { margin: 4px 0 0; }
+
+        .redflag { background: #fef2f2; border-left-color: #dc2626; color: #7f1d1d; }
+        .fallback { background: #fff7ed; border-left-color: #f97316; color: #7c2d12; }
+        .success { background: #f0fdf4; border-left-color: #16a34a; color: #14532d; }
+
+        .symptoms-list { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 8px; }
 
         .symptom {
             display: inline-block;
-            background: #e5e7eb;
-            padding: 6px 10px;
-            border-radius: 6px;
-            margin: 4px;
+            padding: 4px 12px;
+            border-radius: 999px;
+            background: #fff;
+            border: 1px solid #cbd5e1;
+            font-size: 14px;
+            font-weight: 600;
+            color: #334155;
         }
 
-        .confidence { font-size: 18px; font-weight: bold; }
-
-        .redflag {
-            background-color: #fef2f2;
-            border-left: 5px solid #dc2626;
-        }
-
+        /* ---------- Small screens ---------- */
         @media (max-width: 600px) {
-            body { padding: 20px 12px; }
-            .topbar { align-items: flex-start; flex-direction: column; }
-            .card, .result { padding: 18px; }
-        }
+            .appbar-in { flex-direction: column; align-items: flex-start; padding: 14px 16px; }
+            .container { padding: 16px 12px 40px; }
+            .card { padding: 18px 16px; }
+            .result-head, .result-body { padding-left: 16px; padding-right: 16px; }
+            .severity-value { font-size: 30px; }
+            .btn { flex: 1 1 100%; }
+            .btn-primary { order: -1; }
+            .confidence { flex-basis: 100%; }
         }
     </style>
 </head>
 
 <body>
-<div class="container">
-
-    <header>
-        <div class="topbar">
-            <h1 id="title">SACA Clinical Assistant</h1>
-
-            <div class="language-control">
-                <label for="language" id="language-label">Language:</label>
-                <select id="language" onchange="changeLanguage()">
-                    <option value="en">English</option>
-                    <option value="sw">Kiswahili</option>
-                </select>
+<header class="appbar">
+    <div class="appbar-in">
+        <div class="brand">
+            <span class="logo" aria-hidden="true">S</span>
+            <div>
+                <h1 id="title">SACA Clinical Assistant</h1>
+                <p class="subtitle" id="subtitle">
+                    Logistic Regression Clinical Severity Classifier
+                </p>
             </div>
         </div>
 
-        <p class="subtitle" id="subtitle">
-            Logistic Regression Clinical Severity Classifier
-        </p>
-    </header>
+        <div class="language-control">
+            <label for="language" id="language-label">Language:</label>
+            <select id="language" onchange="changeLanguage()">
+                <option value="en">English</option>
+                <option value="sw">Kiswahili</option>
+            </select>
+        </div>
+    </div>
+</header>
+
+<main class="container">
 
     <section class="card">
         <form method="POST">
-            <label for="symptom_text" id="symptom-label">
-                <strong>Patient symptoms</strong>
+            <label class="field-label" for="symptom_text" id="symptom-label">
+                Patient symptoms
             </label>
-            <br><br>
 
             <textarea
                 id="symptom_text"
@@ -158,92 +285,105 @@
                 placeholder="Example: The patient has a high fever, vomiting and abdominal pain."
             >{{ symptom_text | e }}</textarea>
 
-            <br>
+            <div class="actions">
+                <button type="submit" class="btn btn-primary" id="analyse-button">
+                    Analyse Symptoms
+                </button>
 
-            <button type="submit" id="analyse-button">
-                Analyse Symptoms
-            </button>
+                <a href="{{ url_for('body_map') }}" class="btn btn-secondary" id="body-map-link">
+                    Body Map
+                </a>
 
-            <a href="{{ url_for('body_map') }}" class="map-btn" id="body-map-link">
-                Body Map
-            </a>
-
-            <a href="{{ url_for('history') }}" class="map-btn" id="history-link">
-                History
-            </a>
+                <a href="{{ url_for('history') }}" class="btn btn-secondary" id="history-link">
+                    History
+                </a>
+            </div>
         </form>
     </section>
 
     {% if result %}
-    <section class="result {{ result['severity'] | e }}">
+    <section class="result {{ result['severity'] | e }}" aria-live="polite">
 
-        <div class="severity">
-            <span id="severity-label">Severity:</span>
+        <div class="result-head">
+            <div class="severity">
+                <span class="eyebrow" id="severity-label">Severity:</span>
 
-            <span id="severity-value">{{ result['severity'] | e }}</span>
-            <span id="severity-swahili" hidden></span>
-        </div>
+                <span class="severity-value">
+                    <span id="severity-value">{{ result['severity'] | e }}</span>
+                    <span id="severity-swahili" hidden></span>
+                </span>
+            </div>
 
-        {% if result.get('confidence') is not none %}
-        <div class="confidence">
-            <span id="confidence-label">Confidence:</span>
-            {{ "%.1f"|format(result['confidence'] * 100) }}%
-        </div>
-        {% endif %}
-
-        <p>
-            <strong id="reason-label">Reason:</strong>
-            {{ result['reason'] | e }}
-        </p>
-        {% if result.get('override_applied') %}
-        <div class="info redflag">
-            <strong>Red flag detected: {{ result['red_flags']|join(', ') }}</strong>
-            <p>
-                The classifier alone predicted {{ result['model_severity'] }}, but these
-                danger signs raise the result to {{ result['severity'] }}.
-            </p>
-        </div>
-        {% endif %}
-
-        <!-- Extraction status -->
-
-        {% if result.get('fallback_used') %}
-        <div class="info fallback">
-            <strong id="fallback-title">Offline fallback used</strong>
-            <p id="fallback-message">
-                Symptom extraction was unavailable or failed.
-                The original patient text was passed directly to the
-                Logistic Regression classifier.
-            </p>
-        </div>
-        {% else %}
-        <div class="info success">
-            <strong id="extraction-title">Symptom extraction successful</strong>
-
-            {% if result.get('extracted_text') %}
-            <p>
-                <strong id="extracted-label">Extracted symptoms:</strong>
-                {{ result['extracted_text'] | e }}
-            </p>
+            {% if result.get('confidence') is not none %}
+            <div class="confidence">
+                <span class="eyebrow" id="confidence-label">Confidence:</span>
+                <span class="confidence-num">{{ "%.1f"|format(result['confidence'] * 100) }}%</span>
+                <div class="meter" aria-hidden="true">
+                    <span style="width: {{ '%.1f'|format(result['confidence'] * 100) }}%"></span>
+                </div>
+            </div>
             {% endif %}
         </div>
-        {% endif %}
 
-        {% if result.get('symptoms') %}
-        <div class="info">
-            <strong id="classifier-input-label">Classifier input:</strong>
-            <br><br>
+        <div class="result-body">
 
-            {% for symptom in result['symptoms'] %}
-            <span class="symptom">{{ symptom | e }}</span>
-            {% endfor %}
+            <p class="reason">
+                <strong id="reason-label">Reason:</strong>
+                {{ result['reason'] | e }}
+            </p>
+
+            {% if result.get('red_flag_rules') %}
+            <div class="info redflag">
+                <strong>Red-flag rule matched: {{ result['red_flag_rules']|join(', ') }}</strong>
+                <p>
+                    Danger-sign rules set a minimum severity. They can raise
+                    the result but never lower it.
+                </p>
+            </div>
+            {% endif %}
+
+            <!-- Extraction status -->
+
+            {% if result.get('fallback_used') %}
+            <div class="info fallback">
+                <strong id="fallback-title">Offline fallback used</strong>
+                <p id="fallback-message">
+                    Symptom extraction was unavailable or failed.
+                    The original patient text was passed directly to the
+                    Logistic Regression classifier.
+                </p>
+            </div>
+            {% else %}
+            <div class="info success">
+                <strong id="extraction-title">Symptom extraction successful</strong>
+
+                {% if result.get('extracted_text') %}
+                <p>
+                    <strong id="extracted-label">Extracted symptoms:</strong>
+                    {{ result['extracted_text'] | e }}
+                </p>
+                {% endif %}
+            </div>
+            {% endif %}
+
+            {% if result.get('symptoms') %}
+            <div class="info">
+                <strong id="classifier-input-label">Classifier input:</strong>
+
+                <div class="symptoms-list">
+                    {% for symptom in result['symptoms'] %}
+                    <span class="symptom">{{ symptom | e }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
         </div>
-        {% endif %}
 
     </section>
     {% endif %}
 
-</div>
+</main>
 
 <script>
 const translations = {
@@ -364,10 +504,8 @@ window.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
-<!-- YOUR VOICE FEATURE IS KEPT HERE AT THE BOTTOM -->
+<!-- Voice input: microphone button next to the symptom box -->
 <script src="/voice.js" data-target="symptom_text"></script>
 
-</body>
-</html>
 </body>
 </html>
