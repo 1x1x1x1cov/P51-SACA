@@ -28,6 +28,7 @@
 
   <form method="post" action="{{ url_for('auth.guest') }}">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="next" value="{{ next }}">
     <button class="btn secondary block huge" type="submit"><span class="ico" aria-hidden="true">&#128100;</span>{{ _('Continue as guest') }}</button>
   </form>
 

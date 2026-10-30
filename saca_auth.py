@@ -183,11 +183,17 @@ def safe_next(target, default="main.home"):
     return url_for(default)
 
 
+def _to_login():
+    """Send a signed-out visitor to the login screen, keeping where they were going and why they were signed out."""
+    return redirect(url_for("auth.login", next=request.full_path if request.method == "GET" else None,
+                            timeout=1 if g.get("timed_out") else None))
+
+
 def signed_in(view):
     @wraps(view)
     def wrapper(*args, **kwargs):
         if not g.get("kind"):
-            return redirect(url_for("auth.login", next=request.full_path if request.method == "GET" else None))
+            return _to_login()
         return view(*args, **kwargs)
     return wrapper
 
@@ -197,7 +203,7 @@ def medic_required(view):
     def wrapper(*args, **kwargs):
         if g.get("kind") != "medic":
             if not g.get("kind"):
-                return redirect(url_for("auth.login", next=request.full_path if request.method == "GET" else None))
+                return _to_login()
             abort(403)
         return view(*args, **kwargs)
     return wrapper
@@ -250,13 +256,20 @@ def login():
             store.log_event(None, "login_failed", problem)
             error = _(LOGIN_ERRORS.get(problem, LOGIN_ERRORS["invalid"]))
     return render_template("login.html", error=error, name=name, next=request.values.get("next", ""),
-                           needs_setup=store.user_count() == 0, timed_out=g.get("timed_out")), (401 if error else 200)
+                           needs_setup=store.user_count() == 0,
+                           timed_out=g.get("timed_out") or request.args.get("timeout") == "1"), (401 if error else 200)
+
+
+GUEST_NEXT_OK = ("/assess", "/body-map", "/contacts", "/about", "/history")
 
 
 @bp.post("/guest")
 def guest():
     start_session("guest")
-    return redirect(url_for("main.home"))
+    target = safe_next(request.form.get("next"))
+    if not target.startswith(GUEST_NEXT_OK):  # a guest cannot open staff pages, so do not send them there
+        target = url_for("main.home")
+    return redirect(target)
 
 
 @bp.post("/logout")

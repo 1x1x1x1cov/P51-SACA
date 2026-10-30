@@ -242,3 +242,24 @@ table.simple th, table.simple td { text-align: left; padding: 8px 6px; border-bo
 .saca-voice button { min-height: 56px !important; padding: 10px 22px !important; font-size: 19px !important; font-weight: 700; border-radius: 14px !important; }
 .saca-voice select { min-height: 48px !important; width: auto !important; font-size: 17px !important; }
 .saca-voice [role=status] { font-size: 16px !important; }
+
+/* Body Map (its own page and inside the quiz) */
+.bm-wrap { display: grid; grid-template-columns: minmax(260px, 380px) 1fr; gap: 16px; align-items: start; }
+@media (max-width: 720px) { .bm-wrap { grid-template-columns: 1fr; } }
+.bm-svg { width: 100%; max-width: 380px; height: auto; display: block; margin: 0 auto; touch-action: manipulation; }
+.bm-svg .part { stroke: #1f2d30; stroke-width: 2.5; cursor: pointer; transition: filter .12s, stroke-width .12s; }
+.bm-svg .part:hover { filter: brightness(1.08); }
+.bm-svg .part.active { stroke: #0b1517; stroke-width: 6; filter: saturate(1.4) brightness(.92); }
+.bm-svg .part:focus { outline: none; stroke: var(--focus); stroke-width: 6; }
+.bm-svg text { font: 800 17px "Segoe UI", system-ui, sans-serif; fill: #10201f; pointer-events: none; text-anchor: middle;
+               paint-order: stroke; stroke: rgba(255, 255, 255, .85); stroke-width: 4px; }
+.part-buttons { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; margin-top: 12px; }
+.part-btn { min-height: 56px; border-radius: 14px; border: 3px solid #1f2d30; font: inherit; font-weight: 800; font-size: 17px;
+            color: #10201f; cursor: pointer; }
+.part-btn[aria-pressed="true"] { box-shadow: inset 0 0 0 3px #0b1517; outline: 3px solid var(--brand); outline-offset: 2px; }
+.part-panel h2 { display: flex; align-items: center; gap: 10px; }
+.swatch { width: 22px; height: 22px; border-radius: 6px; border: 2px solid #1f2d30; display: inline-block; }
+.count-badge { display: inline-block; min-width: 26px; padding: 0 8px; border-radius: 99px; background: var(--brand); color: var(--brand-ink);
+               font-size: 15px; text-align: center; margin-left: 4px; }
+.bm-inline .bm-wrap { margin-top: 12px; }
+.bm-inline .part-panel { border-top: 1px solid var(--line, #d7dfdf); padding-top: 10px; margin-top: 6px; }

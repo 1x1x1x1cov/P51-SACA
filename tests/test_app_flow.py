@@ -453,3 +453,64 @@ def test_medic_new_patient_is_not_created_when_the_form_has_errors(client):
     r = submit(client, who="new", full_name="Asha", date_of_birth="2015-03-03", sex="F")  # no symptom
     assert r.status_code == 422
     assert store.patient_count() == before
+
+
+# ------------------------------------------------------------------ signed out on the Body Map (30 Oct report)
+def test_idle_sign_out_from_body_map_explains_why_and_keeps_the_picks(client):
+    as_guest(client)
+    assert client.get("/body-map").status_code == 200
+    with client.session_transaction() as s:
+        s["seen"] = int(time.time()) - 31 * 60          # Body Map left open for 31 minutes
+    r = client.get("/assess?mode=bodymap&p=headache&p=chest_pain&typed=")
+    assert r.status_code == 302 and "/login" in r.headers["Location"] and "timeout=1" in r.headers["Location"]
+    html = client.get(r.headers["Location"]).get_data(as_text=True)
+    assert "You were signed out after 30 minutes without use." in html
+    # "Continue as guest" goes straight back to the quiz with the Body Map picks still ticked
+    nxt = re.search(r'name="next" value="([^"]+)"', html).group(1).replace("&amp;", "&")
+    r = client.post("/guest", data={"csrf_token": token(client), "next": nxt})
+    assert r.status_code == 302 and r.headers["Location"].startswith("/assess?mode=bodymap")
+    quiz = client.get(r.headers["Location"]).get_data(as_text=True)
+    assert re.search(r'value="headache"[^>]*checked', quiz) and re.search(r'value="chest_pain"[^>]*checked', quiz)
+
+
+def test_guest_is_never_sent_to_staff_pages(client):
+    r = client.post("/guest", data={"csrf_token": token(client), "next": "/admin/users"})
+    assert r.headers["Location"] == "/"
+    r = client.post("/guest", data={"csrf_token": token(client, "/"), "next": "//evil.example.com"})
+    assert r.headers["Location"] == "/"
+
+# ------------------------------------------------------------------ Body Map inside the quiz
+# Bug seen on 2026-10-30: quiz -> "Use the Body Map" link -> Next went back to an empty "Who is this for?" step, because
+# the link left the quiz page and the quiz answers live only in that page. The Body Map now opens inside the quiz.
+def test_quiz_has_inline_body_map_and_no_link_away(client):
+    as_guest(client)
+    html = client.get("/assess").get_data(as_text=True)
+    assert 'id="bodymap-box"' in html and "data-bm" in html
+    assert 'href="/body-map"' not in html  # leaving the page would drop the answers already given
+    assert html.count('class="part-btn"') == 10
+    # body map tiles are quiz symptoms, so they post with the rest of the quiz
+    assert re.search(r'name="symptom" value="headache" data-part="head"', html)
+    assert 'name="p"' not in html
+
+
+def test_inline_body_map_marks_prefilled_codes(client):
+    as_guest(client)
+    html = client.get("/assess?mode=bodymap&p=joint_pain").get_data(as_text=True)
+    assert re.search(r'name="symptom" value="joint_pain" data-part="arm"[^>]*checked', html)
+
+
+def test_one_post_keeps_person_and_body_map_symptoms(client):
+    as_guest(client)
+    t = token(client, "/assess")
+    r = client.post("/assess", data={"csrf_token": t, "full_name": "Neema", "approx_age_years": "30", "sex": "F",
+                                     "symptom": ["headache", "headache", "joint_pain"], "input_mode": "bodymap",
+                                     "duration": "1-3d"})
+    assert r.status_code == 302, r.get_data(as_text=True)[:400]
+    page = client.get(r.headers["Location"]).get_data(as_text=True)
+    assert "Neema" in page
+
+
+def test_standalone_body_map_still_uses_the_shared_partial(client):
+    as_guest(client)
+    html = client.get("/body-map").get_data(as_text=True)
+    assert 'id="bm-form"' in html and 'name="p" value="headache"' in html and "data-bm" in html

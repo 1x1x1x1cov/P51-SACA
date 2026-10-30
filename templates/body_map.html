@@ -1,26 +1,5 @@
 {% extends "base.html" %}
 {% block title %}{{ _('Body Map') }}{% endblock %}
-{% block head %}
-<style>
-  .bm-wrap { display: grid; grid-template-columns: minmax(260px, 380px) 1fr; gap: 16px; align-items: start; }
-  @media (max-width: 720px) { .bm-wrap { grid-template-columns: 1fr; } }
-  .bm-svg { width: 100%; max-width: 380px; height: auto; display: block; margin: 0 auto; touch-action: manipulation; }
-  .bm-svg .part { stroke: #1f2d30; stroke-width: 2.5; cursor: pointer; transition: filter .12s, stroke-width .12s; }
-  .bm-svg .part:hover { filter: brightness(1.08); }
-  .bm-svg .part.active { stroke: #0b1517; stroke-width: 6; filter: saturate(1.4) brightness(.92); }
-  .bm-svg .part:focus { outline: none; stroke: var(--focus); stroke-width: 6; }
-  .bm-svg text { font: 800 17px "Segoe UI", system-ui, sans-serif; fill: #10201f; pointer-events: none; text-anchor: middle;
-                 paint-order: stroke; stroke: rgba(255, 255, 255, .85); stroke-width: 4px; }
-  .part-buttons { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; margin-top: 12px; }
-  .part-btn { min-height: 56px; border-radius: 14px; border: 3px solid #1f2d30; font: inherit; font-weight: 800; font-size: 17px;
-              color: #10201f; cursor: pointer; }
-  .part-btn[aria-pressed="true"] { box-shadow: inset 0 0 0 3px #0b1517; outline: 3px solid var(--brand); outline-offset: 2px; }
-  .part-panel h2 { display: flex; align-items: center; gap: 10px; }
-  .swatch { width: 22px; height: 22px; border-radius: 6px; border: 2px solid #1f2d30; display: inline-block; }
-  .count-badge { display: inline-block; min-width: 26px; padding: 0 8px; border-radius: 99px; background: var(--brand); color: var(--brand-ink);
-                 font-size: 15px; text-align: center; margin-left: 4px; }
-</style>
-{% endblock %}
 {% block content %}
 {% set L = lang %}
 <h1>{{ _('Body Map') }}</h1>
@@ -28,63 +7,16 @@
 
 <form method="get" action="{{ url_for('main.assess') }}" id="bm-form">
   <input type="hidden" name="mode" value="bodymap">
-  <div class="bm-wrap">
-    <section class="card">
-      <svg class="bm-svg" viewBox="80 0 240 640" role="group" aria-label="{{ _('Body Map') }}">
-        {% set colors = flow.BODY_COLORS %}
-        <ellipse class="part" data-part="head" fill="{{ colors.head }}" cx="200" cy="58" rx="34" ry="42" tabindex="0" role="button" aria-label="{{ _('Head') }}"/>
-        <path class="part" data-part="neck" fill="{{ colors.neck }}" d="M184,96 L216,96 L219,122 L181,122 Z" tabindex="0" role="button" aria-label="{{ _('Neck') }}"/>
-        <path class="part" data-part="shoulders" fill="{{ colors.shoulders }}" d="M181,122 L219,122 Q250,124 264,136 Q272,145 272,160 L240,160 Q200,152 160,160 L128,160 Q128,145 136,136 Q150,124 181,122 Z" tabindex="0" role="button" aria-label="{{ _('Shoulders') }}"/>
-        <path class="part" data-part="chest" fill="{{ colors.chest }}" d="M160,160 Q200,152 240,160 L244,242 Q200,250 156,242 Z" tabindex="0" role="button" aria-label="{{ _('Chest') }}"/>
-        <path class="part" data-part="abdomen" fill="{{ colors.abdomen }}" d="M156,242 Q200,250 244,242 L246,300 Q248,330 238,348 L200,362 L162,348 Q152,330 154,300 Z" tabindex="0" role="button" aria-label="{{ _('Belly') }}"/>
-        <path class="part" data-part="arm" fill="{{ colors.arm }}" d="M128,160 L160,160 Q158,200 148,252 L136,338 L104,338 L114,252 Q118,200 128,160 Z" tabindex="0" role="button" aria-label="{{ _('Arms') }}"/>
-        <path class="part" data-part="arm" fill="{{ colors.arm }}" d="M272,160 L240,160 Q242,200 252,252 L264,338 L296,338 L286,252 Q282,200 272,160 Z" tabindex="-1" aria-hidden="true"/>
-        <path class="part" data-part="hand" fill="{{ colors.hand }}" d="M104,338 L136,338 Q144,362 138,388 Q124,406 106,394 Q94,372 104,338 Z" tabindex="0" role="button" aria-label="{{ _('Hands') }}"/>
-        <path class="part" data-part="hand" fill="{{ colors.hand }}" d="M296,338 L264,338 Q256,362 262,388 Q276,406 294,394 Q306,372 296,338 Z" tabindex="-1" aria-hidden="true"/>
-        <path class="part" data-part="leg" fill="{{ colors.leg }}" d="M162,348 L200,362 L197,440 L192,572 L162,572 L156,440 Q150,390 162,348 Z" tabindex="0" role="button" aria-label="{{ _('Legs') }}"/>
-        <path class="part" data-part="leg" fill="{{ colors.leg }}" d="M238,348 L200,362 L203,440 L208,572 L238,572 L244,440 Q250,390 238,348 Z" tabindex="-1" aria-hidden="true"/>
-        <path class="part" data-part="foot" fill="{{ colors.foot }}" d="M162,572 L194,572 L196,604 Q190,624 154,622 Q142,614 158,598 Z" tabindex="0" role="button" aria-label="{{ _('Feet') }}"/>
-        <path class="part" data-part="foot" fill="{{ colors.foot }}" d="M238,572 L206,572 L204,604 Q210,624 246,622 Q258,614 242,598 Z" tabindex="-1" aria-hidden="true"/>
-        <text x="200" y="64">{{ _('Head') }}</text>
-        <text x="200" y="206">{{ _('Chest') }}</text>
-        <text x="200" y="302">{{ _('Belly') }}</text>
-        <text x="200" y="146" style="font-size:13px">{{ _('Shoulders') }}</text>
-        <text x="200" y="470">{{ _('Legs') }}</text>
-      </svg>
-      <div class="part-buttons" role="group" aria-label="{{ _('Body parts') }}">
-        {% for pid, en, sw, col in flow.BODY_PARTS %}
-        <button type="button" class="part-btn" data-part="{{ pid }}" style="background:{{ col }}" aria-pressed="false">
-          {{ sw if L == 'sw' else en }}<span class="count-badge" data-count="{{ pid }}" hidden>0</span></button>
-        {% endfor %}
-      </div>
-    </section>
+  {% with bm_name="p", bm_card="card", bm_picked=[] %}{% include "_body_map_panel.html" %}{% endwith %}
 
-    <section>
-      <div class="card" id="bm-intro">
-        <h2>{{ _('Choose a body part') }}</h2>
-        <p>{{ _('Tap a coloured part of the body, or one of the coloured buttons.') }}</p>
-      </div>
-      {% for pid, en, sw, col in flow.BODY_PARTS %}
-      <div class="card part-panel" data-panel="{{ pid }}" hidden>
-        <h2><span class="swatch" style="background:{{ col }}" aria-hidden="true"></span>{{ sw if L == 'sw' else en }}</h2>
-        <div class="tiles">
-          {% for code, cen, csw in flow.BODY_MAP[pid] %}
-          <label class="tile compact"><input type="checkbox" name="p" value="{{ code }}" data-part="{{ pid }}"><span>{{ csw if L == 'sw' else cen }}</span></label>
-          {% endfor %}
-        </div>
-      </div>
-      {% endfor %}
-
-      <div class="card">
-        <label class="field" for="free-text">{{ _('Anything else? Describe it in your own words') }} <span class="muted small">({{ _('optional') }})</span></label>
-        <textarea id="free-text" name="typed" maxlength="600" placeholder="{{ _('For example: fever and headache, or: homa na maumivu ya kichwa') }}"></textarea>
-        <p id="form-error" class="field-error" role="alert" hidden>{{ _('Please pick at least one symptom or describe how you feel.') }}</p>
-        <div class="row" style="margin-top:14px">
-          <button class="btn" type="submit" style="flex:2">{{ _('Next') }} &#8250;</button>
-          <button class="btn secondary" type="reset" style="flex:1" id="clear-btn">{{ _('Clear') }}</button>
-        </div>
-      </div>
-    </section>
+  <div class="card">
+    <label class="field" for="free-text">{{ _('Anything else? Describe it in your own words') }} <span class="muted small">({{ _('optional') }})</span></label>
+    <textarea id="free-text" name="typed" maxlength="600" placeholder="{{ _('For example: fever and headache, or: homa na maumivu ya kichwa') }}"></textarea>
+    <p id="form-error" class="field-error" role="alert" hidden>{{ _('Please pick at least one symptom or describe how you feel.') }}</p>
+    <div class="row" style="margin-top:14px">
+      <button class="btn" type="submit" style="flex:2">{{ _('Next') }} &#8250;</button>
+      <button class="btn secondary" type="reset" style="flex:1" id="clear-btn">{{ _('Clear') }}</button>
+    </div>
   </div>
 </form>
 {% endblock %}
@@ -94,33 +26,6 @@
 <script>
 (function () {
   var form = document.getElementById("bm-form");
-  function show(part) {
-    document.getElementById("bm-intro").hidden = true;
-    form.querySelectorAll("[data-panel]").forEach(function (p) { p.hidden = p.getAttribute("data-panel") !== part; });
-    form.querySelectorAll(".bm-svg .part").forEach(function (el) { el.classList.toggle("active", el.getAttribute("data-part") === part); });
-    form.querySelectorAll(".part-btn").forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-part") === part)); });
-    var panel = form.querySelector("[data-panel='" + part + "']");
-    if (panel && window.innerWidth < 720) panel.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-  form.querySelectorAll("[data-part]").forEach(function (el) {
-    if (el.tagName === "INPUT") return;
-    el.addEventListener("click", function () { show(el.getAttribute("data-part")); });
-    el.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); show(el.getAttribute("data-part")); } });
-  });
-  function counts() {
-    var c = {};
-    form.querySelectorAll("input[name='p']:checked").forEach(function (i) { var p = i.getAttribute("data-part"); c[p] = (c[p] || 0) + 1; });
-    form.querySelectorAll("[data-count]").forEach(function (b) { var n = c[b.getAttribute("data-count")] || 0; b.textContent = n; b.hidden = n === 0; });
-  }
-  // the same symptom can appear under two parts (e.g. joint pain): keep them in step
-  form.addEventListener("change", function (e) {
-    var t = e.target;
-    if (t.name === "p") {
-      form.querySelectorAll("input[name='p'][value='" + t.value + "']").forEach(function (o) { o.checked = t.checked; });
-      counts();
-    }
-  });
-  document.getElementById("clear-btn").addEventListener("click", function () { setTimeout(counts, 0); });
   form.addEventListener("submit", function (e) {
     var seen = {};
     form.querySelectorAll("input[name='p']:checked").forEach(function (i) { if (seen[i.value]) i.disabled = true; seen[i.value] = true; });

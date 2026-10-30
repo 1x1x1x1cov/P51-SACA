@@ -1,0 +1,90 @@
+{# Body Map: tap a part of the body, then the symptoms there. Used on its own page and inside the quiz.
+   bm_name  the checkbox name ("p" on the Body Map page, "symptom" in the quiz)
+   bm_picked codes already ticked (quiz only)
+   The same code can sit under two parts and also be a quiz button: every checkbox with the same name and value in the
+   enclosing form is kept in step. #}
+{% set L = lang %}
+{% set picked = bm_picked or [] %}
+<div class="bm-wrap" data-bm data-bm-name="{{ bm_name }}">
+    <section class="{{ bm_card }}">
+      <svg class="bm-svg" viewBox="80 0 240 640" role="group" aria-label="{{ _('Body Map') }}">
+        {% set colors = flow.BODY_COLORS %}
+        <ellipse class="part" data-part="head" fill="{{ colors.head }}" cx="200" cy="58" rx="34" ry="42" tabindex="0" role="button" aria-label="{{ _('Head') }}"/>
+        <path class="part" data-part="neck" fill="{{ colors.neck }}" d="M184,96 L216,96 L219,122 L181,122 Z" tabindex="0" role="button" aria-label="{{ _('Neck') }}"/>
+        <path class="part" data-part="shoulders" fill="{{ colors.shoulders }}" d="M181,122 L219,122 Q250,124 264,136 Q272,145 272,160 L240,160 Q200,152 160,160 L128,160 Q128,145 136,136 Q150,124 181,122 Z" tabindex="0" role="button" aria-label="{{ _('Shoulders') }}"/>
+        <path class="part" data-part="chest" fill="{{ colors.chest }}" d="M160,160 Q200,152 240,160 L244,242 Q200,250 156,242 Z" tabindex="0" role="button" aria-label="{{ _('Chest') }}"/>
+        <path class="part" data-part="abdomen" fill="{{ colors.abdomen }}" d="M156,242 Q200,250 244,242 L246,300 Q248,330 238,348 L200,362 L162,348 Q152,330 154,300 Z" tabindex="0" role="button" aria-label="{{ _('Belly') }}"/>
+        <path class="part" data-part="arm" fill="{{ colors.arm }}" d="M128,160 L160,160 Q158,200 148,252 L136,338 L104,338 L114,252 Q118,200 128,160 Z" tabindex="0" role="button" aria-label="{{ _('Arms') }}"/>
+        <path class="part" data-part="arm" fill="{{ colors.arm }}" d="M272,160 L240,160 Q242,200 252,252 L264,338 L296,338 L286,252 Q282,200 272,160 Z" tabindex="-1" aria-hidden="true"/>
+        <path class="part" data-part="hand" fill="{{ colors.hand }}" d="M104,338 L136,338 Q144,362 138,388 Q124,406 106,394 Q94,372 104,338 Z" tabindex="0" role="button" aria-label="{{ _('Hands') }}"/>
+        <path class="part" data-part="hand" fill="{{ colors.hand }}" d="M296,338 L264,338 Q256,362 262,388 Q276,406 294,394 Q306,372 296,338 Z" tabindex="-1" aria-hidden="true"/>
+        <path class="part" data-part="leg" fill="{{ colors.leg }}" d="M162,348 L200,362 L197,440 L192,572 L162,572 L156,440 Q150,390 162,348 Z" tabindex="0" role="button" aria-label="{{ _('Legs') }}"/>
+        <path class="part" data-part="leg" fill="{{ colors.leg }}" d="M238,348 L200,362 L203,440 L208,572 L238,572 L244,440 Q250,390 238,348 Z" tabindex="-1" aria-hidden="true"/>
+        <path class="part" data-part="foot" fill="{{ colors.foot }}" d="M162,572 L194,572 L196,604 Q190,624 154,622 Q142,614 158,598 Z" tabindex="0" role="button" aria-label="{{ _('Feet') }}"/>
+        <path class="part" data-part="foot" fill="{{ colors.foot }}" d="M238,572 L206,572 L204,604 Q210,624 246,622 Q258,614 242,598 Z" tabindex="-1" aria-hidden="true"/>
+        <text x="200" y="64">{{ _('Head') }}</text>
+        <text x="200" y="206">{{ _('Chest') }}</text>
+        <text x="200" y="302">{{ _('Belly') }}</text>
+        <text x="200" y="146" style="font-size:13px">{{ _('Shoulders') }}</text>
+        <text x="200" y="470">{{ _('Legs') }}</text>
+      </svg>
+      <div class="part-buttons" role="group" aria-label="{{ _('Body parts') }}">
+        {% for pid, en, sw, col in flow.BODY_PARTS %}
+        <button type="button" class="part-btn" data-part="{{ pid }}" style="background:{{ col }}" aria-pressed="false">
+          {{ sw if L == 'sw' else en }}<span class="count-badge" data-count="{{ pid }}" hidden>0</span></button>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section>
+      <div class="{{ bm_card }} bm-intro">
+        <h2>{{ _('Choose a body part') }}</h2>
+        <p>{{ _('Tap a coloured part of the body, or one of the coloured buttons.') }}</p>
+      </div>
+      {% for pid, en, sw, col in flow.BODY_PARTS %}
+      <div class="{{ bm_card }} part-panel" data-panel="{{ pid }}" hidden>
+        <h2><span class="swatch" style="background:{{ col }}" aria-hidden="true"></span>{{ sw if L == 'sw' else en }}</h2>
+        <div class="tiles">
+          {% for code, cen, csw in flow.BODY_MAP[pid] %}
+          <label class="tile compact"><input type="checkbox" name="{{ bm_name }}" value="{{ code }}" data-part="{{ pid }}" data-label="{{ csw if L == 'sw' else cen }}"{% if code in picked %} checked{% endif %}><span>{{ csw if L == 'sw' else cen }}</span></label>
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </section>
+</div>
+<script>
+(function () {
+  // One Body Map per page. Showing a part never leaves the page, so whatever else the form holds is kept.
+  var box = document.currentScript.previousElementSibling;
+  var form = box.closest("form");
+  var name = box.getAttribute("data-bm-name");
+  function show(part) {
+    box.querySelector(".bm-intro").hidden = true;
+    box.querySelectorAll("[data-panel]").forEach(function (p) { p.hidden = p.getAttribute("data-panel") !== part; });
+    box.querySelectorAll(".bm-svg .part").forEach(function (el) { el.classList.toggle("active", el.getAttribute("data-part") === part); });
+    box.querySelectorAll(".part-btn").forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-part") === part)); });
+    var panel = box.querySelector("[data-panel='" + part + "']");
+    if (panel && window.innerWidth < 720) panel.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+  box.querySelectorAll("[data-part]").forEach(function (el) {
+    if (el.tagName === "INPUT") return;
+    el.addEventListener("click", function () { show(el.getAttribute("data-part")); });
+    el.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); show(el.getAttribute("data-part")); } });
+  });
+  function counts() {
+    var c = {};
+    box.querySelectorAll("input[data-part]:checked").forEach(function (i) { var p = i.getAttribute("data-part"); c[p] = (c[p] || 0) + 1; });
+    box.querySelectorAll("[data-count]").forEach(function (b) { var n = c[b.getAttribute("data-count")] || 0; b.textContent = n; b.hidden = n === 0; });
+  }
+  // the same symptom can sit under two parts (joint pain) or also be a quiz button (headache): keep them in step
+  form.addEventListener("change", function (e) {
+    var t = e.target;
+    if (t.type !== "checkbox" || t.name !== name) return;
+    form.querySelectorAll("input[type=checkbox][name='" + name + "']").forEach(function (o) { if (o.value === t.value) o.checked = t.checked; });
+    counts();
+  });
+  form.addEventListener("reset", function () { setTimeout(counts, 0); });
+  counts();
+})();
+</script>

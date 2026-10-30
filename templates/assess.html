@@ -100,7 +100,12 @@
     <div class="row" style="margin-top:18px">
       <button type="button" class="btn secondary" id="speak-btn" aria-controls="typed-box">&#127908; {{ _('Speak instead') }}</button>
       <button type="button" class="btn secondary" id="show-typed" aria-expanded="{{ 'true' if typed else 'false' }}" aria-controls="typed-box">&#9000;&#65039; {{ _('Type it instead') }}</button>
-      <a class="btn secondary" href="{{ url_for('main.body_map') }}">&#129485; {{ _('Use the Body Map') }}</a>
+      <button type="button" class="btn secondary" id="show-bodymap" aria-expanded="false" aria-controls="bodymap-box">&#129485; {{ _('Use the Body Map') }}</button>
+    </div>
+    {# The Body Map opens here, inside the quiz, so the answers on "Who is this for?" are kept. #}
+    <div id="bodymap-box" class="bm-inline" hidden>
+      <p class="muted" style="margin:14px 0 0">{{ _('Tap where it hurts, then tap what you feel. You can pick from more than one part.') }}</p>
+      {% with bm_name="symptom", bm_card="", bm_picked=prefill %}{% include "_body_map_panel.html" %}{% endwith %}
     </div>
     <div id="typed-box" style="margin-top:14px" {% if not typed %}hidden{% endif %}>
       <label class="field" for="typed_text">{{ _('Describe the symptoms in your own words') }}</label>
@@ -235,7 +240,13 @@
   }
 
   function labels(selector) {
-    return Array.prototype.map.call(form.querySelectorAll(selector), function (el) { return el.getAttribute("data-label"); });
+    var seen = {}, out = [];
+    form.querySelectorAll(selector).forEach(function (el) {
+      var key = el.name + "=" + el.value;  // a symptom ticked on the Body Map and as a button is listed once
+      if (seen[key]) return;
+      seen[key] = true; out.push(el.getAttribute("data-label"));
+    });
+    return out;
   }
 
   function buildReview() {
@@ -254,10 +265,12 @@
     row(T.happened, labels("input[name='cause']:checked").join(", "));
   }
 
-  var usedVoice = false;
+  var usedVoice = false, usedBodyMap = false;
+  form.addEventListener("change", function (e) { if (e.target.closest && e.target.closest("[data-bm]")) usedBodyMap = true; });
   function mode() {
     var m = document.getElementById("input_mode");
     if (m.value === "bodymap") return;
+    if (usedBodyMap && form.querySelector("[data-bm] input:checked")) { m.value = "bodymap"; return; }
     var picked = form.querySelectorAll("input[name='symptom']:checked").length > 0;
     if (usedVoice && text("typed_text")) { m.value = "voice"; return; }
     m.value = text("typed_text") && !picked ? "typed" : "pictures";
@@ -319,6 +332,13 @@
     (box.querySelector(".saca-voice") || box).scrollIntoView({ block: "center", behavior: "smooth" });
   });
 
+  document.getElementById("show-bodymap").addEventListener("click", function () {
+    var box = document.getElementById("bodymap-box");
+    box.hidden = !box.hidden;
+    this.setAttribute("aria-expanded", String(!box.hidden));
+    if (!box.hidden) box.scrollIntoView({ block: "start", behavior: "smooth" });
+  });
+
   document.getElementById("show-typed").addEventListener("click", function () {
     var box = document.getElementById("typed-box");
     box.hidden = !box.hidden;
@@ -333,10 +353,11 @@
     }
     syncBabyQuestions();
     mode();
+    // a symptom ticked twice (button + Body Map) is sent twice; the server keeps it once
     document.getElementById("submit-btn").disabled = true;
   });
 
-  // start on the first step with a server error, or skip to symptoms when coming from the Body Map
+  // start on the first step with a server error, otherwise on "Who is this for?"
   var start = 0;
   var errStep = form.querySelector("section .field-error");
   if (errStep) start = steps.indexOf(errStep.closest("section"));
