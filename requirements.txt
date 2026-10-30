@@ -9,3 +9,4 @@ joblib
 groq
 python-dotenv
 flask
+piper-tts  # optional: offline Swahili read-aloud, see speech.py (the voice file is a separate download)

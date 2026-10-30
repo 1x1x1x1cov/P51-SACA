@@ -32,8 +32,9 @@
 <div class="alert error" role="note">{{ _('One of the possible conditions below is usually more serious than this result. If you are unsure, see a health worker today.') }}</div>
 {% endif %}
 
+<p class="small muted no-print" id="speak-msg" role="status" hidden></p>
 <div class="row no-print" style="margin-bottom:12px">
-  <button type="button" class="btn secondary" id="speak-btn" hidden>&#128264; {{ _('Read aloud') }}</button>
+  <button type="button" class="btn secondary" id="speak-btn" aria-pressed="false">&#128264; <span id="speak-label">{{ _('Read aloud') }}</span></button>
   <button type="button" class="btn secondary" onclick="window.print()">&#128424;&#65039; {{ _('Print or save') }}</button>
 </div>
 
@@ -162,24 +163,92 @@
 {% block scripts %}
 <script>
 (function () {
+  // Read-aloud. 1) the browser's own voice for this language; 2) an offline voice made on this computer
+  // (speech.py, Piper); 3) otherwise say why it cannot speak. Swahili voices: Edge has Tanzania/Kenya voices
+  // online; Chrome on Windows has none, so Swahili there needs the offline voice.
   var btn = document.getElementById("speak-btn");
-  if (!btn || !("speechSynthesis" in window)) return;
+  var label = document.getElementById("speak-label");
+  var msg = document.getElementById("speak-msg");
   var lang = {{ lang|tojson }};
-  var text = {{ (pick(advice.level) ~ '. ' ~ pick(advice.headline) ~ ' ' ~ pick(advice.timeframe))|tojson }};
-  function voiceFor() {
-    var vs = window.speechSynthesis.getVoices() || [];
-    for (var i = 0; i < vs.length; i++) if ((vs[i].lang || "").toLowerCase().indexOf(lang) === 0) return vs[i];
-    return null;
+  var text = {{ speak_text|tojson }};
+  var offline = {{ offline_voice|tojson }};
+  var audioUrl = {{ url_for('main.result_speech', assessment_id=a.id, lang=lang)|tojson }};
+  var T = {
+    read: {{ _('Read aloud')|tojson }},
+    stop: {{ _('Stop')|tojson }},
+    loading: {{ _('Preparing the voice...')|tojson }},
+    none: {{ _('This device has no voice for this language. For Swahili, use Microsoft Edge with internet, or ask the team to install the offline Swahili voice.')|tojson }},
+    failed: {{ _('The voice could not play. Please read the screen or ask someone to help.')|tojson }}
+  };
+  var synth = ("speechSynthesis" in window) ? window.speechSynthesis : null;
+  var audio = null, playing = false;
+
+  // Prefer Tanzania Swahili, then Kenya, then any; prefer the natural (neural) voices.
+  function browserVoice() {
+    if (!synth) return null;
+    var vs = synth.getVoices() || [], best = null, bestScore = -1;
+    vs.forEach(function (v) {
+      var l = (v.lang || "").toLowerCase().replace("_", "-");
+      if (l.indexOf(lang) !== 0) return;
+      var score = 1;
+      if (lang === "sw" && l === "sw-tz") score += 4;
+      if (lang === "sw" && l === "sw-ke") score += 2;
+      if (/natural|online|neural/i.test(v.name)) score += 3;
+      if (v.localService) score += 1;
+      if (score > bestScore) { best = v; bestScore = score; }
+    });
+    return best;
   }
-  function setup() { if (voiceFor()) btn.hidden = false; }
-  setup();
-  window.speechSynthesis.onvoiceschanged = setup;
+
+  // Chrome stops long utterances after about 15 seconds, so speak sentence by sentence.
+  function sentences(t) { return t.match(/[^.!?]+[.!?]*/g) || [t]; }
+
+  function setPlaying(on) {
+    playing = on;
+    btn.setAttribute("aria-pressed", String(on));
+    label.textContent = on ? T.stop : T.read;
+  }
+  function say(m) { msg.textContent = m || ""; msg.hidden = !m; }
+
+  function stopAll() {
+    if (synth) synth.cancel();
+    if (audio) { audio.pause(); audio.currentTime = 0; }
+    setPlaying(false);
+  }
+
+  function speakBrowser(v) {
+    var parts = sentences(text), i = 0;
+    function next() {
+      if (!playing || i >= parts.length) { setPlaying(false); return; }
+      var u = new SpeechSynthesisUtterance(parts[i++].trim());
+      u.voice = v; u.lang = v.lang; u.rate = lang === "sw" ? 0.9 : 1;
+      u.onend = next; u.onerror = function () { setPlaying(false); };
+      synth.speak(u);
+    }
+    synth.cancel(); setPlaying(true); next();
+  }
+
+  function speakOffline() {
+    if (!audio) {
+      audio = new Audio(audioUrl);
+      audio.onended = function () { setPlaying(false); say(""); };
+      audio.onerror = function () { setPlaying(false); say(T.failed); };
+      audio.oncanplay = function () { say(""); };
+    }
+    say(T.loading); setPlaying(true);
+    var p = audio.play(); if (p && p.catch) p.catch(function () { setPlaying(false); say(T.failed); });
+  }
+
   btn.addEventListener("click", function () {
-    window.speechSynthesis.cancel();
-    var u = new SpeechSynthesisUtterance(text);
-    var v = voiceFor(); if (v) { u.voice = v; u.lang = v.lang; }
-    window.speechSynthesis.speak(u);
+    if (playing) { stopAll(); return; }
+    say("");
+    var v = browserVoice();
+    if (v) speakBrowser(v);
+    else if (offline) speakOffline();
+    else say(T.none);
   });
+  if (synth) synth.onvoiceschanged = function () {};  // some browsers fill the voice list only after this is set
+  window.addEventListener("pagehide", stopAll);
 })();
 </script>
 {% endblock %}

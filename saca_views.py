@@ -8,13 +8,14 @@ Who can see what:
 """
 from datetime import date
 
-from flask import (Blueprint, abort, current_app, flash, g, jsonify, redirect, render_template, request,
+from flask import (Blueprint, Response, abort, current_app, flash, g, jsonify, redirect, render_template, request,
                    url_for)
 
 import assessment_flow as flow
 import conditions as cond
 import guidance as guide
 import saca_store as store
+import speech
 from i18n import gettext as _
 from saca_auth import (actor_user_id, admin_required, guest_assessment_ids, medic_required,
                        remember_guest_assessment, signed_in)
@@ -216,7 +217,27 @@ def result(assessment_id):
     a = store.get_assessment(assessment_id)
     if a is None or not can_view(a):
         abort(404)
-    return render_template("result.html", **result_view_model(a))
+    model = result_view_model(a)
+    model["speak_text"] = speech.speech_text(model["advice"], g.lang)
+    model["offline_voice"] = speech.available(g.lang)
+    return render_template("result.html", **model)
+
+
+@bp.get("/result/<int:assessment_id>/speech.wav")
+@signed_in
+def result_speech(assessment_id):
+    """Read-aloud audio made on this computer (offline voice). Speaks only the result's own advice."""
+    a = store.get_assessment(assessment_id)
+    if a is None or not can_view(a):
+        abort(404)
+    lang = request.args.get("lang") if request.args.get("lang") in ("en", "sw") else g.lang
+    text = speech.speech_text(result_view_model(a)["advice"], lang)
+    audio = speech.synthesize(text, lang)
+    if audio is None:
+        return jsonify(detail="No offline voice is installed for this language."), 404
+    response = Response(audio, mimetype="audio/wav")
+    response.headers["Cache-Control"] = "private, max-age=600"
+    return response
 
 
 @bp.post("/result/<int:assessment_id>/note")

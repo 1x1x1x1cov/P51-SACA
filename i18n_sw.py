@@ -185,6 +185,12 @@ SW = {
     "One of the possible conditions below is usually more serious than this result. If you are unsure, see a health worker today.":
         "Mojawapo ya magonjwa yanayowezekana hapa chini kwa kawaida ni makubwa kuliko matokeo haya. Ikiwa huna uhakika, muone mhudumu wa afya leo.",
     "Read aloud": "Soma kwa sauti",
+    "Stop": "Simamisha",
+    "Preparing the voice...": "Inaandaa sauti...",
+    "This device has no voice for this language. For Swahili, use Microsoft Edge with internet, or ask the team to install the offline Swahili voice.":
+        "Kifaa hiki hakina sauti ya lugha hii. Kwa Kiswahili, tumia Microsoft Edge ukiwa na intaneti, au waombe timu wasakinishe sauti ya Kiswahili isiyohitaji intaneti.",
+    "The voice could not play. Please read the screen or ask someone to help.":
+        "Sauti imeshindwa kucheza. Tafadhali soma skrini au muombe mtu akusaidie.",
     "Print or save": "Chapisha au hifadhi",
     "Possible condition": "Ugonjwa unaowezekana",
     "Not shown for this result": "Haionyeshwi kwa matokeo haya",

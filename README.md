@@ -146,8 +146,23 @@ There is one login form ("Name or username" + "PIN or password"). Names that sig
 | `assessment_flow.py` | Quiz content: symptom buttons, how long, danger questions, causes, Body Map catalogue |
 | `guidance.py` | Result cards: doctor/clinic advice, self-care and first aid, medicine information. DRAFT, not clinician reviewed. |
 | `conditions.py` | "Possible condition" match scores over the 41 diseases in `dataset.csv`. Not a diagnosis. Run `python conditions.py` to see its evaluation. |
+| `speech.py` | Read-aloud text, and offline speech through Piper when the Swahili voice is installed |
 | `i18n.py`, `i18n_sw.py` | English/Swahili interface. The Swahili is a DRAFT and has not been checked by a native speaker. |
 | `templates/` | `base.html` and `_style.css` hold the shared layout (light and dark mode). There is one template per screen. |
+
+### Read aloud (English and Swahili)
+
+The **Read aloud** button on the result screen reads the urgency level, what to do, and the first steps. It tries two voices in order:
+
+1. **The browser's own voice.** English works in every browser. Swahili works in **Microsoft Edge** with internet, which has Tanzania and Kenya voices. Chrome on Windows has no Swahili voice.
+2. **An offline Swahili voice on this computer.** This uses Piper and the `sw_CD-lanfrica-medium` voice (63 MB). Install it once, with internet:
+
+```
+python -m pip install piper-tts
+python -m piper.download_voices sw_CD-lanfrica-medium --download-dir "%LOCALAPPDATA%\SACA\voices"
+```
+
+Restart the app. Swahili read-aloud then works offline in any browser. The voice has a Congo Swahili accent, so get a Tanzanian listener's opinion before relying on it. The audio is made only from the result's own text (`/result/<id>/speech.wav`); the app never speaks text sent by the browser.
 
 ### Data and privacy
 
