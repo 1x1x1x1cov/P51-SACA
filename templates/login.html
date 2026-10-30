@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}{{ _('Sign in') }}{% endblock %}
+{% block content %}
+<div style="max-width:520px;margin:0 auto">
+  <div style="text-align:center;margin:12px 0 20px">
+    <h1>{{ _('Welcome to SACA') }}</h1>
+    <p class="muted">{{ _('Check symptoms, see how urgent it is, and what to do next.') }}</p>
+  </div>
+
+  {% if timed_out %}<div class="alert info" role="status">{{ _('You were signed out after 30 minutes without use.') }}</div>{% endif %}
+  {% if error %}<div class="alert error" role="alert" id="login-error">{{ error }}</div>{% endif %}
+
+  <form method="post" action="{{ url_for('auth.login') }}" class="card" autocomplete="off" novalidate>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="next" value="{{ next }}">
+    <div class="form-row">
+      <label class="field" for="name">{{ _('Name or username') }}</label>
+      <input type="text" id="name" name="name" value="{{ name }}" autocapitalize="words" autocomplete="username" required
+             {% if error %}aria-describedby="login-error"{% endif %}>
+    </div>
+    <div class="form-row">
+      <label class="field" for="secret">{{ _('PIN or password') }}</label>
+      <input type="password" id="secret" name="secret" autocomplete="current-password" required>
+      <p class="hint">{{ _('Family members use their PIN. Health workers use their password.') }}</p>
+    </div>
+    <button class="btn block" type="submit">{{ _('Log in') }}</button>
+  </form>
+
+  <form method="post" action="{{ url_for('auth.guest') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <button class="btn secondary block huge" type="submit"><span class="ico" aria-hidden="true">&#128100;</span>{{ _('Continue as guest') }}</button>
+  </form>
+
+  <p style="text-align:center;margin-top:18px">
+    <a href="{{ url_for('auth.register') }}" class="btn secondary" style="min-height:48px;font-size:17px">{{ _('Create my profile') }}</a>
+  </p>
+  <p class="small muted" style="text-align:center">{{ _('A profile keeps your own history on this device, protected by a PIN.') }}</p>
+
+  {% if needs_setup %}
+  <div class="alert info" style="margin-top:20px">
+    {{ _('No health worker account exists on this device yet.') }}
+    <a href="{{ url_for('auth.setup') }}">{{ _('Set up the first staff account') }}</a>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

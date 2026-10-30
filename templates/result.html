@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+{% block title %}{{ _('Assessment results') }}{% endblock %}
+{% block content %}
+{% set adv = advice %}
+{% set lvl = level_key %}
+<h1>{{ _('Assessment results') }}</h1>
+<p class="muted">
+  {% if person_name %}<strong>{{ person_name }}</strong>{% if age_text %} · {{ age_text }}{% endif %} · {% endif %}
+  {{ a.created_at[:16]|replace('T', ' ') }}{% if a.patient_code %} · {{ a.patient_code }}{% endif %}
+</p>
+
+{# ---------------- urgency banner: always first, never collapsed ---------------- #}
+<section class="banner {{ lvl }}" aria-labelledby="level-title">
+  <div class="lights" aria-hidden="true">
+    <span class="l-low {{ 'on' if lvl == 'LOW' }}"></span><span class="l-med {{ 'on' if lvl == 'MEDIUM' }}"></span>
+    <span class="l-high {{ 'on' if lvl in ('HIGH', 'NOT_ASSESSED') }}"></span><span class="l-crit {{ 'on' if lvl == 'CRITICAL' }}"></span>
+  </div>
+  <p class="small" style="margin:0;font-weight:700">{{ _('Urgency') }}</p>
+  <p class="level" id="level-title">{{ pick(adv.level) }}</p>
+  <p class="headline">{{ pick(adv.headline) }}</p>
+  <p style="margin:0">{{ pick(adv.timeframe) }}</p>
+  {% if lvl == 'NOT_ASSESSED' %}
+  <p class="small" style="margin-top:8px">{{ _('SACA could not read these words, so it did not guess:') }} <strong>{{ (ctx.unrecognised or [])|join(', ') or _('none') }}</strong>.
+    {{ _('To be safe, this is treated as urgent.') }}</p>
+  {% endif %}
+  {% if lvl in ('CRITICAL', 'HIGH') %}
+  <p style="margin:12px 0 0"><a class="btn danger" href="{{ url_for('main.contacts') }}">&#128222; {{ _('Emergency numbers') }}</a></p>
+  {% endif %}
+</section>
+
+{% if mismatch %}
+<div class="alert error" role="note">{{ _('One of the possible conditions below is usually more serious than this result. If you are unsure, see a health worker today.') }}</div>
+{% endif %}
+
+<div class="row no-print" style="margin-bottom:12px">
+  <button type="button" class="btn secondary" id="speak-btn" hidden>&#128264; {{ _('Read aloud') }}</button>
+  <button type="button" class="btn secondary" onclick="window.print()">&#128424;&#65039; {{ _('Print or save') }}</button>
+</div>
+
+{# ---------------- 1. possible condition ---------------- #}
+<details class="rcard" {% if lvl in ('LOW', 'MEDIUM') %}open{% endif %}>
+  <summary><span class="ico" aria-hidden="true">&#129658;</span>
+    <span><span class="t">{{ _('Possible condition') }}</span><br>
+      <span class="s">{% if show_conditions %}{{ pick(conditions['items'][0]['name']) }} · {{ conditions['items'][0]['percent'] }}% {{ _('match') }}{% else %}{{ _('Not shown for this result') }}{% endif %}
+      · {{ _('Severity') }}: {{ pick(adv.level) }}</span></span>
+    <span class="chev" aria-hidden="true"></span></summary>
+  <div class="body">
+    {% if show_conditions %}
+      <p class="small" style="margin-top:12px"><strong>{{ _('Not a diagnosis.') }}</strong>
+        {{ _('These are the closest matches to your symptoms in a list of 41 common diseases. The percentage shows how well the symptoms fit each one compared with the others, not the chance that you have it. Only a health worker can diagnose.') }}</p>
+      {% if conditions['items'][0]['match'] < 0.35 %}
+      <p class="alert info small" style="font-weight:600">{{ _('Weak match: these symptoms are common to many illnesses, so SACA cannot point to one. A health worker can examine and test.') }}</p>
+      {% endif %}
+      {% for c in conditions['items'] %}
+      <div class="cond">
+        <span class="name">{{ pick(c.name) }}{% if c.serious %} <span class="sev {{ c.tier }}" title="{{ _('This condition is usually serious') }}">{{ _(c.tier) }}</span>{% endif %}</span>
+        <span class="meter" aria-hidden="true"><b style="width:{{ c.percent }}%"></b></span>
+        <span class="pct">{{ c.percent }}%</span>
+      </div>
+      {% endfor %}
+    {% elif lvl == 'NOT_ASSESSED' %}
+      <p style="margin-top:12px">{{ _('SACA could not read the symptoms, so it cannot suggest conditions.') }}</p>
+    {% else %}
+      <p style="margin-top:12px">{{ _('These symptoms do not match any disease in SACA\'s list well enough to show one. This is common for danger signs and injuries: the urgency above still applies.') }}</p>
+    {% endif %}
+  </div>
+</details>
+
+{# ---------------- 2. medicine ---------------- #}
+{% set med = adv.medicine %}
+<details class="rcard">
+  <summary><span class="ico" aria-hidden="true">&#128138;</span>
+    <span><span class="t">{{ _('Medicine information') }}</span><br>
+      <span class="s">{% if med['mode'] == 'urgent' %}{{ _('Do not delay care for medicine') }}{% elif med['items']|length == 1 %}{{ _('1 item') }}{% elif med['items'] %}{{ _('{n} items', n=med['items']|length) }}{% else %}{{ _('Ask a pharmacist') }}{% endif %}</span></span>
+    <span class="chev" aria-hidden="true"></span></summary>
+  <div class="body">
+    <p class="small" style="margin-top:12px"><span class="draft-tag">{{ _('DRAFT') }}</span>
+      {{ _('General information about common medicines from WHO and NHS guidance. SACA never gives doses. Not yet checked by a clinician.') }}</p>
+    {% for item in med['items'] %}
+    <div class="med-item {{ 'blocked' if item.blocked }}">
+      <h3 style="margin:0 0 6px">{% if item.blocked %}&#9940; {% endif %}{{ pick(item.title) }}</h3>
+      <ul class="steps" style="margin:6px 0">{% for p in item.points %}<li>{{ pick(p) }}</li>{% endfor %}</ul>
+      {% if item.cautions %}<ul class="steps donts" style="margin:6px 0">{% for p in item.cautions %}<li>{{ pick(p) }}</li>{% endfor %}</ul>{% endif %}
+    </div>
+    {% endfor %}
+    <ul class="steps">{% for p in med['general'] %}<li><strong>{{ pick(p) }}</strong></li>{% endfor %}</ul>
+  </div>
+</details>
+
+{# ---------------- 3. doctor / clinic ---------------- #}
+<details class="rcard" {% if lvl in ('CRITICAL', 'HIGH', 'NOT_ASSESSED') %}open{% endif %}>
+  <summary><span class="ico" aria-hidden="true">&#127973;</span>
+    <span><span class="t">{{ _('Doctor or clinic') }}</span><br><span class="s">{{ pick(adv.clinic.timeframe) }}</span></span>
+    <span class="chev" aria-hidden="true"></span></summary>
+  <div class="body">
+    <ul class="steps">{% for s in adv.clinic.steps %}<li>{{ pick(s) }}</li>{% endfor %}</ul>
+    {% for n in adv.clinic.notes %}<p class="alert info small" style="font-weight:600">{{ pick(n) }}</p>{% endfor %}
+    <p><a href="{{ url_for('main.contacts') }}">{{ _('Phone numbers and local clinics') }}</a></p>
+  </div>
+</details>
+
+{# ---------------- 4. self-care and first aid ---------------- #}
+<details class="rcard" {% if lvl in ('CRITICAL', 'HIGH') %}open{% endif %}>
+  <summary><span class="ico" aria-hidden="true">&#127968;</span>
+    <span><span class="t">{% if lvl in ('CRITICAL', 'HIGH') %}{{ _('First aid while you get help') }}{% else %}{{ _('Self-care') }}{% endif %}</span><br>
+      <span class="s">{{ _('{n} instructions', n=(adv.self_care.steps|length) + (adv.self_care.topics|sum(attribute='do', start=[])|length)) }}</span></span>
+    <span class="chev" aria-hidden="true"></span></summary>
+  <div class="body">
+    <ul class="steps">{% for s in adv.self_care.steps %}<li>{{ pick(s) }}</li>{% endfor %}</ul>
+    {% for t in adv.self_care.topics %}
+    <div class="topic">
+      <h3>{{ pick(t.title) }}</h3>
+      <ul class="steps">{% for s in t.do %}<li>{{ pick(s) }}</li>{% endfor %}</ul>
+      {% if t.dont %}<p style="font-weight:800;margin:0">{{ _('Do not') }}:</p>
+      <ul class="steps donts">{% for s in t.dont %}<li>{{ pick(s) }}</li>{% endfor %}</ul>{% endif %}
+    </div>
+    {% endfor %}
+    {% if adv.self_care.danger_signs %}
+    <div class="topic">
+      <h3>{{ pick(adv.self_care.danger_signs.title) }}</h3>
+      <ul class="steps">{% for s in adv.self_care.danger_signs['items'] %}<li>{{ pick(s) }}</li>{% endfor %}</ul>
+    </div>
+    {% endif %}
+  </div>
+</details>
+
+{# ---------------- how SACA decided ---------------- #}
+<details class="rcard">
+  <summary><span class="ico" aria-hidden="true">&#128269;</span><span><span class="t">{{ _('How SACA decided') }}</span></span><span class="chev" aria-hidden="true"></span></summary>
+  <div class="body">
+    <table class="simple" style="margin-top:10px">
+      <tr><th>{{ _('Symptoms read') }}</th><td>{{ a.symptom_list|join(', ')|replace('_', ' ') or _('none') }}</td></tr>
+      {% if ctx.typed_text %}<tr><th>{{ _('Typed') }}</th><td>{{ ctx.typed_text }}</td></tr>{% endif %}
+      {% if ctx.unrecognised %}<tr><th>{{ _('Words not understood') }}</th><td>{{ ctx.unrecognised|join(', ') }}</td></tr>{% endif %}
+      {% if ctx.duration %}<tr><th>{{ _('How long') }}</th><td>{{ (durations[ctx.duration][1] if lang == 'sw' else durations[ctx.duration][0]) }}</td></tr>{% endif %}
+      {% if ctx.pregnancy_added %}<tr><th>{{ _('Pregnancy') }}</th><td>{{ _('Included in the check (from the profile or your answer).') }}</td></tr>{% endif %}
+      <tr><th>{{ _('Safety rules used') }}</th><td>{{ a.red_flags|join(', ') or _('none') }}</td></tr>
+      <tr><th>{{ _('Model confidence') }}</th><td>{% if a.confidence is not none %}{% if a.confidence >= 0.99 %}&gt; 99%{% else %}{{ (a.confidence * 100)|round(0)|int }}%{% endif %}
+        <div class="small muted">{{ _('How strongly the model favours this level over the others. It is not the chance that the person is this sick. Several danger signs together push it close to 100%.') }}</div>
+        {% else %}{{ _('Not shown: a safety rule set or changed the level.') }}{% endif %}</td></tr>
+      <tr><th>{{ _('Reason') }}</th><td>{{ a.reason }}</td></tr>
+    </table>
+    <p class="small muted" style="margin-top:10px">{{ pick(adv.caveat) }} {{ _('Advice version') }}: {{ adv.version }}.</p>
+  </div>
+</details>
+
+{% if actor_kind == 'medic' %}
+<form method="post" action="{{ url_for('main.result_note', assessment_id=a.id) }}" class="card no-print">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <label class="field" for="note">{{ _('Health worker note') }}</label>
+  <textarea id="note" name="note" maxlength="500">{{ a.note or '' }}</textarea>
+  <button class="btn secondary" type="submit" style="margin-top:10px">{{ _('Save note') }}</button>
+  {% if a.worker_name %}<p class="small muted" style="margin-top:8px">{{ _('Checked by') }} {{ a.worker_name }}</p>{% endif %}
+</form>
+{% elif a.note %}
+<section class="card"><h2>{{ _('Health worker note') }}</h2><p>{{ a.note }}</p></section>
+{% endif %}
+
+<a class="btn block huge no-print" href="{{ url_for('main.assess') }}" style="margin-top:8px">&#8635; {{ _('Start new assessment') }}</a>
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function () {
+  var btn = document.getElementById("speak-btn");
+  if (!btn || !("speechSynthesis" in window)) return;
+  var lang = {{ lang|tojson }};
+  var text = {{ (pick(advice.level) ~ '. ' ~ pick(advice.headline) ~ ' ' ~ pick(advice.timeframe))|tojson }};
+  function voiceFor() {
+    var vs = window.speechSynthesis.getVoices() || [];
+    for (var i = 0; i < vs.length; i++) if ((vs[i].lang || "").toLowerCase().indexOf(lang) === 0) return vs[i];
+    return null;
+  }
+  function setup() { if (voiceFor()) btn.hidden = false; }
+  setup();
+  window.speechSynthesis.onvoiceschanged = setup;
+  btn.addEventListener("click", function () {
+    window.speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(text);
+    var v = voiceFor(); if (v) { u.voice = v; u.lang = v.lang; }
+    window.speechSynthesis.speak(u);
+  });
+})();
+</script>
+{% endblock %}

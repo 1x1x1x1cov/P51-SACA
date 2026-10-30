@@ -237,9 +237,15 @@ class LogisticRegressionClassifier(BaseClassifier):
 
         confidence = float(np.max(proba))
 
+        # A logistic regression adds up the evidence, so several strong danger signs push the top probability
+        # towards 1.0. Showing "100.0%" would overstate it, so anything from 99% up is written as ">99%".
+        confidence_text = (
+            ">99%" if confidence >= 0.99 else f"{confidence * 100:.1f}%"
+        )
+
         reason = (
             f"Model predicted {severity} "
-            f"with {confidence * 100:.1f}% confidence"
+            f"with {confidence_text} confidence"
         )
 
         allowed = {

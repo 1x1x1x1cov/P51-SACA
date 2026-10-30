@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}{{ _('Change my password') }}{% endblock %}
+{% block content %}
+<div style="max-width:520px;margin:0 auto">
+  <h1>{{ _('Change my password') }}</h1>
+  {% if error %}<div class="alert error" role="alert">{{ _(error) }}</div>{% endif %}
+  <form method="post" class="card" novalidate>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="form-row"><label class="field" for="current_password">{{ _('Current password') }}</label><input type="password" id="current_password" name="current_password" autocomplete="current-password"></div>
+    <div class="form-row"><label class="field" for="new_password">{{ _('New password') }}</label><input type="password" id="new_password" name="new_password" autocomplete="new-password"></div>
+    <div class="form-row"><label class="field" for="new_password_confirm">{{ _('Type the password again') }}</label><input type="password" id="new_password_confirm" name="new_password_confirm" autocomplete="new-password"></div>
+    <button class="btn block" type="submit">{{ _('Change password') }}</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}{{ _('Contact community') }}{% endblock %}
+{% block content %}
+<h1>{{ _('Contact community') }}</h1>
+<p class="muted">{{ _('Numbers for {country}. Tap a number to call it.', country=_(countries[country])) }}</p>
+<div class="alert error" role="note">{{ _('In an emergency, call for help AND start going to the nearest health facility. Phone lines may not work everywhere.') }}</div>
+
+{% set groups = [('local', 'Local clinics and health workers'), ('emergency', 'Emergency'), ('health', 'Health advice'), ('support', 'Support lines')] %}
+{% for cat, title in groups %}
+{% set rows = items|selectattr('category', 'equalto', cat)|list %}
+{% if rows or cat == 'local' %}
+<section class="card">
+  <h2>{{ _(title) }}</h2>
+  {% for c in rows %}
+  <div class="contact">
+    <div class="grow">
+      <div style="font-weight:800">{{ c.name_sw if lang == 'sw' else c.name_en }}</div>
+      <div class="number">{{ c.number }}</div>
+      {% set note = c.note_sw if lang == 'sw' and c.note_sw else c.note_en %}
+      {% if note %}<div class="small">{{ note }}</div>{% endif %}
+      {% if actor_kind == 'medic' %}<div class="small muted">{{ _('Source') }}: {{ c.source }} · {{ _('checked') }} {{ c.checked_on }}</div>{% endif %}
+    </div>
+    <a class="btn call" href="tel:{{ c.number.split('/')[0]|replace(' ', '') }}">&#128222; {{ _('Call') }}</a>
+    {% if actor_kind == 'medic' and actor_user.role == 'admin' and not c.is_default %}
+    <form method="post" action="{{ url_for('main.contact_delete', contact_id=c.id) }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <button class="linkish" type="submit" aria-label="{{ _('Remove') }} {{ c.name_en }}">{{ _('Remove') }}</button>
+    </form>
+    {% endif %}
+  </div>
+  {% else %}
+  <p class="muted">{{ _('No local contacts yet. A health worker with an admin account can add the nearest clinic, the community health worker and transport.') }}</p>
+  {% endfor %}
+</section>
+{% endif %}
+{% endfor %}
+
+{% if actor_kind == 'medic' and actor_user.role == 'admin' %}
+<section class="card no-print">
+  <h2>{{ _('Add a local contact') }}</h2>
+  <form method="post" action="{{ url_for('main.contact_add') }}" class="grid-2">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div><label class="field" for="name_en">{{ _('Name (English)') }}</label><input type="text" id="name_en" name="name_en" maxlength="80" required></div>
+    <div><label class="field" for="name_sw">{{ _('Name (Swahili)') }}</label><input type="text" id="name_sw" name="name_sw" maxlength="80"></div>
+    <div><label class="field" for="number">{{ _('Phone number') }}</label><input type="tel" id="number" name="number" maxlength="25" required></div>
+    <div><label class="field" for="note_en">{{ _('Note') }}</label><input type="text" id="note_en" name="note_en" maxlength="200"></div>
+    <button class="btn" type="submit">{{ _('Add contact') }}</button>
+  </form>
+  <form method="post" action="{{ url_for('main.set_country') }}" class="row" style="margin-top:18px">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label class="field" for="country" style="margin:0">{{ _('Country') }}</label>
+    <select id="country" name="country" style="width:auto">
+      {% for code, name in countries.items() %}<option value="{{ code }}" {% if code == country %}selected{% endif %}>{{ _(name) }}</option>{% endfor %}
+    </select>
+    <button class="btn secondary" type="submit">{{ _('Change') }}</button>
+  </form>
+</section>
+{% endif %}
+<p class="small muted">{{ _('National numbers were checked on {date}. Numbers change: a health worker should confirm them before relying on them.', date=checked_on) }}</p>
+{% endblock %}

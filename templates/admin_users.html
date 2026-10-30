@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}{{ _('Staff accounts') }}{% endblock %}
+{% block content %}
+<h1>{{ _('Staff accounts') }}</h1>
+<section class="card">
+  <table class="simple">
+    <tr><th>{{ _('Name') }}</th><th>{{ _('Username') }}</th><th>{{ _('Role') }}</th><th>{{ _('Status') }}</th><th></th></tr>
+    {% for u in users %}
+    <tr>
+      <td>{{ u.display_name }}</td><td>{{ u.username }}</td><td>{{ _(u.role) }}</td>
+      <td>{{ _('Active') if u.active else _('Switched off') }}</td>
+      <td>{% if u.id != actor_user.id %}
+        <form method="post" action="{{ url_for('main.admin_user_active', user_id=u.id) }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="active" value="{{ '0' if u.active else '1' }}">
+          <button class="linkish" type="submit">{{ _('Switch off') if u.active else _('Switch on') }}</button>
+        </form>{% endif %}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</section>
+<section class="card">
+  <h2>{{ _('Add a health worker') }}</h2>
+  {% if error %}<div class="alert error" role="alert">{{ _(error) }}</div>{% endif %}
+  <form method="post" action="{{ url_for('main.admin_user_create') }}" class="grid-2" novalidate>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div><label class="field" for="display_name">{{ _('Name') }}</label><input type="text" id="display_name" name="display_name" value="{{ form.get('display_name', '') }}" maxlength="60"></div>
+    <div><label class="field" for="username">{{ _('Username') }}</label><input type="text" id="username" name="username" value="{{ form.get('username', '') }}" maxlength="32" autocapitalize="none"></div>
+    <div><label class="field" for="password">{{ _('Password') }}</label><input type="password" id="password" name="password" autocomplete="new-password"></div>
+    <div><label class="field" for="role">{{ _('Role') }}</label>
+      <select id="role" name="role"><option value="worker">{{ _('worker') }}</option><option value="admin">{{ _('admin') }}</option></select></div>
+    <button class="btn" type="submit">{{ _('Create account') }}</button>
+  </form>
+</section>
+<details class="card">
+  <summary style="font-weight:800;cursor:pointer">{{ _('Recent activity') }}</summary>
+  <table class="simple small" style="margin-top:10px">
+    {% for e in events %}<tr><td>{{ e.at[:16]|replace('T', ' ') }}</td><td>{{ e.username or '-' }}</td><td>{{ e.action }}</td><td>{{ e.detail }}</td></tr>{% endfor %}
+  </table>
+</details>
+{% endblock %}

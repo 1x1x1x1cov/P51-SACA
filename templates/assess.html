@@ -1,0 +1,346 @@
+{% extends "base.html" %}
+{% block title %}{{ _('Start assessment') }}{% endblock %}
+{% block content %}
+{% set L = lang %}
+<form method="post" action="{{ url_for('main.assess_submit') }}" id="quiz" novalidate>
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <input type="hidden" name="input_mode" id="input_mode" value="{{ mode or '' }}">
+
+  <div class="progress" aria-hidden="true" id="progress"></div>
+  <p class="small muted" id="step-count" aria-live="polite"></p>
+
+  {% if errors %}<div class="alert error" role="alert">{{ _('Please check the highlighted answers.') }}</div>{% endif %}
+
+  {# ------------------------------------------------------------ 1. who #}
+  <section class="card" data-step="who" data-title="{{ _('Who is this for?') }}"
+           data-profile-age="{{ actor_patient.age_years if actor_kind == 'profile' and actor_patient.age_years is not none else '' }}">
+    <h1 class="step-title">{{ _('Who is this for?') }}</h1>
+
+    {% if actor_kind == 'profile' %}
+      {% set p = actor_patient %}
+      <p style="font-size:20px"><strong>{{ p.full_name }}</strong> · {{ p.age_text }} · {{ _({'F': 'Female', 'M': 'Male'}.get(p.sex, 'Sex not given')) }}</p>
+      <p class="hint">{{ _('This check will be saved to your history.') }}</p>
+      {% if p.sex == 'F' and p.age_years is not none and 10 <= p.age_years <= 55 %}
+      <fieldset style="border:0;padding:0;margin:16px 0 0">
+        <legend class="field" style="font-weight:700">{{ _('Are you pregnant now?') }}</legend>
+        <div class="yesno">
+          <label class="tile"><input type="radio" name="pregnant" value="yes" {% if p.pregnant == 1 %}checked{% endif %}><span>{{ _('Yes') }}</span></label>
+          <label class="tile"><input type="radio" name="pregnant" value="no" {% if p.pregnant == 0 %}checked{% endif %}><span>{{ _('No') }}</span></label>
+        </div>
+      </fieldset>
+      {% endif %}
+
+    {% elif actor_kind == 'medic' %}
+      {% set who = form.get('who') or ('existing' if preselect else 'new') %}
+      <div class="tiles wide" role="radiogroup" aria-label="{{ _('Who is this for?') }}">
+        <label class="tile compact"><input type="radio" name="who" value="existing" {% if who == 'existing' %}checked{% endif %} data-who><span>&#128101; {{ _('A registered patient') }}</span></label>
+        <label class="tile compact"><input type="radio" name="who" value="new" {% if who == 'new' %}checked{% endif %} data-who><span>&#10133; {{ _('New patient (save a record)') }}</span></label>
+        <label class="tile compact"><input type="radio" name="who" value="quick" {% if who == 'quick' %}checked{% endif %} data-who><span>&#9889; {{ _('Quick check (no record)') }}</span></label>
+      </div>
+      {% if errors.who %}<p class="field-error">{{ _(errors.who) }}</p>{% endif %}
+      <div id="who-existing" style="margin-top:16px">
+        <label class="field" for="patient_id">{{ _('Choose the patient') }}</label>
+        <select id="patient_id" name="patient_id">
+          <option value="">{{ _('Select...') }}</option>
+          {% for pt in patients %}
+          <option value="{{ pt.id }}" data-sex="{{ pt.sex }}" data-age="{{ pt.age_years if pt.age_years is not none else '' }}" {% if preselect == pt.id %}selected{% endif %}>{{ pt.full_name }} · {{ pt.patient_code }} · {{ pt.age_text }}</option>
+          {% endfor %}
+        </select>
+        <fieldset id="existing-preg" style="border:0;padding:0;margin:12px 0 0">
+          <legend class="field" style="font-weight:700">{{ _('If female: pregnant now?') }}</legend>
+          <div class="tiles" style="grid-template-columns:repeat(3,minmax(0,1fr))">
+            <label class="tile compact"><input type="radio" name="pregnant_existing" value="yes"><span>{{ _('Yes') }}</span></label>
+            <label class="tile compact"><input type="radio" name="pregnant_existing" value="no"><span>{{ _('No') }}</span></label>
+            <label class="tile compact"><input type="radio" name="pregnant_existing" value="" checked><span>{{ _('No change') }}</span></label>
+          </div>
+        </fieldset>
+      </div>
+      <div id="who-person" style="margin-top:16px">
+        {% with show_pin=False, pin_required=False, name_optional=False, show_location=True %}{% include "_person_fields.html" %}{% endwith %}
+      </div>
+
+    {% else %}
+      <p class="hint">{{ _('The advice depends on age and sex. The name is optional.') }}</p>
+      {% with show_pin=False, pin_required=False, name_optional=True, show_location=False %}{% include "_person_fields.html" %}{% endwith %}
+    {% endif %}
+  </section>
+
+  {# ------------------------------------------------------------ 2. symptoms #}
+  <section class="card" data-step="symptoms" data-title="{{ _('What symptoms?') }}">
+    <h1 class="step-title">{{ _('What symptoms?') }}</h1>
+    <p class="muted">{{ _('Tap every one that fits. Tap again to undo.') }}</p>
+    {% if errors.symptoms %}<p class="field-error" role="alert">{{ _(errors.symptoms) }}</p>{% endif %}
+
+    {% if extra %}
+    <p class="section-label">&#129485; {{ _('From the Body Map') }}</p>
+    <div class="tiles">
+      {% for code, en, sw in extra %}
+      <label class="tile"><input type="checkbox" name="symptom" value="{{ code }}" data-label="{{ sw if L == 'sw' else en }}" checked>
+        <span>{{ sw if L == 'sw' else en }}</span></label>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <p class="section-label danger">&#9888;&#65039; {{ _('Danger signs') }}</p>
+    <div class="tiles">
+      {% for code, icon, en, sw, danger in flow.SYMPTOM_BUTTONS if danger %}
+      <label class="tile danger"><input type="checkbox" name="symptom" value="{{ code }}" data-label="{{ sw if L == 'sw' else en }}" {% if code in prefill %}checked{% endif %}>
+        <span><span class="emoji" aria-hidden="true">{{ icon }}</span>{{ sw if L == 'sw' else en }}</span></label>
+      {% endfor %}
+    </div>
+
+    <p class="section-label">{{ _('Common symptoms') }}</p>
+    <div class="tiles">
+      {% for code, icon, en, sw, danger in flow.SYMPTOM_BUTTONS if not danger %}
+      <label class="tile"><input type="checkbox" name="symptom" value="{{ code }}" data-label="{{ sw if L == 'sw' else en }}" {% if code in prefill %}checked{% endif %}>
+        <span><span class="emoji" aria-hidden="true">{{ icon }}</span>{{ sw if L == 'sw' else en }}</span></label>
+      {% endfor %}
+    </div>
+
+    <div class="row" style="margin-top:18px">
+      <button type="button" class="btn secondary" id="speak-btn" aria-controls="typed-box">&#127908; {{ _('Speak instead') }}</button>
+      <button type="button" class="btn secondary" id="show-typed" aria-expanded="{{ 'true' if typed else 'false' }}" aria-controls="typed-box">&#9000;&#65039; {{ _('Type it instead') }}</button>
+      <a class="btn secondary" href="{{ url_for('main.body_map') }}">&#129485; {{ _('Use the Body Map') }}</a>
+    </div>
+    <div id="typed-box" style="margin-top:14px" {% if not typed %}hidden{% endif %}>
+      <label class="field" for="typed_text">{{ _('Describe the symptoms in your own words') }}</label>
+      <textarea id="typed_text" name="typed_text" maxlength="{{ flow.MAX_TYPED }}" placeholder="{{ _('For example: fever and headache, or: homa na maumivu ya kichwa') }}">{{ typed }}</textarea>
+      <p class="hint">{{ _('Write symptoms only. The next screens ask how long and what happened. If SACA cannot read a word, it will say so instead of guessing.') }}</p>
+      <p class="hint">&#127908; {{ _('Speaking needs an internet connection. Tap Speak, talk, then tap Stop. Check the words before you go on.') }}</p>
+    </div>
+  </section>
+
+  {# ------------------------------------------------------------ 3. duration #}
+  <section class="card" data-step="duration" data-title="{{ _('How long?') }}">
+    <h1 class="step-title">{{ _('How long has this been going on?') }}</h1>
+    <div class="tiles wide">
+      {% for value, en, sw in flow.DURATIONS %}
+      <label class="tile compact"><input type="radio" name="duration" value="{{ value }}" data-label="{{ sw if L == 'sw' else en }}" {% if form.get('duration') == value %}checked{% endif %}><span>{{ sw if L == 'sw' else en }}</span></label>
+      {% endfor %}
+    </div>
+    <p class="hint">{{ _('This changes the advice. It does not change the urgency level.') }}</p>
+  </section>
+
+  {# ------------------------------------------------------------ 4. danger questions #}
+  <section class="card" data-step="danger" data-title="{{ _('Danger questions') }}">
+    <h1 class="step-title">{{ _('A few important questions') }}</h1>
+    <p class="muted">{{ _('Answer yes or no. If you are not sure, answer yes.') }}</p>
+    {% for field, codes, en, sw, child in flow.DANGER_QUESTIONS %}
+    <fieldset style="border:0;padding:0;margin:0 0 18px" data-q="{{ field }}" {% if child %}data-baby-only hidden{% endif %}>
+      <legend class="field" style="font-weight:700;font-size:19px">{{ sw if L == 'sw' else en }}</legend>
+      <div class="yesno">
+        <label class="tile danger"><input type="radio" name="{{ field }}" value="yes" data-label="{{ sw if L == 'sw' else en }}" {% if form.get(field) == 'yes' %}checked{% endif %}><span>{{ _('Yes') }}</span></label>
+        <label class="tile"><input type="radio" name="{{ field }}" value="no" {% if form.get(field) == 'no' %}checked{% endif %}><span>{{ _('No') }}</span></label>
+      </div>
+    </fieldset>
+    {% endfor %}
+  </section>
+
+  {# ------------------------------------------------------------ 5. cause #}
+  <section class="card" data-step="cause" data-title="{{ _('What happened?') }}">
+    <h1 class="step-title">{{ _('Did any of these happen?') }}</h1>
+    <p class="muted">{{ _('Tap any that fit, or tap Next if none do.') }}</p>
+    <div class="tiles">
+      {% for code, icon, en, sw in flow.CAUSES %}
+      <label class="tile"><input type="checkbox" name="cause" value="{{ code }}" data-label="{{ sw if L == 'sw' else en }}" {% if code in prefill %}checked{% endif %}>
+        <span><span class="emoji" aria-hidden="true">{{ icon }}</span>{{ sw if L == 'sw' else en }}</span></label>
+      {% endfor %}
+    </div>
+  </section>
+
+  {# ------------------------------------------------------------ 6. review #}
+  <section class="card" data-step="review" data-title="{{ _('Check and finish') }}">
+    <h1 class="step-title">{{ _('Check and finish') }}</h1>
+    <dl id="review" class="stack"></dl>
+    <button class="btn block huge" type="submit" id="submit-btn">&#10003; {{ _('See the result') }}</button>
+    <p class="hint">{{ _('SACA gives general advice. It is not a doctor and can be wrong. If you are worried, see a health worker.') }}</p>
+  </section>
+
+  <div class="step-nav" id="step-nav" hidden>
+    <button type="button" class="btn secondary" id="back-btn">&#8249; {{ _('Back') }}</button>
+    <button type="button" class="btn" id="next-btn">{{ _('Next') }} &#8250;</button>
+  </div>
+</form>
+{% endblock %}
+
+{% block scripts %}
+<script src="/voice.js" data-target="typed_text" data-lang="{{ 'sw' if lang == 'sw' else 'auto' }}"></script>
+<script>
+(function () {
+  var T = {
+    step: {{ _('Step {n} of {total}')|tojson }},
+    none: {{ _('None')|tojson }},
+    symptoms: {{ _('Symptoms')|tojson }},
+    typed: {{ _('Typed')|tojson }},
+    howlong: {{ _('How long')|tojson }},
+    dangers: {{ _('Danger answers: yes')|tojson }},
+    happened: {{ _('What happened')|tojson }},
+    needSymptom: {{ _('Please pick at least one symptom or describe how you feel.')|tojson }},
+    needAge: {{ _('Enter the date of birth, or an approximate age if it is not known.')|tojson }},
+    needSex: {{ _('Please choose female, male or prefer not to say.')|tojson }},
+    needPatient: {{ _('Please choose a patient.')|tojson }},
+    needName: {{ _('Please enter a name (a first name or nickname is enough).')|tojson }}
+  };
+  var form = document.getElementById("quiz");
+  var steps = Array.prototype.slice.call(form.querySelectorAll("section[data-step]"));
+  var nav = document.getElementById("step-nav");
+  var back = document.getElementById("back-btn");
+  var next = document.getElementById("next-btn");
+  var progress = document.getElementById("progress");
+  var count = document.getElementById("step-count");
+  var kind = {{ (actor_kind or '')|tojson }};
+  var current = 0;
+
+  steps.forEach(function () { progress.appendChild(document.createElement("i")); });
+  nav.hidden = false;
+
+  function val(name) { var el = form.querySelector("[name='" + name + "']:checked"); return el ? el.value : ""; }
+  function text(id) { var el = document.getElementById(id); return el ? el.value.trim() : ""; }
+
+  function whoMode() { return kind === "medic" ? val("who") : kind; }
+
+  function syncWho() {
+    if (kind !== "medic") return;
+    var m = val("who");
+    document.getElementById("who-existing").hidden = m !== "existing";
+    document.getElementById("who-person").hidden = m === "existing";
+  }
+  form.querySelectorAll("input[data-who]").forEach(function (r) { r.addEventListener("change", syncWho); });
+  syncWho();
+
+  function showError(section, msg) {
+    var old = section.querySelector(".js-error");
+    if (old) old.remove();
+    if (!msg) return;
+    var p = document.createElement("p");
+    p.className = "field-error js-error"; p.setAttribute("role", "alert"); p.textContent = msg;
+    section.querySelector("h1").after(p);
+    p.scrollIntoView({ block: "center" });
+  }
+
+  function validate(i) {
+    var s = steps[i], name = s.getAttribute("data-step"), m = whoMode();
+    if (name === "who") {
+      if (m === "existing") { if (!text("patient_id")) return T.needPatient; return ""; }
+      if (m === "profile") return "";
+      if (m === "new" && !text("full_name")) return T.needName;
+      if (!text("date_of_birth") && !text("approx_age_years")) return T.needAge;
+      if (!val("sex")) return T.needSex;
+    }
+    if (name === "symptoms") {
+      var any = form.querySelectorAll("input[name='symptom']:checked").length > 0;
+      if (!any && !text("typed_text")) return T.needSymptom;
+    }
+    return "";
+  }
+
+  function labels(selector) {
+    return Array.prototype.map.call(form.querySelectorAll(selector), function (el) { return el.getAttribute("data-label"); });
+  }
+
+  function buildReview() {
+    var dl = document.getElementById("review");
+    dl.innerHTML = "";
+    function row(term, value) {
+      var dt = document.createElement("dt"); dt.style.fontWeight = "800"; dt.textContent = term;
+      var dd = document.createElement("dd"); dd.style.margin = "2px 0 10px"; dd.textContent = value || T.none;
+      dl.appendChild(dt); dl.appendChild(dd);
+    }
+    row(T.symptoms, labels("input[name='symptom']:checked").join(", "));
+    if (text("typed_text")) row(T.typed, text("typed_text"));
+    var d = form.querySelector("input[name='duration']:checked");
+    row(T.howlong, d ? d.getAttribute("data-label") : "");
+    row(T.dangers, labels("section[data-step='danger'] input[value='yes']:checked").join(" / "));
+    row(T.happened, labels("input[name='cause']:checked").join(", "));
+  }
+
+  var usedVoice = false;
+  function mode() {
+    var m = document.getElementById("input_mode");
+    if (m.value === "bodymap") return;
+    var picked = form.querySelectorAll("input[name='symptom']:checked").length > 0;
+    if (usedVoice && text("typed_text")) { m.value = "voice"; return; }
+    m.value = text("typed_text") && !picked ? "typed" : "pictures";
+  }
+
+  // Age in whole years from whatever the first screen knows; null when unknown.
+  function ageYears() {
+    var m = whoMode(), v;
+    if (m === "profile") v = steps[0].getAttribute("data-profile-age");
+    else if (m === "existing") {
+      var sel = document.getElementById("patient_id");
+      v = sel && sel.selectedOptions[0] ? sel.selectedOptions[0].getAttribute("data-age") : "";
+    } else if (text("date_of_birth")) {
+      var b = new Date(text("date_of_birth") + "T00:00:00"), n = new Date();
+      var y = n.getFullYear() - b.getFullYear();
+      if (n.getMonth() < b.getMonth() || (n.getMonth() === b.getMonth() && n.getDate() < b.getDate())) y--;
+      return isNaN(y) ? null : Math.max(y, 0);
+    } else v = text("approx_age_years");
+    return v === "" || v === null || v === undefined || isNaN(parseInt(v, 10)) ? null : parseInt(v, 10);
+  }
+
+  // "Is the baby unable to breastfeed?" is shown only for a baby (0 years old).
+  function syncBabyQuestions() {
+    var baby = ageYears() === 0;
+    form.querySelectorAll("[data-baby-only]").forEach(function (fs) {
+      fs.hidden = !baby;
+      if (!baby) fs.querySelectorAll("input").forEach(function (i) { i.checked = false; });
+    });
+  }
+
+  function go(i) {
+    current = Math.max(0, Math.min(steps.length - 1, i));
+    steps.forEach(function (s, j) { s.hidden = j !== current; });
+    Array.prototype.forEach.call(progress.children, function (b, j) { b.className = j <= current ? "on" : ""; });
+    count.textContent = T.step.replace("{n}", current + 1).replace("{total}", steps.length);
+    back.style.visibility = current === 0 ? "hidden" : "visible";
+    next.hidden = current === steps.length - 1;
+    if (steps[current].getAttribute("data-step") === "danger") syncBabyQuestions();
+    if (steps[current].getAttribute("data-step") === "review") { syncBabyQuestions(); buildReview(); mode(); }
+    window.scrollTo(0, 0);
+    var h = steps[current].querySelector("h1"); if (h) { h.setAttribute("tabindex", "-1"); h.focus({ preventScroll: true }); }
+  }
+
+  next.addEventListener("click", function () {
+    var msg = validate(current);
+    showError(steps[current], msg);
+    if (!msg) go(current + 1);
+  });
+  back.addEventListener("click", function () { go(current - 1); });
+
+  document.getElementById("speak-btn").addEventListener("click", function () {
+    var box = document.getElementById("typed-box");
+    box.hidden = false;
+    document.getElementById("show-typed").setAttribute("aria-expanded", "true");
+    usedVoice = true;
+    var mic = box.querySelector(".saca-voice button");
+    if (mic && !mic.disabled) mic.click();
+    // bring the Stop button and the "Listening..." message into view
+    (box.querySelector(".saca-voice") || box).scrollIntoView({ block: "center", behavior: "smooth" });
+  });
+
+  document.getElementById("show-typed").addEventListener("click", function () {
+    var box = document.getElementById("typed-box");
+    box.hidden = !box.hidden;
+    this.setAttribute("aria-expanded", String(!box.hidden));
+    if (!box.hidden) document.getElementById("typed_text").focus();
+  });
+
+  form.addEventListener("submit", function (e) {
+    for (var i = 0; i < steps.length; i++) {
+      var msg = validate(i);
+      if (msg) { e.preventDefault(); go(i); showError(steps[i], msg); return; }
+    }
+    syncBabyQuestions();
+    mode();
+    document.getElementById("submit-btn").disabled = true;
+  });
+
+  // start on the first step with a server error, or skip to symptoms when coming from the Body Map
+  var start = 0;
+  var errStep = form.querySelector("section .field-error");
+  if (errStep) start = steps.indexOf(errStep.closest("section"));
+  go(start);
+})();
+</script>
+{% endblock %}

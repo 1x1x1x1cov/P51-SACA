@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}{{ _('Patients') }}{% endblock %}
+{% block content %}
+<div class="row" style="justify-content:space-between">
+  <h1 style="margin:0">{{ _('Patients') }}</h1>
+  <a class="btn" href="{{ url_for('main.patient_new') }}">+ {{ _('Add patient') }}</a>
+</div>
+<form method="get" class="card row" role="search" style="margin-top:14px">
+  <div style="flex:1;min-width:200px">
+    <label class="field" for="q">{{ _('Search name, code or village') }}</label>
+    <input type="search" id="q" name="q" value="{{ q }}">
+  </div>
+  <button class="btn" type="submit" style="align-self:flex-end">{{ _('Search') }}</button>
+</form>
+<section class="card">
+  <ul class="list">
+    {% for p in items %}
+    <li><a class="item" href="{{ url_for('main.patient_detail', patient_id=p.id) }}">
+      {% if p.last_severity %}<span class="sev {{ p.last_severity }}">{{ _(p.last_severity) }}</span>{% else %}<span class="sev NOT_ASSESSED" style="opacity:.5">&#8211;</span>{% endif %}
+      <span class="grow"><span style="display:block;font-weight:700" class="clip">{{ p.full_name }} · {{ p.patient_code }}</span>
+        <span class="meta">{{ p.age_text }} · {{ _({'F': 'Female', 'M': 'Male'}.get(p.sex, 'Sex not given')) }}{% if p.location %} · {{ p.location }}{% endif %} · {{ _('{n} checks', n=p.assessment_count) }}{% if p.has_pin %} · {{ _('signs in with PIN') }}{% endif %}</span></span>
+      <span aria-hidden="true">&#8250;</span></a></li>
+    {% else %}
+    <li class="muted" style="padding:14px 0">{{ _('No patients found.') }}</li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}{{ _('Create my profile') }}{% endblock %}
+{% block content %}
+<div style="max-width:620px;margin:0 auto">
+  <h1>{{ _('Create my profile') }}</h1>
+  <p class="muted">{{ _('Your profile keeps your own results on this device. Only you (with your PIN) and health workers can see them.') }}</p>
+  {% if errors %}<div class="alert error" role="alert">{{ _('Please check the highlighted answers.') }}</div>{% endif %}
+  <form method="post" class="card" novalidate>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    {% with show_pin=True, pin_required=True, name_optional=False, show_location=True, today=today_iso %}
+      {% include "_person_fields.html" %}
+    {% endwith %}
+    <button class="btn block" type="submit">{{ _('Create profile and sign in') }}</button>
+  </form>
+  <p style="text-align:center"><a href="{{ url_for('auth.login') }}">{{ _('Back to sign in') }}</a></p>
+</div>
+{% endblock %}

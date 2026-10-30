@@ -1,0 +1,74 @@
+{# Name, date of birth (or approximate age), sex, pregnancy, place, optional PIN.
+   Variables: form, errors, show_pin, pin_required, name_optional, show_location, today #}
+<div class="form-row">
+  <label class="field" for="full_name">{{ _('Name') }}{% if name_optional %} <span class="muted small">({{ _('optional') }})</span>{% endif %}</label>
+  <input type="text" id="full_name" name="full_name" value="{{ form.get('full_name', '') }}" maxlength="80" autocapitalize="words" autocomplete="off">
+  {% if show_pin %}<p class="hint">{{ _('This is the name you will type to sign in.') }}</p>{% endif %}
+  {% if errors.full_name %}<p class="field-error">{{ _(errors.full_name) }}</p>{% endif %}
+</div>
+
+<div class="form-row">
+  <label class="field" for="date_of_birth">{{ _('Date of birth') }}</label>
+  <input type="date" id="date_of_birth" name="date_of_birth" value="{{ form.get('date_of_birth', '') }}" max="{{ today }}" min="1900-01-01">
+  {% if errors.date_of_birth %}<p class="field-error">{{ _(errors.date_of_birth) }}</p>{% endif %}
+  <details style="margin-top:8px" {% if form.get('approx_age_years') %}open{% endif %}>
+    <summary class="linkish">{{ _('Date of birth not known? Enter the age instead') }}</summary>
+    <div style="margin-top:8px;max-width:220px">
+      <label class="field" for="approx_age_years">{{ _('Age in years') }}</label>
+      <input type="number" id="approx_age_years" name="approx_age_years" min="0" max="120" inputmode="numeric" value="{{ form.get('approx_age_years', '') }}">
+      <p class="hint">{{ _('Enter 0 for a baby under 1 year.') }}</p>
+    </div>
+    {% if errors.approx_age_years %}<p class="field-error">{{ _(errors.approx_age_years) }}</p>{% endif %}
+  </details>
+</div>
+
+<fieldset class="form-row" style="border:0;padding:0;margin:0 0 16px">
+  <legend class="field" style="font-weight:700;margin-bottom:6px">{{ _('Sex') }}</legend>
+  <div class="tiles" style="grid-template-columns:repeat(3,minmax(0,1fr))">
+    {% for value, icon, label in [('F', '&#9792;', 'Female'), ('M', '&#9794;', 'Male'), ('U', '&#8211;', 'Prefer not to say')] %}
+    <label class="tile compact"><input type="radio" name="sex" value="{{ value }}" {% if form.get('sex') == value %}checked{% endif %} data-sex>
+      <span><span aria-hidden="true">{{ icon|safe }}</span>{{ _(label) }}</span></label>
+    {% endfor %}
+  </div>
+  {% if errors.sex %}<p class="field-error">{{ _(errors.sex) }}</p>{% endif %}
+</fieldset>
+
+<fieldset class="form-row" id="pregnant-row" style="border:0;padding:0;margin:0 0 16px" {% if form.get('sex') != 'F' %}hidden{% endif %}>
+  <legend class="field" style="font-weight:700;margin-bottom:6px">{{ _('Pregnant now?') }}</legend>
+  <div class="tiles" style="grid-template-columns:repeat(3,minmax(0,1fr))">
+    {% for value, label in [('yes', 'Yes'), ('no', 'No'), ('', 'Not sure')] %}
+    <label class="tile compact"><input type="radio" name="pregnant" value="{{ value }}" {% if form.get('pregnant', '') == value %}checked{% endif %}><span>{{ _(label) }}</span></label>
+    {% endfor %}
+  </div>
+  <p class="hint">{{ _('Only asked for women and girls aged 10 to 55. It changes the advice and the danger checks.') }}</p>
+</fieldset>
+
+{% if show_location %}
+<div class="form-row">
+  <label class="field" for="location">{{ _('Village or area') }} <span class="muted small">({{ _('optional') }})</span></label>
+  <input type="text" id="location" name="location" value="{{ form.get('location', '') or '' }}" maxlength="80">
+</div>
+{% endif %}
+
+{% if show_pin %}
+<div class="grid-2">
+  <div class="form-row">
+    <label class="field" for="pin">{{ _('Choose a PIN (4 to 6 numbers)') }}{% if not pin_required %} <span class="muted small">({{ _('optional') }})</span>{% endif %}</label>
+    <input type="password" id="pin" name="pin" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="new-password">
+  </div>
+  <div class="form-row">
+    <label class="field" for="pin_confirm">{{ _('Type the PIN again') }}</label>
+    <input type="password" id="pin_confirm" name="pin_confirm" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="new-password">
+  </div>
+</div>
+{% if errors.pin %}<p class="field-error">{{ _(errors.pin) }}</p>{% endif %}
+{% endif %}
+
+<script>
+  (function () {
+    var row = document.getElementById("pregnant-row");
+    document.querySelectorAll("input[data-sex]").forEach(function (r) {
+      r.addEventListener("change", function () { if (row) row.hidden = (r.value !== "F" || !r.checked); });
+    });
+  })();
+</script>

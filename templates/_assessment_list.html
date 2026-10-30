@@ -1,0 +1,20 @@
+{# items: assessments from saca_store.list_assessments / get_assessment #}
+<ul class="list">
+  {% for a in items %}
+  {% set lvl = a.severity if a.assessed else 'NOT_ASSESSED' %}
+  <li>
+    <a class="item" href="{{ url_for('main.result', assessment_id=a.id) }}">
+      <span class="sev {{ lvl }}">{{ _(lvl|replace('_', ' ')) }}</span>
+      <span class="grow">
+        <span class="clip" style="display:block;font-weight:700">
+          {% if actor_kind == 'medic' %}{{ a.full_name or (a.context.person.name if a.context and a.context.person and a.context.person.name) or _('No name (guest or quick check)') }}{% if a.patient_code %} · {{ a.patient_code }}{% endif %}{% else %}{{ a.symptom_list|join(', ')|replace('_', ' ') }}{% endif %}
+        </span>
+        <span class="meta clip" style="display:block">{{ a.created_at[:16]|replace('T', ' ') }}{% if actor_kind == 'medic' %} · {{ a.symptom_list|join(', ')|replace('_', ' ') }}{% endif %}</span>
+      </span>
+      <span aria-hidden="true">&#8250;</span>
+    </a>
+  </li>
+  {% else %}
+  <li class="muted" style="padding:14px 0">{{ _('No results yet.') }}</li>
+  {% endfor %}
+</ul>

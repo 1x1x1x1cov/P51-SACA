@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}{{ _('Edit patient') if patient else _('Add patient') }}{% endblock %}
+{% block content %}
+<div style="max-width:640px;margin:0 auto">
+  <h1>{{ _('Edit patient') if patient else _('Add patient') }}</h1>
+  {% if errors %}<div class="alert error" role="alert">{{ _('Please check the highlighted answers.') }}</div>{% endif %}
+  <form method="post" class="card" novalidate>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    {% with show_pin=not patient, pin_required=False, name_optional=False, show_location=True %}{% include "_person_fields.html" %}{% endwith %}
+    {% if not patient %}<p class="hint">{{ _('Give a PIN only if this person will sign in on this device themselves.') }}</p>{% endif %}
+    <button class="btn block" type="submit">{{ _('Save') }}</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}{{ patient.full_name }}{% endblock %}
+{% block content %}
+<h1>{{ patient.full_name }}</h1>
+<p class="muted">{{ patient.patient_code }} · {{ patient.age_text }} · {{ _({'F': 'Female', 'M': 'Male'}.get(patient.sex, 'Sex not given')) }}
+  {% if patient.pregnant == 1 %} · {{ _('Pregnant') }}{% endif %}{% if patient.location %} · {{ patient.location }}{% endif %}</p>
+<div class="row" style="margin-bottom:16px">
+  <a class="btn" href="{{ url_for('main.assess', patient_id=patient.id) }}">&#129658; {{ _('Start assessment') }}</a>
+  <a class="btn secondary" href="{{ url_for('main.patient_edit', patient_id=patient.id) }}">{{ _('Edit details') }}</a>
+</div>
+<section class="card">
+  <h2>{{ _('Assessments') }}</h2>
+  {% include "_assessment_list.html" %}
+</section>
+<details class="card">
+  <summary style="font-weight:800;cursor:pointer">{{ _('Set or reset this person\'s PIN') }}</summary>
+  <form method="post" action="{{ url_for('main.patient_reset_pin', patient_id=patient.id) }}" style="margin-top:12px" class="grid-2">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div><label class="field" for="pin">{{ _('New PIN') }}</label><input type="password" id="pin" name="pin" inputmode="numeric" maxlength="6" autocomplete="new-password"></div>
+    <div><label class="field" for="pin_confirm">{{ _('Type the PIN again') }}</label><input type="password" id="pin_confirm" name="pin_confirm" inputmode="numeric" maxlength="6" autocomplete="new-password"></div>
+    <button class="btn secondary" type="submit">{{ _('Save PIN') }}</button>
+  </form>
+</details>
+{% if actor_user.role == 'admin' %}
+<details class="card">
+  <summary style="font-weight:800;cursor:pointer;color:var(--danger)">{{ _('Delete this patient') }}</summary>
+  <form method="post" action="{{ url_for('main.patient_delete', patient_id=patient.id) }}" style="margin-top:12px">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <p>{{ _('This permanently deletes the patient and all their assessments. It cannot be undone.') }}</p>
+    <label class="field" for="confirm_code">{{ _('Type the patient code to confirm') }} ({{ patient.patient_code }})</label>
+    <input type="text" id="confirm_code" name="confirm_code" autocomplete="off">
+    <button class="btn danger" type="submit" style="margin-top:10px">{{ _('Delete permanently') }}</button>
+  </form>
+</details>
+{% endif %}
+{% endblock %}

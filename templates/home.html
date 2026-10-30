@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}{{ _('Home') }}{% endblock %}
+{% block content %}
+<h1>
+  {% if actor_kind == 'profile' %}{{ _('Hello, {name}', name=actor_patient.full_name) }}
+  {% elif actor_kind == 'medic' %}{{ _('Hello, {name}', name=actor_user.display_name) }}
+  {% else %}{{ _('Hello') }}{% endif %}
+</h1>
+<p class="muted">{{ _('What would you like to do?') }}</p>
+
+<div class="stack" style="margin:18px 0 24px">
+  <a class="btn huge block" href="{{ url_for('main.assess') }}" id="start-assessment">
+    <span class="ico" aria-hidden="true">&#129658;</span>{{ _('Start assessment') }}</a>
+  <a class="btn secondary huge block" href="{{ url_for('main.contacts') }}" id="contact-community">
+    <span class="ico" aria-hidden="true">&#128222;</span>{{ _('Contact community') }}</a>
+  <a class="btn secondary block" href="{{ url_for('main.body_map') }}">
+    <span class="ico" aria-hidden="true">&#129485;</span>{{ _('Show where it hurts (Body Map)') }}</a>
+</div>
+
+<div class="alert error" role="note">
+  <strong>{{ _('Emergency?') }}</strong>
+  {{ _('If someone is not breathing, is fitting, is bleeding heavily or will not wake up, get help now. Do not wait for the app.') }}
+  <a href="{{ url_for('main.contacts') }}">{{ _('Emergency numbers') }}</a>
+</div>
+
+{% if actor_kind == 'medic' %}
+<section class="card">
+  <div class="row" style="justify-content:space-between">
+    <h2 style="margin:0">{{ _('Last 7 days on this device') }}</h2>
+    <a href="{{ url_for('main.patient_new') }}" class="btn secondary" style="min-height:44px;font-size:16px">+ {{ _('Add patient') }}</a>
+  </div>
+  <div class="stats" style="margin-top:12px">
+    {% for lvl in ['CRITICAL', 'HIGH', 'MEDIUM', 'LOW'] %}
+    <div><b class="sev-num">{{ stats[lvl] }}</b><span class="sev {{ lvl }}">{{ _(lvl) }}</span></div>
+    {% endfor %}
+  </div>
+  <p class="small muted" style="margin-top:10px">{{ _('{n} patients registered.', n=patient_total) }}</p>
+</section>
+{% endif %}
+
+{% if recent %}
+<section class="card">
+  <h2>{{ _('Recent results') }}</h2>
+  {% with items=recent %}{% include "_assessment_list.html" %}{% endwith %}
+  <p style="margin-top:8px"><a href="{{ url_for('main.history') }}">{{ _('See all history') }}</a></p>
+</section>
+{% endif %}
+
+{% if actor_kind == 'guest' %}
+<p class="small muted">{{ _('As a guest, you can see only the results from this visit. Create a profile to keep your own history.') }}
+  <a href="{{ url_for('auth.register') }}">{{ _('Create my profile') }}</a></p>
+{% endif %}
+{% endblock %}

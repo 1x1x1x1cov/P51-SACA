@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}{{ _('First staff account') }}{% endblock %}
+{% block content %}
+<div style="max-width:560px;margin:0 auto">
+  <h1>{{ _('Set up the first staff account') }}</h1>
+  <p class="muted">{{ _('This account is the administrator. It can see every patient on this device and add other health workers.') }}</p>
+  {% if error %}<div class="alert error" role="alert">{{ _(error) }}</div>{% endif %}
+  <form method="post" class="card" novalidate>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="form-row">
+      <label class="field" for="display_name">{{ _('Your name') }}</label>
+      <input type="text" id="display_name" name="display_name" value="{{ form.get('display_name', '') }}" maxlength="60">
+    </div>
+    <div class="form-row">
+      <label class="field" for="username">{{ _('Username') }}</label>
+      <input type="text" id="username" name="username" value="{{ form.get('username', '') }}" maxlength="32" autocapitalize="none" autocomplete="username">
+      <p class="hint">{{ _('3 to 32 letters or numbers. Dots, dashes and underscores are allowed.') }}</p>
+    </div>
+    <div class="form-row">
+      <label class="field" for="password">{{ _('Password') }}</label>
+      <input type="password" id="password" name="password" autocomplete="new-password">
+      <p class="hint">{{ _('At least 8 characters, with letters as well as numbers.') }}</p>
+    </div>
+    <div class="form-row">
+      <label class="field" for="password_confirm">{{ _('Type the password again') }}</label>
+      <input type="password" id="password_confirm" name="password_confirm" autocomplete="new-password">
+    </div>
+    <button class="btn block" type="submit">{{ _('Create administrator account') }}</button>
+  </form>
+</div>
+{% endblock %}

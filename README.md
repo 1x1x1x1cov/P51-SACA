@@ -113,3 +113,54 @@ This isn't a formality — it broke twice already (Sept 9 and Sept 22), both tim
 - **`ModuleNotFoundError: No module named 'classifier'`** — you're running a classifier file directly (`python3 classifier/rule_based.py`) instead of as a module (`python3 -m classifier.rule_based`). Always run from the repo root using the `-m` form for anything inside the `classifier/` package.
 - **Empty `/sessions` after restarting the server** — check you're launching `uvicorn` from the same directory each time. `saca.db` is created relative to wherever you run the command from.
 - **AMMU replies always use the fixed/canned text, never the LLM phrasing** — either `GROQ_API_KEY` isn't set (see Setup step 4) or the LLM's reply is failing `ammu_safety.py`'s safety check (it's a fairly strict keyword match — see `ammu_log.txt` for real pass/fail examples). This is expected behavior, not a bug: the fallback is intentional and safe.
+
+## The SACA app (Flask, sign-in, history, quiz, result cards)
+
+Run it:
+
+```
+python logistic_regression.app.py
+```
+
+Open http://127.0.0.1:5000. On a new device the login screen shows **Set up the first staff account**. That account is the administrator.
+
+### Who sees what
+
+| Sign-in | How | Sees |
+|---|---|---|
+| Guest | "Continue as guest" | Only their own results from this visit |
+| Family profile | Name + PIN (4 to 6 numbers), created with "Create my profile" | Only their own history |
+| Health worker | Username + password | Every patient and assessment on this device |
+| Admin health worker | Same, role `admin` | Also staff accounts, local contacts, country |
+
+There is one login form ("Name or username" + "PIN or password"). Names that sign in are unique on the device, so a login is never ambiguous.
+
+### Files
+
+| File | What it does |
+|---|---|
+| `logistic_regression.app.py` | `create_app()`: wires everything. `SACA_DEBUG=1` turns on the debugger. It is off by default, and must stay off anywhere real patient data is stored. |
+| `saca_store.py` | SQLite data layer: users, patients, assessments, contacts, audit log |
+| `saca_auth.py` | Login, guest, register, first-run setup, sessions, CSRF, security headers |
+| `saca_views.py` | Home, assessment quiz, result, history, patients, contacts, about, staff admin |
+| `assessment_flow.py` | Quiz content: symptom buttons, how long, danger questions, causes, Body Map catalogue |
+| `guidance.py` | Result cards: doctor/clinic advice, self-care and first aid, medicine information. DRAFT, not clinician reviewed. |
+| `conditions.py` | "Possible condition" match scores over the 41 diseases in `dataset.csv`. Not a diagnosis. Run `python conditions.py` to see its evaluation. |
+| `i18n.py`, `i18n_sw.py` | English/Swahili interface. The Swahili is a DRAFT and has not been checked by a native speaker. |
+| `templates/` | `base.html` and `_style.css` hold the shared layout (light and dark mode). There is one template per screen. |
+
+### Data and privacy
+
+Data lives in `%LOCALAPPDATA%\SACA\saca_app.db`. Set `SACA_DATA_DIR` or `SACA_DB_PATH` to move it.
+
+- **Not encrypted.** The file is not encrypted at rest, so use BitLocker on any device with real patient data.
+- **Secret key.** The session secret key is generated into the same folder on first run, or read from `SACA_SECRET_KEY`. Never commit it.
+- **Old history.** The old `history.db` is imported once as unassigned results, which only health workers can see.
+
+### Not done yet (next phase)
+
+- clinical sign-off of the advice and medicine text
+- native-speaker check of the Swahili
+- validation of the condition list on real presentations
+- encryption at rest
+- an installer

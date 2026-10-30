@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}{{ _('About') }}{% endblock %}
+{% block content %}
+<h1>{{ _('About SACA') }}</h1>
+<section class="card">
+  <p>{{ _('SACA (Symptom Assessment and Care Advice) helps people and health workers decide how urgently someone needs care, in English or Swahili, without internet.') }}</p>
+  <h2>{{ _('How it decides') }}</h2>
+  <ul class="steps">
+    <li>{{ _('It reads the symptoms you tap or type.') }}</li>
+    <li>{{ _('A trained model suggests an urgency level: LOW, MEDIUM, HIGH or CRITICAL.') }}</li>
+    <li>{{ _('Safety rules can only make the level more urgent, never less. For example, a stiff neck with a high fever is always CRITICAL.') }}</li>
+    <li>{{ _('If SACA cannot read the symptoms, it does not guess. It tells you to see a health worker.') }}</li>
+  </ul>
+  <h2>{{ _('Limits') }}</h2>
+  <ul class="steps">
+    <li>{{ _('SACA is a student project. It has not been tested in a clinic and is not a medical device.') }}</li>
+    <li>{{ _('The possible conditions come from a list of 41 diseases and are not a diagnosis.') }}</li>
+    <li>{{ _('The advice and medicine information are drafts from WHO and NHS sources and have not been checked by a clinician. The Swahili has not been checked by a native speaker.') }}</li>
+    <li>{{ _('The model has not been tested on children or babies.') }}</li>
+  </ul>
+  <p class="small muted">{{ _('Advice status') }}: {{ guidance_status }} · {{ guidance_version }}</p>
+</section>
+<section class="card">
+  <h2>{{ _('Your data') }}</h2>
+  <p>{{ _('Everything stays on this device. Health workers signed in on this device can see every assessment. Guests see only their own results from this visit. Profiles see only their own history.') }}</p>
+</section>
+<details class="card">
+  <summary style="font-weight:800;cursor:pointer">{{ _('Sources used for the advice') }}</summary>
+  <ul class="small">{% for s in sources %}<li>{{ s }}</li>{% endfor %}</ul>
+</details>
+{% if actor_kind == 'medic' %}
+<section class="card row">
+  <a class="btn secondary" href="{{ url_for('main.account') }}">{{ _('Change my password') }}</a>
+  {% if actor_user.role == 'admin' %}<a class="btn secondary" href="{{ url_for('main.admin_users') }}">{{ _('Staff accounts') }}</a>{% endif %}
+</section>
+{% endif %}
+<p class="small muted">Swinburne ICT30018 · Group P51</p>
+{% endblock %}
