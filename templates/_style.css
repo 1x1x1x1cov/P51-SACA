@@ -133,6 +133,9 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--f
 .tile.danger input:checked + span { border-color: var(--crit); box-shadow: inset 0 0 0 3px var(--crit); }
 .tile.danger input:checked + span::after { color: var(--crit); }
 .tile.compact > span { min-height: 60px; flex-direction: row; font-size: 18px; }
+/* three small choices in a row (sex, pregnant): icon above the word, so "Female" never breaks mid-word on a phone */
+.tiles.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.tiles.three .tile.compact > span { flex-direction: column; gap: 2px; padding: 8px 4px; font-size: 16px; overflow-wrap: normal; word-break: normal; hyphens: auto; }
 .yesno { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .yesno .tile > span { min-height: 64px; font-size: 20px; }
 

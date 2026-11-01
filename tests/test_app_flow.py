@@ -514,3 +514,33 @@ def test_standalone_body_map_still_uses_the_shared_partial(client):
     as_guest(client)
     html = client.get("/body-map").get_data(as_text=True)
     assert 'id="bm-form"' in html and 'name="p" value="headache"' in html and "data-bm" in html
+
+
+# ------------------------------------------------------------------ demo fixes (1 Nov 2026)
+def test_weak_condition_match_is_not_named_in_the_card_heading(client):
+    """A fitting child matched Hepatitis A at 10%; the heading now says 'No clear match' instead of naming it."""
+    as_guest(client)
+    html, _ = result_html(client, submit(client, typed_text="ana homa na degedege", approx_age_years="2", sex="M",
+                                         duration="today"))
+    assert level(html) == "CRITICAL"
+    assert "No clear match" in html
+
+
+def test_strong_condition_match_is_still_named(client):
+    as_guest(client)
+    html, _ = result_html(client, submit(client, symptom=["cough", "runny_nose"], **GUEST_PERSON))
+    assert level(html) == "LOW"
+    assert re.search(r"Common cold · \d+% match", html)
+
+
+def test_typed_swahili_cold_is_assessed_not_unreadable(client):
+    as_guest(client)
+    html, _ = result_html(client, submit(client, typed_text="kikohozi na mafua", **GUEST_PERSON))
+    assert level(html) == "LOW"
+
+
+def test_sex_choices_use_the_three_column_layout(client):
+    as_guest(client)
+    html = client.get("/assess").get_data(as_text=True)
+    assert 'class="tiles three"' in html
+

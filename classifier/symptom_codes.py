@@ -91,8 +91,86 @@ def red_flag_codes():
     return {c for _, cs, _ in _load_rules() for c in cs}
 
 
+# --------------------------------------------------------------------------
+# Extra Swahili phrases -> v2 codes (added 1 Nov 2026, DRAFT, no native-speaker review).
+# 1. Every Swahili label the app itself shows (quiz buttons, Body Map, "what happened")
+#    that keywords.py did not read, so a person who types what they saw on screen is understood.
+#    "kuungua wakati wa kukojoa" (burning urination) used to be read as "kuungua" = burns.
+# 2. Common spoken forms ("kichwa kinauma", "anatapika", "kuharisha").
+# Only phrases that keywords.py read as nothing (or misread) are listed, so nothing that was
+# read before changes. They are matched in ONE longest-first pass together with keywords.py,
+# so a longer keyword phrase ("kikohozi cha damu") still wins over a shorter one here.
+# --------------------------------------------------------------------------
+SWAHILI_PHRASES = {
+    # labels shown in the app
+    "anaishi na mtu mwenye tb": ["tb_contact"],
+    "kiungulia": ["acidity"],
+    "kucha zinazovunjika kwa urahisi": ["brittle_nails"],
+    "kufunga choo": ["constipation"],
+    "kugongwa kichwani": ["head_injury"],
+    "kukakamaa": ["movement_stiffness"],
+    "kukaza kwa misuli": ["cramps"],
+    "kukosa hamu ya kula": ["loss_of_appetite"],
+    "kukosa kumeng'enya chakula vizuri": ["indigestion"],
+    "kupoteza usawa": ["loss_of_balance"],
+    "kupoteza uwezo wa kunusa": ["loss_of_smell"],
+    "kupungua uzito": ["weight_loss"],
+    "kutokwa na jasho": ["sweating"],
+    "kuungua wakati wa kukojoa": ["burning_micturition"],
+    "kuwashwa": ["itching"],
+    "mabaka kwenye koo": ["patches_in_throat"],
+    "macho mekundu": ["redness_of_eyes"],
+    "mafua": ["runny_nose"],
+    "makohozi": ["phlegm"],
+    "mapigo ya moyo kwenda kasi": ["fast_heart_rate"],
+    "maumivu nyuma ya macho": ["pain_behind_the_eyes"],
+    "maumivu wakati wa kukojoa": ["burning_micturition"],
+    "maumivu wakati wa kutembea": ["painful_walking"],
+    "maumivu ya goti": ["knee_pain"],
+    "maumivu ya koo": ["throat_irritation"],
+    "maumivu ya mwili": ["muscle_pain"],
+    "maumivu ya nyonga": ["hip_joint_pain"],
+    "maumivu ya sehemu ya juu ya mgongo": ["back_pain"],
+    "miguu iliyovimba": ["swollen_legs"],
+    "mishipa kuonekana kwenye muundi": ["prominent_veins_on_calf"],
+    "moyo kudunda kwa nguvu": ["palpitations"],
+    "ngozi kuchubuka": ["skin_peeling"],
+    "pua inayotiririka": ["runny_nose"],
+    "shingo kukakamaa": ["stiff_neck"],
+    "shinikizo kwenye sinasi": ["sinus_pressure"],
+    "tezi zilizovimba": ["swelled_lymph_nodes"],
+    "uchovu": ["fatigue"],
+    "udhaifu": ["fatigue"],
+    "udhaifu wa misuli": ["muscle_weakness"],
+    "uoni hafifu": ["blurred_and_distorted_vision"],
+    "upele": ["skin_rash"],
+    "vipele": ["skin_rash"],
+    "upungufu wa maji mwilini": ["dehydration"],
+    "usemi usio wazi": ["slurred_speech"],
+    "uvimbe mbele ya shingo": ["enlarged_thyroid"],
+    "vidonda kwenye ulimi": ["ulcers_on_tongue"],
+    "viungo vilivyovimba": ["swelling_joints"],
+    # common spoken forms
+    "kichwa kinauma": ["headache"], "kichwa kinaniuma": ["headache"],
+    "tumbo linauma": ["stomach_pain"], "tumbo linaniuma": ["stomach_pain"],
+    "kifua kinauma": ["chest_pain"], "kifua kinaniuma": ["chest_pain"],
+    "koo linauma": ["throat_irritation"], "koo linaniuma": ["throat_irritation"],
+    "mgongo unauma": ["back_pain"], "mgongo unaniuma": ["back_pain"],
+    "mwili unauma": ["muscle_pain"], "mwili unaniuma": ["muscle_pain"],
+    "viungo vinauma": ["joint_pain"], "viungo vinaniuma": ["joint_pain"],
+    "kuharisha": ["diarrhoea"], "anaharisha": ["diarrhoea"], "ninaharisha": ["diarrhoea"], "naharisha": ["diarrhoea"],
+    "anatapika": ["vomiting"], "ninatapika": ["vomiting"], "natapika": ["vomiting"],
+    "anatapika damu": ["stomach_bleeding"], "ninatapika damu": ["stomach_bleeding"], "natapika damu": ["stomach_bleeding"],
+    "kamasi": ["runny_nose"], "pua inatiririka": ["runny_nose"],
+    "kukojoa kwa maumivu": ["burning_micturition"],
+    "kuwasha": ["itching"],
+    "sina hamu ya kula": ["loss_of_appetite"], "hana hamu ya kula": ["loss_of_appetite"],
+    "nimechoka": ["fatigue"], "amechoka": ["fatigue"],
+}
+
+
 def read_swahili(text):
-    """Match Swahili phrases in `text`.
+    """Match Swahili phrases in `text` (keywords.py plus SWAHILI_PHRASES, one longest-first pass).
 
     Returns Reading(codes, unmapped, residual):
       codes     v2 codes found (order of discovery, no duplicates)
@@ -102,13 +180,17 @@ def read_swahili(text):
     "kukohoa damu" yields haemoptysis only, not cough + blood.
     """
     xw = _load_crosswalk()
-    residual = text.lower()
+    residual = text.lower().replace("\u2019", "'")
     codes, unmapped, positions = [], [], {}
-    for phrase in sorted(SYMPTOM_MAP, key=len, reverse=True):
+    phrases = set(SYMPTOM_MAP) | set(SWAHILI_PHRASES)
+    for phrase in sorted(phrases, key=len, reverse=True):
         at = residual.find(phrase)
         if at >= 0:
             residual = residual.replace(phrase, " " * len(phrase))
-            mapped = xw.get(SYMPTOM_MAP[phrase], [])
+            if phrase in SYMPTOM_MAP:  # keywords.py wins when a phrase is in both
+                mapped = xw.get(SYMPTOM_MAP[phrase], [])
+            else:
+                mapped = SWAHILI_PHRASES[phrase]
             if not mapped:
                 unmapped.append(phrase)
             for c in mapped:

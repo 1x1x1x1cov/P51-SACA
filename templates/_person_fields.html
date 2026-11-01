@@ -24,7 +24,7 @@
 
 <fieldset class="form-row" style="border:0;padding:0;margin:0 0 16px">
   <legend class="field" style="font-weight:700;margin-bottom:6px">{{ _('Sex') }}</legend>
-  <div class="tiles" style="grid-template-columns:repeat(3,minmax(0,1fr))">
+  <div class="tiles three">
     {% for value, icon, label in [('F', '&#9792;', 'Female'), ('M', '&#9794;', 'Male'), ('U', '&#8211;', 'Prefer not to say')] %}
     <label class="tile compact"><input type="radio" name="sex" value="{{ value }}" {% if form.get('sex') == value %}checked{% endif %} data-sex>
       <span><span aria-hidden="true">{{ icon|safe }}</span>{{ _(label) }}</span></label>
@@ -35,7 +35,7 @@
 
 <fieldset class="form-row" id="pregnant-row" style="border:0;padding:0;margin:0 0 16px" {% if form.get('sex') != 'F' %}hidden{% endif %}>
   <legend class="field" style="font-weight:700;margin-bottom:6px">{{ _('Pregnant now?') }}</legend>
-  <div class="tiles" style="grid-template-columns:repeat(3,minmax(0,1fr))">
+  <div class="tiles three">
     {% for value, label in [('yes', 'Yes'), ('no', 'No'), ('', 'Not sure')] %}
     <label class="tile compact"><input type="radio" name="pregnant" value="{{ value }}" {% if form.get('pregnant', '') == value %}checked{% endif %}><span>{{ _(label) }}</span></label>
     {% endfor %}

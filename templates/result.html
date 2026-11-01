@@ -42,7 +42,7 @@
 <details class="rcard" {% if lvl in ('LOW', 'MEDIUM') %}open{% endif %}>
   <summary><span class="ico" aria-hidden="true">&#129658;</span>
     <span><span class="t">{{ _('Possible condition') }}</span><br>
-      <span class="s">{% if show_conditions %}{{ pick(conditions['items'][0]['name']) }} · {{ conditions['items'][0]['percent'] }}% {{ _('match') }}{% else %}{{ _('Not shown for this result') }}{% endif %}
+      <span class="s">{% if show_conditions and conditions['items'][0]['match'] < 0.35 %}{{ _('No clear match') }}{% elif show_conditions %}{{ pick(conditions['items'][0]['name']) }} · {{ conditions['items'][0]['percent'] }}% {{ _('match') }}{% else %}{{ _('Not shown for this result') }}{% endif %}
       · {{ _('Severity') }}: {{ pick(adv.level) }}</span></span>
     <span class="chev" aria-hidden="true"></span></summary>
   <div class="body">

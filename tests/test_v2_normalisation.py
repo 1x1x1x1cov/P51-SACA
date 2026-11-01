@@ -220,3 +220,67 @@ def test_vague_symptoms_alone_are_never_above_medium(clf, codes):
 def test_ceiling_does_not_hide_a_red_flag(clf):
     r = clf.classify("headache nausea stiff_neck high_fever")
     assert r["severity"] == "CRITICAL"
+
+
+# ---- extra Swahili phrases (1 Nov 2026) ----------------------------------
+def _keywords_only(text):
+    """What keywords.py alone read before SWAHILI_PHRASES was added."""
+    from keywords import SYMPTOM_MAP
+    from classifier.symptom_codes import _load_crosswalk
+    xw, residual, codes = _load_crosswalk(), text.lower(), []
+    for phrase in sorted(SYMPTOM_MAP, key=len, reverse=True):
+        if phrase in residual:
+            residual = residual.replace(phrase, " " * len(phrase))
+            codes += [c for c in xw.get(SYMPTOM_MAP[phrase], []) if c not in codes]
+    return codes
+
+
+def test_every_extra_swahili_phrase_maps_to_a_model_vocabulary_code(clf):
+    from classifier.symptom_codes import SWAHILI_PHRASES
+    vocab = set(clf.pipeline.named_steps["vectorizer"].vocabulary_)
+    bad = {p: c for p, cs in SWAHILI_PHRASES.items() for c in cs if c not in vocab}
+    assert not bad, bad
+
+
+def test_extra_swahili_phrases_only_fill_gaps_and_change_nothing_already_read():
+    """Each added phrase was read as nothing by keywords.py, except one misread that is fixed on purpose."""
+    from classifier.symptom_codes import SWAHILI_PHRASES
+    on_purpose = {"kuungua wakati wa kukojoa": ["burns"]}  # burning urination was read as a burn
+    changed = {p: _keywords_only(p) for p in SWAHILI_PHRASES if _keywords_only(p)}
+    assert changed == on_purpose
+
+
+def test_every_swahili_label_the_app_shows_is_read_when_typed():
+    import re
+    import assessment_flow as f
+    labels = [sw for _c, _i, _en, sw, _d in f.SYMPTOM_BUTTONS]
+    labels += [sw for items in f.BODY_MAP.values() for _c, _en, sw in items]
+    labels += [sw for _c, _i, _en, sw in f.CAUSES]
+    unread = []
+    for label in labels:
+        for part in re.sub(r"\(.*?\)", "", label).split("/"):
+            if part.strip() and not read_swahili(part.strip()).codes:
+                unread.append(part.strip())
+    assert unread == []
+
+
+def test_longer_keyword_phrase_still_wins_over_a_shorter_added_phrase():
+    assert read_swahili("kikohozi cha damu").codes == ["blood_in_sputum"]
+    assert read_swahili("anatapika damu").codes == ["stomach_bleeding"]
+
+
+def test_burning_urination_in_swahili_is_not_read_as_a_burn():
+    assert read_swahili("kuungua wakati wa kukojoa").codes == ["burning_micturition"]
+    assert read_swahili("kuungua").codes == ["burns"]
+
+
+@pytest.mark.parametrize("text,code", [("kikohozi na mafua", "runny_nose"), ("kichwa kinauma", "headache"),
+                                       ("tumbo linauma", "stomach_pain"), ("kuharisha", "diarrhoea")])
+def test_common_spoken_swahili_is_now_assessed(clf, text, code):
+    r = clf.classify(text)
+    assert r["assessed"] is True and code in r["symptoms"], r
+
+
+def test_spoken_swahili_chest_pain_is_not_low(clf):
+    assert RANK[clf.classify("kifua kinauma")["severity"]] >= RANK["HIGH"]
+
