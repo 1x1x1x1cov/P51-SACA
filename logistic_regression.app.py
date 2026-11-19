@@ -29,8 +29,12 @@ def resource_path(relative_path):
 
 
 def build_pipeline():
-    from classifier.llm_extractor import extract_symptoms
     from classifier.pipeline import SACAPipeline
+
+    try:
+        from classifier.llm_extractor import extract_symptoms
+    except ImportError:  # e.g. the Android app (no pandas/python-dotenv); the extractor needs internet anyway
+        extract_symptoms = None
 
     pipeline = SACAPipeline(extractor=extract_symptoms)
     pipeline.classifier.train()
@@ -48,8 +52,12 @@ def create_app(pipeline=None, config=None):
     saca_views.init_app(app)
 
     # Voice input: POST /transcribe and GET /voice.js (see voice_flask.py). Needs internet (Groq).
-    from voice_flask import voice_bp
-    app.register_blueprint(voice_bp)
+    try:
+        from voice_flask import voice_bp
+        app.register_blueprint(voice_bp)
+        app.config.setdefault("VOICE_AVAILABLE", True)
+    except ImportError:  # e.g. the Android app (no python-dotenv/groq): the app works without voice input
+        app.config["VOICE_AVAILABLE"] = False
 
     app.config["SACA_PIPELINE"] = pipeline or build_pipeline()
     return app

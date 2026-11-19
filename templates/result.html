@@ -178,8 +178,13 @@
     stop: {{ _('Stop')|tojson }},
     loading: {{ _('Preparing the voice...')|tojson }},
     none: {{ _('This device has no voice for this language. For Swahili, use Microsoft Edge with internet, or ask the team to install the offline Swahili voice.')|tojson }},
-    failed: {{ _('The voice could not play. Please read the screen or ask someone to help.')|tojson }}
+    failed: {{ _('The voice could not play. Please read the screen or ask someone to help.')|tojson }},
+    phone: {{ _('This phone has no voice for this language. Add one in Settings, Text-to-speech, or read the screen.')|tojson }}
   };
+  // The Android app passes read-aloud to the phone's own text-to-speech (MainActivity.java), because the
+  // Android WebView has no speechSynthesis.
+  var android = window.SACAAndroid || null;
+  window.__sacaSpeechDone = function () { setPlaying(false); };
   var synth = ("speechSynthesis" in window) ? window.speechSynthesis : null;
   var audio = null, playing = false;
 
@@ -211,6 +216,7 @@
   function say(m) { msg.textContent = m || ""; msg.hidden = !m; }
 
   function stopAll() {
+    if (android) android.stop();
     if (synth) synth.cancel();
     if (audio) { audio.pause(); audio.currentTime = 0; }
     setPlaying(false);
@@ -242,6 +248,11 @@
   btn.addEventListener("click", function () {
     if (playing) { stopAll(); return; }
     say("");
+    if (android) {
+      var r = android.speak(text, lang);
+      if (r === "ok") setPlaying(true); else say(r === "nolang" ? T.phone : T.failed);
+      return;
+    }
     var v = browserVoice();
     if (v) speakBrowser(v);
     else if (offline) speakOffline();

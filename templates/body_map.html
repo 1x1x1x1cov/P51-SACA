@@ -22,7 +22,7 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="/voice.js" data-target="free-text" data-lang="{{ 'sw' if lang == 'sw' else 'auto' }}"></script>
+{% if config.VOICE_AVAILABLE %}<script src="/voice.js" data-target="free-text" data-lang="{{ 'sw' if lang == 'sw' else 'auto' }}"></script>{% endif %}
 <script>
 (function () {
   var form = document.getElementById("bm-form");

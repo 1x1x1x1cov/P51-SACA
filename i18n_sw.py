@@ -152,6 +152,8 @@ SW = {
         "Jinsi modeli inavyopendelea kiwango hiki kuliko vingine. Si uwezekano kwamba mtu huyu anaumwa kiasi hiki. Dalili kadhaa za hatari kwa pamoja huisogeza karibu na 100%.",
     "Use the Body Map": "Tumia Ramani ya Mwili",
     "No clear match": "Hakuna inayolingana wazi",
+    "This phone has no voice for this language. Add one in Settings, Text-to-speech, or read the screen.":
+        "Simu hii haina sauti ya lugha hii. Ongeza moja katika Mipangilio, Maandishi-hadi-sauti, au soma skrini.",
     "Describe the symptoms in your own words": "Eleza dalili kwa maneno yako mwenyewe",
     "For example: fever and headache, or: homa na maumivu ya kichwa": "Mfano: homa na maumivu ya kichwa",
     "Write symptoms only. The next screens ask how long and what happened. If SACA cannot read a word, it will say so instead of guessing.":

@@ -6,13 +6,20 @@ Logistic Regression Classifier for SACA.
 import os
 import sys
 
-import numpy as np
-import pandas as pd
+# numpy, pandas and scikit-learn are needed only to TRAIN the model. Devices without them (the Android app
+# runs SACA in Pyodide) load the same trained model from dataset_v2/saca_v2_model.json instead
+# (classifier/portable_model.py). Set SACA_PORTABLE=1 to force that path on a desktop.
+try:
+    import numpy as np
+    import pandas as pd
 
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.linear_model import LogisticRegression
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import LabelEncoder
+    from sklearn.feature_extraction.text import CountVectorizer
+    from sklearn.linear_model import LogisticRegression
+    from sklearn.pipeline import Pipeline
+    from sklearn.preprocessing import LabelEncoder
+    HAVE_SKLEARN = True
+except ImportError:
+    HAVE_SKLEARN = False
 
 from classifier.base import BaseClassifier
 from classifier.symptom_codes import (
@@ -118,6 +125,13 @@ class LogisticRegressionClassifier(BaseClassifier):
 
     def train(self, train_path=None):
         """Train the Logistic Regression model."""
+
+        if train_path is None and (os.environ.get("SACA_PORTABLE") == "1" or not HAVE_SKLEARN):
+            from classifier import portable_model
+            self.pipeline, self.label_encoder = portable_model.load()
+            self.is_trained = True
+            print("[LogisticRegression] Loaded the portable model (no scikit-learn needed).")
+            return
 
         if train_path is None:
             train_path = DEFAULT_TRAIN_PATH
@@ -235,7 +249,7 @@ class LogisticRegressionClassifier(BaseClassifier):
             [pred_encoded]
         )[0]
 
-        confidence = float(np.max(proba))
+        confidence = float(max(proba))
 
         # A logistic regression adds up the evidence, so several strong danger signs push the top probability
         # towards 1.0. Showing "100.0%" would overstate it, so anything from 99% up is written as ">99%".

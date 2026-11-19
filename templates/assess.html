@@ -98,7 +98,7 @@
     </div>
 
     <div class="row" style="margin-top:18px">
-      <button type="button" class="btn secondary" id="speak-btn" aria-controls="typed-box">&#127908; {{ _('Speak instead') }}</button>
+      {% if config.VOICE_AVAILABLE %}<button type="button" class="btn secondary" id="speak-btn" aria-controls="typed-box">&#127908; {{ _('Speak instead') }}</button>{% endif %}
       <button type="button" class="btn secondary" id="show-typed" aria-expanded="{{ 'true' if typed else 'false' }}" aria-controls="typed-box">&#9000;&#65039; {{ _('Type it instead') }}</button>
       <button type="button" class="btn secondary" id="show-bodymap" aria-expanded="false" aria-controls="bodymap-box">&#129485; {{ _('Use the Body Map') }}</button>
     </div>
@@ -111,7 +111,7 @@
       <label class="field" for="typed_text">{{ _('Describe the symptoms in your own words') }}</label>
       <textarea id="typed_text" name="typed_text" maxlength="{{ flow.MAX_TYPED }}" placeholder="{{ _('For example: fever and headache, or: homa na maumivu ya kichwa') }}">{{ typed }}</textarea>
       <p class="hint">{{ _('Write symptoms only. The next screens ask how long and what happened. If SACA cannot read a word, it will say so instead of guessing.') }}</p>
-      <p class="hint">&#127908; {{ _('Speaking needs an internet connection. Tap Speak, talk, then tap Stop. Check the words before you go on.') }}</p>
+      {% if config.VOICE_AVAILABLE %}<p class="hint">&#127908; {{ _('Speaking needs an internet connection. Tap Speak, talk, then tap Stop. Check the words before you go on.') }}</p>{% endif %}
     </div>
   </section>
 
@@ -169,7 +169,7 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="/voice.js" data-target="typed_text" data-lang="{{ 'sw' if lang == 'sw' else 'auto' }}"></script>
+{% if config.VOICE_AVAILABLE %}<script src="/voice.js" data-target="typed_text" data-lang="{{ 'sw' if lang == 'sw' else 'auto' }}"></script>{% endif %}
 <script>
 (function () {
   var T = {
@@ -321,7 +321,8 @@
   });
   back.addEventListener("click", function () { go(current - 1); });
 
-  document.getElementById("speak-btn").addEventListener("click", function () {
+  var speakBtn = document.getElementById("speak-btn");  // absent when voice input is not available (e.g. the Android app)
+  if (speakBtn) speakBtn.addEventListener("click", function () {
     var box = document.getElementById("typed-box");
     box.hidden = false;
     document.getElementById("show-typed").setAttribute("aria-expanded", "true");
