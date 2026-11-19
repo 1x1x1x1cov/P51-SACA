@@ -1,181 +1,77 @@
-# SACA — Dev Environment Setup
+# SACA: Smart Adaptive Clinical Assistant
 
-## Prerequisites
+SACA is an offline triage app in English and Kiswahili, built for Mbinga District, Ruvuma Region, Tanzania.
+A person describes symptoms by tapping buttons, typing, or using a Body Map. SACA returns an urgency level
+(LOW, MEDIUM, HIGH or CRITICAL), what to do next, and who to call. It runs with no internet.
 
-- Python 3.10+
-- pip
+> **Student prototype, not a medical device.** SACA gives decision support, not a diagnosis. The danger-sign
+> rules, the advice text, the medicine information and the Swahili wording are drafts. None of them has been
+> reviewed by a clinician or checked by a native Swahili speaker. Do not use SACA for real patients before that
+> review. See Part 3 of the handover documentation.
 
-## Setup
+Built by Group P51 for Swinburne University of Technology ICT30017/ICT30018 (2026): Minh-Hieu Ong, Ryan Cheng,
+Md Shayan Ibteshum, Abdullah Azzam and Hitesh Kumar.
 
-1. Clone the repo and `cd` into it.
+## Documentation
 
-2. Create a virtual environment:
-   ```
-   python3 -m venv venv
-   source venv/bin/activate      # Mac/Linux
-   venv\Scripts\activate         # Windows
-   ```
+Full documentation is in **[docs/SACA_Handover_Documentation.docx](docs/SACA_Handover_Documentation.docx)**, in four parts:
 
-3. Install dependencies:
-   ```
-   pip install -r requirements.txt
-   ```
+1. Overview: what SACA is, quick start, repository layout.
+2. User Guide: signing in, running an assessment, reading the result, History, contacts, language.
+3. Clinical and Safety: how SACA decides a level, the safety rules, test results and their limits, what must be reviewed before real use.
+4. Technical and Debugging Guide: architecture, setup, tests, retraining, the Android build, troubleshooting.
 
-4. (Optional, only needed for AMMU's LLM-phrased replies) Create a `.env` file in the repo root with:
-   ```
-   GROQ_API_KEY=your-key-here
-   ```
-   Get a free key at [console.groq.com/keys](https://console.groq.com/keys). `ammu_safety.py` reads this via `python-dotenv`. If it's unset, AMMU still works normally — `ammu_api.py` falls back to its fixed, non-LLM reply text whenever the Groq call fails or isn't configured, so this is not required to run the app.
+How the training data was built: [dataset_v2/README_v2.md](dataset_v2/README_v2.md).
 
-## Running the API server
+## Quick start (computer)
 
-From the repo root:
+Needs Python 3.10 or newer.
 
 ```
-uvicorn main:app --reload
-```
-
-The API will be available at `http://127.0.0.1:8000`. The interactive docs are at `http://127.0.0.1:8000/docs`.
-
-`saca.db` is created automatically on first run (in whatever directory you launched the server from). It's gitignored — don't commit it, each person's local DB is their own.
-
-## Endpoints
-
-- `GET /` — health check
-- `POST /classify` — send `{"symptom_text": "..."}`, get back a severity result
-- `GET /sessions` — all saved classification sessions, most recent first
-- `GET /sync/pending` — unsynced sessions, for offline sync
-- `POST /sync/confirm` — send `{"session_ids": [...]}` to mark sessions as synced
-- `GET /keywords` — full Swahili symptom keyword list (for frontend dropdowns/autocomplete)
-- `GET /ammu` — serves the AMMU conversational UI (`ammu.html`)
-- `POST /ammu/respond` — send `{"user_text": "..."}`, get back a conversational reply plus severity. Classifies with the same active classifier as `/classify`, then optionally rephrases the reply via Groq (`ammu_safety.py`), gated by a safety check that always falls back to a fixed, verified-safe reply if the LLM call fails or the output doesn't pass
-
-## Running a classifier standalone (no server needed)
-
-Each classifier can be run directly for quick testing, without starting the API:
-
-```
-python3 -m classifier.logistic_regression
-```
-
-This runs the built-in test cases in that file and prints the results. (`python3 -m classifier.rule_based` still works too, but `rule_based.py` is not used by the live app — see below.)
-
-## Classifier: Logistic Regression is the only one the app uses
-
-Per the team's 2026-09-11 decision, **Logistic Regression is the sole classifier for both `/classify` and `/ammu/respond`.** `main.py` and `ammu_api.py` each construct their own `LogisticRegressionClassifier()`. `rule_based.py`, `rule_based_en.py`, and `svm.py` are kept in `classifier/` only so `score_classifiers.py` can still score them for comparison — they are not wired into the live app anywhere, and shouldn't be.
-
-**If you're touching `main.py` or `ammu_api.py`, especially while merging another branch, double-check the `active_classifier` / `classifier` line still says `LogisticRegressionClassifier()` before you push.** This has already broken once (2026-09-23): a branch that forked before this decision existed got merged into `main` and silently reverted both files back to `RuleBasedClassifier()`, undoing the decision without anyone noticing until a later audit. `main` is now protected by a ruleset requiring a PR — review this specifically on any PR that touches either file.
-
-## Adding a new classifier (comparison-only — not for the live app)
-
-To add a classifier for `score_classifiers.py` to compare (not to make it active — see above):
-
-1. Create a new file in `classifier/`, e.g. `classifier/random_forest.py`.
-2. Subclass `BaseClassifier` from `classifier/base.py`:
-
-   ```python
-   from classifier.base import BaseClassifier
-
-   class RandomForestClassifier(BaseClassifier):
-       name = "random_forest"
-
-       def classify(self, symptom_text: str) -> dict:
-           # your logic here
-           return self.build_result(severity, symptoms, reason)
-   ```
-
-3. `severity` must be one of `"CRITICAL"`, `"HIGH"`, `"MEDIUM"`, `"LOW"` — `build_result()` will raise an error if it isn't, so mistakes get caught immediately rather than silently breaking the frontend.
-4. `score_classifiers.py` auto-discovers it — no other wiring needed. Do **not** swap it into `main.py`'s or `ammu_api.py`'s active classifier without an explicit team decision, per the section above.
-
-## Regenerating the training dataset
-
-If `Symptom-severity.csv` or `dataset.csv` change, regenerate the cleaned dataset:
-
-```
-python3 prepare_dataset.py
-```
-
-This writes `saca_dataset.csv` and prints the severity tier distribution so you can sanity check it before committing.
-
-`saca_train.csv`/`saca_test.csv` are bilingual (English + Swahili) and must stay leak-free: no `symptom_text` value may appear in both files. Before committing any change to either file, verify directly:
-
-```python
-import pandas as pd
-train = pd.read_csv("saca_train.csv")
-test = pd.read_csv("saca_test.csv")
-assert not (set(train["symptom_text"]) & set(test["symptom_text"])), "train/test leakage!"
-```
-
-This isn't a formality — it broke twice already (Sept 9 and Sept 22), both times because a "corrected" or "post-fix" file was trusted by its name/label instead of actually checked.
-
-## Common issues
-
-- **`ModuleNotFoundError: No module named 'classifier'`** — you're running a classifier file directly (`python3 classifier/rule_based.py`) instead of as a module (`python3 -m classifier.rule_based`). Always run from the repo root using the `-m` form for anything inside the `classifier/` package.
-- **Empty `/sessions` after restarting the server** — check you're launching `uvicorn` from the same directory each time. `saca.db` is created relative to wherever you run the command from.
-- **AMMU replies always use the fixed/canned text, never the LLM phrasing** — either `GROQ_API_KEY` isn't set (see Setup step 4) or the LLM's reply is failing `ammu_safety.py`'s safety check (it's a fairly strict keyword match — see `ammu_log.txt` for real pass/fail examples). This is expected behavior, not a bug: the fallback is intentional and safe.
-
-## The SACA app (Flask, sign-in, history, quiz, result cards)
-
-Run it:
-
-```
+python -m venv venv
+venv\Scripts\activate            # Windows
+source venv/bin/activate         # Mac or Linux
+pip install -r requirements.txt
 python logistic_regression.app.py
 ```
 
-Open http://127.0.0.1:5000. On a new device the login screen shows **Set up the first staff account**. That account is the administrator.
+Open http://127.0.0.1:5000. On the first run the login screen offers **Set up the first staff account**, which
+creates the administrator. After that, anyone can **Continue as guest** or create a profile.
 
-### Who sees what
+No API key is needed. The optional online extras (voice input and the LLM symptom extractor) need a Groq API key
+in a `.env` file; without one, the app works fully offline. See Part 4 of the handover documentation.
 
-| Sign-in | How | Sees |
-|---|---|---|
-| Guest | "Continue as guest" | Only their own results from this visit |
-| Family profile | Name + PIN (4 to 6 numbers), created with "Create my profile" | Only their own history |
-| Health worker | Username + password | Every patient and assessment on this device |
-| Admin health worker | Same, role `admin` | Also staff accounts, local contacts, country |
+## Quick start (Android phone)
 
-There is one login form ("Name or username" + "PIN or password"). Names that sign in are unique on the device, so a login is never ambiguous.
+The Android app is the same SACA app running fully offline inside the phone, with no internet permission.
+Open the `android/` folder in Android Studio, connect the phone with USB debugging on, and press **Run**.
+Full steps are in [android/README.md](android/README.md) and Part 4, section 6 of the handover documentation.
 
-### Files
+## Run the tests
 
-| File | What it does |
+```
+set GROQ_API_KEY=dummy           # Windows (cmd); on Mac or Linux: export GROQ_API_KEY=dummy
+python -m pytest -q
+```
+
+Last full run (19 November 2026): 378 passed, 1 skipped. The dummy key is needed because a module creates its
+Groq client when it is imported.
+
+## Repository layout
+
+| Path | What it is |
 |---|---|
-| `logistic_regression.app.py` | `create_app()`: wires everything. `SACA_DEBUG=1` turns on the debugger. It is off by default, and must stay off anywhere real patient data is stored. |
-| `saca_store.py` | SQLite data layer: users, patients, assessments, contacts, audit log |
-| `saca_auth.py` | Login, guest, register, first-run setup, sessions, CSRF, security headers |
-| `saca_views.py` | Home, assessment quiz, result, history, patients, contacts, about, staff admin |
-| `assessment_flow.py` | Quiz content: symptom buttons, how long, danger questions, causes, Body Map catalogue |
-| `guidance.py` | Result cards: doctor/clinic advice, self-care and first aid, medicine information. DRAFT, not clinician reviewed. |
-| `conditions.py` | "Possible condition" match scores over the 41 diseases in `dataset.csv`. Not a diagnosis. Run `python conditions.py` to see its evaluation. |
-| `speech.py` | Read-aloud text, and offline speech through Piper when the Swahili voice is installed |
-| `i18n.py`, `i18n_sw.py` | English/Swahili interface. The Swahili is a DRAFT and has not been checked by a native speaker. |
-| `templates/` | `base.html` and `_style.css` hold the shared layout (light and dark mode). There is one template per screen. |
-
-### Read aloud (English and Swahili)
-
-The **Read aloud** button on the result screen reads the urgency level, what to do, and the first steps. It tries two voices in order:
-
-1. **The browser's own voice.** English works in every browser. Swahili works in **Microsoft Edge** with internet, which has Tanzania and Kenya voices. Chrome on Windows has no Swahili voice.
-2. **An offline Swahili voice on this computer.** This uses Piper and the `sw_CD-lanfrica-medium` voice (63 MB). Install it once, with internet:
-
-```
-python -m pip install piper-tts
-python -m piper.download_voices sw_CD-lanfrica-medium --download-dir "%LOCALAPPDATA%\SACA\voices"
-```
-
-Restart the app. Swahili read-aloud then works offline in any browser. The voice has a Congo Swahili accent, so get a Tanzanian listener's opinion before relying on it. The audio is made only from the result's own text (`/result/<id>/speech.wav`); the app never speaks text sent by the browser.
-
-### Data and privacy
-
-Data lives in `%LOCALAPPDATA%\SACA\saca_app.db`. Set `SACA_DATA_DIR` or `SACA_DB_PATH` to move it.
-
-- **Not encrypted.** The file is not encrypted at rest, so use BitLocker on any device with real patient data.
-- **Secret key.** The session secret key is generated into the same folder on first run, or read from `SACA_SECRET_KEY`. Never commit it.
-- **Old history.** The old `history.db` is imported once as unassigned results, which only health workers can see.
-
-### Not done yet (next phase)
-
-- clinical sign-off of the advice and medicine text
-- native-speaker check of the Swahili
-- validation of the condition list on real presentations
-- encryption at rest
-- an installer
+| `logistic_regression.app.py` | Starts the Flask app (`create_app`) |
+| `saca_views.py`, `saca_auth.py` | Screens and routes; sign-in, sessions and security |
+| `saca_store.py` | Local SQLite database: accounts, patients, assessments, contacts, audit log |
+| `assessment_flow.py` | The step-by-step assessment (buttons, danger questions) |
+| `guidance.py`, `conditions.py` | Result cards: next steps, medicine information, possible condition |
+| `classifier/` | The triage pipeline: reader, logistic regression model, red-flag floor, portable model |
+| `dataset_v2/` | Training data, red-flag rules, evaluation reports, clinician review pack |
+| `templates/` | HTML screens (Jinja2) and the stylesheet |
+| `i18n.py`, `i18n_sw.py`, `keywords.py` | English and Swahili interface text and Swahili symptom words |
+| `speech.py` | Read-aloud audio, including an optional offline Swahili voice |
+| `mobile/` | Builds the Android app's Python bundle |
+| `android/` | The Android Studio project |
+| `tests/` | Automated tests (pytest) |
+| `main.py`, `ammu_*.py`, `database.py` | Earlier FastAPI prototype and the AMMU chat; kept for reference, not used by the app |

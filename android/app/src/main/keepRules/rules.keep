@@ -1,0 +1,4 @@
+# The page calls these from JavaScript (window.SACAAndroid.speak / stop).
+-keepclassmembers class au.edu.swin.saca.MainActivity$SpeechBridge {
+   @android.webkit.JavascriptInterface <methods>;
+}

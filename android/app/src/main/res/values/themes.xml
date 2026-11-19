@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.SACA" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:colorPrimary">#0F766E</item>
+        <item name="android:colorAccent">#0F766E</item>
+        <item name="android:windowBackground">#0F766E</item>
+        <item name="android:statusBarColor">#0F766E</item>
+        <item name="android:navigationBarColor">#FFFFFF</item>
+    </style>
+</resources>
